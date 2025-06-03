@@ -5,8 +5,8 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
-  Put,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -35,8 +35,8 @@ export class PostController {
   }
 
   @Get('get/:id')
-  get(@Param('id', ParseIntPipe) userId: number) {
-    return this.postService.get(userId);
+  get(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.get(id);
   }
 
   @ApiBearerAuth()
@@ -48,7 +48,7 @@ export class PostController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Put('put/:id')
+  @Patch('patch/:id')
   update(
     @Param('id', ParseIntPipe) postId: number,
     @Req() request: Request,

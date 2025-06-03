@@ -20,7 +20,7 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  async create(signupDto: SignupDto) {
+  async signup(signupDto: SignupDto) {
     const { email, password, passwordConfirmation, username, avatar } =
       signupDto;
 
@@ -39,35 +39,28 @@ export class UserService {
       data: { email, username, password: hash, avatar },
     });
 
-    return { data: 'User successfully created' };
+    return 'User successfully created';
   }
 
-  async get(userId: number) {
-    return await this.prismaService.user.findUnique({
-      where: {
-        userId,
-      },
-      select: {
-        userId: true,
-        email: true,
-        username: true,
-      },
-    });
-  }
-
-  async login(signinDto: SigninDto) {
+  async signin(signinDto: SigninDto) {
     const { password, email } = signinDto;
 
     const user = await this.prismaService.user.findUnique({
       where: { email },
     });
-    if (!user) throw new NotFoundException('User not found');
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
 
     const match = await bcrypt.compare(password, user.password);
-    if (!match) throw new UnauthorizedException('Credentials are not good');
+
+    if (!match) {
+      throw new UnauthorizedException('Credentials are not good');
+    }
 
     const userToken = {
-      userId: user.userId,
+      id: user.id,
       username: user.username,
       email: user.email,
     };
@@ -85,18 +78,31 @@ export class UserService {
     };
   }
 
-  async update(userId: number, updateDto: UpdateDto) {
+  async get(id: number) {
+    return await this.prismaService.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+      },
+    });
+  }
+
+  async update(id: number, updateDto: UpdateDto) {
     const { username, email, avatar } = updateDto;
 
     try {
       const user = await this.prismaService.user.update({
-        where: { userId },
+        where: { id },
         data: { username, email, avatar },
       });
 
       const userReturned = {
         username: user.username,
-        userId: user.userId,
+        userId: user.id,
         email: user.email,
         avatar: user.avatar,
       };
@@ -106,4 +112,10 @@ export class UserService {
       throw new NotFoundException(err.message);
     }
   }
+
+  getMe = async (req: Request) => {
+    const authHeader = req.headers['authorization'] || '';
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+    return this.jwtService.decode(token);
+  };
 }
