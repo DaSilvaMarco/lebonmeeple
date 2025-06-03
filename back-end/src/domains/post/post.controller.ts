@@ -12,43 +12,42 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreatePostDto } from './dtos/CreatePostDto';
-import { UpdatePostDto } from './dtos/UpdatePostDto';
+
+import { CreatePostDto, UpdatePostDto } from './dtos';
 import { PostService } from './post.service';
 import { Request } from 'express';
+import { IsOwner } from 'src/decorator/is-owner.decorator';
 
 @ApiTags('Post')
-@Controller('post')
+@Controller()
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Post('create')
+  @ApiBearerAuth('access-token')
+  @Post('post')
   create(@Body() createPostDto: CreatePostDto, @Req() request: Request) {
     return this.postService.create(createPostDto, request);
   }
 
-  @Get('get')
+  @Get('posts')
   getAll() {
     return this.postService.getAll();
   }
 
-  @Get('get/:id')
-  get(@Param('id', ParseIntPipe) id: number) {
-    return this.postService.get(id);
+  @Get('post/:id')
+  getById(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.getById(id);
   }
 
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
-  @Delete('delete/:id')
-  delete(@Param('id', ParseIntPipe) postId: number, @Req() request: Request) {
-    return this.postService.delete(postId, request);
+  @IsOwner()
+  @Delete('post/:id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.delete(id);
   }
 
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
-  @Patch('patch/:id')
+  @IsOwner()
+  @Patch('post/:id')
   update(
     @Param('id', ParseIntPipe) postId: number,
     @Req() request: Request,
