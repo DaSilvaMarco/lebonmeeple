@@ -16,22 +16,22 @@ export class PostService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(createPostDto: CreatePostDto, request: Request) {
-    const userId = request.user['userId'];
+    const id = request.user['id'];
     const { body, title, image } = createPostDto;
     const post = await this.prismaService.post.create({
       data: {
         body: body,
         title: title,
-        userId: userId,
+        userId: id,
         image: image,
       },
     });
 
     try {
       const user = await this.prismaService.user.findUnique({
-        where: { userId },
+        where: { id },
         select: {
-          userId: true,
+          id: true,
           email: true,
           username: true,
         },
@@ -43,10 +43,10 @@ export class PostService {
     }
   }
 
-  async delete(postId: number, request: Request) {
+  async delete(id: number, request: Request) {
     try {
       const userId = request.user['userId'];
-      await this.prismaService.post.delete({ where: { postId, userId } });
+      await this.prismaService.post.delete({ where: { id, userId } });
       return { data: 'Post deleted !' };
     } catch (err) {
       if (err.name === PRISMA_CLIENT_KNOWN_REQUEST_ERROR) {
@@ -78,17 +78,17 @@ export class PostService {
     }
   }
 
-  async get(postId: number) {
+  async get(id: number) {
     try {
       return await this.prismaService.post.findUnique({
-        where: { postId },
+        where: { id },
         include: {
           user: {
             select: {
               username: true,
               email: true,
               password: false,
-              userId: true,
+              id: true,
             },
           },
         },
@@ -98,11 +98,11 @@ export class PostService {
     }
   }
 
-  async update(postId: number, request: Request, updatePostDto: UpdatePostDto) {
+  async update(id: number, request: Request, updatePostDto: UpdatePostDto) {
     try {
       const userId = request.user['userId'];
       await this.prismaService.post.update({
-        where: { postId, userId },
+        where: { id, userId },
         data: { ...updatePostDto },
       });
       return { data: 'Post updated !' };

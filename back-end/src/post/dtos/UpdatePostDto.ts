@@ -1,11 +1,11 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
 
 export class UpdatePostDto {
-  @ApiProperty()
-  @IsOptional()
+  @ApiPropertyOptional()
   readonly title: string;
-  @ApiProperty()
-  @IsOptional()
+  @ApiPropertyOptional()
   readonly body: string;
+  @ApiPropertyOptional()
+  readonly image: string;
 }

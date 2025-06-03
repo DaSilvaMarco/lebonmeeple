@@ -8,10 +8,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Title')
-    .setDescription('Test project')
+    .setTitle('LeBonMeeple')
+    .setDescription('API documentation for LeBonMeeple')
     .setVersion('0.1')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+      'access-token',
+    )
     .build();
 
   app.enableCors({
