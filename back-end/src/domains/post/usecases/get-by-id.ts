@@ -10,6 +10,13 @@ export const getById = async (id: number, prismaService: PrismaService) => {
           ...PRISMA_BASIC_USER,
         },
       },
+      comments: {
+        select: {
+          id: true,
+          body: true,
+          updatedAt: true,
+        },
+      },
     },
   });
 };
