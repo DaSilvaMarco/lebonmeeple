@@ -25,10 +25,6 @@ export class IsOwnerGuard implements CanActivate {
       throw new ForbiddenException('Missing user or target resource');
     }
 
-    return await isAuthorized(
-      request,
-      Number(paramId),
-      this.prismaService
-    );
+    return await isAuthorized(request, Number(paramId), this.prismaService);
   };
 }
