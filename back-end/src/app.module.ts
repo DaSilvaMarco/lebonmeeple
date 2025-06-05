@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
+import { UserModule } from './domains/user/user.module';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
-import { PostModule } from './post/post.module';
+import { PostModule } from './domains/post/post.module';
 
 @Module({
   imports: [

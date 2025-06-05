@@ -5,13 +5,19 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { isAuthorized } from './index';
 
 @Injectable()
 export class IsOwnerGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+  constructor(
+    private readonly reflector: Reflector,
+    private readonly prismaService: PrismaService,
+  ) {}
 
-  canActivate(context: ExecutionContext): boolean {
+  canActivate = async (context: ExecutionContext): Promise<boolean> => {
     const request = context.switchToHttp().getRequest();
+
     const user = request.user;
     const paramId = request.params['id'];
 
@@ -19,10 +25,10 @@ export class IsOwnerGuard implements CanActivate {
       throw new ForbiddenException('Missing user or target resource');
     }
 
-    if (user.id !== Number(paramId)) {
-      throw new ForbiddenException('You can only modify your own data');
-    }
-
-    return true;
-  }
+    return await isAuthorized(
+      request,
+      Number(paramId),
+      this.prismaService
+    );
+  };
 }
