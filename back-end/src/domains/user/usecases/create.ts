@@ -20,9 +20,7 @@ export const createUser = async (
 
   const hash = await bcrypt.hash(password, 10);
 
-  await prismaService.user.create({
+  return prismaService.user.create({
     data: { email, username, password: hash, avatar },
   });
-
-  return 'User successfully created';
 };
