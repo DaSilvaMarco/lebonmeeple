@@ -16,7 +16,8 @@
     "test": "vitest",
     "test:cov": "vitest --coverage.enabled --coverage",
     "prisma:migrate": "npx prisma migrate dev",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.2",
@@ -51,7 +52,7 @@
     "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
-    "@vitest/coverage-istanbul": "^3.2.0",
+    "@vitest/coverage-istanbul": "^3.2.4",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
@@ -65,7 +66,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
-    "vitest": "^3.2.0"
+    "vitest": "^3.2.4"
   },
   "jest": {
     "moduleFileExtensions": [

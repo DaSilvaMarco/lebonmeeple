@@ -4,6 +4,5 @@ export const deletePost = async (
   id: number,
   prismaService: PrismaService,
 ) => {
-  await prismaService.post.delete({ where: { id } });
-  return 'Post deleted !';
+  return prismaService.post.delete({ where: { id } });
 };

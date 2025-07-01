@@ -1,4 +1,4 @@
-import { JwtService } from "@nestjs/jwt";
+import { JwtService } from '@nestjs/jwt';
 
 export const me = async (request: Request, jwtService: JwtService) => {
   const authHeader = request.headers['authorization'] || '';
