@@ -7,7 +7,7 @@ export class SignupDto {
     email: string,
     password: string,
     passwordConfirmation: string,
-    avatar: string = '',
+    avatar: string = ''
   ) {
     this.username = username;
     this.email = email;

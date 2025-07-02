@@ -2,7 +2,7 @@ import { ForbiddenException } from '@nestjs/common';
 
 export const checkUserPermission = async (
   userId: number,
-  paramId: number,
+  paramId: number
 ): Promise<boolean> => {
   if (userId === paramId) {
     return true;

@@ -2,10 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsEmail } from 'class-validator';
 
 export class SigninDto {
-  constructor(
-    email: string,
-    password: string,
-  ) {
+  constructor(email: string, password: string) {
     this.email = email;
     this.password = password;
   }

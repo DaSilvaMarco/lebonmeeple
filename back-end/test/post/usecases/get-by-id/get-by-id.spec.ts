@@ -1,4 +1,4 @@
-import { expect, test, vi } from 'vitest';
+import { expect, test } from 'vitest';
 import { getById } from 'src/domains/post/usecases';
 import { prismaMock as prismaMockGetById } from './mock';
 

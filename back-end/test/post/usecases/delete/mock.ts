@@ -1,5 +1,4 @@
-import { CreatePostDto } from "src/domains/post/dtos";
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from 'src/prisma/prisma.service';
 
 export const prismaMock = (id: number) => {
   return {

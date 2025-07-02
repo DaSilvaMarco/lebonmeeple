@@ -9,7 +9,11 @@ import { prismaMockUserNotFound, requestMock } from '../usecases/create/mock';
 describe('CreatePostDto', () => {
   it('should validate successfully with valid data', async () => {
     const dto = new CreatePostDto();
-    Object.assign(dto, { body: 'This is a post', title: 'Post Title', image: 'http://example.com/image.jpg' });
+    Object.assign(dto, {
+      body: 'This is a post',
+      title: 'Post Title',
+      image: 'http://example.com/image.jpg',
+    });
 
     const errors = await validate(dto);
     expect(errors.length).toBe(0);
@@ -29,7 +33,10 @@ describe('CreatePostDto', () => {
 
   it('should fail validation if body is missing', async () => {
     const dto = new CreatePostDto();
-    Object.assign(dto, { title: 'Post Title', image: 'http://example.com/image.jpg' });
+    Object.assign(dto, {
+      title: 'Post Title',
+      image: 'http://example.com/image.jpg',
+    });
 
     const errors = await validate(dto);
     expect(errors.length).toBeGreaterThan(0);
@@ -39,7 +46,7 @@ describe('CreatePostDto', () => {
 
   test('should throw error if user not found', async () => {
     await expect(
-      createPost(CREATE_DTO, requestMock, prismaMockUserNotFound),
+      createPost(CREATE_DTO, requestMock, prismaMockUserNotFound)
     ).rejects.toBeInstanceOf(BadRequestException);
   });
 });

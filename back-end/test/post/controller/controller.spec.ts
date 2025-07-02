@@ -5,6 +5,7 @@ import { CreatePostDto, UpdatePostDto } from 'src/domains/post/dtos';
 
 describe('PostController', () => {
   let controller: PostController;
+  // eslint-disable-next-line
   let postServiceMock: any;
 
   beforeEach(() => {
@@ -46,18 +47,6 @@ describe('PostController', () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it('should call getById with correct id and return result', async () => {
-    const postId = 1;
-    const expectedResult = { id: postId, title: 'Post 1' };
-
-    postServiceMock.getById.mockResolvedValue(expectedResult);
-
-    const result = await controller.getById(postId);
-
-    expect(postServiceMock.getById).toHaveBeenCalledWith(postId);
-    expect(result).toEqual(expectedResult);
-  });
-
   it('should call delete with correct id and return result', async () => {
     const postId = 1;
     const expectedResult = { id: postId, deleted: true };
@@ -87,7 +76,7 @@ describe('PostController', () => {
     expect(postServiceMock.update).toHaveBeenCalledWith(
       postId,
       fakeRequest,
-      dto,
+      dto
     );
     expect(result).toEqual(expectedResult);
   });

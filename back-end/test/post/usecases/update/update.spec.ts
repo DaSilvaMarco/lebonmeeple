@@ -1,6 +1,6 @@
-import { expect, test, vi } from 'vitest';
+import { expect, test } from 'vitest';
 import { updatePost } from 'src/domains/post/usecases';
-import { prismaMock as prismaMockUpdate, requestMock } from './mock';
+import { prismaMock as prismaMockUpdate } from './mock';
 
 const UPDATE_DTO = {
   title: 'Updated post title',
@@ -10,8 +10,7 @@ const UPDATE_DTO = {
 
 test('The user can update a post', async () => {
   const prismaMock = prismaMockUpdate();
-
-  const result = await updatePost(1, requestMock, UPDATE_DTO, prismaMock);
+  const result = await updatePost(1, UPDATE_DTO, prismaMock);
 
   expect(prismaMock.post.update).toHaveBeenCalledWith({
     where: { id: 1 },

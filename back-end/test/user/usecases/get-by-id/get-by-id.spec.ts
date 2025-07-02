@@ -4,7 +4,6 @@ import { USER_GET_BY_ID } from './const';
 import { prismaMockGetById } from './mock';
 
 test('The user can get an user by id', async () => {
-
   const result = await getById(1, prismaMockGetById);
 
   expect(prismaMockGetById.user.findUnique).toHaveBeenCalledWith({

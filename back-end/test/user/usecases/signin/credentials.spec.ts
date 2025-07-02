@@ -1,7 +1,11 @@
-import { signinUser } from "src/domains/user/usecases";
-import { SIGNIN_DTO, SIGNIN_WRONG_DTO } from "./const";
-import { configServiceMock, jwtServiceMock, prismaCredentialsNotGood } from "./mock";
-import { UnauthorizedException } from "@nestjs/common";
+import { signinUser } from 'src/domains/user/usecases';
+import { SIGNIN_DTO, SIGNIN_WRONG_DTO } from './const';
+import {
+  configServiceMock,
+  jwtServiceMock,
+  prismaCredentialsNotGood,
+} from './mock';
+import { UnauthorizedException } from '@nestjs/common';
 
 test('should throw error if credentials are not good', async () => {
   vi.mock('bcrypt', () => ({
@@ -13,7 +17,7 @@ test('should throw error if credentials are not good', async () => {
       SIGNIN_DTO,
       prismaCredentialsNotGood(SIGNIN_WRONG_DTO),
       jwtServiceMock,
-      configServiceMock,
-    ),
+      configServiceMock
+    )
   ).rejects.toBeInstanceOf(UnauthorizedException);
 });

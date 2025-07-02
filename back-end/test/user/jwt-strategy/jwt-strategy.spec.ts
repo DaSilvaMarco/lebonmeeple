@@ -1,10 +1,15 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UnauthorizedException } from '@nestjs/common';
 import { JwtStrategy } from 'src/domains/user/jwtStrategy';
 import { USER_PAYLOAD } from './const';
-import { configServiceMock, prismaServiceMock, prismaServiceUserNotFoundMock, prismaServicUserExistsMock } from './mock';
+import {
+  configServiceMock,
+  prismaServiceMock,
+  prismaServiceUserNotFoundMock,
+  prismaServicUserExistsMock,
+} from './mock';
 
 describe('JwtStrategy', () => {
   let jwtStrategy: JwtStrategy;
@@ -12,7 +17,7 @@ describe('JwtStrategy', () => {
   beforeEach(() => {
     jwtStrategy = new JwtStrategy(
       configServiceMock as ConfigService,
-      prismaServiceMock as PrismaService,
+      prismaServiceMock as PrismaService
     );
   });
 
@@ -33,7 +38,7 @@ describe('JwtStrategy', () => {
   it('should throw UnauthorizedException if user not found', async () => {
     prismaServiceUserNotFoundMock();
     await expect(jwtStrategy.validate(USER_PAYLOAD)).rejects.toThrow(
-      UnauthorizedException,
+      UnauthorizedException
     );
   });
 });

@@ -7,7 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export const createPost = async (
   createPostDto: CreatePostDto,
   request: Request,
-  prismaService: PrismaService,
+  prismaService: PrismaService
 ): Promise<Post> => {
   const id = request.user['id'];
   const { body, title, image } = createPostDto;

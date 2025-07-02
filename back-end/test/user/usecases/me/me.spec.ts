@@ -11,7 +11,6 @@ import {
   requestMock,
 } from './mock';
 import { USER_ME } from './const';
-import { JwtService } from '@nestjs/jwt';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),
@@ -34,7 +33,7 @@ test('should extract token from authorization header starting with "Bearer "', a
   const result = await me(requestGoodBearerMock, jwtServiceAuthorizationMock);
 
   expect(jwtServiceAuthorizationMock.decode).toHaveBeenCalledWith(
-    'abc.def.ghi',
+    'abc.def.ghi'
   );
   expect(result).toEqual({ sub: 1 });
 });
