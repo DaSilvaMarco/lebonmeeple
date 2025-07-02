@@ -25,3 +25,23 @@ export const prismaMock = (signinDto: SigninDto) => {
     },
   } as unknown as PrismaService;
 };
+
+export const prismaMockUserNotFound = () => {
+  return {
+    user: {
+      findUnique: vi.fn().mockResolvedValue(null),
+    },
+  } as unknown as PrismaService;
+};
+
+export const prismaCredentialsNotGood = (signinDto: SigninDto) => {
+  return {
+    user: {
+      findUnique: vi.fn().mockResolvedValue({
+        id: 1,
+        email: signinDto.email,
+        password: signinDto.password,
+      }),
+    },
+  } as unknown as PrismaService;
+};
