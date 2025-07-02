@@ -11,7 +11,6 @@ import {
   requestMock,
 } from './mock';
 import { USER_ME } from './const';
-import { JwtService } from '@nestjs/jwt';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),

@@ -5,6 +5,7 @@ import { CreateCommentDto, UpdateCommentDto } from 'src/domains/comment/dtos';
 
 describe('CommentController', () => {
   let controller: CommentController;
+  // eslint-disable-next-line
   let commentServiceMock: any;
 
   beforeEach(() => {

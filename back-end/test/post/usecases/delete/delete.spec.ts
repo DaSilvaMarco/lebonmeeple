@@ -1,5 +1,5 @@
 import { deletePost } from 'src/domains/post/usecases';
-import { expect, test, vi } from 'vitest';
+import { expect, test } from 'vitest';
 import { POST_TO_DELETE } from './const';
 import { prismaMock as prismaMockDelete } from './mock';
 

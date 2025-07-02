@@ -1,4 +1,3 @@
-import { Request } from "express";
 import { UpdateCommentDto } from "../dtos";
 import { PrismaService } from "src/prisma/prisma.service";
 

@@ -13,6 +13,7 @@ export const configServiceMock = {
 } as unknown as Partial<ConfigService>;
 
 export const prismaServicUserExistsMock = () => {
+  // eslint-disable-next-line
   (prismaServiceMock.user.findUnique as any).mockResolvedValue({
     id: 1,
     email: USER_PAYLOAD.email,
@@ -21,5 +22,6 @@ export const prismaServicUserExistsMock = () => {
 };
 
 export const prismaServiceUserNotFoundMock = () => {
+  // eslint-disable-next-line
   (prismaServiceMock.user.findUnique as any).mockResolvedValue(null);
 };

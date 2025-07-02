@@ -1,9 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Request } from 'express';
 
 import { CreatePostDto, UpdatePostDto } from './dtos';
-import {  } from './dtos/update';
 import { throwError } from 'src/utils/errors';
 import {
   createPost,
@@ -12,8 +11,6 @@ import {
   getById,
   updatePost,
 } from './usecases';
-
-const PRISMA_CLIENT_KNOWN_REQUEST_ERROR = 'PrismaClientKnownRequestError';
 
 @Injectable()
 export class PostService {
@@ -53,7 +50,7 @@ export class PostService {
 
   update = async (id: number, request: Request, updatePostDto: UpdatePostDto) => {
     try {
-      return await updatePost(id, request, updatePostDto, this.prismaService);
+      return await updatePost(id, updatePostDto, this.prismaService);
     } catch (error) {
       throwError(error);
     }

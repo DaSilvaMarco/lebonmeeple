@@ -4,10 +4,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 describe('UserController', () => {
   let controller: UserController;
+  // eslint-disable-next-line
   let userServiceMock: any;
 
   beforeEach(() => {
-    // Création d'un mock simple pour UserService
     userServiceMock = {
       signup: vi.fn(),
       signin: vi.fn(),
@@ -55,6 +55,7 @@ describe('UserController', () => {
 
     userServiceMock.me.mockResolvedValue(expectedResult);
 
+    // eslint-disable-next-line
     const result = await controller.me(fakeRequest as any);
 
     expect(userServiceMock.me).toHaveBeenCalledWith(fakeRequest);
