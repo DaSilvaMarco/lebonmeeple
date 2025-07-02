@@ -11,7 +11,7 @@ import { CommentModule } from './domains/comment/comment.module';
     UserModule,
     PrismaModule,
     PostModule,
-    CommentModule
+    CommentModule,
   ],
 })
 export class AppModule {}

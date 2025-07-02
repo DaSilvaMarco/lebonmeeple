@@ -8,4 +8,4 @@ export const MOCKED_USER = {
   id: 1,
   email: 'test@gmail.com',
   username: 'TestUser',
-}
+};

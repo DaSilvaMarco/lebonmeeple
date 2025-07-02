@@ -7,7 +7,7 @@ import { permissionCheckers } from './permissions/index';
 export const isAuthorized = async (
   request: Request,
   paramId: number,
-  prismaService: PrismaService,
+  prismaService: PrismaService
 ): Promise<boolean> => {
   const resource = request.originalUrl.split('/')[1];
   const user = request.user as BasicUser;

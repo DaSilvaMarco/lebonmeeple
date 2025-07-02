@@ -46,13 +46,17 @@ export class PostService {
     } catch (error) {
       throwError(error);
     }
-  }
+  };
 
-  update = async (id: number, request: Request, updatePostDto: UpdatePostDto) => {
+  update = async (
+    id: number,
+    request: Request,
+    updatePostDto: UpdatePostDto
+  ) => {
     try {
       return await updatePost(id, updatePostDto, this.prismaService);
     } catch (error) {
       throwError(error);
     }
-  }
+  };
 }

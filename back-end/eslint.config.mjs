@@ -4,13 +4,11 @@ import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores([
-    'dist/**'
-  ]),
+  globalIgnores(['dist/**']),
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
     plugins: { js },
-    extends: ['js/recommended'],
+    extends: ['js/recommended', 'plugin:prettier/recommended'],
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],

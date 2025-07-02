@@ -1,6 +1,6 @@
-import { Request } from "express";
-import { CreatePostDto } from "src/domains/post/dtos";
-import { PrismaService } from "src/prisma/prisma.service";
+import { Request } from 'express';
+import { CreatePostDto } from 'src/domains/post/dtos';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 export const requestMock = {
   user: {
@@ -31,5 +31,5 @@ export const prismaMock = (createDto: CreatePostDto) => {
 export const prismaMockUserNotFound = {
   user: {
     findUnique: vi.fn().mockResolvedValue(null),
-  }
+  },
 } as unknown as PrismaService;

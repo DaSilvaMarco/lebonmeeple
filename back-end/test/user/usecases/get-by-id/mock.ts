@@ -1,5 +1,5 @@
-import { PrismaService } from "src/prisma/prisma.service";
-import { USER_GET_BY_ID } from "./const";
+import { PrismaService } from 'src/prisma/prisma.service';
+import { USER_GET_BY_ID } from './const';
 
 export const prismaMockGetById = {
   user: {

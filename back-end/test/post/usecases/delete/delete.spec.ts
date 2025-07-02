@@ -12,6 +12,6 @@ test('The user can delete a post', async () => {
   });
 
   expect(result).toMatchObject({
-    id: POST_TO_DELETE.id
+    id: POST_TO_DELETE.id,
   });
 });

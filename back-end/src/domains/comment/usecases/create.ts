@@ -1,13 +1,13 @@
-import { Request } from "express";
-import { PrismaService } from "src/prisma/prisma.service";
+import { Request } from 'express';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommentDto } from '../dtos/create';
-import { BasicUser } from "src/domains/user/types/users";
+import { BasicUser } from 'src/domains/user/types/users';
 
 export const createComment = async (
   createCommentDto: CreateCommentDto,
   request: Request,
   postId: number,
-  prismaService: PrismaService,
+  prismaService: PrismaService
 ) => {
   const { body } = createCommentDto;
   const user = request.user as BasicUser;

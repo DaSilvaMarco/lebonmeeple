@@ -46,7 +46,7 @@ export class PostController {
   update(
     @Param('id', ParseIntPipe) postId: number,
     @Req() request: Request,
-    @Body() updatePostDto: UpdatePostDto,
+    @Body() updatePostDto: UpdatePostDto
   ) {
     return this.postService.update(postId, request, updatePostDto);
   }

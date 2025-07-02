@@ -9,7 +9,7 @@ export const signinUser = async (
   signinDto: SigninDto,
   prismaService: PrismaService,
   jwtService: JwtService,
-  configService: ConfigService,
+  configService: ConfigService
 ) => {
   const { password, email } = signinDto;
 
@@ -20,7 +20,7 @@ export const signinUser = async (
   if (!user) {
     throw new NotFoundException('User not found');
   }
-  
+
   const match = await bcrypt.compare(password, user.password);
 
   if (!match) {

@@ -12,7 +12,7 @@ import { isAuthorized } from './index';
 export class IsOwnerGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
-    private readonly prismaService: PrismaService,
+    private readonly prismaService: PrismaService
   ) {}
 
   canActivate = async (context: ExecutionContext): Promise<boolean> => {

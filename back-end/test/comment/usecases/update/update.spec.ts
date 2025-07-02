@@ -1,6 +1,6 @@
-import { MOCKED_COMMENT, UPDATE_DTO } from "./const";
-import { updateComment } from "src/domains/comment/usecases/update";
-import { prismaMock as prismaMockUpdate } from "./mock";
+import { MOCKED_COMMENT, UPDATE_DTO } from './const';
+import { updateComment } from 'src/domains/comment/usecases/update';
+import { prismaMock as prismaMockUpdate } from './mock';
 
 test('The user can update a post', async () => {
   const prismaMock = prismaMockUpdate();

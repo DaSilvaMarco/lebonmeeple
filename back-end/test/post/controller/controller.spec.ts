@@ -76,7 +76,7 @@ describe('PostController', () => {
     expect(postServiceMock.update).toHaveBeenCalledWith(
       postId,
       fakeRequest,
-      dto,
+      dto
     );
     expect(result).toEqual(expectedResult);
   });

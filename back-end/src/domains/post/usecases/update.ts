@@ -5,7 +5,7 @@ import { Post } from '@prisma/client';
 export const updatePost = async (
   id: number,
   updatePostDto: UpdatePostDto,
-  prismaService: PrismaService,
+  prismaService: PrismaService
 ): Promise<Post> => {
   return prismaService.post.update({
     where: { id },
