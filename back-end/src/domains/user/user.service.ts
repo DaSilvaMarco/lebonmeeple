@@ -12,7 +12,7 @@ export class UserService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
   ) {}
 
   signup = async (signupDto: SignupDto) => {
@@ -29,7 +29,7 @@ export class UserService {
         signinDto,
         this.prismaService,
         this.jwtService,
-        this.configService
+        this.configService,
       );
     } catch (error) {
       throwError(error);

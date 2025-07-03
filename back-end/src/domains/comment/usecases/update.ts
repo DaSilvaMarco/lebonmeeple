@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export const updateComment = async (
   id: number,
   updateCommentDto: UpdateCommentDto,
-  prismaService: PrismaService
+  prismaService: PrismaService,
 ) => {
   const { body } = updateCommentDto;
 

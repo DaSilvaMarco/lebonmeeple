@@ -20,7 +20,7 @@ test('The user can log in', async () => {
     SIGNIN_DTO,
     prismaMock,
     jwtServiceMock,
-    configServiceMock
+    configServiceMock,
   );
 
   expect(prismaMock.user.findUnique).toHaveBeenCalledWith({
@@ -36,7 +36,7 @@ test('should throw error if user not found', async () => {
       SIGNIN_DTO,
       prismaMockUserNotFound(),
       jwtServiceMock,
-      configServiceMock
-    )
+      configServiceMock,
+    ),
   ).rejects.toBeInstanceOf(NotFoundException);
 });

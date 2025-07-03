@@ -17,7 +17,7 @@ describe('JwtStrategy', () => {
   beforeEach(() => {
     jwtStrategy = new JwtStrategy(
       configServiceMock as ConfigService,
-      prismaServiceMock as PrismaService
+      prismaServiceMock as PrismaService,
     );
   });
 
@@ -38,7 +38,7 @@ describe('JwtStrategy', () => {
   it('should throw UnauthorizedException if user not found', async () => {
     prismaServiceUserNotFoundMock();
     await expect(jwtStrategy.validate(USER_PAYLOAD)).rejects.toThrow(
-      UnauthorizedException
+      UnauthorizedException,
     );
   });
 });

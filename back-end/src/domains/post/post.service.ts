@@ -51,7 +51,7 @@ export class PostService {
   update = async (
     id: number,
     request: Request,
-    updatePostDto: UpdatePostDto
+    updatePostDto: UpdatePostDto,
   ) => {
     try {
       return await updatePost(id, updatePostDto, this.prismaService);

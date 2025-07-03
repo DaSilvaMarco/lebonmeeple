@@ -15,14 +15,14 @@ export class CommentService {
   create = async (
     createCommentDto: CreateCommentDto,
     request: Request,
-    postId: number
+    postId: number,
   ) => {
     try {
       return await createComment(
         createCommentDto,
         request,
         postId,
-        this.prismaService
+        this.prismaService,
       );
     } catch (error) {
       throwError(error);

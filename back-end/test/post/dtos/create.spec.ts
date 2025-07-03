@@ -46,7 +46,7 @@ describe('CreatePostDto', () => {
 
   test('should throw error if user not found', async () => {
     await expect(
-      createPost(CREATE_DTO, requestMock, prismaMockUserNotFound)
+      createPost(CREATE_DTO, requestMock, prismaMockUserNotFound),
     ).rejects.toBeInstanceOf(BadRequestException);
   });
 });

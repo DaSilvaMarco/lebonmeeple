@@ -42,7 +42,7 @@ test('The user can create an account', async () => {
 
 test('should throw error if passwords are not the same', async () => {
   await expect(
-    createUser(CREATE_USER_WRONG_PASSWORDS_CREATE_DTO, prismaMockConflict)
+    createUser(CREATE_USER_WRONG_PASSWORDS_CREATE_DTO, prismaMockConflict),
   ).rejects.toBeInstanceOf(ConflictException);
 });
 
@@ -50,15 +50,15 @@ test('should throw error if user already exists', async () => {
   await expect(
     createUser(
       CREATE_USER_ALREADY_EXISTS_CREATE_DTO,
-      prismaMockUserAlreadyExists
-    )
+      prismaMockUserAlreadyExists,
+    ),
   ).rejects.toBeInstanceOf(ConflictException);
 
   await expect(
     createUser(
       CREATE_USER_ALREADY_EXISTS_CREATE_DTO,
-      prismaMockUserAlreadyExists
-    )
+      prismaMockUserAlreadyExists,
+    ),
   ).rejects.toThrow('User already exists !');
 });
 

@@ -7,7 +7,7 @@ export const createComment = async (
   createCommentDto: CreateCommentDto,
   request: Request,
   postId: number,
-  prismaService: PrismaService
+  prismaService: PrismaService,
 ) => {
   const { body } = createCommentDto;
   const user = request.user as BasicUser;
