@@ -15,6 +15,7 @@
     "test": "vitest",
     "test:cov": "vitest --coverage.enabled --coverage",
     "prisma:migrate": "npx prisma migrate dev",
+    "prisma:fixtures": "ts-node prisma/seed.ts",
     "tsc": "tsc --noEmit",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint .",
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
+    "@faker-js/faker": "^9.9.0",
     "@nestjs/cli": "^11.0.7",
     "@nestjs/schematics": "^11.0.5",
     "@nestjs/testing": "^11.1.2",
