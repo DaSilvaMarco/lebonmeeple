@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export const checkPostPermission = async (
   userId: number,
   paramId: number,
-  prisma: PrismaService
+  prisma: PrismaService,
 ): Promise<boolean> => {
   const post = await prisma.post.findUnique({
     where: { id: paramId },

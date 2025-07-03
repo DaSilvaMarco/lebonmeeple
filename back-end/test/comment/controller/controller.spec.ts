@@ -29,13 +29,13 @@ describe('CommentController', () => {
     const result = await controller.create(
       createDto,
       fakeRequest,
-      String(postId)
+      String(postId),
     );
 
     expect(commentServiceMock.create).toHaveBeenCalledWith(
       createDto,
       fakeRequest,
-      postId
+      postId,
     );
     expect(result).toEqual(expectedResult);
   });
@@ -63,7 +63,7 @@ describe('CommentController', () => {
 
     expect(commentServiceMock.update).toHaveBeenCalledWith(
       commentId,
-      updateDto
+      updateDto,
     );
     expect(result).toEqual(expectedResult);
   });

@@ -17,7 +17,7 @@ test('should throw error if credentials are not good', async () => {
       SIGNIN_DTO,
       prismaCredentialsNotGood(SIGNIN_WRONG_DTO),
       jwtServiceMock,
-      configServiceMock
-    )
+      configServiceMock,
+    ),
   ).rejects.toBeInstanceOf(UnauthorizedException);
 });

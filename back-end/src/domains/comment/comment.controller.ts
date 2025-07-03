@@ -27,7 +27,7 @@ export class CommentController {
   create(
     @Body() createCommentDto: CreateCommentDto,
     @Req() request: Request,
-    @Param('id', ParseIntPipe) id: string
+    @Param('id', ParseIntPipe) id: string,
   ) {
     return this.commentService.create(createCommentDto, request, Number(id));
   }
@@ -42,7 +42,7 @@ export class CommentController {
   @Patch('comment/:id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateCommentDto: UpdateCommentDto
+    @Body() updateCommentDto: UpdateCommentDto,
   ) {
     return this.commentService.update(id, updateCommentDto);
   }

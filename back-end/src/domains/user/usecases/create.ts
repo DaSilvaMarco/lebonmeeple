@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 
 export const createUser = async (
   signupDto: SignupDto,
-  prismaService: PrismaService
+  prismaService: PrismaService,
 ) => {
   const { email, password, passwordConfirmation, username, avatar } = signupDto;
 

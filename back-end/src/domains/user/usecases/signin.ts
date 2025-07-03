@@ -9,7 +9,7 @@ export const signinUser = async (
   signinDto: SigninDto,
   prismaService: PrismaService,
   jwtService: JwtService,
-  configService: ConfigService
+  configService: ConfigService,
 ) => {
   const { password, email } = signinDto;
 

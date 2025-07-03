@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export const checkCommentPermission = async (
   userId: number,
   paramId: number,
-  prisma: PrismaService
+  prisma: PrismaService,
 ): Promise<boolean> => {
   const comment = await prisma.comment.findUnique({
     where: { id: paramId },

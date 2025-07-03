@@ -6,6 +6,6 @@ import { IsOwnerGuard } from '../guard/is-owner.guard';
 export function IsOwner() {
   return applyDecorators(
     UseGuards(AuthGuard('jwt'), IsOwnerGuard),
-    ApiBearerAuth('access-token')
+    ApiBearerAuth('access-token'),
   );
 }
