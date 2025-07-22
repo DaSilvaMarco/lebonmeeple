@@ -7,7 +7,14 @@ import prettierPlugin from 'eslint-plugin-prettier';
 export default [
   // Ignorer les fichiers de build
   {
-    ignores: ['dist/**', 'node_modules/**', '*.d.ts', "**/dist/**"],
+    ignores: [
+      'dist/**',
+      '*.d.ts',
+      '**/dist/**',
+      '**/node_modules/**',
+      '**/.next/**',
+      '**/seed.ts',
+    ],
   },
 
   // Configuration de base JavaScript
