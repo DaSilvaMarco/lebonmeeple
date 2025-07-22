@@ -63,7 +63,8 @@ async function main() {
 }
 
 main()
-  .catch(() => {
+  .catch((e) => {
+    console.error('ERROR : ', e);
     process.exit(1);
   })
   .finally(async () => {
