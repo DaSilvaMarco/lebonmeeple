@@ -32,7 +32,6 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        working-directory: back-end
         run: npm install
 
       - name: Wait for Postgres
@@ -45,13 +44,11 @@ jobs:
           PGPASSWORD: postgres
 
       - name: Run migrations
-        working-directory: back-end
         run: npm run prisma:migrate
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
 
       - name: Run tests
-        working-directory: back-end
         run: npm run test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
