@@ -1,7 +1,7 @@
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
-import { SigninDto } from 'apps/back-end/src/domains/user/dtos';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { type ConfigService } from '@nestjs/config';
+import { type JwtService } from '@nestjs/jwt';
+import { type SigninDto } from '@domains/user/dtos';
+import { type PrismaService } from '@prisma-service/prisma.service';
 import { vi } from 'vitest';
 
 export const configServiceMock = {

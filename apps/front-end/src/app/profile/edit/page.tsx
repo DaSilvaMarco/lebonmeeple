@@ -19,19 +19,20 @@ import {
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from '../../../hooks/useAuth';
 import { useRouter } from 'next/navigation';
-import { useAppDispatch } from '../../../store';
-import { toastError, toastSuccess } from '../../../domains/shared/toat/toast';
-import { update } from '../../../domains/user/usecase/update';
+import { toastError, toastSuccess } from '@/domains/shared/toat/toast';
+import { update } from '@/domains/user/usecase/update';
 import {
   UserProfileFormData,
   userProfileUpdateSchema,
-} from '../../../domains/user/type';
-import { updateUser } from '../../../store/authSlice';
+} from '@/domains/user/type';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { updateUser } from '@/domains/user/slice';
 
 const UpdateProfile = () => {
-  const { user, isAuthenticated, token } = useAuth();
+  const { user, isAuthenticated, token } = useAppSelector(
+    (state) => state.user,
+  );
   const toast = useToast();
   const dispatch = useAppDispatch();
   const router = useRouter();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
-import Avatar from '../../avatar/components/Avatar';
+import Avatar from '@/domains/shared/avatar/components/Avatar';
 
 const Nav = () => {
   const user = null;

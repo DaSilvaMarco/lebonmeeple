@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { POST_TO_DELETE } from './const';
 import { prismaMock as prismaMockDelete } from './mock';
-import { deletePost } from 'apps/back-end/src/domains/post/usecases';
+import { deletePost } from '@domains/post/usecases';
 
 test('The user can delete a post', async () => {
   const prismaMock = prismaMockDelete(POST_TO_DELETE.id);

@@ -1,8 +1,8 @@
-import { createPost } from 'apps/back-end/src/domains/post/usecases';
+import { createPost } from '@domains/post/usecases';
 import { CREATE_DTO } from './const';
 import { prismaMock as prismaMockCreate } from './mock';
 import { requestMock } from './mock';
-import { test, expect, vi } from 'vitest';
+import { expect, test, vi } from 'vitest';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),

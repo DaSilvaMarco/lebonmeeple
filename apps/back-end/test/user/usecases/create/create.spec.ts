@@ -1,8 +1,8 @@
 import { expect, test, vi } from 'vitest';
 import {
   CREATE_USER_ALREADY_EXISTS_CREATE_DTO,
-  CREATE_USER_WITH_AVATAR,
   CREATE_USER_WITHOUT_AVATAR,
+  CREATE_USER_WITH_AVATAR,
   CREATE_USER_WRONG_PASSWORDS_CREATE_DTO,
   SIGNUP_DTO,
 } from './const';
@@ -12,7 +12,7 @@ import {
   prismaMockUserAlreadyExists,
 } from './mock';
 import { ConflictException } from '@nestjs/common';
-import { createUser } from 'apps/back-end/src/domains/user/usecases';
+import { createUser } from '@domains/user/usecases';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),

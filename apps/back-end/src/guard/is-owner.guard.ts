@@ -1,12 +1,12 @@
 import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
+  type CanActivate,
+  type ExecutionContext,
   ForbiddenException,
+  Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { isAuthorized } from './index';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '@prisma-service/prisma.service';
 
 @Injectable()
 export class IsOwnerGuard implements CanActivate {
@@ -18,7 +18,7 @@ export class IsOwnerGuard implements CanActivate {
   canActivate = async (context: ExecutionContext): Promise<boolean> => {
     const request = context.switchToHttp().getRequest();
 
-    const user = request.user;
+    const { user } = request;
     const paramId = request.params['id'];
 
     if (!user || !paramId) {

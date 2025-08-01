@@ -18,20 +18,17 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { login, selectIsLoading } from '../../store/authSlice';
-import { signin } from '../../domains/user/usecase/signin';
-import {
-  toastSuccess,
-  toastError,
-} from '../../domains/shared/toat/toast';
-import { LoginFormData, schemaUserLogin } from '../../domains/user/type';
+import { signin } from '@/domains/user/usecase/signin';
+import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
+import { LoginFormData, schemaUserLogin } from '@/domains/user/type';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { login } from '@/domains/user/slice';
 
 export default function LoginForm() {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const isLoadingAuth = useAppSelector(selectIsLoading);
   const toast = useToast();
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.user);
 
   const {
     register,
@@ -86,7 +83,7 @@ export default function LoginForm() {
               variant="solid"
               type="submit"
               width="full"
-              isLoading={isSubmitting || isLoadingAuth}
+              isLoading={isSubmitting || isLoading}
               isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
             >
               Se connecter

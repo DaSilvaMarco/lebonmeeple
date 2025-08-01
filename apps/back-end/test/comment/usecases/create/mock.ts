@@ -1,6 +1,6 @@
-import { CreateCommentDto } from 'apps/back-end/src/domains/comment/dtos';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
-import { Request } from 'express';
+import { type CreateCommentDto } from '@domains/comment/dtos';
+import { type PrismaService } from '@prisma-service/prisma.service';
+import { type Request } from 'express';
 import { vi } from 'vitest';
 
 export const requestMock = {

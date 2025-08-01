@@ -16,3 +16,18 @@ export const userProfileUpdateSchema = z.object({
 });
 
 export type UserProfileFormData = z.infer<typeof userProfileUpdateSchema>;
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  avatar?: string;
+  createdAt?: string;
+}
+
+export interface UserState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}

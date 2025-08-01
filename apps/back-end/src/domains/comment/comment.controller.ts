@@ -12,9 +12,9 @@ import {
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CommentService } from './comment.service';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateCommentDto, UpdateCommentDto } from './dtos';
-import { Request } from 'express';
-import { IsOwner } from '../../decorator/is-owner.decorator';
+import { type CreateCommentDto, type UpdateCommentDto } from './dtos';
+import type { Request } from 'express';
+import { IsOwner } from '@decorator/is-owner.decorator';
 
 @ApiTags('Comment')
 @Controller()

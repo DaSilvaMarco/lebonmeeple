@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Request } from 'express';
+import { type Request } from 'express';
 
-import { CreatePostDto, UpdatePostDto } from './dtos';
+import { type CreatePostDto, type UpdatePostDto } from './dtos';
 import {
   createPost,
   deletePost,
@@ -9,8 +9,8 @@ import {
   getById,
   updatePost,
 } from './usecases';
-import { PrismaService } from '../../prisma/prisma.service';
-import { throwError } from '../../utils/errors';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { throwError } from '@utils/errors';
 
 @Injectable()
 export class PostService {

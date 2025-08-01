@@ -1,6 +1,6 @@
-import { CreatePostDto } from 'apps/back-end/src/domains/post/dtos';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
-import { Request } from 'express';
+import { type CreatePostDto } from '@domains/post/dtos';
+import { type PrismaService } from '@prisma-service/prisma.service';
+import { type Request } from 'express';
 import { vi } from 'vitest';
 
 export const requestMock = {

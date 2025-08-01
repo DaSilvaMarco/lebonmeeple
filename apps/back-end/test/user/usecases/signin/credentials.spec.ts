@@ -1,4 +1,4 @@
-import { signinUser } from 'apps/back-end/src/domains/user/usecases';
+import { signinUser } from '@domains/user/usecases';
 import { SIGNIN_DTO, SIGNIN_WRONG_DTO } from './const';
 import {
   configServiceMock,
@@ -6,7 +6,7 @@ import {
   prismaCredentialsNotGood,
 } from './mock';
 import { UnauthorizedException } from '@nestjs/common';
-import { vi, test, expect } from 'vitest';
+import { expect, test, vi } from 'vitest';
 
 test('should throw error if credentials are not good', async () => {
   vi.mock('bcrypt', () => ({

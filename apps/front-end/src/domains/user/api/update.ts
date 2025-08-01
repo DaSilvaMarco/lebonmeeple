@@ -1,5 +1,5 @@
-import { API_USER_UPDATE, PATCH_METHOD } from '../contants';
-import { UserProfileFormData } from '../type';
+import { API_USER_UPDATE, PATCH_METHOD } from '../constants';
+import { type UserProfileFormData } from '../type';
 import { meAPI } from './me';
 
 export const updateUserAPI = async (

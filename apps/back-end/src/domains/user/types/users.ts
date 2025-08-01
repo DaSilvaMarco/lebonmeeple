@@ -1,4 +1,4 @@
-export type PrismaBasicUser = {
+export interface PrismaBasicUser {
   username: boolean;
   email: boolean;
   avatar: boolean;
@@ -6,9 +6,9 @@ export type PrismaBasicUser = {
   id: boolean;
   createdAt: boolean;
   updateAt: boolean;
-};
+}
 
-export type BasicUser = {
+export interface BasicUser {
   username: string;
   email: string;
   avatar: string;
@@ -16,4 +16,4 @@ export type BasicUser = {
   id: number;
   createdAt: number;
   updateAt: number;
-};
+}

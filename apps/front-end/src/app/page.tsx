@@ -12,12 +12,12 @@ import {
   Badge,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import HomeCard from '../domains/home/components/HomeCard';
-import { homeData } from '../domains/home/data/home-data';
-import { useAuth } from '../hooks/useAuth';
+import HomeCard from '@/domains/home/components/HomeCard';
+import { homeData } from '@/domains/home/data/home-data';
+import { useAppSelector } from '@/store/hook';
 
 const App = () => {
-  const { isAuthenticated, user } = useAuth();
+  const { user, isAuthenticated } = useAppSelector((state) => state.user);
 
   return (
     <>

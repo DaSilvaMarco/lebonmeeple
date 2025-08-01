@@ -1,10 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Request } from 'express';
-import { PostController } from 'apps/back-end/src/domains/post/post.controller';
-import {
-  CreatePostDto,
-  UpdatePostDto,
-} from 'apps/back-end/src/domains/post/dtos';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type Request } from 'express';
+import { PostController } from '@domains/post/post.controller';
+import { type CreatePostDto, type UpdatePostDto } from '@domains/post/dtos';
 
 describe('PostController', () => {
   let controller: PostController;

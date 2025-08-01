@@ -1,6 +1,6 @@
-import { ConfigService } from '@nestjs/config';
+import { type ConfigService } from '@nestjs/config';
 import { USER_PAYLOAD } from './const';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { type PrismaService } from '@prisma-service/prisma.service';
 import { vi } from 'vitest';
 
 export const prismaServiceMock = {

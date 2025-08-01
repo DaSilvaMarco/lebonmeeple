@@ -10,7 +10,7 @@ import {
   requestMock,
 } from './mock';
 import { USER_ME } from './const';
-import { me } from 'apps/back-end/src/domains/user/usecases';
+import { me } from '@domains/user/usecases';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),

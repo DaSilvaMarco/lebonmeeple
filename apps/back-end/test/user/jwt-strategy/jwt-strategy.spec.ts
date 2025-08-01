@@ -1,15 +1,15 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { ConfigService } from '@nestjs/config';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { type ConfigService } from '@nestjs/config';
 import { UnauthorizedException } from '@nestjs/common';
 import { USER_PAYLOAD } from './const';
 import {
   configServiceMock,
+  prismaServicUserExistsMock,
   prismaServiceMock,
   prismaServiceUserNotFoundMock,
-  prismaServicUserExistsMock,
 } from './mock';
-import { JwtStrategy } from 'apps/back-end/src/domains/user/jwtStrategy';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { JwtStrategy } from '@domains/user/jwtStrategy';
+import { type PrismaService } from '@prisma-service/prisma.service';
 
 describe('JwtStrategy', () => {
   let jwtStrategy: JwtStrategy;

@@ -1,14 +1,15 @@
 import { ForbiddenException } from '@nestjs/common';
-import { Request } from 'express';
+import { type Request } from 'express';
 import { permissionCheckers } from './permissions/index';
-import { PrismaService } from '../prisma/prisma.service';
-import { BasicUser } from '../domains/user/types/users';
+import { type PrismaService } from '@prisma-service/prisma.service';
+import { type BasicUser } from '@domains/user/types/users';
 
 export const isAuthorized = async (
   request: Request,
   paramId: number,
   prismaService: PrismaService,
 ): Promise<boolean> => {
+  // eslint-disable-next-line prefer-destructuring
   const resource = request.originalUrl.split('/')[1];
   const user = request.user as BasicUser;
 

@@ -16,14 +16,13 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import ResponsiveNav from '../../navigation/components/ResponsiveNav';
-import { useAuth } from '../../../../hooks/useAuth';
-import { useAppDispatch } from '../../../../store';
-import { logout } from '../../../../store/authSlice';
+import ResponsiveNav from '@/domains/shared/navigation/components/ResponsiveNav';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { logout } from '@/domains/user/slice';
 import { useRouter } from 'next/navigation';
 
 const Header = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -47,16 +46,7 @@ const Header = () => {
           </Heading>
         </Link>
 
-        {/* Section centrale avec navigation */}
-        {/* <HStack spacing={4} flex={1} justify="center">
-          <Show above="md">
-            <Nav />
-          </Show>
-        </HStack> */}
-
-        {/* Section droite avec avatar ou navigation mobile */}
         <HStack spacing={4}>
-          {/* Affichage conditionnel de l'avatar */}
           {isAuthenticated && user ? (
             <Show above="md">
               <Menu>
@@ -83,7 +73,6 @@ const Header = () => {
               </Menu>
             </Show>
           ) : (
-            /* Si pas connecté, afficher les liens de connexion sur desktop */
             <Show above="md">
               <HStack spacing={2}>
                 <Link href="/login">
@@ -99,8 +88,6 @@ const Header = () => {
               </HStack>
             </Show>
           )}
-
-          {/* Navigation mobile */}
           <Show below="md">
             <ResponsiveNav />
           </Show>

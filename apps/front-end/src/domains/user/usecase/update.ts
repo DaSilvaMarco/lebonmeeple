@@ -1,5 +1,5 @@
 import { updateUserAPI } from '../api/update';
-import { UserProfileFormData } from '../type';
+import { type UserProfileFormData } from '../type';
 
 export const update = async (data: UserProfileFormData, token: string) => {
   const newUser = await updateUserAPI(data, token);
@@ -11,6 +11,6 @@ export const update = async (data: UserProfileFormData, token: string) => {
       email: newUser.email || '',
       avatar: newUser.avatar || '',
     },
-    token: token,
+    token,
   };
 };

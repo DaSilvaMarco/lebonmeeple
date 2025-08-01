@@ -1,6 +1,6 @@
 import { signinAPI } from '../api/signin';
 import { meAPI } from '../api/me';
-import { LoginFormData } from '../type';
+import { type LoginFormData } from '../type';
 
 export const signin = async (data: LoginFormData) => {
   const signinResult = await signinAPI(data);
@@ -15,6 +15,6 @@ export const signin = async (data: LoginFormData) => {
       email: resultMe.email || '',
       avatar: resultMe.avatar || '',
     },
-    token: token,
+    token,
   };
 };

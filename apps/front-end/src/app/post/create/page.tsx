@@ -17,16 +17,14 @@ import {
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../../../hooks/useAuth';
-import { convertToBase64 } from '../../../utils/convertToBase64';
-import { BlogCreateFormData, createPostSchema } from '../../../domains/post/schema';
+import { convertToBase64 } from '@/utils/convertToBase64';
+import { BlogCreateFormData, createPostSchema } from '@/domains/post/schema';
+import { useAppSelector } from '@/store/hook';
 
 const PostCreate = () => {
   const router = useRouter();
   const toast = useToast();
-  const { token, isAuthenticated } = useAuth();
-
-  console.log('isAuthenticated:', isAuthenticated);
+  const { token } = useAppSelector((state) => state.user);
 
   const {
     register,

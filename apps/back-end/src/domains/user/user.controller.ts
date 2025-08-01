@@ -13,8 +13,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
 import { UserService } from './user.service';
-import { SignupDto, SigninDto, UpdateDto } from './dtos';
-import { IsOwner } from '../../decorator/is-owner.decorator';
+import { type SigninDto, type SignupDto, type UpdateDto } from './dtos';
+import { IsOwner } from '@decorator/is-owner.decorator';
 
 @ApiTags('User')
 @Controller()

@@ -1,4 +1,20 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "./apps/back-end/dist",
+    "noEmit": false,
+    "declaration": true,
+    "removeComments": true
+  },
+  "include": [
+    "apps/back-end/src/**/*",
+    "apps/back-end/test/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "apps/front-end/**/*",
+    "apps/back-end/test/**/*",
+    "apps/back-end/coverage/**/*"
+  ]
 }
