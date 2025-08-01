@@ -1,4 +1,4 @@
-import { signinUser } from 'apps/back-end/src/domains/user/usecases';
+import { signinUser } from '@domains/user/usecases';
 import { SIGNIN_DTO, SIGNIN_WRONG_DTO } from './const';
 import {
   configServiceMock,

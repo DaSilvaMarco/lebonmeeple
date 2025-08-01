@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { isAuthorized } from './index';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '@prisma-service/prisma.service';
 
 @Injectable()
 export class IsOwnerGuard implements CanActivate {

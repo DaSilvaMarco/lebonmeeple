@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import React from 'react';
-import { Provider } from '../ui/Provider';
-import PageLayout from '../domains/shared/layout/components/PageLayout';
-import { ReduxProvider } from '../components/ReduxProvider';
+import { Provider } from '@/ui/Provider';
+import PageLayout from '@/domains/shared/layout/components/PageLayout';
+import { ReduxProvider } from '@/components/ReduxProvider';
 
 export const metadata: Metadata = {
   title: 'Le Bon Meeple',

@@ -1,23 +1,159 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "module": "commonjs",
+    // Configuration commune
+    "target": "ES2021",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    // Configuration React/Next.js
+    "jsx": "preserve",
+    // Configuration NestJS
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
     "sourceMap": true,
-    "outDir": "./dist",
+    // Paths et base
     "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "types": ["vitest/globals"]
-  }
+    "outDir": "./dist",
+    // Types
+    "types": [
+      "vitest/globals",
+      "node"
+    ],
+    // Paths alias pour tout le projet
+    "paths": {
+      // Backend aliases
+      "@backend/*": [
+        "./apps/back-end/src/*"
+      ],
+      "@backend/domains/*": [
+        "./apps/back-end/src/domains/*"
+      ],
+      "@backend/utils/*": [
+        "./apps/back-end/src/utils/*"
+      ],
+      "@backend/guard/*": [
+        "./apps/back-end/src/guard/*"
+      ],
+      "@backend/decorator/*": [
+        "./apps/back-end/src/decorator/*"
+      ],
+      "@backend/prisma/*": [
+        "./apps/back-end/src/prisma/*"
+      ],
+      // Frontend aliases
+      "@frontend/*": [
+        "./apps/front-end/src/*"
+      ],
+      "@frontend/app/*": [
+        "./apps/front-end/src/app/*"
+      ],
+      "@frontend/components/*": [
+        "./apps/front-end/src/components/*"
+      ],
+      "@frontend/domains/*": [
+        "./apps/front-end/src/domains/*"
+      ],
+      "@frontend/store/*": [
+        "./apps/front-end/src/store/*"
+      ],
+      "@frontend/ui/*": [
+        "./apps/front-end/src/ui/*"
+      ],
+      "@frontend/utils/*": [
+        "./apps/front-end/src/utils/*"
+      ],
+      // Aliases courts pour le frontend (pour une utilisation plus simple)
+      "@/*": [
+        "./apps/front-end/src/*"
+      ],
+      "@/app/*": [
+        "./apps/front-end/src/app/*"
+      ],
+      "@/components/*": [
+        "./apps/front-end/src/components/*"
+      ],
+      "@/domains/*": [
+        "./apps/front-end/src/domains/*"
+      ],
+      "@/store/*": [
+        "./apps/front-end/src/store/*"
+      ],
+      "@/ui/*": [
+        "./apps/front-end/src/ui/*"
+      ],
+      "@/utils/*": [
+        "./apps/front-end/src/utils/*"
+      ],
+      // Aliases courts pour le backend
+      "@domains/*": [
+        "./apps/back-end/src/domains/*"
+      ],
+      "@utils/*": [
+        "./apps/back-end/src/utils/*"
+      ],
+      "@guard/*": [
+        "./apps/back-end/src/guard/*"
+      ],
+      "@decorator/*": [
+        "./apps/back-end/src/decorator/*"
+      ],
+      "@prisma-service/*": [
+        "./apps/back-end/src/prisma/*"
+      ],
+      // Shared et utilitaires
+      "@shared/*": [
+        "./shared/*"
+      ],
+      "@prisma/*": [
+        "./apps/back-end/prisma/*"
+      ],
+      "@test/*": [
+        "./apps/back-end/test/*"
+      ],
+      "@public/*": [
+        "./apps/front-end/public/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    // Include tout le projet
+    "**/*.ts",
+    "**/*.tsx",
+    "apps/**/*.js",
+    "apps/**/*.jsx",
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "apps/front-end/.next/types/**/*.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    ".next",
+    "apps/back-end/dist",
+    "apps/front-end/.next"
+  ]
 }

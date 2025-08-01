@@ -3,8 +3,8 @@ import { validate } from 'class-validator';
 import { BadRequestException } from '@nestjs/common';
 import { CREATE_DTO } from '../usecases/create/const';
 import { prismaMockUserNotFound, requestMock } from '../usecases/create/mock';
-import { CreatePostDto } from 'apps/back-end/src/domains/post/dtos';
-import { createPost } from 'apps/back-end/src/domains/post/usecases';
+import { CreatePostDto } from '@domains/post/dtos';
+import { createPost } from '@domains/post/usecases';
 
 describe('CreatePostDto', () => {
   it('should validate successfully with valid data', async () => {

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { prismaMock as prismaMockUpdate } from './mock';
-import { updatePost } from 'apps/back-end/src/domains/post/usecases';
+import { updatePost } from '@domains/post/usecases';
 
 const UPDATE_DTO = {
   title: 'Updated post title',

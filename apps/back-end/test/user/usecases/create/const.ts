@@ -1,4 +1,4 @@
-import { SignupDto } from 'apps/back-end/src/domains/user/dtos';
+import { SignupDto } from '@domains/user/dtos';
 
 export const SIGNUP_DTO = new SignupDto(
   'testuser',

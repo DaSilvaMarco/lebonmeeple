@@ -1,4 +1,4 @@
-import { UpdateCommentDto } from 'apps/back-end/src/domains/comment/dtos';
+import { UpdateCommentDto } from '@domains/comment/dtos';
 import { describe, it, expect } from 'vitest';
 
 describe('UpdateCommentDto', () => {

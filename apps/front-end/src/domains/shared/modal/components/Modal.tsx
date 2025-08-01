@@ -8,7 +8,7 @@ import {
   ModalBody,
   ModalFooter,
 } from '@chakra-ui/react';
-import Button from '../../button/components/Button';
+import Button from '@/domains/shared/button/components/Button';
 
 interface Modal {
   isOpen: boolean;

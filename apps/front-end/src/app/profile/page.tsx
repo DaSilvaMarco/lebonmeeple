@@ -13,15 +13,14 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { logout, selectIsAuthenticated, selectUser } from '../../store/authSlice';
 import Link from 'next/link';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { logout } from '@/domains/user/slice';
 
 export function UserProfile() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const user = useAppSelector(selectUser);
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { user, isAuthenticated } = useAppSelector((state) => state.user);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -74,16 +73,11 @@ export function UserProfile() {
           >
             Se déconnecter
           </Button>
-          <Link href='profile/edit'>
-            <Button
-              colorScheme="red"
-              variant="outline"
-              w="full"
-            >
+          <Link href="profile/edit">
+            <Button colorScheme="red" variant="outline" w="full">
               Modifier profil
             </Button>
           </Link>
- 
         </VStack>
       </CardBody>
     </Card>

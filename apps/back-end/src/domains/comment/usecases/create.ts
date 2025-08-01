@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { CreateCommentDto } from '../dtos/create';
-import { BasicUser } from '../../user/types/users';
+import { BasicUser } from '@domains/user/types/users';
 import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
 
 export const createComment = async (

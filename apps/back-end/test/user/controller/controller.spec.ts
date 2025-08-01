@@ -1,9 +1,5 @@
-import {
-  SigninDto,
-  SignupDto,
-  UpdateDto,
-} from 'apps/back-end/src/domains/user/dtos';
-import { UserController } from 'apps/back-end/src/domains/user/user.controller';
+import { SigninDto, SignupDto, UpdateDto } from '@domains/user/dtos';
+import { UserController } from '@domains/user/user.controller';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 describe('UserController', () => {

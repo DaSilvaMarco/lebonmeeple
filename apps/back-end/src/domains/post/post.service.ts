@@ -9,8 +9,8 @@ import {
   getById,
   updatePost,
 } from './usecases';
-import { PrismaService } from '../../prisma/prisma.service';
-import { throwError } from '../../utils/errors';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { throwError } from '@utils/errors';
 
 @Injectable()
 export class PostService {

@@ -1,5 +1,5 @@
-import { CreatePostDto } from 'apps/back-end/src/domains/post/dtos';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { CreatePostDto } from '@domains/post/dtos';
+import { PrismaService } from '@prisma-service/prisma.service';
 import { Request } from 'express';
 import { vi } from 'vitest';
 

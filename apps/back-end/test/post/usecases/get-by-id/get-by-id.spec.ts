@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { prismaMock as prismaMockGetById } from './mock';
-import { getById } from 'apps/back-end/src/domains/post/usecases';
+import { getById } from '@domains/post/usecases';
 
 test('The user can get one post by id', async () => {
   const prismaMock = prismaMockGetById(1);

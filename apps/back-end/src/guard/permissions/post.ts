@@ -1,5 +1,5 @@
 import { ForbiddenException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '@prisma-service/prisma.service';
 
 export const checkPostPermission = async (
   userId: number,

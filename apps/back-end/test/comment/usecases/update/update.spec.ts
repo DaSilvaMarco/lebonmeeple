@@ -1,4 +1,4 @@
-import { updateComment } from 'apps/back-end/src/domains/comment/usecases';
+import { updateComment } from '@domains/comment/usecases';
 import { MOCKED_COMMENT, UPDATE_DTO } from './const';
 import { prismaMock as prismaMockUpdate } from './mock';
 import { test, expect } from 'vitest';

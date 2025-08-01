@@ -1,8 +1,8 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import Link from 'next/link';
-import Button from '../../domains/shared/button/components/Button';
-import PostCard from '../../domains/shared/card/components/PostCard';
+import Button from '@/domains/shared/button/components/Button';
+import PostCard from '@/domains/shared/card/components/PostCard';
 
 const Post = () => {
   const posts = null;

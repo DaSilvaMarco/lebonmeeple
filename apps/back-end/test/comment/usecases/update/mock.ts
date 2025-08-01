@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import { MOCKED_COMMENT } from './const';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { PrismaService } from '@prisma-service/prisma.service';
 
 export const prismaMock = () => {
   return {

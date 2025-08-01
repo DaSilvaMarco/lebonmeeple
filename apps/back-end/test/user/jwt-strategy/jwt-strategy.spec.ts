@@ -8,8 +8,8 @@ import {
   prismaServiceUserNotFoundMock,
   prismaServicUserExistsMock,
 } from './mock';
-import { JwtStrategy } from 'apps/back-end/src/domains/user/jwtStrategy';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { JwtStrategy } from '@domains/user/jwtStrategy';
+import { PrismaService } from '@prisma-service/prisma.service';
 
 describe('JwtStrategy', () => {
   let jwtStrategy: JwtStrategy;

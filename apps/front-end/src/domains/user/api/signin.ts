@@ -1,4 +1,4 @@
-import { API_USER_SIGNIN, POST_METHOD } from '../contants';
+import { API_USER_SIGNIN, POST_METHOD } from '../constants';
 import { LoginFormData } from '../type';
 
 export const signinAPI = async (data: LoginFormData) => {

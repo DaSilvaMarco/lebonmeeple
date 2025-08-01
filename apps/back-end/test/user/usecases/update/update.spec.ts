@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { UPDATE_DTO, UPDATE_DTO_TWO } from './const';
 import { prismaMock as prismaMockUpdate } from './mock';
-import { updateUser } from 'apps/back-end/src/domains/user/usecases';
+import { updateUser } from '@domains/user/usecases';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),

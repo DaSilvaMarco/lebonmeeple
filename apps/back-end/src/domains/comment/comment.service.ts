@@ -5,8 +5,8 @@ import { createComment } from './usecases/create';
 import { Request } from 'express';
 import { deleteComment } from './usecases/delete';
 import { updateComment } from './usecases/update';
-import { PrismaService } from '../../prisma/prisma.service';
-import { throwError } from '../../utils/errors';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { throwError } from '@utils/errors';
 
 @Injectable()
 export class CommentService {

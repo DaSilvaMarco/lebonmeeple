@@ -1,4 +1,4 @@
-import { API_USER_ME, GET_METHOD } from '../contants';
+import { API_USER_ME, GET_METHOD } from '../constants';
 
 export const meAPI = async (token: string) => {
   const me = await fetch(API_USER_ME, {

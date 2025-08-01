@@ -1,4 +1,4 @@
-import { deleteComment } from 'apps/back-end/src/domains/comment/usecases';
+import { deleteComment } from '@domains/comment/usecases';
 import { COMMENT_TO_DELETE } from './const';
 import { prismaMock as prismaMockDelete } from './mock';
 import { test, expect } from 'vitest';

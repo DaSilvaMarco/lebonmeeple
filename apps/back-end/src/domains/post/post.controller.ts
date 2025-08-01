@@ -15,8 +15,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { CreatePostDto, UpdatePostDto } from './dtos';
 import { PostService } from './post.service';
-import { Request } from 'express';
-import { IsOwner } from '../../decorator/is-owner.decorator';
+import type { Request } from 'express';
+import { IsOwner } from '@decorator/is-owner.decorator';
 
 @ApiTags('Post')
 @Controller()

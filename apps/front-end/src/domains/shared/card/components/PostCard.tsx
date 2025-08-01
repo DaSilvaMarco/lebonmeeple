@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FaRegTimesCircle } from 'react-icons/fa';
-import Modal from '../../modal/components/Modal';
+import Modal from '@/domains/shared/modal/components/Modal';
 
 interface IUserProfile {
   username: string;

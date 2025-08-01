@@ -1,4 +1,4 @@
-import { API_USER_UPDATE, PATCH_METHOD } from '../contants';
+import { API_USER_UPDATE, PATCH_METHOD } from '../constants';
 import { UserProfileFormData } from '../type';
 import { meAPI } from './me';
 

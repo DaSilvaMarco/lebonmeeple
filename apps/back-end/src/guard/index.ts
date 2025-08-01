@@ -1,8 +1,8 @@
 import { ForbiddenException } from '@nestjs/common';
 import { Request } from 'express';
 import { permissionCheckers } from './permissions/index';
-import { PrismaService } from '../prisma/prisma.service';
-import { BasicUser } from '../domains/user/types/users';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { BasicUser } from '@domains/user/types/users';
 
 export const isAuthorized = async (
   request: Request,

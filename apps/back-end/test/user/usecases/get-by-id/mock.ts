@@ -1,4 +1,4 @@
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { PrismaService } from '@prisma-service/prisma.service';
 import { USER_GET_BY_ID } from './const';
 import { vi } from 'vitest';
 
