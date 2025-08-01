@@ -1,0 +1,43 @@
+name: ⚡ Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    name: 🚀 Quality Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📚 Install
+        run: npm ci
+
+      - name: 🗄️ Generate Prisma
+        run: npm run prisma:generate
+
+      - name: 🎨 Format Check
+        run: npm run format:check
+
+      - name: 📝 Lint
+        run: npm run lint
+
+      - name: 🔧 Type Check
+        run: npm run tsc:check
+
+      - name: 🏗️ Build Backend
+        run: npm run api:build
+
+      - name: 🏗️ Build Frontend
+        run: npm run front:build
