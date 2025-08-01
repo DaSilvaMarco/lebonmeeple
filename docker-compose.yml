@@ -15,7 +15,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: .docker/Dockerfile.backend
     container_name: app
     ports:
       - '3000:3000'
@@ -23,8 +23,24 @@ services:
       - db
     volumes:
       - .:/app
-    command: "bash -c \"npm run prisma:migrate && npm run api:start:dev\""
-    
+    command: 'bash -c "npm run prisma:migrate && npm run api:start:dev"'
+
+  frontend:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.frontend
+    container_name: frontend
+    ports:
+      - '3001:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+    depends_on:
+      - app
+    command: 'npm run front:dev'
 
   adminer:
     image: adminer
