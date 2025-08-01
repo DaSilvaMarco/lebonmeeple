@@ -1,0 +1,93 @@
+'use client';
+
+import React from 'react';
+import {
+  Button,
+  Avatar,
+  Text,
+  VStack,
+  HStack,
+  Badge,
+  Card,
+  CardBody,
+  Heading,
+} from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { logout, selectIsAuthenticated, selectUser } from '../../store/authSlice';
+import Link from 'next/link';
+
+export function UserProfile() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const user = useAppSelector(selectUser);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push('/login');
+  };
+
+  if (!isAuthenticated || !user) {
+    return (
+      <Card>
+        <CardBody>
+          <Text>Vous n'êtes pas connecté.</Text>
+          <Button
+            mt={4}
+            colorScheme="brand"
+            onClick={() => router.push('/login')}
+          >
+            Se connecter
+          </Button>
+        </CardBody>
+      </Card>
+    );
+  }
+
+  return (
+    <Card maxW="md" mx="auto">
+      <CardBody>
+        <VStack spacing={4} align="center">
+          <Avatar size="xl" name={user.username} src={user.avatar} />
+
+          <VStack spacing={2} align="center">
+            <Heading size="md">{user.username}</Heading>
+            <Text color="gray.600">{user.email}</Text>
+            <Badge colorScheme="green" variant="subtle">
+              Connecté
+            </Badge>
+          </VStack>
+
+          <VStack spacing={2} align="stretch" w="full">
+            <HStack justify="space-between">
+              <Text fontWeight="semibold">ID:</Text>
+              <Text>{user.id}</Text>
+            </HStack>
+          </VStack>
+
+          <Button
+            colorScheme="red"
+            variant="outline"
+            onClick={handleLogout}
+            w="full"
+          >
+            Se déconnecter
+          </Button>
+          <Link href='profile/edit'>
+            <Button
+              colorScheme="red"
+              variant="outline"
+              w="full"
+            >
+              Modifier profil
+            </Button>
+          </Link>
+ 
+        </VStack>
+      </CardBody>
+    </Card>
+  );
+}
+
+export default UserProfile;

@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import React from 'react';
 import { Provider } from '../ui/Provider';
-import PageLayout from '../ui/layout/PageLayout';
+import PageLayout from '../domains/shared/layout/components/PageLayout';
+import { ReduxProvider } from '../components/ReduxProvider';
 
 export const metadata: Metadata = {
   title: 'Le Bon Meeple',
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body>
-        <Provider>
-          <PageLayout>{children}</PageLayout>
-        </Provider>
+        <ReduxProvider>
+          <Provider>
+            <PageLayout>{children}</PageLayout>
+          </Provider>
+        </ReduxProvider>
       </body>
     </html>
   );
