@@ -1,13 +1,14 @@
 import { BadRequestException } from '@nestjs/common';
-import { CreatePostDto } from '../dtos';
-import { Request } from 'express';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { type CreatePostDto } from '../dtos';
+import { type Request } from 'express';
+import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
 
 export const createPost = async (
   createPostDto: CreatePostDto,
   request: Request,
   prismaService: PrismaService,
 ) => {
+  // eslint-disable-next-line prefer-destructuring
   const id = request.user['id'];
   const { body, title, image } = createPostDto;
 

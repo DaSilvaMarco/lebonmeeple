@@ -1,6 +1,6 @@
-import { SignupDto } from '@domains/user/dtos';
+import { type SignupDto } from '@domains/user/dtos';
 import { SIGNUP_DTO } from './const';
-import { PrismaService } from '@prisma-service/prisma.service';
+import { type PrismaService } from '@prisma-service/prisma.service';
 import { vi } from 'vitest';
 
 export const prismaMock = (signupDto: SignupDto) => {

@@ -1,4 +1,4 @@
-import { CreateToastFnReturn } from '@chakra-ui/react';
+import { type CreateToastFnReturn } from '@chakra-ui/react';
 
 export const toastSuccess = (
   toast: CreateToastFnReturn,

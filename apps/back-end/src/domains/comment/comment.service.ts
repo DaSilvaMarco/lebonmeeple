@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 import { Injectable } from '@nestjs/common';
-import { CreateCommentDto, UpdateCommentDto } from './dtos';
+import { type CreateCommentDto, type UpdateCommentDto } from './dtos';
 import { createComment } from './usecases/create';
-import { Request } from 'express';
+import { type Request } from 'express';
 import { deleteComment } from './usecases/delete';
 import { updateComment } from './usecases/update';
 import { PrismaService } from '@prisma-service/prisma.service';

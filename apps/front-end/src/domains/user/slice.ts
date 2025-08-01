@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { initialState } from './constants';
-import { User, UserState } from './type.js';
+import { type User, type UserState } from './type.js';
 
 export const userSlice = createSlice({
   name: 'user',

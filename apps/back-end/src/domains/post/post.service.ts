@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Request } from 'express';
+import { type Request } from 'express';
 
-import { CreatePostDto, UpdatePostDto } from './dtos';
+import { type CreatePostDto, type UpdatePostDto } from './dtos';
 import {
   createPost,
   deletePost,

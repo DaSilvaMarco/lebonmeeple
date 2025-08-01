@@ -1,4 +1,4 @@
-import { PrismaService } from '@prisma-service/prisma.service';
+import { type PrismaService } from '@prisma-service/prisma.service';
 import { vi } from 'vitest';
 
 export const prismaMock = (id: number) => {

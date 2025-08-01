@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-import { SignupDto, SigninDto, UpdateDto } from './dtos';
+import { type SigninDto, type SignupDto, type UpdateDto } from './dtos';
 import { throwError } from '@utils/errors';
-import { createUser, signinUser, getById, updateUser, me } from './usecases';
+import { createUser, getById, me, signinUser, updateUser } from './usecases';
 import { PrismaService } from '@prisma-service/prisma.service';
 
 @Injectable()

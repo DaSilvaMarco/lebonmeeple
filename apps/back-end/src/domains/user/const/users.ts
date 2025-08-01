@@ -1,4 +1,4 @@
-import { PrismaBasicUser } from '../types/users';
+import { type PrismaBasicUser } from '../types/users';
 
 export const PRISMA_BASIC_USER: PrismaBasicUser = {
   username: true,

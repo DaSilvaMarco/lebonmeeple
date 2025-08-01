@@ -1,5 +1,5 @@
 import { UpdateCommentDto } from '@domains/comment/dtos';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 describe('UpdateCommentDto', () => {
   it('should assign the body property', () => {

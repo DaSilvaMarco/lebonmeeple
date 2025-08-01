@@ -1,4 +1,4 @@
-import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
+import { type ThemeConfig, extendTheme } from '@chakra-ui/react';
 
 // Configuration du thème (mode sombre/clair)
 const config: ThemeConfig = {

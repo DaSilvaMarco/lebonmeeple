@@ -1,6 +1,10 @@
-import { SigninDto, SignupDto, UpdateDto } from '@domains/user/dtos';
+import {
+  type SigninDto,
+  type SignupDto,
+  type UpdateDto,
+} from '@domains/user/dtos';
 import { UserController } from '@domains/user/user.controller';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('UserController', () => {
   let controller: UserController;

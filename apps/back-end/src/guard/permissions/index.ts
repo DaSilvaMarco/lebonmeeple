@@ -1,5 +1,5 @@
 import { checkPostPermission } from './post';
-import { PermissionChecker } from './type';
+import { type PermissionChecker } from './type';
 import { checkUserPermission } from './user';
 import { checkCommentPermission } from './comment';
 

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { validate } from 'class-validator';
 import { CreateCommentDto } from '@domains/comment/dtos';
 

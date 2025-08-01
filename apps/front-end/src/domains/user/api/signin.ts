@@ -1,5 +1,5 @@
 import { API_USER_SIGNIN, POST_METHOD } from '../constants';
-import { LoginFormData } from '../type';
+import { type LoginFormData } from '../type';
 
 export const signinAPI = async (data: LoginFormData) => {
   const signinResponse = await fetch(API_USER_SIGNIN, {

@@ -13,7 +13,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { CreatePostDto, UpdatePostDto } from './dtos';
+import { type CreatePostDto, type UpdatePostDto } from './dtos';
 import { PostService } from './post.service';
 import type { Request } from 'express';
 import { IsOwner } from '@decorator/is-owner.decorator';

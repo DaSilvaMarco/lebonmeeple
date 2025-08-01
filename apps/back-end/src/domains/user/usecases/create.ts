@@ -1,7 +1,7 @@
 import { ConflictException } from '@nestjs/common';
-import { SignupDto } from '../dtos/signup';
+import { type SignupDto } from '../dtos/signup';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
 
 export const createUser = async (
   signupDto: SignupDto,

@@ -1,4 +1,4 @@
-import { UserState } from './type';
+import { type UserState } from './type';
 
 export const API_USER_ME = 'http://localhost:3000/user/me';
 export const API_USER_SIGNIN = 'http://localhost:3000/user/signin';

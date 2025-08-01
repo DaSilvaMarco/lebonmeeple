@@ -17,17 +17,17 @@ export const userProfileUpdateSchema = z.object({
 
 export type UserProfileFormData = z.infer<typeof userProfileUpdateSchema>;
 
-export type User = {
+export interface User {
   id: string;
   username: string;
   email: string;
   avatar?: string;
   createdAt?: string;
-};
+}
 
-export type UserState = {
+export interface UserState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-};
+}

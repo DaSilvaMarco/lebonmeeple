@@ -1,7 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Request } from 'express';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type Request } from 'express';
 import { CommentController } from '@domains/comment/comment.controller';
-import { CreateCommentDto, UpdateCommentDto } from '@domains/comment/dtos';
+import {
+  type CreateCommentDto,
+  type UpdateCommentDto,
+} from '@domains/comment/dtos';
 
 describe('CommentController', () => {
   let controller: CommentController;
