@@ -21,18 +21,17 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { toastError, toastSuccess } from '@/domains/shared/toat/toast';
-import { update } from '@/domains/user/usecase/update';
+import { patchUser } from '@frontend/domains/user/api/patch-user';
 import {
   UserProfileFormData,
   userProfileUpdateSchema,
 } from '@/domains/user/type';
-import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { updateUser } from '@/domains/user/slice';
+import { useAppDispatch } from '@frontend/store/hook';
+import { updateUser } from '@frontend/domains/user/slice';
+import { useAppSelector } from '@/store/hook';
 
 const UpdateProfile = () => {
-  const { user, isAuthenticated, token } = useAppSelector(
-    (state) => state.user,
-  );
+  const { user, isAuthenticated, token } = useAppSelector((state) => state.user);
   const toast = useToast();
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -63,8 +62,9 @@ const UpdateProfile = () => {
 
   const onSubmit = async (data: UserProfileFormData) => {
     try {
-      const newUser = await update(data, token);
-      dispatch(updateUser(newUser.user));
+      const newUser = await patchUser(data, token);
+
+      dispatch(updateUser(newUser));
       toastSuccess(
         toast,
         'Modification réussie !',
@@ -75,7 +75,11 @@ const UpdateProfile = () => {
         router.push('/');
       }, 1000);
     } catch (error) {
-      toastError(toast, 'Erreur de connexion', error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Une erreur inattendue s'est produite";
+      toastError(toast, 'Erreur de connexion', errorMessage);
     }
   };
 

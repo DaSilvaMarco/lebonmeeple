@@ -4,46 +4,44 @@ import {
   Heading,
   Image,
   Text,
-  Box,
-  useDisclosure,
+  // Box,
+  // useDisclosure,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FaRegTimesCircle } from 'react-icons/fa';
-import Modal from '@/domains/shared/modal/components/Modal';
+// import { FaRegTimesCircle } from 'react-icons/fa';
+// import Modal from '@/domains/shared/modal/components/Modal';
 
-interface IUserProfile {
+type UserProfile = {
   username: string;
   email: string;
   avatar: string;
 }
 
-interface IUser extends IUserProfile {
+type User = {
   userId: number;
-}
+} & UserProfile;
 
-interface IPost {
-  postId: number;
+type Post = {
+  id: number;
   title: string;
   body: string;
-  user: IUser;
+  user: User;
   image: string;
 }
 
-interface Props {
-  post: IPost;
+type Props = {
+  post: Post;
 }
 
 const PostCard = (props: Props) => {
-  const { postId, title, body, user, image } = props.post;
+  const { id, title, body, user, image } = props.post;
   // const userState = useAppSelector((state) => state.user);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   // const [deletePost] = useDeletePostMutation();
 
-  const handleDeletePost = async () => {
-    return;
-  };
-
-  const userState = null;
+  // const handleDeletePost = async () => {
+  //   return;
+  // };
 
   return (
     <Card
@@ -53,7 +51,7 @@ const PostCard = (props: Props) => {
       p="10px"
       position="relative"
     >
-      {userState.user && userState.user.userId === user.userId && (
+      {/* {user && user.id === id && (
         <Box
           top="10px"
           right="10px"
@@ -65,8 +63,8 @@ const PostCard = (props: Props) => {
         >
           <FaRegTimesCircle color="red" />
         </Box>
-      )}
-      <Link href={`/post/detail/${postId}`}>
+      )} */}
+      <Link href={`/post/detail/${id}`}>
         <Heading>{title}</Heading>
         <Image
           w="100%"
@@ -78,7 +76,7 @@ const PostCard = (props: Props) => {
         <Text>De : {user.username}</Text>
       </Link>
 
-      <Modal isOpen={isOpen} onClose={onClose} handleClick={handleDeletePost} />
+      {/* <Modal isOpen={isOpen} onClose={onClose} handleClick={handleDeletePost} /> */}
     </Card>
   );
 };

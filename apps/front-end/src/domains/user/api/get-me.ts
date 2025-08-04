@@ -1,6 +1,7 @@
 import { API_USER_ME, GET_METHOD } from '../constants';
+import { type Me } from '../type';
 
-export const meAPI = async (token: string) => {
+export const getMe = async (token: string): Promise<Me> => {
   const me = await fetch(API_USER_ME, {
     method: GET_METHOD,
     headers: {

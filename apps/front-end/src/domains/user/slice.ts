@@ -1,6 +1,6 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { initialState } from './constants';
-import { type User, type UserState } from './type.js';
+import { type UpdatedUser, type User, type UserState } from './type.js';
 
 export const userSlice = createSlice({
   name: 'user',
@@ -26,16 +26,12 @@ export const userSlice = createSlice({
       localStorage.removeItem('user');
     },
 
-    updateUser: (state, action: PayloadAction<Partial<User>>) => {
-      if (!state.user) return;
-
+    updateUser: (state, action: PayloadAction<UpdatedUser>) => {
       const updatedUser: User = {
         ...state.user,
         ...action.payload,
       };
-
       localStorage.setItem('user', JSON.stringify(updatedUser));
-
       state.user = updatedUser;
     },
   },

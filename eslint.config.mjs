@@ -62,13 +62,13 @@ export default [
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/consistent-type-imports': [
         'error',
-        { 
-          prefer: 'type-imports', 
+        {
+          prefer: 'type-imports',
           fixStyle: 'inline-type-imports',
-          disallowTypeAnnotations: false
+          disallowTypeAnnotations: false,
         },
       ],
-      '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
 
       // Règles JavaScript/TypeScript communes pour la qualité
       'no-console': 'warn',

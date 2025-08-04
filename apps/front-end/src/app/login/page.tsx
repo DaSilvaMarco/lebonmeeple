@@ -18,11 +18,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signin } from '@/domains/user/usecase/signin';
+import { signin } from '@frontend/domains/user/api/post-signin';
 import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
 import { LoginFormData, schemaUserLogin } from '@/domains/user/type';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { login } from '@/domains/user/slice';
+import { getMe } from '@frontend/domains/user/api/get-me';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -42,7 +43,11 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginFormData) => {
     try {
       const user = await signin(data);
-      dispatch(login(user));
+      const { token } = user;
+      const me = await getMe(token);
+      const { id, email, username } = me;
+
+      dispatch(login({ user: { id, email, username }, token }));
       toastSuccess(
         toast,
         'Connexion réussie !',
