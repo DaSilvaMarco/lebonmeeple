@@ -10,11 +10,11 @@ import {
 } from '@chakra-ui/react';
 import Button from '@/domains/shared/button/components/Button';
 
-interface Modal {
+type Modal = {
   isOpen: boolean;
   onClose: () => void;
   handleClick: () => void;
-}
+};
 
 const Modal = ({ isOpen, onClose, handleClick }: Modal) => {
   const PRIMARY_COLOR = '#bd3a6a';

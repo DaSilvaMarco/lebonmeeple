@@ -1,11 +1,10 @@
 import { Card as ChakraCard, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 
-
-interface Props {
+type Props = {
   text: string;
   image: string;
-}
+};
 
 const HomeCard = ({ text, image }: Props) => {
   return (

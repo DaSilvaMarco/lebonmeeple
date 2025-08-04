@@ -1,18 +1,19 @@
 import React from 'react';
 import { Box, Image } from '@chakra-ui/react';
 
-interface IUserProfile {
+type IUserProfile = {
   username: string;
   email: string;
   avatar: string;
-}
+};
 
-interface IUser extends IUserProfile {
+type IUser = IUserProfile & {
   userId: number;
-}
-interface Props {
+};
+
+type Props = {
   user: IUser;
-}
+};
 
 const Avatar = ({ user }: Props) => {
   return (

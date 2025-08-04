@@ -23,13 +23,13 @@ import Link from 'next/link';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
 // Types pour TypeScript
-interface User {
+type User = {
   id: string;
   username: string;
   avatar?: string;
-}
+};
 
-interface Post {
+type Post = {
   id: string;
   title: string;
   body: string;
@@ -37,7 +37,7 @@ interface Post {
   user: User;
   createdAt: string;
   updatedAt: string;
-}
+};
 
 // Simulation d'une fonction d'API (à remplacer par votre vraie logique)
 const useGetPostByIdQuery = (id: string | undefined) => {
