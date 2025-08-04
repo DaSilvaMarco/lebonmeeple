@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { logout } from '@/domains/user/slice';
+import NotConnected from '@frontend/domains/shared/warning/NotConnected';
 
 export function UserProfile() {
   const dispatch = useAppDispatch();
@@ -29,18 +30,7 @@ export function UserProfile() {
 
   if (!isAuthenticated || !user) {
     return (
-      <Card>
-        <CardBody>
-          <Text>Vous n'êtes pas connecté.</Text>
-          <Button
-            mt={4}
-            colorScheme="brand"
-            onClick={() => router.push('/login')}
-          >
-            Se connecter
-          </Button>
-        </CardBody>
-      </Card>
+      <NotConnected />
     );
   }
 

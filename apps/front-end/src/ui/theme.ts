@@ -56,56 +56,56 @@ const fonts = {
 
 // Styles des composants
 const components = {
-  Button: {
-    baseStyle: {
-      fontWeight: 'semibold',
-      borderRadius: 'lg',
-    },
-    variants: {
-      solid: {
-        bg: 'brand.500',
-        color: 'white',
-        _hover: {
-          bg: 'brand.600',
-          transform: 'translateY(-2px)',
-          boxShadow: 'lg',
-        },
-        _active: {
-          bg: 'brand.700',
-          transform: 'translateY(0)',
-        },
-      },
-      meeple: {
-        bg: 'meeple.500',
-        color: 'white',
-        _hover: {
-          bg: 'meeple.600',
-          transform: 'translateY(-2px)',
-          boxShadow: 'lg',
-        },
-        _active: {
-          bg: 'meeple.700',
-          transform: 'translateY(0)',
-        },
-      },
-      game: {
-        bg: 'game.500',
-        color: 'white',
-        _hover: {
-          bg: 'game.600',
-          transform: 'translateY(-2px)',
-          boxShadow: 'lg',
-        },
-        _active: {
-          bg: 'game.700',
-          transform: 'translateY(0)',
-        },
-      },
-    },
-    defaultProps: {
-      variant: 'solid',
-    },
-  },
+  // Button: {
+  //   baseStyle: {
+  //     fontWeight: 'semibold',
+  //     borderRadius: 'lg',
+  //   },
+  //   variants: {
+  //     solid: {
+  //       bg: 'brand.500',
+  //       color: 'white',
+  //       _hover: {
+  //         bg: 'brand.600',
+  //         transform: 'translateY(-2px)',
+  //         boxShadow: 'lg',
+  //       },
+  //       _active: {
+  //         bg: 'brand.700',
+  //         transform: 'translateY(0)',
+  //       },
+  //     },
+  //     meeple: {
+  //       bg: 'meeple.500',
+  //       color: 'white',
+  //       _hover: {
+  //         bg: 'meeple.600',
+  //         transform: 'translateY(-2px)',
+  //         boxShadow: 'lg',
+  //       },
+  //       _active: {
+  //         bg: 'meeple.700',
+  //         transform: 'translateY(0)',
+  //       },
+  //     },
+  //     game: {
+  //       bg: 'game.500',
+  //       color: 'white',
+  //       _hover: {
+  //         bg: 'game.600',
+  //         transform: 'translateY(-2px)',
+  //         boxShadow: 'lg',
+  //       },
+  //       _active: {
+  //         bg: 'game.700',
+  //         transform: 'translateY(0)',
+  //       },
+  //     },
+  //   },
+  //   defaultProps: {
+  //     variant: 'solid',
+  //   },
+  // },
   Card: {
     baseStyle: {
       container: {

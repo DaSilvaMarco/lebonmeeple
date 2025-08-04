@@ -11,8 +11,6 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
         flex="1"
         direction="column"
         justifyContent="center"
-        w="90%"
-        margin="auto"
       >
         {children}
       </Flex>

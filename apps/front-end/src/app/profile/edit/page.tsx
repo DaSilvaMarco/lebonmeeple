@@ -12,9 +12,6 @@ import {
   FormErrorMessage,
   Input,
   Button,
-  Card,
-  CardBody,
-  Text,
   useToast,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
@@ -29,6 +26,7 @@ import {
 import { useAppDispatch } from '@frontend/store/hook';
 import { updateUser } from '@frontend/domains/user/slice';
 import { useAppSelector } from '@/store/hook';
+import NotConnected from '@frontend/domains/shared/warning/NotConnected';
 
 const UpdateProfile = () => {
   const { user, isAuthenticated, token } = useAppSelector((state) => state.user);
@@ -85,18 +83,7 @@ const UpdateProfile = () => {
 
   if (!isAuthenticated || !user) {
     return (
-      <Card>
-        <CardBody>
-          <Text>Vous n'êtes pas connecté.</Text>
-          <Button
-            mt={4}
-            colorScheme="brand"
-            onClick={() => router.push('/login')}
-          >
-            Se connecter
-          </Button>
-        </CardBody>
-      </Card>
+      <NotConnected />
     );
   }
 

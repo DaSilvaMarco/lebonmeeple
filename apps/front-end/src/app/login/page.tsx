@@ -3,7 +3,6 @@
 import React from 'react';
 import {
   Box,
-  Button,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -18,12 +17,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signin } from '@frontend/domains/user/api/post-signin';
 import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
 import { LoginFormData, schemaUserLogin } from '@/domains/user/type';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { login } from '@/domains/user/slice';
-import { getMe } from '@frontend/domains/user/api/get-me';
+import { signinAndGetMe } from '@frontend/domains/user/service/service';
+import Button from '@frontend/domains/shared/button/components/Button';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -42,12 +41,8 @@ export default function LoginForm() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const user = await signin(data);
-      const { token } = user;
-      const me = await getMe(token);
-      const { id, email, username } = me;
-
-      dispatch(login({ user: { id, email, username }, token }));
+      const user = await signinAndGetMe(data);
+      dispatch(login(user));
       toastSuccess(
         toast,
         'Connexion réussie !',
@@ -84,6 +79,14 @@ export default function LoginForm() {
             </FormControl>
 
             <Button
+              color="primary"
+              type="submit"
+              isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
+              isLoading={isSubmitting || isLoading}
+            >
+              Se connecter
+            </Button>
+            {/* <Button
               colorScheme="brand"
               variant="solid"
               type="submit"
@@ -92,7 +95,7 @@ export default function LoginForm() {
               isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
             >
               Se connecter
-            </Button>
+            </Button> */}
           </VStack>
         </form>
 
