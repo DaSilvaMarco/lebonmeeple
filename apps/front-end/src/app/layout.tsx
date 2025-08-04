@@ -3,7 +3,7 @@ import './globals.css';
 import React from 'react';
 import { Provider } from '@/ui/Provider';
 import PageLayout from '@/domains/shared/layout/components/PageLayout';
-import { ReduxProvider } from '@/components/ReduxProvider';
+import { ReduxProvider } from '@frontend/store/ReduxProvider';
 
 export const metadata: Metadata = {
   title: 'Le Bon Meeple',

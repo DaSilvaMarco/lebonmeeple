@@ -12,7 +12,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button,
+  Button as ChakraButton,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ChevronDownIcon } from '@chakra-ui/icons';
@@ -20,6 +20,7 @@ import ResponsiveNav from '@/domains/shared/navigation/components/ResponsiveNav'
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { logout } from '@/domains/user/slice';
 import { useRouter } from 'next/navigation';
+import Button from '@/domains/shared/button/components/Button';
 
 const Header = () => {
   const { user, isAuthenticated } = useAppSelector((state) => state.user);
@@ -50,7 +51,7 @@ const Header = () => {
           {isAuthenticated && user ? (
             <Show above="md">
               <Menu>
-                <MenuButton as={Button} variant="ghost" p={0}>
+                <MenuButton as={ChakraButton} variant="ghost" p={0}>
                   <HStack spacing={2}>
                     <Avatar size="sm" name={user.username} src={user.avatar} />
                     <Text fontSize="sm" fontWeight="medium">
@@ -76,12 +77,12 @@ const Header = () => {
             <Show above="md">
               <HStack spacing={2}>
                 <Link href="/login">
-                  <Button variant="ghost" size="sm">
+                  <Button type="button" color="primary">
                     Connexion
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button colorScheme="brand" size="sm">
+                  <Button type="button" color="secondary">
                     Inscription
                   </Button>
                 </Link>
