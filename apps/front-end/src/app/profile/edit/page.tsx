@@ -64,7 +64,7 @@ const UpdateProfile = () => {
   const onSubmit = async (data: UserProfileFormData) => {
     try {
       const newUser = await update(data, token);
-      dispatch(updateUser(newUser));
+      dispatch(updateUser(newUser.user));
       toastSuccess(
         toast,
         'Modification réussie !',
