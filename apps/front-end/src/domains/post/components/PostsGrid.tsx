@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid,
   GridItem,
@@ -8,16 +8,28 @@ import {
 import { motion } from 'framer-motion';
 import PostCard from '@/domains/shared/card/components/PostCard';
 import { type Post } from '@frontend/domains/post/type';
+import { useAppDispatch, useAppSelector } from '@frontend/store/hook';
+import { getPosts } from '../api/getPosts';
+import { postsList } from '../slice';
 
 const MotionGridItem = motion(GridItem);
 const MotionGrid = motion(Grid);
 
-type Props =  {
-  posts: Post[];
-}
+const PostsGrid = () => {
+  const dispatch = useAppDispatch();
+  const { posts } = useAppSelector((state) => state.post);
 
-const PostsGrid = (props: Props) => {
-  const { posts } = props;
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const fetchedPosts = await getPosts();
+        dispatch(postsList(fetchedPosts));
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+    fetchPosts();
+  }, [dispatch]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
