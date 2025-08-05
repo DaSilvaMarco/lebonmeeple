@@ -37,7 +37,7 @@ const Header = () => {
       <Flex
         width="100%"
         shadow="xl"
-        p="10px"
+        p="20px"
         alignItems="center"
         justifyContent="space-between"
       >
@@ -53,8 +53,8 @@ const Header = () => {
               <Menu>
                 <MenuButton as={ChakraButton} variant="ghost" p={0}>
                   <HStack spacing={2}>
-                    <Avatar size="sm" name={user.username} src={user.avatar} />
-                    <Text fontSize="sm" fontWeight="medium">
+                    <Avatar size="lg" name={user.username} src={user.avatar} />
+                    <Text fontSize="xl" fontWeight="medium">
                       {user.username}
                     </Text>
                     <ChevronDownIcon />
