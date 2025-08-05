@@ -1,29 +1,11 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@frontend/store/hook';
-import { postsList } from '@frontend/domains/post/slice';
-import { getPosts } from '@frontend/domains/post/api/getPosts';
+import React from 'react';
 import PostsHeader from './PostsHeader';
 import PostsGrid from './PostsGrid';
 import { Box } from '@chakra-ui/react';
 
 const PostsList = () => {
-  const dispatch = useAppDispatch();
-  const { posts } = useAppSelector((state) => state.post);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const fetchedPosts = await getPosts();
-        dispatch(postsList(fetchedPosts));
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-    fetchPosts();
-  }, [dispatch]);
-
   return (
     <Box
       w="100%"
@@ -45,7 +27,7 @@ const PostsList = () => {
       }}
     >
       <PostsHeader />
-      <PostsGrid posts={posts} />
+      <PostsGrid  />
     </Box>
   );
 };

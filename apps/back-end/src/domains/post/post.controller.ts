@@ -35,6 +35,11 @@ export class PostController {
     return this.postService.getAll();
   }
 
+  @Get('post/:id')
+  getById(@Param('id', ParseIntPipe) id: number) {
+    return this.postService.getById(id);
+  }
+
   @IsOwner()
   @Delete('post/:id')
   delete(@Param('id', ParseIntPipe) id: number) {

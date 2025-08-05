@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { logout } from '@/domains/user/slice';
 import { useRouter } from 'next/navigation';
 import Button from '@/domains/shared/button/components/Button';
+import Nav from '../../navigation/components/Nav';
 
 const Header = () => {
   const { user, isAuthenticated } = useAppSelector((state) => state.user);
@@ -46,6 +47,10 @@ const Header = () => {
             Lebonmeeple<span style={{ fontSize: '16px' }}>.com</span>
           </Heading>
         </Link>
+  
+        <Show above="md">
+          <Nav />
+        </Show>
 
         <HStack spacing={4}>
           {isAuthenticated && user ? (
