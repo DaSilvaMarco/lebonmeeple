@@ -32,6 +32,7 @@ export const useThemeColors = () => {
 
   const hoverBg = useColorModeValue('gray.50', 'gray.700');
   const activeBg = useColorModeValue('gray.100', 'gray.600');
+  const buttonSecondaryHoverBg = useColorModeValue('brand.50', 'brand.900');
 
   return {
     bgGradient,
@@ -40,6 +41,7 @@ export const useThemeColors = () => {
     cardBgSecondary,
     hoverBg,
     activeBg,
+    buttonSecondaryHoverBg,
     textColor,
     textColorPrimary,
     textColorSecondary,
