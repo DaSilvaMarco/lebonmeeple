@@ -13,8 +13,6 @@ const WelcomeBack = (props: Props) => {
   const { username, email } = user;
   const { cardBg, textColor } = useThemeColors();
 
-  console.log('cardbg', cardBg);
-
   return (
     <Box
       mb={8}
@@ -27,7 +25,7 @@ const WelcomeBack = (props: Props) => {
     >
       <HStack justify="space-between" align="center">
         <HStack spacing={4}>
-          <Avatar size="md" name={username} />
+          <Avatar size="xl" src={user.avatar} name={username} />
           <VStack align="start" spacing={1}>
             <Text fontSize="xl" fontWeight="bold">
               Bon retour, {username} ! 🎮
