@@ -69,7 +69,7 @@ const Header = () => {
                   <MenuItem onClick={() => router.push('/profile')}>
                     Mon profil
                   </MenuItem>
-                  <MenuItem onClick={() => router.push('/post/create')}>
+                  <MenuItem onClick={() => router.push('/posts/create')}>
                     Écrire un article
                   </MenuItem>
                   <MenuItem onClick={handleLogout} color="red.500">
