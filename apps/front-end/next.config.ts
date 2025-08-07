@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
 
   // Configuration pour les images
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'picsum.photos'],
   },
 };
 

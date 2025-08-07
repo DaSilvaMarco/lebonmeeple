@@ -1,15 +1,10 @@
-'use client';
-
+import PostsPage from '@frontend/domains/post/pages/PostsPage';
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
-import PostsList from '@frontend/domains/post/components/PostsList';
 
-const PostsPage = () => {
+const App = () => {
   return (
-    <Flex justify="center" p={2} w="100%">
-        <PostsList />
-    </Flex>
-  );
+    <PostsPage />
+  )
 };
 
-export default PostsPage;
+export default App;

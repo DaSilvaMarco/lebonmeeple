@@ -86,6 +86,7 @@ const LoginForm = () => {
               id="email"
               type="email"
               placeholder="votre.email@exemple.com"
+              autoComplete="email"
               bg={inputBg}
               border="2px"
               borderColor={errors.email ? 'red.300' : inputBorderColor}
@@ -122,6 +123,7 @@ const LoginForm = () => {
               id="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Votre mot de passe"
+              autoComplete="current-password"
               bg={inputBg}
               border="2px"
               borderColor={errors.password ? 'red.300' : inputBorderColor}

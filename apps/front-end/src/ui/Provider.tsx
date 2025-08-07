@@ -1,14 +1,6 @@
-'use client';
-
 import * as React from 'react';
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-import theme from './theme';
+import { ThemeProvider } from './ThemeProvider';
 
 export function Provider({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <ChakraProvider theme={theme}>{children}</ChakraProvider>
-    </>
-  );
+  return <ThemeProvider>{children}</ThemeProvider>;
 }

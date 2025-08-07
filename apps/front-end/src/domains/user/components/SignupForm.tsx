@@ -100,6 +100,7 @@ const SignupForm = () => {
                 id="username"
                 type="text"
                 placeholder="Votre pseudo"
+                autoComplete="username"
                 bg={inputBg}
                 border="2px"
                 borderColor={errors.username ? 'red.300' : inputBorderColor}
@@ -138,6 +139,7 @@ const SignupForm = () => {
                 id="email"
                 type="email"
                 placeholder="votre.email@exemple.com"
+                autoComplete="email"
                 bg={inputBg}
                 border="2px"
                 borderColor={errors.email ? 'red.300' : inputBorderColor}
@@ -176,6 +178,7 @@ const SignupForm = () => {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Votre mot de passe"
+                autoComplete="new-password"
                 bg={inputBg}
                 border="2px"
                 borderColor={errors.password ? 'red.300' : inputBorderColor}
@@ -228,6 +231,7 @@ const SignupForm = () => {
                 id="passwordConfirmation"
                 type={showPasswordConfirmation ? 'text' : 'password'}
                 placeholder="Confirmez votre mot de passe"
+                autoComplete="new-password"
                 bg={inputBg}
                 border="2px"
                 borderColor={

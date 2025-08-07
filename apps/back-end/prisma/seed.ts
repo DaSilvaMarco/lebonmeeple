@@ -11,6 +11,19 @@ async function main() {
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
 
+  const landscapeImages = [
+    'https://picsum.photos/600/300?random=1',
+    'https://picsum.photos/600/300?random=2',
+    'https://picsum.photos/600/300?random=3',
+    'https://picsum.photos/600/300?random=4',
+    'https://picsum.photos/600/300?random=5',
+    'https://picsum.photos/600/300?random=6',
+    'https://picsum.photos/600/300?random=7',
+    'https://picsum.photos/600/300?random=8',
+    'https://picsum.photos/600/300?random=9',
+    'https://picsum.photos/600/300?random=10',
+  ];
+
   const specificUser = await prisma.user.create({
     data: {
       username: 'Coquinho',
@@ -41,7 +54,7 @@ async function main() {
       data: {
         title: faker.lorem.sentence(6),
         body: faker.lorem.paragraphs(2),
-        image: faker.image.url(),
+        image: faker.helpers.arrayElement(landscapeImages),
         userId: user.id,
       },
     });
