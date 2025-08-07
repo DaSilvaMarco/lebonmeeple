@@ -18,7 +18,7 @@
     "api:test:cov": "cd apps/back-end && vitest --coverage.enabled --coverage",
     "api:test:coverage": "cd apps/back-end && vitest run --coverage",
     "prisma:migrate": "prisma migrate dev --schema=./apps/back-end/prisma/schema.prisma",
-    "prisma:fixtures": "ts-node apps/back-end/prisma/seed.ts",
+    "prisma:fixtures": "npx tsx apps/back-end/prisma/seed.ts",
     "prisma:generate": "prisma generate --schema=./apps/back-end/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./apps/back-end/prisma/schema.prisma",
     "prisma:reset": "prisma migrate reset --schema=./apps/back-end/prisma/schema.prisma",

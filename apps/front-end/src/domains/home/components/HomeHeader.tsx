@@ -75,15 +75,13 @@ const HomeHeader = (props : Props) => {
         ) : (
           <>
             <Link href="/signup">
-              <Link href="/signup">
-                <Button
-                  color="secondary"
-                  type="button"
-                  icon={<Icon as={FaStar} />}
-                >
-                  Rejoindre la communauté
-                </Button>
-              </Link>
+              <Button
+                color="secondary"
+                type="button"
+                icon={<Icon as={FaStar} />}
+              >
+                Rejoindre la communauté
+              </Button>
             </Link>
             <Link href="/login">
               <Button
