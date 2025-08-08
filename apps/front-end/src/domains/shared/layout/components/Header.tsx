@@ -34,72 +34,66 @@ const Header = () => {
   };
 
   return (
-    <>
-      <Flex
-        width="100%"
-        shadow="xl"
-        p="20px"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Link href="/">
-          <Heading as="h1" color="#bd3a6a">
-            Lebonmeeple<span style={{ fontSize: '16px' }}>.com</span>
-          </Heading>
-        </Link>
-  
-        <Show above="md">
-          <Nav />
-        </Show>
+    <Flex w="full" shadow="md" p={5} align="center" justify="space-between">
+      <Link href="/">
+        <Heading color="primary.500">
+          Lebonmeeple
+          <Text as="span" fontSize="sm">
+            .com
+          </Text>
+        </Heading>
+      </Link>
 
-        <HStack spacing={4}>
-          {isAuthenticated && user ? (
-            <Show above="md">
-              <Menu>
-                <MenuButton as={ChakraButton} variant="ghost" p={0}>
-                  <HStack spacing={2}>
-                    <Avatar size="lg" name={user.username} src={user.avatar} />
-                    <Text fontSize="xl" fontWeight="medium">
-                      {user.username}
-                    </Text>
-                    <ChevronDownIcon />
-                  </HStack>
-                </MenuButton>
-                <MenuList>
-                  <MenuItem onClick={() => router.push('/profile')}>
-                    Mon profil
-                  </MenuItem>
-                  <MenuItem onClick={() => router.push('/posts/create')}>
-                    Écrire un article
-                  </MenuItem>
-                  <MenuItem onClick={handleLogout} color="red.500">
-                    Se déconnecter
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </Show>
-          ) : (
-            <Show above="md">
-              <HStack spacing={2}>
-                <Link href="/login">
-                  <Button type="button" color="primary">
-                    Connexion
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button type="button" color="secondary">
-                    Inscription
-                  </Button>
-                </Link>
-              </HStack>
-            </Show>
-          )}
-          <Show below="md">
-            <ResponsiveNav />
+      <Show above="md">
+        <Nav />
+      </Show>
+
+      <HStack spacing={4}>
+        {isAuthenticated && user ? (
+          <Show above="md">
+            <Menu>
+              <MenuList>
+                <MenuItem onClick={handleLogout} color="red.500">
+                  Se déconnecter
+                </MenuItem>
+              </MenuList>
+              <MenuButton as={ChakraButton} variant="ghost">
+                <HStack spacing={2}>
+                  <Text
+                    color="primary.500"
+                    fontWeight="600"
+                    fontFamily="heading"
+                    _hover={{ color: 'primary.700' }}
+                  >
+                    {user.username}
+                  </Text>
+                  <ChevronDownIcon />
+                  <Avatar size="md" name={user.username} src={user.avatar} />
+                </HStack>
+              </MenuButton>
+            </Menu>
           </Show>
-        </HStack>
-      </Flex>
-    </>
+        ) : (
+          <Show above="md">
+            <HStack spacing={2}>
+              <Link href="/login">
+                <Button type="button" color="primary">
+                  Connexion
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button type="button" color="secondary">
+                  Inscription
+                </Button>
+              </Link>
+            </HStack>
+          </Show>
+        )}
+        <Show below="md">
+          <ResponsiveNav />
+        </Show>
+      </HStack>
+    </Flex>
   );
 };
 

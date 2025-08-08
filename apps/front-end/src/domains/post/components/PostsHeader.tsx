@@ -1,14 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import Button from '@/domains/shared/button/components/Button';
-import { useThemeColors } from '@/ui/hooks';
 import { useAppSelector } from '@frontend/store/hook';
 
 const PostsHeader = () => {
-  const { textColorBrand } = useThemeColors();
+  const textColorBrand = useColorModeValue('primary.500', 'primary.500');
   const { isAuthenticated } = useAppSelector((state) => state.user);
 
   return (

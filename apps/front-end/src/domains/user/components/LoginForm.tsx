@@ -13,7 +13,6 @@ import {
   InputGroup,
   InputRightElement,
   IconButton,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -26,7 +25,6 @@ import { LoginFormData, schemaUserLogin } from '@/domains/user/type';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { login } from '@/domains/user/slice';
 import { signinAndGetMe } from '@frontend/domains/user/service/service';
-import { useThemeColors } from '@/ui/hooks';
 import Button from '@frontend/domains/shared/button/components/Button';
 
 const LoginForm = () => {
@@ -35,12 +33,6 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const { isLoading } = useAppSelector((state) => state.user);
-
-  const { textColorPrimary, textColor, cardBg } = useThemeColors();
-
-  const inputBg = useColorModeValue('gray.50', 'gray.700');
-  const inputBorderColor = useColorModeValue('gray.300', 'gray.600');
-  const linkColor = useColorModeValue('brand.500', 'brand.300');
 
   const {
     register,
@@ -75,48 +67,24 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <VStack spacing={6}>
         <FormControl isInvalid={!!errors.email}>
-          <FormLabel
-            htmlFor="email"
-            color={textColorPrimary}
-            fontWeight="semibold"
-            fontSize="sm"
-          >
+          <FormLabel htmlFor="email" color="neutral.800" fontWeight="semibold">
             Adresse e-mail
           </FormLabel>
-          <InputGroup>
-            <Input
-              id="email"
-              type="email"
-              placeholder="votre.email@exemple.com"
-              autoComplete="email"
-              bg={inputBg}
-              border="2px"
-              borderColor={errors.email ? 'red.300' : inputBorderColor}
-              _hover={{
-                borderColor: errors.email ? 'red.400' : 'brand.300',
-              }}
-              _focus={{
-                borderColor: errors.email ? 'red.500' : 'brand.500',
-                bg: cardBg,
-                shadow: 'lg',
-              }}
-              size="lg"
-              borderRadius="lg"
-              fontSize="md"
-              {...register('email')}
-            />
-          </InputGroup>
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.email?.message}
-          </FormErrorMessage>
+          <Input
+            id="email"
+            type="email"
+            placeholder="votre.email@exemple.com"
+            autoComplete="email"
+            {...register('email')}
+          />
+          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
 
         <FormControl isInvalid={!!errors.password}>
           <FormLabel
             htmlFor="password"
-            color={textColorPrimary}
+            color="neutral.800"
             fontWeight="semibold"
-            fontSize="sm"
           >
             Mot de passe
           </FormLabel>
@@ -126,23 +94,9 @@ const LoginForm = () => {
               type={showPassword ? 'text' : 'password'}
               placeholder="Votre mot de passe"
               autoComplete="current-password"
-              bg={inputBg}
-              border="2px"
-              borderColor={errors.password ? 'red.300' : inputBorderColor}
-              _hover={{
-                borderColor: errors.password ? 'red.400' : 'brand.300',
-              }}
-              _focus={{
-                borderColor: errors.password ? 'red.500' : 'brand.500',
-                bg: cardBg,
-                shadow: 'lg',
-              }}
-              size="lg"
-              borderRadius="lg"
-              fontSize="md"
               {...register('password')}
             />
-            <InputRightElement h="full">
+            <InputRightElement>
               <IconButton
                 aria-label={
                   showPassword
@@ -152,25 +106,16 @@ const LoginForm = () => {
                 icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
                 variant="ghost"
                 onClick={() => setShowPassword(!showPassword)}
-                color={textColor}
-                _hover={{ color: textColorPrimary }}
               />
             </InputRightElement>
           </InputGroup>
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.password?.message}
-          </FormErrorMessage>
+          <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
         </FormControl>
 
         {/* Lien mot de passe oublié */}
         <Box w="full" textAlign="right">
           <Link href="/forgot-password">
-            <Text
-              fontSize="sm"
-              color={linkColor}
-              _hover={{ textDecoration: 'underline' }}
-              cursor="pointer"
-            >
+            <Text fontSize="sm" color="primary.500" cursor="pointer">
               Mot de passe oublié ?
             </Text>
           </Link>

@@ -1,5 +1,11 @@
-import { VStack, Box, Icon, Heading, Text } from '@chakra-ui/react';
-import { useThemeColors } from '@frontend/ui';
+import {
+  VStack,
+  Box,
+  Icon,
+  Heading,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React from 'react';
 
 type Props = {
@@ -8,12 +14,12 @@ type Props = {
     title: string;
     description: string;
   };
-  index: number;
 };
 
 const Features = (props: Props) => {
-  const { feature, index } = props;
-  const { cardBg, textColor } = useThemeColors();
+  const { feature } = props;
+  const cardBg = useColorModeValue('white', 'neutral.800');
+  const textColor = useColorModeValue('neutral.600', 'white');
 
   return (
     <VStack
@@ -26,19 +32,10 @@ const Features = (props: Props) => {
       _hover={{ transform: 'translateY(-4px)', shadow: 'xl' }}
       transition="all 0.3s"
       border="1px"
-      borderColor="gray.200"
+      borderColor="neutral.200"
     >
-      <Box
-        p={4}
-        borderRadius="full"
-        bg={`${['brand', 'meeple', 'game', 'brand'][index % 4]}.100`}
-      >
-        <Icon
-          as={feature.icon}
-          w={8}
-          h={8}
-          color={`${['brand', 'meeple', 'game', 'brand'][index % 4]}.500`}
-        />
+      <Box p={4} borderRadius="full" bg="primary.100">
+        <Icon as={feature.icon} w={8} h={8} color="primary.500" />
       </Box>
       <Heading fontSize="xl">{feature.title}</Heading>
       <Text color={textColor}>{feature.description}</Text>

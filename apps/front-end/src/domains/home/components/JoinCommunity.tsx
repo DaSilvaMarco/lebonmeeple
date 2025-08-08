@@ -1,14 +1,24 @@
-import { Box, Container, VStack, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  VStack,
+  Heading,
+  Stack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { useAppSelector } from '@frontend/store/hook';
 import React from 'react';
 import CallToAction from './CallToAction';
 
 const JoinCommunity = () => {
   const { isAuthenticated } = useAppSelector((state) => state.user);
+  const featuresBg = useColorModeValue('white', 'neutral.800');
+
   return (
     <>
       {!isAuthenticated && (
-        <Box py={20} bg="gray.800" color="white">
+        <Box py={20} bg={featuresBg}>
           <Container maxW="4xl" textAlign="center">
             <VStack spacing={8}>
               <Heading fontSize={{ base: '3xl', md: '4xl' }}>

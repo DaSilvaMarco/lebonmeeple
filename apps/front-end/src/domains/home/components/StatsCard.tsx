@@ -1,5 +1,4 @@
-import { VStack, Text } from '@chakra-ui/react';
-import { useThemeColors } from '@frontend/ui';
+import { VStack, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
 
 const StatsCard = (props: Props) => {
   const { value, title, color } = props;
-  const {  textColor } = useThemeColors();
+  const textColor = useColorModeValue('neutral.600', 'white');
 
   return (
     <VStack spacing={1}>

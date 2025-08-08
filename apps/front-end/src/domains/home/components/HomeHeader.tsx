@@ -5,21 +5,24 @@ import {
   Icon,
   HStack,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
 import { FaRocket, FaPenNib, FaStar } from 'react-icons/fa';
 import StatsCard from './StatsCard';
-import { useThemeColors } from '@frontend/ui';
 import Button from '@frontend/domains/shared/button/components/Button';
 
 type Props = {
   isAuthenticated: boolean;
-}
+};
 
-const HomeHeader = (props : Props) => {
+const HomeHeader = (props: Props) => {
   const { isAuthenticated } = props;
-  const { textColor, textColorBrand, textColorMeeple, textColorGame } = useThemeColors();
+  const textColor = useColorModeValue('neutral.600', 'white');
+  const textColorBrand = useColorModeValue('primary.500', 'primary.500');
+  const PRIMARY_COLOR = '#bd3a6a';
+
   return (
     <VStack align="start" spacing={8}>
       <VStack align="start" spacing={4}>
@@ -36,8 +39,8 @@ const HomeHeader = (props : Props) => {
           fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
           fontWeight="bold"
           lineHeight="shorter"
-          bgGradient="linear(to-r, brand.600, meeple.500, game.600)"
           bgClip="text"
+          color={PRIMARY_COLOR}
         >
           LeBonMeeple
         </Heading>
@@ -101,12 +104,12 @@ const HomeHeader = (props : Props) => {
         <StatsCard
           value="1200+"
           title="Articles publiés"
-          color={textColorMeeple}
+          color={PRIMARY_COLOR}
         />
         <StatsCard
           value="50+"
           title="Éditeurs partenaires"
-          color={textColorGame}
+          color={PRIMARY_COLOR}
         />
       </HStack>
     </VStack>

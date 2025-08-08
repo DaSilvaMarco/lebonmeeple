@@ -9,8 +9,8 @@ import {
   Avatar,
   Badge,
   Box,
+  useColorModeValue,
 } from '@chakra-ui/react';
-import { useThemeColors } from '@/ui/hooks';
 import { Post } from '@frontend/domains/post/type';
 import Link from 'next/link';
 import Image from '@frontend/domains/shared/image/components/Image';
@@ -21,13 +21,10 @@ type Props = {
 
 const PostCard = (props: Props) => {
   const { id, title, body, user, image } = props.post;
-  const {
-    cardBg,
-    textColorPrimary,
-    textColorSecondary,
-    borderColor,
-    shadowColor,
-  } = useThemeColors();
+  const cardBg = useColorModeValue('white', 'neutral.800');
+  const textColorPrimary = useColorModeValue('neutral.800', 'white');
+  const textColorSecondary = useColorModeValue('neutral.600', 'white');
+  const borderColor = useColorModeValue('neutral.200', 'neutral.600');
 
   return (
     <Link href={`/posts/${id}`}>
@@ -44,7 +41,6 @@ const PostCard = (props: Props) => {
         cursor="pointer"
         _hover={{
           transform: 'translateY(-4px)',
-          boxShadow: `0 20px 40px ${shadowColor}`,
           borderColor: 'brand.200',
         }}
       >

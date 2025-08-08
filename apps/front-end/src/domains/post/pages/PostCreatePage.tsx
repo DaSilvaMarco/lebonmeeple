@@ -3,9 +3,9 @@
 import React from 'react';
 import { Flex, Box } from '@chakra-ui/react';
 
-import { PostCreateFormCard } from '../components';
 import NotConnected from '@frontend/domains/shared/warning/NotConnected';
 import { useAppSelector } from '@frontend/store/hook';
+import PostCreateFormCard from '../components/PostCreateFormCard';
 
 const PostCreatePage = () => {
 

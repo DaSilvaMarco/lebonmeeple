@@ -1,18 +1,9 @@
 import React from 'react';
 import { Box, Image } from '@chakra-ui/react';
-
-type IUserProfile = {
-  username: string;
-  email: string;
-  avatar: string;
-};
-
-type IUser = IUserProfile & {
-  userId: number;
-};
+import { User } from '../types';
 
 type Props = {
-  user: IUser;
+  user: User;
 };
 
 const Avatar = ({ user }: Props) => {

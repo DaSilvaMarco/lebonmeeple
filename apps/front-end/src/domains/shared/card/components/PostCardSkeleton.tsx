@@ -8,11 +8,12 @@ import {
   Skeleton,
   SkeletonCircle,
   SkeletonText,
+  useColorModeValue,
 } from '@chakra-ui/react';
-import { useThemeColors } from '@/ui/hooks';
 
 const PostCardSkeleton = () => {
-  const { cardBg, borderColor } = useThemeColors();
+  const cardBg = useColorModeValue('white', 'neutral.800');
+  const borderColor = useColorModeValue('neutral.200', 'neutral.600');
 
   return (
     <Card

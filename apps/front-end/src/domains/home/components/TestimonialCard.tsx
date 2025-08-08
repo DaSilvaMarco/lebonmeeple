@@ -1,5 +1,13 @@
-import { Box, Icon, VStack, Divider, HStack, Avatar, Text } from '@chakra-ui/react';
-import { useThemeColors } from '@frontend/ui/hooks/useThemeColors';
+import {
+  Box,
+  Icon,
+  VStack,
+  Divider,
+  HStack,
+  Avatar,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React from 'react';
 import { FaQuoteLeft } from 'react-icons/fa';
 
@@ -15,7 +23,7 @@ type Props = {
 
 const TestimonialCard = (props: Props) => {
   const { testimonial, index } = props;
-  const { textColor } = useThemeColors();
+  const textColor = useColorModeValue('neutral.600', 'white');
 
   return (
     <Box

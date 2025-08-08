@@ -10,4 +10,5 @@ export type Post = {
   body: string;
   image: string;
   user: User;
+  userId: number;
 };

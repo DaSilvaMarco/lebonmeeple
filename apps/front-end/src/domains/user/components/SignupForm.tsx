@@ -24,7 +24,6 @@ import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
 import { SignupFormData, schemaUserSignup } from '@/domains/user/type';
 import { postSignup } from '@frontend/domains/user/api/post-signup';
 import { convertToBase64 } from '@frontend/utils/convertToBase64';
-import { useThemeColors } from '@/ui/hooks';
 import Button from '@frontend/domains/shared/button/components/Button';
 
 const SignupForm = () => {
@@ -34,7 +33,9 @@ const SignupForm = () => {
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
 
-  const { textColorPrimary, textColor, cardBg } = useThemeColors();
+  const textColorPrimary = useColorModeValue('neutral.800', 'white');
+  const textColor = useColorModeValue('neutral.600', 'white');
+  const cardBg = useColorModeValue('white', 'neutral.800');
 
   const inputBg = useColorModeValue('gray.50', 'gray.700');
   const inputBorderColor = useColorModeValue('gray.300', 'gray.600');

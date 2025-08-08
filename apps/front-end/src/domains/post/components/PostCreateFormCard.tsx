@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Box } from '@chakra-ui/react';
-import { useThemeColors } from '@/ui/hooks';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 import WelcomePostCreateFormCard from './WelcomePostCreateFormCard';
 import PostCreateForm from './PostCreateForm';
 
 const PostCreateFormCard = () => {
-  const { cardBg, borderColor } = useThemeColors();
+  const cardBg = useColorModeValue('white', 'neutral.800');
+  const borderColor = useColorModeValue('neutral.200', 'neutral.600');
 
   return (
     <Box

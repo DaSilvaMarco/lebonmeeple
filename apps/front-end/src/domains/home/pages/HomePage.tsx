@@ -11,11 +11,8 @@ const HomePage = () => {
   return (
     <>
       <HomePresentation />
-
       <WhyLeBonMeeple />
-
       <Testimonial />
-
       <JoinCommunity />
     </>
   );

@@ -5,14 +5,14 @@ import {
   Heading,
   SimpleGrid,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import React from 'react';
 import Features from './Features';
-import { useThemeColors } from '@frontend/ui';
 import { features } from '@frontend/domains/home/data/data';
 
 const WhyLeBonMeeple = () => {
-  const { featuresBg } = useThemeColors();
+  const featuresBg = useColorModeValue('white', 'neutral.800');
 
   return (
     <Box py={20} bg={featuresBg}>
@@ -35,7 +35,7 @@ const WhyLeBonMeeple = () => {
 
           <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={8}>
             {features.map((feature, index) => (
-              <Features key={index} feature={feature} index={index} />
+              <Features key={index} feature={feature} />
             ))}
           </SimpleGrid>
         </VStack>
