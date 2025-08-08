@@ -15,6 +15,12 @@ export const getById = async (id: number, prismaService: PrismaService) => {
           id: true,
           body: true,
           updatedAt: true,
+          userId: true,
+          user: {
+            select: {
+              ...PRISMA_BASIC_USER,
+            },
+          },
         },
       },
     },

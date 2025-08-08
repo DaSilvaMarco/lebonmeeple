@@ -14,16 +14,28 @@ import {
   Text,
 } from '@chakra-ui/react';
 import GoBackButton from '@frontend/domains/shared/button/components/GoBackButton';
-import React from 'react';
+import React, { useState } from 'react';
 import { Post } from '../type';
 import Image from '@frontend/domains/shared/image/components/Image';
+import CommentsSection from '@frontend/domains/comment/components/CommentsSection';
+import { getPostById } from '../api/getPostById';
 
 type Props = {
   post: Post;
 };
 
 const PostViewPage = (props: Props) => {
-  const { post } = props;
+  const { post: initialPost } = props;
+  const [post, setPost] = useState<Post>(initialPost);
+
+  const handleCommentsUpdate = async () => {
+    try {
+      const updatedPost = await getPostById(initialPost.id.toString());
+      setPost(updatedPost);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour des commentaires:', error);
+    }
+  };
 
   return (
     <Flex py={8}>
@@ -95,6 +107,14 @@ const PostViewPage = (props: Props) => {
                 </Link>
               </HStack>
             </HStack>
+          </Box>
+
+          <Box p={8} pt={0}>
+            <CommentsSection
+              postId={post.id}
+              comments={post.comments || []}
+              onCommentsUpdate={handleCommentsUpdate}
+            />
           </Box>
         </Box>
       </Box>

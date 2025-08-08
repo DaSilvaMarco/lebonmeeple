@@ -1,4 +1,5 @@
 import { type User } from '../user/type';
+import { type Comment } from '../comment/type';
 
 export type InitialStatePost = {
   posts: Post[];
@@ -11,4 +12,5 @@ export type Post = {
   image: string;
   user: User;
   userId: number;
+  comments?: Comment[];
 };

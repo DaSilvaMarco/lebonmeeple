@@ -13,9 +13,10 @@ import {
   IconButton,
   useToast,
 } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { Post } from '@frontend/domains/post/type';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from '@frontend/domains/shared/image/components/Image';
 import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
 import { deletePost as deletePostApi } from '@frontend/domains/post/api/delete-post';
@@ -35,13 +36,14 @@ const PostCard = (props: Props) => {
   const borderColor = useColorModeValue('neutral.200', 'neutral.600');
   const { user, token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const toast = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     setIsDeleting(true);
 
     if (!token) {
@@ -64,6 +66,12 @@ const PostCard = (props: Props) => {
     } finally {
       setIsDeleting(false);
     }
+  };
+
+  const handleEdit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    router.push(`/posts/${id}/edit`);
   };
 
   return (
@@ -119,22 +127,39 @@ const PostCard = (props: Props) => {
           </Box>
           {user?.id === post.userId && (
             <Box position="absolute" top={3} left={3}>
-              <IconButton
-                aria-label="Supprimer le post"
-                icon={<DeleteIcon />}
-                size="sm"
-                colorScheme="red"
-                variant="solid"
-                onClick={handleDelete}
-                isLoading={isDeleting}
-                borderRadius="full"
-                bg="rgba(255, 0, 0, 0.8)"
-                color="white"
-                _hover={{
-                  bg: 'red.600',
-                }}
-                backdropFilter="blur(8px)"
-              />
+              <HStack spacing={2}>
+                <IconButton
+                  aria-label="Modifier le post"
+                  icon={<EditIcon />}
+                  size="sm"
+                  colorScheme="blue"
+                  variant="solid"
+                  onClick={handleEdit}
+                  borderRadius="full"
+                  bg="rgba(0, 0, 255, 0.8)"
+                  color="white"
+                  _hover={{
+                    bg: 'blue.600',
+                  }}
+                  backdropFilter="blur(8px)"
+                />
+                <IconButton
+                  aria-label="Supprimer le post"
+                  icon={<DeleteIcon />}
+                  size="sm"
+                  colorScheme="red"
+                  variant="solid"
+                  onClick={handleDelete}
+                  isLoading={isDeleting}
+                  borderRadius="full"
+                  bg="rgba(255, 0, 0, 0.8)"
+                  color="white"
+                  _hover={{
+                    bg: 'red.600',
+                  }}
+                  backdropFilter="blur(8px)"
+                />
+              </HStack>
             </Box>
           )}
         </Box>
