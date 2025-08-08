@@ -1,12 +1,11 @@
 'use client';
 
 import React from 'react';
-
 import { Box, Flex } from '@chakra-ui/react';
-import PostsGrid from '../components/PostsGrid';
-import PostsHeader from '../components/PostsHeader';
+import PostsGridSkeleton from '../components/PostsGridSkeleton';
+import PostsHeaderSkeleton from '../components/PostsHeaderSkeleton';
 
-const PostsPage = () => {
+const PostsPageSkeleton = () => {
   return (
     <Flex justify="center" align="flex-start" p={2} w="100%" minH="100vh">
       <Box
@@ -29,11 +28,11 @@ const PostsPage = () => {
           opacity: 0.1,
         }}
       >
-        <PostsHeader />
-        <PostsGrid />
+        <PostsHeaderSkeleton />
+        <PostsGridSkeleton count={6} />
       </Box>
     </Flex>
   );
 };
 
-export default PostsPage;
+export default PostsPageSkeleton;
