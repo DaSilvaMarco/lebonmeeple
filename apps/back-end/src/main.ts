@@ -22,9 +22,10 @@ async function bootstrap() {
     .build();
 
   app.enableCors({
-    origin: '*', // specify your allowed origins, use '*' for all origins (not recommended for production)
+    origin: ['http://localhost:3001', 'http://frontend:3000'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
   });
 
   const document = SwaggerModule.createDocument(app, config);

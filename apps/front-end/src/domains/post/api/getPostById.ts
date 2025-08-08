@@ -1,7 +1,8 @@
 import { GET_METHOD } from '../constants';
+import { getApiBaseUrl } from '@/utils/api-config';
 
 export const getPostById = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/post/${id}`, {
+  const response = await fetch(`${getApiBaseUrl()}/post/${id}`, {
     method: GET_METHOD,
     headers: {
       'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Post } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 
@@ -46,7 +46,7 @@ async function main() {
     users.push(user);
   }
 
-  const posts = [];
+  const posts: Post[] = [];
   for (let i = 0; i < 10; i++) {
     const user = faker.helpers.arrayElement(users);
 

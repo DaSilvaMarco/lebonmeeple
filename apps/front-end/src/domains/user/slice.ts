@@ -27,12 +27,14 @@ export const userSlice = createSlice({
     },
 
     updateUser: (state, action: PayloadAction<UpdatedUser>) => {
-      const updatedUser: User = {
-        ...state.user,
-        ...action.payload,
-      };
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      state.user = updatedUser;
+      if (state.user) {
+        const updatedUser: User = {
+          ...state.user,
+          ...action.payload,
+        };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        state.user = updatedUser;
+      }
     },
   },
 });

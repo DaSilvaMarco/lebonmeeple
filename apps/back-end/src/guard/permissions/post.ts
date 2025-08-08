@@ -10,7 +10,7 @@ export const checkPostPermission = async (
     where: { id: paramId },
   });
 
-  if (post.userId === userId) {
+  if (post && post.userId === userId) {
     return true;
   }
 

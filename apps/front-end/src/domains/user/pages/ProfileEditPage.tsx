@@ -59,6 +59,15 @@ const ProfileEditPage = () => {
 
   const onSubmit = async (data: UserProfileFormData) => {
     try {
+      if (!token) {
+        toastError(
+          toast,
+          "Erreur d'authentification",
+          'Vous devez être connecté pour modifier votre profil.',
+        );
+        return;
+      }
+
       const newUser = await patchUser(data, token);
 
       dispatch(updateUser(newUser));

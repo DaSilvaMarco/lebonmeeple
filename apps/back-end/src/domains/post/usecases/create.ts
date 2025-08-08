@@ -2,14 +2,14 @@ import { BadRequestException } from '@nestjs/common';
 import { type CreatePostDto } from '../dtos';
 import { type Request } from 'express';
 import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { BasicUser } from '@backend/domains/user/types/users';
 
 export const createPost = async (
   createPostDto: CreatePostDto,
   request: Request,
   prismaService: PrismaService,
 ) => {
-  // eslint-disable-next-line prefer-destructuring
-  const id = request.user['id'];
+  const { id } = request.user as BasicUser;
   const { body, title, image } = createPostDto;
 
   const user = await prismaService.user.findUnique({

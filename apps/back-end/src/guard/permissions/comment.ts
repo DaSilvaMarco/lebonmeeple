@@ -10,7 +10,7 @@ export const checkCommentPermission = async (
     where: { id: paramId },
   });
 
-  if (comment.userId === userId) {
+  if (comment && comment.userId === userId) {
     return true;
   }
 

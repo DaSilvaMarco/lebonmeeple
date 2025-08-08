@@ -4,11 +4,11 @@ import { IsNotEmpty } from 'class-validator';
 export class CreatePostDto {
   @ApiProperty()
   @IsNotEmpty()
-  readonly title?: string;
+  readonly title: string;
   @ApiProperty()
   @IsNotEmpty()
-  readonly body?: string;
+  readonly body: string;
   @ApiProperty()
   @IsNotEmpty()
-  readonly image?: string;
+  readonly image: string;
 }
