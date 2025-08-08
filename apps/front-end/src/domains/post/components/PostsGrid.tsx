@@ -16,8 +16,6 @@ const PostsGrid = (props: Props ) => {
   const MotionGridItem = motion(GridItem);
   const MotionGrid = motion(Grid);
 
-  console.log('pourquoiiiiii ?', posts);
-
   return (
     <MotionGrid
       initial="hidden"
