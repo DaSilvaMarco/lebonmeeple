@@ -5,8 +5,11 @@ import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import PostsGrid from '../components/PostsGrid';
 import PostsHeader from '../components/PostsHeader';
+import { useAppSelector } from '@frontend/store/hook';
 
 const PostsPage = () => {
+  const { posts } = useAppSelector((state) => state.post);
+
   return (
     <Flex justify="center" align="flex-start" p={2} w="100%" minH="100vh">
       <Box
@@ -30,7 +33,7 @@ const PostsPage = () => {
         }}
       >
         <PostsHeader />
-        <PostsGrid />
+        <PostsGrid posts={posts} />
       </Box>
     </Flex>
   );

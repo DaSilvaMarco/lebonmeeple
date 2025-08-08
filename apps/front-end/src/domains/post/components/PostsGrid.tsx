@@ -5,14 +5,18 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import PostCard from '@/domains/shared/card/components/PostCard';
 import { type Post } from '@frontend/domains/post/type';
-import { useAppSelector } from '@frontend/store/hook';
 import { containerVariants, itemVariants } from '../constants';
 
-const PostsGrid = () => {
-  const { posts } = useAppSelector((state) => state.post);
+type Props = {
+  posts: Post[];
+};
 
+const PostsGrid = (props: Props ) => {
+  const { posts } = props;
   const MotionGridItem = motion(GridItem);
   const MotionGrid = motion(Grid);
+
+  console.log('pourquoiiiiii ?', posts);
 
   return (
     <MotionGrid
