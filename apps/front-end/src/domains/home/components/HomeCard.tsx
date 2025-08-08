@@ -1,5 +1,6 @@
-import { Card as ChakraCard, Image, Text } from '@chakra-ui/react';
+import { Card as ChakraCard, Text } from '@chakra-ui/react';
 import React from 'react';
+import Image from '@frontend/domains/shared/image/components/Image';
 
 type Props = {
   text: string;

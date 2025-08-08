@@ -5,9 +5,11 @@ import { Flex, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 import Button from '@/domains/shared/button/components/Button';
 import { useThemeColors } from '@/ui/hooks';
+import { useAppSelector } from '@frontend/store/hook';
 
 const PostsHeader = () => {
   const { textColorBrand } = useThemeColors();
+  const { isAuthenticated } = useAppSelector((state) => state.user);
 
   return (
     <Flex
@@ -21,11 +23,13 @@ const PostsHeader = () => {
       <Heading size="lg" color={textColorBrand} fontWeight="bold">
         Articles
       </Heading>
-      <Link href="/posts/create">
-        <Button color="primary" type="button">
-          Créer un article
-        </Button>
-      </Link>
+      {isAuthenticated && (
+        <Link href="/posts/create">
+          <Button color="primary" type="button">
+            Créer un article
+          </Button>
+        </Link>
+      )}
     </Flex>
   );
 };

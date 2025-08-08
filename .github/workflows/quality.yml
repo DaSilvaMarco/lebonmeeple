@@ -41,3 +41,6 @@ jobs:
 
       - name: 🏗️ Build Frontend
         run: npm run front:build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:3000
+          CI_BUILD: true

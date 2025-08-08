@@ -19,9 +19,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private readonly configService: ConfigService,
     private readonly prismaService: PrismaService,
   ) {
+    const secretKey = configService.get<string>('SECRET_KEY');
+    if (!secretKey) {
+      throw new Error('SECRET_KEY is not defined in environment variables');
+    }
+
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: configService.get('SECRET_KEY'),
+      secretOrKey: secretKey,
       ignoreExpiration: false,
     });
   }

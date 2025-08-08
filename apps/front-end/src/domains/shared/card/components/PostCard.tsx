@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   Heading,
-  Image,
   Text,
   VStack,
   HStack,
@@ -14,6 +13,7 @@ import {
 import { useThemeColors } from '@/ui/hooks';
 import { Post } from '@frontend/domains/post/type';
 import Link from 'next/link';
+import Image from '@frontend/domains/shared/image/components/Image';
 
 type Props = {
   post: Post;
@@ -48,16 +48,18 @@ const PostCard = (props: Props) => {
           borderColor: 'brand.200',
         }}
       >
-        <Box position="relative" overflow="hidden">
+        <Box position="relative" overflow="hidden" w="100%" h="200px">
           <Image
-            w="100%"
-            h="200px"
+            fill
             objectFit="cover"
             alt={`Photo de l'article ${title}`}
             src={image}
             fallbackSrc="/boardgame.jpg"
-            transition="transform 0.3s ease"
-            _hover={{ transform: 'scale(1.05)' }}
+            style={{
+              transition: 'transform 0.3s ease',
+            }}
+            className="hover:scale-105"
+            sizes="max-width: 600px"
           />
           <Box
             position="absolute"

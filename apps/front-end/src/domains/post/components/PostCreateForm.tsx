@@ -21,6 +21,7 @@ import { useAppSelector } from '@/store/hook';
 import { convertToBase64 } from '@/utils/convertToBase64';
 import { useThemeColors } from '@/ui/hooks';
 import Button from '@frontend/domains/shared/button/components/Button';
+import { getApiBaseUrl } from '@/utils/api-config';
 
 const PostCreateForm = () => {
   const router = useRouter();
@@ -59,7 +60,7 @@ const PostCreateForm = () => {
 
   const onSubmit = async (data: PostCreateFormData) => {
     try {
-      const response = await fetch('http://localhost:3000/post', {
+      const response = await fetch(`${getApiBaseUrl()}/post`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

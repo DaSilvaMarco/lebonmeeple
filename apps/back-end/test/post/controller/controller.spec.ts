@@ -21,7 +21,11 @@ describe('PostController', () => {
   });
 
   it('should call create with correct dto and request, and return result', async () => {
-    const dto: CreatePostDto = { title: 'Test Post', body: 'Content' };
+    const dto: CreatePostDto = {
+      title: 'Test Post',
+      body: 'Content',
+      image: 'test-image.jpg',
+    };
     const fakeRequest = {} as Request;
     const expectedResult = { id: 1, ...dto };
 

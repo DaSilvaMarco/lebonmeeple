@@ -1,10 +1,8 @@
-import PostsPage from '@frontend/domains/post/pages/PostsPage';
+import PostsClientPage from '@frontend/domains/post/pages/PostsClientPage';
 import React from 'react';
 
 const App = () => {
-  return (
-    <PostsPage />
-  )
+  return <PostsClientPage />;
 };
 
 export default App;

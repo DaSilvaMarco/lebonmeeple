@@ -1,9 +1,10 @@
 import { type UserState } from './type';
+import { getApiBaseUrl } from '@/utils/api-config';
 
-export const API_USER_ME = 'http://localhost:3000/user/me';
-export const API_USER_SIGNIN = 'http://localhost:3000/user/signin';
-export const API_USER_UPDATE = 'http://localhost:3000/user/{id}';
-export const API_USER_SIGNUP = 'http://localhost:3000/user/signup';
+export const API_USER_ME = () => `${getApiBaseUrl()}/user/me`;
+export const API_USER_SIGNIN = () => `${getApiBaseUrl()}/user/signin`;
+export const API_USER_UPDATE = () => `${getApiBaseUrl()}/user/{id}`;
+export const API_USER_SIGNUP = () => `${getApiBaseUrl()}/user/signup`;
 
 export const GET_METHOD = 'GET';
 export const POST_METHOD = 'POST';

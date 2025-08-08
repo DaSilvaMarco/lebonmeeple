@@ -65,7 +65,9 @@ const LoginForm = () => {
         router.push('/');
       }, 1000);
     } catch (error) {
-      toastError(toast, 'Erreur de connexion', error);
+      const errorMessage =
+        error instanceof Error ? error.message : 'Une erreur est survenue';
+      toastError(toast, 'Erreur de connexion', errorMessage);
     }
   };
 
