@@ -15,6 +15,18 @@ test('The user can get one post by id', async () => {
           body: true,
           id: true,
           updatedAt: true,
+          userId: true,
+          user: {
+            select: {
+              avatar: true,
+              createdAt: false,
+              email: true,
+              id: false,
+              password: false,
+              updateAt: false,
+              username: true,
+            },
+          },
         },
       },
       user: {

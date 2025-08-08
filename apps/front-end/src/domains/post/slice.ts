@@ -12,9 +12,17 @@ export const postSlice = createSlice({
     deletePost: (state, action: PayloadAction<number>) => {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
+    updatePost: (state, action: PayloadAction<Post>) => {
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id,
+      );
+      if (index !== -1) {
+        state.posts[index] = action.payload;
+      }
+    },
   },
 });
 
-export const { postsList, deletePost } = postSlice.actions;
+export const { postsList, deletePost, updatePost } = postSlice.actions;
 
 export default postSlice.reducer;
