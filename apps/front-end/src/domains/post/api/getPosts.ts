@@ -6,7 +6,7 @@ export const getPosts = async () => {
   }
 
   try {
-    const posts = await fetch(API_POSTS, {
+    const posts = await fetch(API_POSTS(), {
       method: GET_METHOD,
       headers: {
         'Content-Type': 'application/json',

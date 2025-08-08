@@ -1,29 +1,29 @@
 'use client';
 
-import { Avatar, Badge, Box, Button, Divider, Flex, Heading, HStack, Link, VStack, Text, Image } from "@chakra-ui/react";
-import GoBackButton from "@frontend/domains/shared/button/components/GoBackButton";
-import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { getPostById } from "../api/getPostById";
-import { Post } from "../type";
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Heading,
+  HStack,
+  Link,
+  VStack,
+  Text,
+} from '@chakra-ui/react';
+import GoBackButton from '@frontend/domains/shared/button/components/GoBackButton';
+import React from 'react';
+import { Post } from '../type';
+import Image from '@frontend/domains/shared/image/components/Image';
 
-const PostViewPage = () => {
-  const params = useParams();
-  const id = params?.id as string;
+type Props = {
+  post: Post;
+};
 
-  const [post, setData] = useState<Post | null>(null);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const post = await getPostById(id);
-        setData(post);
-      } catch (error) {
-        console.log(`${error}`);
-      }
-    };
-    fetchPost();
-  }, [id]);
+const PostViewPage = (props: Props) => {
+  const { post } = props;
 
   return (
     <Flex py={8}>
@@ -56,16 +56,18 @@ const PostViewPage = () => {
             </VStack>
           </Box>
           {post?.image && (
-            <Box px={8}>
+            <Box position="relative" overflow="hidden" w="100%" h="400px">
               <Image
-                src={post?.image || '/boardgame.jpg'}
-                alt={`Image de l'article: ${post?.title}`}
-                w="full"
-                maxH="400px"
+                fill
                 objectFit="cover"
-                borderRadius="lg"
-                shadow="sm"
+                alt={`Photo de l'article: ${post?.title}`}
+                src={post?.image}
                 fallbackSrc="/boardgame.jpg"
+                style={{
+                  transition: 'transform 0.3s ease',
+                }}
+                className="hover:scale-105"
+                sizes="max-width: 600px"
               />
             </Box>
           )}

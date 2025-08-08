@@ -12,11 +12,11 @@ services:
     ports:
       - '5432:5432'
 
-  app:
+  backend:
     build:
       context: .
       dockerfile: .docker/Dockerfile.backend
-    container_name: app
+    container_name: backend
     ports:
       - '3000:3000'
     depends_on:
@@ -38,9 +38,8 @@ services:
     environment:
       - NODE_ENV=development
       - DOCKER_ENV=true
-      - NEXT_PUBLIC_API_URL=http://app:3000
     depends_on:
-      - app
+      - backend
     command: 'npm run front:dev'
 
   adminer:

@@ -10,7 +10,7 @@ export const patchUser = async (
   const me = await getMe(token);
 
   const updateUserResponse = await fetch(
-    API_USER_UPDATE.replace('{id}', String(me.id)),
+    API_USER_UPDATE().replace('{id}', String(me.id)),
     {
       method: PATCH_METHOD,
       headers: {

@@ -2,7 +2,7 @@ import { API_USER_SIGNUP, POST_METHOD } from '../constants';
 import { type Signup, type SignupFormData } from '../type';
 
 export const postSignup = async (data: SignupFormData): Promise<Signup> => {
-  const signupResponse = await fetch(API_USER_SIGNUP, {
+  const signupResponse = await fetch(API_USER_SIGNUP(), {
     method: POST_METHOD,
     headers: {
       'Content-Type': 'application/json',

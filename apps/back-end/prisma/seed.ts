@@ -1,4 +1,4 @@
-import { PrismaClient, Post } from '@prisma/client';
+import { PrismaClient, type Post } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 
