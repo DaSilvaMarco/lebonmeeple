@@ -25,7 +25,6 @@ const nextConfig: NextConfig = {
 
   // Autres options de configuration
   reactStrictMode: true,
-  swcMinify: true,
 
   // Configuration pour les images
   images: {

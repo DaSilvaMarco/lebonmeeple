@@ -4,9 +4,7 @@ import React from 'react';
 
 const App = async () => {
   const posts = await getPosts();
-  return (
-    <PostsPage posts={posts} />
-  )
+  return <PostsPage posts={posts} />;
 };
 
 export default App;

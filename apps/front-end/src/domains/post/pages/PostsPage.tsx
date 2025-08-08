@@ -10,19 +10,19 @@ import { postsList } from '../slice';
 
 type Props = {
   posts: Post[];
-}
+};
 
 const PostsPage = (props: Props) => {
   const { posts } = props;
   const dispatch = useAppDispatch();
-  
+
   useEffect(() => {
     dispatch(postsList(posts));
-  }, [dispatch]);
+  }, [dispatch, posts]);
 
-    return (
+  return (
     <Flex justify="center" p={2} w="100%">
-        <PostsList />
+      <PostsList />
     </Flex>
   );
 };
