@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Heading, Text, VStack } from '@chakra-ui/react';
-import { useThemeColors } from '@/ui/hooks';
+import { Heading, Text, VStack, useColorModeValue } from '@chakra-ui/react';
 
 const WelcomePostCreateFormCard = () => {
-  const { textColorPrimary, textColor } = useThemeColors();
+  const textColorPrimary = useColorModeValue('neutral.800', 'white');
+  const textColor = useColorModeValue('neutral.600', 'white');
 
   return (
     <VStack spacing={4} textAlign="center" mb={8}>

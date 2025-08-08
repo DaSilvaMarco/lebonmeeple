@@ -3,8 +3,8 @@ import { Button as ChakraButton } from '@chakra-ui/react';
 
 type Props = {
   children: ReactNode;
-  color: string;
-  type: 'button' | 'submit' | 'reset' | undefined;
+  color: 'primary' | 'secondary' | 'peach';
+  type?: 'button' | 'submit' | 'reset';
   handleClick?: () => void;
   icon?: ReactElement;
   isDisabled?: boolean;
@@ -12,24 +12,36 @@ type Props = {
 };
 
 const Button = (props: Props) => {
-  const PRIMARY_COLOR = '#bd3a6a';
+  const {
+    color,
+    children,
+    type = 'button',
+    handleClick,
+    icon,
+    isDisabled,
+    isLoading,
+  } = props;
 
-  const { color, children, type, handleClick, icon, isDisabled, isLoading } = props;
+  const getVariant = () => {
+    switch (color) {
+      case 'primary':
+        return 'solid';
+      case 'secondary':
+        return 'outline';
+      case 'peach':
+        return 'peach';
+      default:
+        return 'solid';
+    }
+  };
 
   return (
     <ChakraButton
-      backgroundColor={color === 'primary' ? PRIMARY_COLOR : 'white'}
-      isDisabled={isDisabled}
+      variant={getVariant()}
       type={type}
-      textColor={color === 'primary' ? 'white' : PRIMARY_COLOR}
       onClick={handleClick}
-      size="lg"
       rightIcon={icon}
-      border={`1px solid ${color === 'primary' ? 'white' : PRIMARY_COLOR}`}
-      _hover={{
-        shadow: 'xl',
-        transform: 'translateY(-2px)',
-      }}
+      isDisabled={isDisabled}
       isLoading={isLoading}
     >
       {children}

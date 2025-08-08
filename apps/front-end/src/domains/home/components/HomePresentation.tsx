@@ -10,42 +10,15 @@ import {
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import HomeHeader from './HomeHeader';
-import WelcomeBack from './WelcomeBack';
-import { useThemeColors } from '@frontend/ui';
 import { useAppSelector } from '@frontend/store/hook';
 import Image from '@frontend/domains/shared/image/components/Image';
 
 const HomePresentation = () => {
-  const { user, isAuthenticated } = useAppSelector((state) => state.user);
-  const { bgGradient } = useThemeColors();
+  const { isAuthenticated } = useAppSelector((state) => state.user);
 
   return (
-    <Box bgGradient={bgGradient} position="relative" overflow="hidden">
-      <Box
-        position="absolute"
-        top="-50px"
-        right="-50px"
-        w="200px"
-        h="200px"
-        borderRadius="full"
-        bg="brand.400"
-        opacity="0.1"
-        transform="rotate(45deg)"
-      />
-      <Box
-        position="absolute"
-        bottom="-100px"
-        left="-100px"
-        w="300px"
-        h="300px"
-        borderRadius="full"
-        bg="meeple.400"
-        opacity="0.1"
-      />
-
-      <Container maxW="7xl" pt={20} pb={16}>
-        {isAuthenticated && user && <WelcomeBack user={user} />}
-
+    <Box bg="peach.200" position="relative">
+      <Container maxW="7xl" py={20}>
         <Grid
           templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
           gap={12}
@@ -56,7 +29,13 @@ const HomePresentation = () => {
           </GridItem>
 
           <GridItem>
-            <Box position="relative" overflow="hidden" w="100%" h="400px" borderRadius="xl">
+            <Box
+              position="relative"
+              overflow="hidden"
+              w="100%"
+              h="400px"
+              borderRadius="xl"
+            >
               <Image
                 fill
                 objectFit="cover"

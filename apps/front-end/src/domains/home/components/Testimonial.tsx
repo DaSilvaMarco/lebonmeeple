@@ -9,12 +9,11 @@ import {
 import React from 'react';
 import TestimonialCard from './TestimonialCard';
 import { testimonials } from '@frontend/domains/home/data/data';
-import { useThemeColors } from '@frontend/ui';
 
 const Testimonial = () => {
-  const { testimonialsBg } = useThemeColors();
+
   return (
-    <Box py={20} bgGradient={testimonialsBg}>
+    <Box py={20} bg="peach.200">
       <Container maxW="7xl">
         <VStack spacing={12}>
           <VStack spacing={4} textAlign="center">

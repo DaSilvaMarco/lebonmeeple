@@ -7,12 +7,13 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import Button from '@frontend/domains/shared/button/components/Button';
-import { useThemeColors } from '@frontend/ui';
 import Link from 'next/link';
 import React from 'react';
 
 const LoginDivider = () => {
-  const { borderColor, cardBg, textColor } = useThemeColors();
+  const borderColor = useColorModeValue('neutral.200', 'neutral.600');
+  const cardBg = useColorModeValue('white', 'neutral.800');
+  const textColor = useColorModeValue('neutral.600', 'white');
   const linkColor = useColorModeValue('brand.500', 'brand.300');
 
   return (

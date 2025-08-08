@@ -1,9 +1,9 @@
-import { VStack, Heading, Text } from '@chakra-ui/react';
-import { useThemeColors } from '@frontend/ui';
+import { VStack, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
 const WelcomeLoginFormCard = () => {
-  const { textColorPrimary, textColor } = useThemeColors();
+  const textColorPrimary = useColorModeValue('neutral.800', 'white');
+  const textColor = useColorModeValue('neutral.600', 'white');
   return (
     <VStack spacing={6} mb={8} textAlign="center">
       <VStack spacing={2}>

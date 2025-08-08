@@ -19,7 +19,6 @@ import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
 import { PostCreateFormData, createPostSchema } from '@/domains/post/schema';
 import { useAppSelector } from '@/store/hook';
 import { convertToBase64 } from '@/utils/convertToBase64';
-import { useThemeColors } from '@/ui/hooks';
 import Button from '@frontend/domains/shared/button/components/Button';
 import { getApiBaseUrl } from '@/utils/api-config';
 
@@ -28,7 +27,8 @@ const PostCreateForm = () => {
   const toast = useToast();
   const { token } = useAppSelector((state) => state.user);
 
-  const { textColorPrimary, cardBg } = useThemeColors();
+  const textColorPrimary = useColorModeValue('neutral.800', 'white');
+  const cardBg = useColorModeValue('white', 'neutral.800');
 
   const inputBg = useColorModeValue('gray.50', 'gray.700');
   const inputBorderColor = useColorModeValue('gray.300', 'gray.600');
@@ -49,7 +49,6 @@ const PostCreateForm = () => {
     },
   });
 
-  // Validation personnalisée pour le bouton
   const watchedValues = watch();
   const formIsValid = !!(
     watchedValues.title &&
