@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`Post Create Page App - Complete Coverage > Integration with Testing Environment > should support snapshot testing 1`] = `
-<div
-  data-testid="post-create-page"
->
-  Mocked PostCreatePage
-</div>
-`;
