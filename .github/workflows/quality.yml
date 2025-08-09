@@ -44,3 +44,24 @@ jobs:
         env:
           NEXT_PUBLIC_API_URL: http://localhost:3000
           CI_BUILD: true
+
+  test:
+    name: 🧪 Run Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [back-end, front-end]
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: 📚 Install
+        run: npm ci
+        working-directory: apps/${{ matrix.app }}
+      - name: 🧪 Test
+        run: npm test
+        working-directory: apps/${{ matrix.app }}
