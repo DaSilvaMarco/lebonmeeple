@@ -12,6 +12,21 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() {}
 };
 
+// Mock matchMedia pour Chakra UI
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // Deprecated
+    removeListener: vi.fn(), // Deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
 // Mock des modules Next.js
 vi.mock('next/router', () => ({
   useRouter: () => ({

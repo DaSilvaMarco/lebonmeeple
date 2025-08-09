@@ -68,9 +68,7 @@ function ResponsiveNav() {
         ) : (
           <>
             <ListItem>
-              <Link
-                href={''}
-              >
+              <Link href={''}>
                 <Flex direction="column" alignItems="center">
                   <AiOutlineAudit fontSize="20px" />
                   <Text fontWeight="bold" color="white">

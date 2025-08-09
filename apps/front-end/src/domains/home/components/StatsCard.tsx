@@ -12,7 +12,7 @@ const StatsCard = (props: Props) => {
   const textColor = useColorModeValue('neutral.600', 'white');
 
   return (
-    <VStack spacing={1}>
+    <VStack spacing={1} data-testid="stats-card">
       <Text fontSize="2xl" fontWeight="bold" color={color}>
         {value}
       </Text>

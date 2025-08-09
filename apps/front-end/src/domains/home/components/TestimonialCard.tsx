@@ -28,6 +28,7 @@ const TestimonialCard = (props: Props) => {
   return (
     <Box
       key={index}
+      data-testid={`testimonial-card-${index}`}
       p={8}
       bg="white"
       borderRadius="xl"
@@ -46,7 +47,12 @@ const TestimonialCard = (props: Props) => {
         left={6}
       />
       <VStack spacing={6} pt={4}>
-        <Text fontSize="lg" fontStyle="italic" textAlign="center">
+        <Text
+          fontSize="lg"
+          fontStyle="italic"
+          textAlign="center"
+          data-testid="testimonial-content"
+        >
           "{testimonial.content}"
         </Text>
         <Divider />
