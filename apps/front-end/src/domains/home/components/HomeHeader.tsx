@@ -24,7 +24,12 @@ const HomeHeader = (props: Props) => {
   const PRIMARY_COLOR = '#bd3a6a';
 
   return (
-    <VStack align="start" spacing={8}>
+    <VStack
+      align="start"
+      spacing={8}
+      data-testid="home-header"
+      data-authenticated={isAuthenticated}
+    >
       <VStack align="start" spacing={4}>
         <Text
           fontSize="sm"
