@@ -22,7 +22,7 @@
     "app:test": "npm run api:test && npm run front:test",
     "app:test:watch": "concurrently \"npm run api:test:watch\" \"npm run front:test:watch\"",
     "app:test:coverage": "npm run api:test:coverage && npm run front:test:coverage",
-    "prisma:migrate": "prisma migrate devœ --schema=./apps/back-end/prisma/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema=./apps/back-end/prisma/schema.prisma",
     "prisma:fixtures": "npx tsx apps/back-end/prisma/seed.ts",
     "prisma:generate": "prisma generate --schema=./apps/back-end/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./apps/back-end/prisma/schema.prisma",
