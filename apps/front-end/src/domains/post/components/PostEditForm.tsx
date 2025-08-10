@@ -165,6 +165,7 @@ const PostEditForm = ({ post, token }: Props) => {
             borderRadius="lg"
             fontSize="md"
             p={1}
+            data-testid="post-image-input"
           />
           <FormErrorMessage fontSize="sm" mt={2}>
             {errors.image?.message}

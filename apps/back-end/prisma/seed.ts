@@ -1,6 +1,7 @@
-import { PrismaClient, type Post } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
+import { Post } from '@frontend/domains/post/type';
 
 const prisma = new PrismaClient();
 
@@ -46,7 +47,7 @@ async function main() {
     users.push(user);
   }
 
-  const posts: Post[] = [];
+  const posts: Awaited<ReturnType<typeof prisma.post.create>>[] = [];
   for (let i = 0; i < 10; i++) {
     const user = faker.helpers.arrayElement(users);
 

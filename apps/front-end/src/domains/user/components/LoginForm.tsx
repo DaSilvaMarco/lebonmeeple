@@ -76,6 +76,7 @@ const LoginForm = () => {
             placeholder="votre.email@exemple.com"
             autoComplete="email"
             {...register('email')}
+            data-testid="login-email-input"
           />
           <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
@@ -95,6 +96,7 @@ const LoginForm = () => {
               placeholder="Votre mot de passe"
               autoComplete="current-password"
               {...register('password')}
+              data-testid="login-password-input"
             />
             <InputRightElement>
               <IconButton
@@ -122,6 +124,7 @@ const LoginForm = () => {
         </Box>
 
         <Button
+          dataTestId="login-submit-button"
           type="submit"
           color="primary"
           icon={<FaLock />}
