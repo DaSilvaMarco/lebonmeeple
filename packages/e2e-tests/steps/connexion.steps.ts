@@ -18,6 +18,8 @@ Given(
     await page.fill('input[name="password"]', password);
     await page.click('button[type="submit"]');
 
+    await page.waitForURL('http://localhost:3001/');
+
     await expect(page).toHaveURL('http://localhost:3001/');
   },
 );

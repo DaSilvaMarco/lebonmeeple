@@ -21,9 +21,11 @@ services:
       - '3000:3000'
     depends_on:
       - db
+    environment:
+      - NODE_ENV=development
+      - DOCKER_ENV=true
     volumes:
       - .:/app
-    command: 'bash -c "npm run prisma:migrate && npm run api:start:dev"'
 
   frontend:
     build:

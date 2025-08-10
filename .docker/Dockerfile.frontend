@@ -1,19 +1,7 @@
 FROM node:18-alpine
-
 WORKDIR /app
-
-# Copy package files
 COPY package*.json ./
-COPY yarn.lock ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the entire project (needed for monorepo structure)
-COPY . .
-
-# Expose the port Next.js runs on
+COPY apps/front-end ./apps/front-end
 EXPOSE 3000
-
-# Start the frontend development server
 CMD ["npm", "run", "front:dev"]
