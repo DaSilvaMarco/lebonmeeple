@@ -140,6 +140,7 @@ const PostCreateForm = () => {
             borderRadius="lg"
             fontSize="md"
             {...register('title')}
+            data-testid="post-title-input"
           />
           <FormErrorMessage fontSize="sm" mt={2}>
             {errors.title?.message}
@@ -175,6 +176,7 @@ const PostCreateForm = () => {
             borderRadius="lg"
             fontSize="md"
             p={1}
+            data-testid="post-image-input"
           />
           <FormErrorMessage fontSize="sm" mt={2}>
             {errors.image?.message}
@@ -210,6 +212,7 @@ const PostCreateForm = () => {
             fontSize="md"
             resize="vertical"
             {...register('body')}
+            data-testid="post-body-input"
           />
           <FormErrorMessage fontSize="sm" mt={2}>
             {errors.body?.message}
@@ -222,6 +225,7 @@ const PostCreateForm = () => {
           icon={<FaPlus />}
           isDisabled={!formIsValid}
           isLoading={isSubmitting}
+          data-testid='post-submit-button'
         >
           Créer l'article
         </Button>

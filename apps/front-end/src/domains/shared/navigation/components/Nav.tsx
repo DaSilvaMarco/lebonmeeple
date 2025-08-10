@@ -33,6 +33,7 @@ const Nav = () => {
           transform: 'translateY(-1px)',
         }}
         transition="all 0.2s"
+        data-testid="post-list-button"
       >
         Accueil
       </Button>
@@ -81,6 +82,7 @@ const Nav = () => {
             py={3}
             fontSize="md"
             fontWeight="500"
+            data-testid="view-all-posts-button"
           >
             Voir tous les articles
           </MenuItem>
@@ -96,6 +98,7 @@ const Nav = () => {
               py={3}
               fontSize="md"
               fontWeight="500"
+              data-testid="create-post-button"
             >
               <Icon as={EditIcon} w={4} h={4} mr={2} />
               Écrire un article

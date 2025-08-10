@@ -17,7 +17,7 @@ const WelcomeLoginFormCard = () => {
         >
           Bon retour !
         </Heading>
-        <Text color={textColor} fontSize="lg">
+        <Text color={textColor} fontSize="lg" data-testid="login-title-page">
           Connectez-vous à votre compte LeBonMeeple
         </Text>
       </VStack>

@@ -119,6 +119,7 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
           disabled={isSubmitting}
           size="sm"
           alignSelf="flex-end"
+          data-testid="submit-comment-button"
         >
           Publier le commentaire
         </Button>

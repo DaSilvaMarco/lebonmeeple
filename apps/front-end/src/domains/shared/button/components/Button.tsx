@@ -9,6 +9,7 @@ type Props = {
   icon?: ReactElement;
   isDisabled?: boolean;
   isLoading?: boolean;
+  dataTestId?: string;
 };
 
 const Button = (props: Props) => {
@@ -20,6 +21,7 @@ const Button = (props: Props) => {
     icon,
     isDisabled,
     isLoading,
+    dataTestId='',
   } = props;
 
   const getVariant = () => {
@@ -43,6 +45,7 @@ const Button = (props: Props) => {
       rightIcon={icon}
       isDisabled={isDisabled}
       isLoading={isLoading}
+      data-testid={dataTestId}
     >
       {children}
     </ChakraButton>

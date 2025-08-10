@@ -19,7 +19,7 @@ const PostsHeader = () => {
       pt={4}
       w="100%"
     >
-      <Heading size="lg" color={textColorBrand} fontWeight="bold">
+      <Heading size="lg" color={textColorBrand} fontWeight="bold" data-testid="posts-title-page">
         Articles
       </Heading>
       {isAuthenticated && (
