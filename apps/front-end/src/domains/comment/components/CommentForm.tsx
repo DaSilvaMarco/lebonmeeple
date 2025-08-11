@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import Modal from '@/domains/shared/modal/Modal';
+import Button from '@/domains/shared/button/components/Button';
+import { useDisclosure } from '@chakra-ui/react';
 import {
   Box,
-  Button,
   Textarea,
   VStack,
   Text,
   useToast,
   useColorModeValue,
+  Button as ChakraButton,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,20 +41,33 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
     resolver: zodResolver(createCommentSchema),
   });
 
-  const onSubmit = async (data: CreateCommentDto) => {
-    setIsSubmitting(true);
+  const {
+    isOpen: isModalOpen,
+    onOpen: openModal,
+    onClose: closeModal,
+  } = useDisclosure();
+  const [pendingData, setPendingData] = useState<CreateCommentDto | null>(null);
 
+  const onSubmit = (data: CreateCommentDto) => {
+    setPendingData(data);
+    openModal();
+  };
+
+  const handleConfirmComment = async () => {
+    if (!pendingData) return;
+    setIsSubmitting(true);
     if (!token) {
       toastError(
         toast,
         'Erreur',
         'Vous devez être connecté pour ajouter un commentaire.',
       );
+      setIsSubmitting(false);
+      closeModal();
       return;
     }
-
     try {
-      await createComment(postId, data, token);
+      await createComment(postId, pendingData, token);
       toastSuccess(toast, 'Succès', 'Commentaire ajouté avec succès !');
       reset();
       onCommentAdded();
@@ -63,6 +79,8 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
       );
     } finally {
       setIsSubmitting(false);
+      setPendingData(null);
+      closeModal();
     }
   };
 
@@ -84,47 +102,81 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
   }
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleSubmit(onSubmit)}
-      p={4}
-      bg={bg}
-      borderRadius="lg"
-      border="1px"
-      borderColor={borderColor}
-    >
-      <VStack spacing={4} align="stretch">
-        <Text fontWeight="semibold">Ajouter un commentaire</Text>
+    <>
+      <Box
+        as="form"
+        onSubmit={handleSubmit(onSubmit)}
+        p={4}
+        bg={bg}
+        borderRadius="lg"
+        border="1px"
+        borderColor={borderColor}
+      >
+        <VStack spacing={4} align="stretch">
+          <Text fontWeight="semibold">Ajouter un commentaire</Text>
 
-        <VStack spacing={2} align="stretch">
-          <Textarea
-            {...register('body')}
-            placeholder="Écrivez votre commentaire..."
-            minHeight="100px"
-            resize="vertical"
+          <VStack spacing={2} align="stretch">
+            <Textarea
+              {...register('body')}
+              placeholder="Écrivez votre commentaire..."
+              minHeight="100px"
+              resize="vertical"
+              disabled={isSubmitting}
+            />
+            {errors.body && (
+              <Text color="red.500" fontSize="sm">
+                {errors.body.message}
+              </Text>
+            )}
+          </VStack>
+
+          <ChakraButton
+            type="submit"
+            colorScheme="brand"
+            isLoading={isSubmitting}
             disabled={isSubmitting}
-          />
-          {errors.body && (
-            <Text color="red.500" fontSize="sm">
-              {errors.body.message}
-            </Text>
-          )}
+            data-testid="submit-comment-button"
+            size="sm"
+            alignSelf="flex-end"
+          >
+            Publier le commentaire
+          </ChakraButton>
         </VStack>
-
-        <Button
-          type="submit"
-          colorScheme="brand"
-          isLoading={isSubmitting}
-          loadingText="Envoi..."
-          disabled={isSubmitting}
-          size="sm"
-          alignSelf="flex-end"
-          data-testid="submit-comment-button"
-        >
-          Publier le commentaire
-        </Button>
-      </VStack>
-    </Box>
+      </Box>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setPendingData(null);
+          closeModal();
+        }}
+        title="Confirmer la publication"
+        footer={
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmComment}
+              isLoading={isSubmitting}
+              dataTestId="confirm-create-button"
+            >
+              Confirmer
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={() => {
+                setPendingData(null);
+                closeModal();
+              }}
+              isDisabled={isSubmitting}
+              dataTestId="cancel-create-button"
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir publier ce commentaire ?
+      </Modal>
+    </>
   );
 };
 

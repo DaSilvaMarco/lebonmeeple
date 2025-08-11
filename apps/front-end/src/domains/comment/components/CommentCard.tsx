@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Modal from '@/domains/shared/modal/Modal';
+import Button from '@/domains/shared/button/components/Button';
+import { useDisclosure } from '@chakra-ui/react';
 import {
   Box,
   HStack,
@@ -28,6 +31,11 @@ const CommentCard = ({
   onCommentUpdated,
 }: Props) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const {
+    isOpen: isModalOpen,
+    onOpen: openModal,
+    onClose: closeModal,
+  } = useDisclosure();
   const [isEditing, setIsEditing] = useState(false);
   const cardBg = useColorModeValue('gray.50', 'gray.700');
   const textColorPrimary = useColorModeValue('gray.800', 'white');
@@ -45,21 +53,24 @@ const CommentCard = ({
     });
   };
 
-  const handleDelete = async (e: React.MouseEvent) => {
+  const handleDeleteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    openModal();
+  };
 
+  const handleConfirmDelete = async () => {
     setIsDeleting(true);
-
     if (!token) {
       toastError(
         toast,
         'Erreur',
         'Vous devez être connecté pour supprimer un commentaire.',
       );
+      setIsDeleting(false);
+      closeModal();
       return;
     }
-
     try {
       await deleteComment(comment.id, token);
       toastSuccess(
@@ -68,12 +79,14 @@ const CommentCard = ({
         'Le commentaire a été supprimé avec succès.',
       );
       onCommentDeleted();
+      closeModal();
     } catch {
       toastError(
         toast,
         'Erreur',
         'Impossible de supprimer le commentaire. Veuillez réessayer.',
       );
+      closeModal();
     } finally {
       setIsDeleting(false);
     }
@@ -97,78 +110,108 @@ const CommentCard = ({
   };
 
   return (
-    <Box
-      bg={cardBg}
-      p={4}
-      borderRadius="lg"
-      border="1px"
-      borderColor={useColorModeValue('gray.200', 'gray.600')}
-    >
-      <HStack align="start" spacing={3}>
-        <Avatar
-          size="sm"
-          name={comment.user.username}
-          src={comment.user.avatar || '/defaultAvatar.jpg'}
-        />
-        <VStack align="start" spacing={1} flex={1}>
-          <HStack spacing={2} justify="space-between" w="full">
-            <HStack spacing={2}>
+    <>
+      <Box
+        bg={cardBg}
+        p={4}
+        borderRadius="lg"
+        border="1px"
+        borderColor={useColorModeValue('gray.200', 'gray.600')}
+      >
+        <HStack align="start" spacing={3}>
+          <Avatar
+            size="sm"
+            name={comment.user.username}
+            src={comment.user.avatar || '/defaultAvatar.jpg'}
+          />
+          <VStack align="start" spacing={1} flex={1}>
+            <HStack spacing={2} justify="space-between" w="full">
+              <HStack spacing={2}>
+                <Text
+                  fontSize="sm"
+                  fontWeight="semibold"
+                  color={textColorPrimary}
+                >
+                  {comment.user.username}
+                </Text>
+                <Text fontSize="xs" color={textColorSecondary}>
+                  {formatDate(comment.updatedAt)}
+                </Text>
+              </HStack>
+
+              {user && user.id === comment.userId && (
+                <HStack spacing={1}>
+                  <IconButton
+                    aria-label="Modifier le commentaire"
+                    icon={<EditIcon />}
+                    size="xs"
+                    variant="ghost"
+                    colorScheme="blue"
+                    onClick={handleEdit}
+                    disabled={isEditing}
+                  />
+                  <IconButton
+                    aria-label="Supprimer le commentaire"
+                    icon={<DeleteIcon />}
+                    size="xs"
+                    variant="ghost"
+                    colorScheme="red"
+                    onClick={handleDeleteClick}
+                    isLoading={isDeleting}
+                    disabled={isEditing}
+                  />
+                </HStack>
+              )}
+            </HStack>
+            {isEditing ? (
+              <CommentEditForm
+                commentId={comment.id}
+                initialBody={comment.body}
+                onCommentUpdated={handleCommentUpdated}
+                onCancel={handleCancelEdit}
+              />
+            ) : (
               <Text
                 fontSize="sm"
-                fontWeight="semibold"
                 color={textColorPrimary}
+                lineHeight="tall"
+                whiteSpace="pre-wrap"
               >
-                {comment.user.username}
+                {comment.body}
               </Text>
-              <Text fontSize="xs" color={textColorSecondary}>
-                {formatDate(comment.updatedAt)}
-              </Text>
-            </HStack>
-
-            {user && user.id === comment.userId && (
-              <HStack spacing={1}>
-                <IconButton
-                  aria-label="Modifier le commentaire"
-                  icon={<EditIcon />}
-                  size="xs"
-                  variant="ghost"
-                  colorScheme="blue"
-                  onClick={handleEdit}
-                  disabled={isEditing}
-                />
-                <IconButton
-                  aria-label="Supprimer le commentaire"
-                  icon={<DeleteIcon />}
-                  size="xs"
-                  variant="ghost"
-                  colorScheme="red"
-                  onClick={handleDelete}
-                  isLoading={isDeleting}
-                  disabled={isEditing}
-                />
-              </HStack>
             )}
-          </HStack>
-          {isEditing ? (
-            <CommentEditForm
-              commentId={comment.id}
-              initialBody={comment.body}
-              onCommentUpdated={handleCommentUpdated}
-              onCancel={handleCancelEdit}
-            />
-          ) : (
-            <Text
-              fontSize="sm"
-              color={textColorPrimary}
-              lineHeight="tall"
-              whiteSpace="pre-wrap"
+          </VStack>
+        </HStack>
+      </Box>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Confirmer la suppression"
+        footer={
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmDelete}
+              isLoading={isDeleting}
+              dataTestId="confirm-delete-button"
             >
-              {comment.body}
-            </Text>
-          )}
-        </VStack>
-      </HStack>
-    </Box>
+              Confirmer
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={closeModal}
+              isDisabled={isDeleting}
+              dataTestId="cancel-delete-button"
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir supprimer ce commentaire ? Cette action est
+        irréversible.
+      </Modal>
+    </>
   );
 };
 

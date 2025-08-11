@@ -20,9 +20,18 @@ import { PostCreateFormData, createPostSchema } from '@/domains/post/schema';
 import { useAppSelector } from '@/store/hook';
 import { convertToBase64 } from '@/utils/convertToBase64';
 import Button from '@frontend/domains/shared/button/components/Button';
+import Modal from '@frontend/domains/shared/modal/Modal';
+import { useDisclosure } from '@chakra-ui/react';
 import { getApiBaseUrl } from '@/utils/api-config';
 
 const PostCreateForm = () => {
+  const {
+    isOpen: isModalOpen,
+    onOpen: openModal,
+    onClose: closeModal,
+  } = useDisclosure();
+  const [pendingData, setPendingData] =
+    React.useState<PostCreateFormData | null>(null);
   const router = useRouter();
   const toast = useToast();
   const { token } = useAppSelector((state) => state.user);
@@ -57,7 +66,13 @@ const PostCreateForm = () => {
     watchedValues.body.trim().length > 0
   );
 
-  const onSubmit = async (data: PostCreateFormData) => {
+  const onSubmit = (data: PostCreateFormData) => {
+    setPendingData(data);
+    openModal();
+  };
+
+  const handleConfirmCreate = async () => {
+    if (!pendingData) return;
     try {
       const response = await fetch(`${getApiBaseUrl()}/post`, {
         method: 'POST',
@@ -66,9 +81,9 @@ const PostCreateForm = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          title: data.title,
-          body: data.body,
-          image: data.image || null,
+          title: pendingData.title,
+          body: pendingData.body,
+          image: pendingData.image || null,
         }),
       });
 
@@ -89,6 +104,9 @@ const PostCreateForm = () => {
       const errorMessage =
         error instanceof Error ? error.message : 'Une erreur est survenue';
       toastError(toast, 'Erreur', errorMessage);
+    } finally {
+      setPendingData(null);
+      closeModal();
     }
   };
 
@@ -110,127 +128,161 @@ const PostCreateForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <VStack spacing={6}>
-        <FormControl isInvalid={!!errors.title}>
-          <FormLabel
-            htmlFor="title"
-            color={textColorPrimary}
-            fontWeight="semibold"
-            fontSize="sm"
-          >
-            Titre de l'article
-          </FormLabel>
-          <Input
-            id="title"
-            type="text"
-            placeholder="Donnez un titre accrocheur à votre article..."
-            bg={inputBg}
-            border="2px"
-            borderColor={errors.title ? 'red.300' : inputBorderColor}
-            _hover={{
-              borderColor: errors.title ? 'red.400' : 'brand.300',
-            }}
-            _focus={{
-              borderColor: errors.title ? 'red.500' : 'brand.500',
-              bg: cardBg,
-              shadow: 'lg',
-            }}
-            size="lg"
-            borderRadius="lg"
-            fontSize="md"
-            {...register('title')}
-            data-testid="post-title-input"
-          />
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.title?.message}
-          </FormErrorMessage>
-        </FormControl>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <VStack spacing={6}>
+          <FormControl isInvalid={!!errors.title}>
+            <FormLabel
+              htmlFor="title"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Titre de l'article
+            </FormLabel>
+            <Input
+              id="title"
+              type="text"
+              placeholder="Donnez un titre accrocheur à votre article..."
+              bg={inputBg}
+              border="2px"
+              borderColor={errors.title ? 'red.300' : inputBorderColor}
+              _hover={{
+                borderColor: errors.title ? 'red.400' : 'brand.300',
+              }}
+              _focus={{
+                borderColor: errors.title ? 'red.500' : 'brand.500',
+                bg: cardBg,
+                shadow: 'lg',
+              }}
+              size="lg"
+              borderRadius="lg"
+              fontSize="md"
+              {...register('title')}
+              data-testid="post-title-input"
+            />
+            <FormErrorMessage fontSize="sm" mt={2}>
+              {errors.title?.message}
+            </FormErrorMessage>
+          </FormControl>
 
-        <FormControl isInvalid={!!errors.image}>
-          <FormLabel
-            htmlFor="image"
-            color={textColorPrimary}
-            fontWeight="semibold"
-            fontSize="sm"
-          >
-            Image (optionnelle)
-          </FormLabel>
-          <Input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleFileUpload}
-            bg={inputBg}
-            border="2px"
-            borderColor={errors.image ? 'red.300' : inputBorderColor}
-            _hover={{
-              borderColor: errors.image ? 'red.400' : 'brand.300',
-            }}
-            _focus={{
-              borderColor: errors.image ? 'red.500' : 'brand.500',
-              bg: cardBg,
-              shadow: 'lg',
-            }}
-            size="lg"
-            borderRadius="lg"
-            fontSize="md"
-            p={1}
-            data-testid="post-image-input"
-          />
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.image?.message}
-          </FormErrorMessage>
-        </FormControl>
+          <FormControl isInvalid={!!errors.image}>
+            <FormLabel
+              htmlFor="image"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Image (optionnelle)
+            </FormLabel>
+            <Input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              bg={inputBg}
+              border="2px"
+              borderColor={errors.image ? 'red.300' : inputBorderColor}
+              _hover={{
+                borderColor: errors.image ? 'red.400' : 'brand.300',
+              }}
+              _focus={{
+                borderColor: errors.image ? 'red.500' : 'brand.500',
+                bg: cardBg,
+                shadow: 'lg',
+              }}
+              size="lg"
+              borderRadius="lg"
+              fontSize="md"
+              p={1}
+              data-testid="post-image-input"
+            />
+            <FormErrorMessage fontSize="sm" mt={2}>
+              {errors.image?.message}
+            </FormErrorMessage>
+          </FormControl>
 
-        <FormControl isInvalid={!!errors.body}>
-          <FormLabel
-            htmlFor="body"
-            color={textColorPrimary}
-            fontWeight="semibold"
-            fontSize="sm"
-          >
-            Contenu de l'article
-          </FormLabel>
-          <Textarea
-            id="body"
-            rows={8}
-            placeholder="Écrivez le contenu de votre article..."
-            bg={inputBg}
-            border="2px"
-            borderColor={errors.body ? 'red.300' : inputBorderColor}
-            _hover={{
-              borderColor: errors.body ? 'red.400' : 'brand.300',
-            }}
-            _focus={{
-              borderColor: errors.body ? 'red.500' : 'brand.500',
-              bg: cardBg,
-              shadow: 'lg',
-            }}
-            size="lg"
-            borderRadius="lg"
-            fontSize="md"
-            resize="vertical"
-            {...register('body')}
-            data-testid="post-body-input"
-          />
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.body?.message}
-          </FormErrorMessage>
-        </FormControl>
+          <FormControl isInvalid={!!errors.body}>
+            <FormLabel
+              htmlFor="body"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Contenu de l'article
+            </FormLabel>
+            <Textarea
+              id="body"
+              rows={8}
+              placeholder="Écrivez le contenu de votre article..."
+              bg={inputBg}
+              border="2px"
+              borderColor={errors.body ? 'red.300' : inputBorderColor}
+              _hover={{
+                borderColor: errors.body ? 'red.400' : 'brand.300',
+              }}
+              _focus={{
+                borderColor: errors.body ? 'red.500' : 'brand.500',
+                bg: cardBg,
+                shadow: 'lg',
+              }}
+              size="lg"
+              borderRadius="lg"
+              fontSize="md"
+              resize="vertical"
+              {...register('body')}
+              data-testid="post-body-input"
+            />
+            <FormErrorMessage fontSize="sm" mt={2}>
+              {errors.body?.message}
+            </FormErrorMessage>
+          </FormControl>
 
-        <Button
-          type="submit"
-          color="primary"
-          icon={<FaPlus />}
-          isDisabled={!formIsValid}
-          isLoading={isSubmitting}
-          data-testid='post-submit-button'
-        >
-          Créer l'article
-        </Button>
-      </VStack>
-    </form>
+          <Button
+            type="submit"
+            color="primary"
+            icon={<FaPlus />}
+            isDisabled={!formIsValid}
+            isLoading={isSubmitting}
+            data-testid="post-submit-button"
+          >
+            Créer l'article
+          </Button>
+        </VStack>
+      </form>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setPendingData(null);
+          closeModal();
+        }}
+        title="Confirmer la création"
+        footer={
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmCreate}
+              dataTestId="confirm-create-button"
+            >
+              Confirmer
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={() => {
+                setPendingData(null);
+                closeModal();
+              }}
+              dataTestId="cancel-create-button"
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir créer cet article ?
+      </Modal>
+    </>
   );
 };
 

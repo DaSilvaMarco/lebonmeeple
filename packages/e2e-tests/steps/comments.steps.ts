@@ -14,6 +14,10 @@ When('je créé un commentaire', async ({ page }) => {
   await page.fill('textarea[name="body"]', 'Mon nouveau commentaire');
 
   await page.getByTestId('submit-comment-button').click();
+
+  const modal = page.getByTestId('modal');
+  await expect(modal).toBeVisible();
+  await modal.getByTestId('confirm-create-button').click();
 });
 
 Then('je dois voir le commentaire créé', async ({ page }) => {
@@ -27,6 +31,10 @@ When('je modifie le commentaire', async ({ page }) => {
   const textarea = page.locator('textarea[name="body"]').nth(1);
   await textarea.fill('Mon nouveau commentaire modifié');
   await page.getByText('Modifier').click();
+
+  const modal = page.getByTestId('modal');
+  await expect(modal).toBeVisible();
+  await modal.getByTestId('confirm-edit-button').click();
 });
 
 Then('je dois voir le commentaire modifié', async ({ page }) => {
@@ -36,6 +44,10 @@ Then('je dois voir le commentaire modifié', async ({ page }) => {
 
 When('je supprime le commentaire', async ({ page }) => {
   await page.getByLabel('Supprimer le commentaire').click();
+
+  const modal = page.getByTestId('modal');
+  await expect(modal).toBeVisible();
+  await modal.getByTestId('confirm-delete-button').click();
 });
 
 Then('je ne dois plus voir le commentaire', async ({ page }) => {
