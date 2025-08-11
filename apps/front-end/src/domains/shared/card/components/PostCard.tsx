@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Modal from '@/domains/shared/modal/Modal';
+import { useDisclosure } from '@chakra-ui/react';
 import {
   Card,
   CardBody,
@@ -22,6 +24,7 @@ import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
 import { deletePost as deletePostApi } from '@frontend/domains/post/api/delete-post';
 import { deletePost as deletePostAction } from '@frontend/domains/post/slice';
 import { toastSuccess, toastError } from '@frontend/domains/shared/toat/toast';
+import Button from '../../button/components/Button';
 
 type Props = {
   post: Post;
@@ -39,38 +42,58 @@ const PostCard = (props: Props) => {
   const router = useRouter();
   const toast = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
+  const {
+    isOpen: isDeleteModalOpen,
+    onOpen: openDeleteModal,
+    onClose: closeDeleteModal,
+  } = useDisclosure();
+  const {
+    isOpen: isEditModalOpen,
+    onOpen: openEditModal,
+    onClose: closeEditModal,
+  } = useDisclosure();
 
-  const handleDelete = async (e: React.MouseEvent) => {
+  const handleDeleteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    openDeleteModal();
+  };
 
+  const handleConfirmDelete = async () => {
     setIsDeleting(true);
-
     if (!token) {
       toastError(
         toast,
         'Erreur',
         'Vous devez être connecté pour supprimer un post.',
       );
+      setIsDeleting(false);
+      closeDeleteModal();
       return;
     }
-
     try {
       await deletePostApi(id, token);
       dispatch(deletePostAction(id));
       toastSuccess(toast, 'Succès', 'Le post a été supprimé avec succès.');
+      closeDeleteModal();
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Une erreur est survenue';
       toastError(toast, 'Erreur', errorMessage);
+      closeDeleteModal();
     } finally {
       setIsDeleting(false);
     }
   };
 
-  const handleEdit = (e: React.MouseEvent) => {
+  const handleEditClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    openEditModal();
+  };
+
+  const handleConfirmEdit = () => {
+    closeEditModal();
     router.push(`/posts/${id}/edit`);
   };
 
@@ -134,7 +157,7 @@ const PostCard = (props: Props) => {
                   size="sm"
                   colorScheme="blue"
                   variant="solid"
-                  onClick={handleEdit}
+                  onClick={handleEditClick}
                   borderRadius="full"
                   bg="rgba(0, 0, 255, 0.8)"
                   color="white"
@@ -149,7 +172,7 @@ const PostCard = (props: Props) => {
                   size="sm"
                   colorScheme="red"
                   variant="solid"
-                  onClick={handleDelete}
+                  onClick={handleDeleteClick}
                   isLoading={isDeleting}
                   borderRadius="full"
                   bg="rgba(255, 0, 0, 0.8)"
@@ -221,6 +244,56 @@ const PostCard = (props: Props) => {
           </VStack>
         </CardBody>
       </Card>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        title="Confirmer la suppression"
+        footer={
+            <>
+              <Button
+                color="primary"
+                handleClick={handleConfirmDelete}
+                icon={<DeleteIcon />}
+                isLoading={isDeleting}
+              >
+                Supprimer
+              </Button>
+              <Button
+                color="secondary"
+                handleClick={closeDeleteModal}
+              >
+                Annuler
+              </Button>
+            </>
+        }
+      >
+        Êtes-vous sûr de vouloir supprimer ce post ?
+      </Modal>
+
+      <Modal
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        title="Confirmer la modification"
+        footer={
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmEdit}
+              icon={<EditIcon />}
+            >
+              Modifier !
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={closeEditModal}
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir modifier ce post ?
+      </Modal>
     </Link>
   );
 };

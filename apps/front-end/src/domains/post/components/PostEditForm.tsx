@@ -22,6 +22,8 @@ import { updatePost } from '@/domains/post/api/update-post';
 import { updatePost as updatePostAction } from '@/domains/post/slice';
 import { useAppDispatch } from '@frontend/store/hook';
 import Button from '@frontend/domains/shared/button/components/Button';
+import Modal from '@/domains/shared/modal/Modal';
+import { useDisclosure } from '@chakra-ui/react';
 import { Post } from '@frontend/domains/post/type';
 
 type Props = {
@@ -64,9 +66,23 @@ const PostEditForm = ({ post, token }: Props) => {
     watchedValues.body.trim().length > 0
   );
 
-  const onSubmit = async (data: PostUpdateFormData) => {
+  const {
+    isOpen: isModalOpen,
+    onOpen: openModal,
+    onClose: closeModal,
+  } = useDisclosure();
+  const [pendingData, setPendingData] =
+    React.useState<PostUpdateFormData | null>(null);
+
+  const onSubmit = (data: PostUpdateFormData) => {
+    setPendingData(data);
+    openModal();
+  };
+
+  const handleConfirmEdit = async () => {
+    if (!pendingData) return;
     try {
-      const updatedPost = await updatePost(post.id, data, token);
+      const updatedPost = await updatePost(post.id, pendingData, token);
       dispatch(updatePostAction(updatedPost));
       toastSuccess(
         toast,
@@ -79,6 +95,9 @@ const PostEditForm = ({ post, token }: Props) => {
       const errorMessage =
         error instanceof Error ? error.message : 'Une erreur est survenue';
       toastError(toast, 'Erreur', errorMessage);
+    } finally {
+      setPendingData(null);
+      closeModal();
     }
   };
 
@@ -100,124 +119,152 @@ const PostEditForm = ({ post, token }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <VStack spacing={6}>
-        <FormControl isInvalid={!!errors.title}>
-          <FormLabel
-            htmlFor="title"
-            color={textColorPrimary}
-            fontWeight="semibold"
-            fontSize="sm"
-          >
-            Titre de l'article
-          </FormLabel>
-          <Input
-            id="title"
-            type="text"
-            placeholder="Donnez un titre accrocheur à votre article..."
-            bg={inputBg}
-            border="2px"
-            borderColor={errors.title ? 'red.300' : inputBorderColor}
-            _hover={{
-              borderColor: errors.title ? 'red.400' : 'brand.300',
-            }}
-            _focus={{
-              borderColor: errors.title ? 'red.500' : 'brand.500',
-              bg: cardBg,
-              shadow: 'lg',
-            }}
-            size="lg"
-            borderRadius="lg"
-            fontSize="md"
-            {...register('title')}
-          />
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.title?.message}
-          </FormErrorMessage>
-        </FormControl>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <VStack spacing={6}>
+          <FormControl isInvalid={!!errors.title}>
+            <FormLabel
+              htmlFor="title"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Titre de l'article
+            </FormLabel>
+            <Input
+              id="title"
+              type="text"
+              placeholder="Donnez un titre accrocheur à votre article..."
+              bg={inputBg}
+              border="2px"
+              borderColor={errors.title ? 'red.300' : inputBorderColor}
+              _hover={{
+                borderColor: errors.title ? 'red.400' : 'brand.300',
+              }}
+              _focus={{
+                borderColor: errors.title ? 'red.500' : 'brand.500',
+                bg: cardBg,
+                shadow: 'lg',
+              }}
+              size="lg"
+              borderRadius="lg"
+              fontSize="md"
+              {...register('title')}
+            />
+            <FormErrorMessage fontSize="sm" mt={2}>
+              {errors.title?.message}
+            </FormErrorMessage>
+          </FormControl>
 
-        <FormControl isInvalid={!!errors.image}>
-          <FormLabel
-            htmlFor="image"
-            color={textColorPrimary}
-            fontWeight="semibold"
-            fontSize="sm"
-          >
-            Image (optionnelle)
-          </FormLabel>
-          <Input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleFileUpload}
-            bg={inputBg}
-            border="2px"
-            borderColor={errors.image ? 'red.300' : inputBorderColor}
-            _hover={{
-              borderColor: errors.image ? 'red.400' : 'brand.300',
-            }}
-            _focus={{
-              borderColor: errors.image ? 'red.500' : 'brand.500',
-              bg: cardBg,
-              shadow: 'lg',
-            }}
-            size="lg"
-            borderRadius="lg"
-            fontSize="md"
-            p={1}
-            data-testid="post-image-input"
-          />
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.image?.message}
-          </FormErrorMessage>
-        </FormControl>
+          <FormControl isInvalid={!!errors.image}>
+            <FormLabel
+              htmlFor="image"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Image (optionnelle)
+            </FormLabel>
+            <Input
+              id="image"
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              bg={inputBg}
+              border="2px"
+              borderColor={errors.image ? 'red.300' : inputBorderColor}
+              _hover={{
+                borderColor: errors.image ? 'red.400' : 'brand.300',
+              }}
+              _focus={{
+                borderColor: errors.image ? 'red.500' : 'brand.500',
+                bg: cardBg,
+                shadow: 'lg',
+              }}
+              size="lg"
+              borderRadius="lg"
+              fontSize="md"
+              p={1}
+              data-testid="post-image-input"
+            />
+            <FormErrorMessage fontSize="sm" mt={2}>
+              {errors.image?.message}
+            </FormErrorMessage>
+          </FormControl>
 
-        <FormControl isInvalid={!!errors.body}>
-          <FormLabel
-            htmlFor="body"
-            color={textColorPrimary}
-            fontWeight="semibold"
-            fontSize="sm"
-          >
-            Contenu de l'article
-          </FormLabel>
-          <Textarea
-            id="body"
-            rows={8}
-            placeholder="Écrivez le contenu de votre article..."
-            bg={inputBg}
-            border="2px"
-            borderColor={errors.body ? 'red.300' : inputBorderColor}
-            _hover={{
-              borderColor: errors.body ? 'red.400' : 'brand.300',
-            }}
-            _focus={{
-              borderColor: errors.body ? 'red.500' : 'brand.500',
-              bg: cardBg,
-              shadow: 'lg',
-            }}
-            size="lg"
-            borderRadius="lg"
-            fontSize="md"
-            resize="vertical"
-            {...register('body')}
-          />
-          <FormErrorMessage fontSize="sm" mt={2}>
-            {errors.body?.message}
-          </FormErrorMessage>
-        </FormControl>
+          <FormControl isInvalid={!!errors.body}>
+            <FormLabel
+              htmlFor="body"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Contenu de l'article
+            </FormLabel>
+            <Textarea
+              id="body"
+              rows={8}
+              placeholder="Écrivez le contenu de votre article..."
+              bg={inputBg}
+              border="2px"
+              borderColor={errors.body ? 'red.300' : inputBorderColor}
+              _hover={{
+                borderColor: errors.body ? 'red.400' : 'brand.300',
+              }}
+              _focus={{
+                borderColor: errors.body ? 'red.500' : 'brand.500',
+                bg: cardBg,
+                shadow: 'lg',
+              }}
+              size="lg"
+              borderRadius="lg"
+              fontSize="md"
+              resize="vertical"
+              {...register('body')}
+            />
+            <FormErrorMessage fontSize="sm" mt={2}>
+              {errors.body?.message}
+            </FormErrorMessage>
+          </FormControl>
 
-        <Button
-          type="submit"
-          color="primary"
-          icon={<FaSave />}
-          isDisabled={!formIsValid}
-          isLoading={isSubmitting}
-        >
-          Sauvegarder les modifications
-        </Button>
-      </VStack>
-    </form>
+          <Button
+            type="submit"
+            color="primary"
+            icon={<FaSave />}
+            isDisabled={!formIsValid}
+            isLoading={isSubmitting}
+          >
+            Sauvegarder les modifications
+          </Button>
+        </VStack>
+      </form>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setPendingData(null);
+          closeModal();
+        }}
+        title="Confirmer la modification"
+        footer={
+          <>
+            <Button color="primary" handleClick={handleConfirmEdit}>
+              Confirmer
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={() => {
+                setPendingData(null);
+                closeModal();
+              }}
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir sauvegarder les modifications ?
+      </Modal>
+    </>
   );
 };
 

@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  Textarea,
-  VStack,
-  HStack,
-  Text,
-  useToast,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import Modal from '@/domains/shared/modal/Modal';
+import Button from '@/domains/shared/button/components/Button';
+import { useDisclosure } from '@chakra-ui/react';
+import { Box, Textarea, VStack, HStack, Text, useToast, useColorModeValue } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createCommentSchema } from '../schema';
@@ -33,10 +27,8 @@ const CommentEditForm = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { token } = useAppSelector((state) => state.user);
   const toast = useToast();
-
   const borderColor = useColorModeValue('gray.200', 'gray.600');
   const bg = useColorModeValue('white', 'gray.800');
-
   const {
     register,
     handleSubmit,
@@ -47,80 +39,129 @@ const CommentEditForm = ({
       body: initialBody,
     },
   });
+  const {
+    isOpen: isModalOpen,
+    onOpen: openModal,
+    onClose: closeModal,
+  } = useDisclosure();
+  const [pendingData, setPendingData] = useState<UpdateCommentDto | null>(null);
 
-  const onSubmit = async (data: UpdateCommentDto) => {
+  const onSubmit = (data: UpdateCommentDto) => {
+    setPendingData(data);
+    openModal();
+  };
+
+  const handleConfirmEdit = async () => {
+    if (!pendingData) return;
     setIsSubmitting(true);
-
     if (!token) {
       toastError(
         toast,
         'Erreur',
         'Vous devez être connecté pour modifier un commentaire.',
       );
+      setIsSubmitting(false);
+      closeModal();
       return;
     }
-
     try {
-      await updateComment(commentId, data, token);
+      await updateComment(commentId, pendingData, token);
       toastSuccess(toast, 'Succès', 'Commentaire modifié avec succès !');
       onCommentUpdated();
+      closeModal();
     } catch {
       toastError(
         toast,
         'Erreur',
         'Impossible de modifier le commentaire. Veuillez réessayer.',
       );
+      closeModal();
     } finally {
       setIsSubmitting(false);
+      setPendingData(null);
     }
   };
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleSubmit(onSubmit)}
-      p={3}
-      bg={bg}
-      borderRadius="lg"
-      border="1px"
-      borderColor={borderColor}
-    >
-      <VStack spacing={3} align="stretch">
-        <Textarea
-          {...register('body')}
-          placeholder="Écrivez votre commentaire..."
-          minHeight="80px"
-          resize="vertical"
-          disabled={isSubmitting}
-          fontSize="sm"
-        />
-        {errors.body && (
-          <Text color="red.500" fontSize="sm">
-            {errors.body.message}
-          </Text>
-        )}
-
-        <HStack spacing={2} justify="flex-end">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onCancel}
+    <>
+      <Box
+        as="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(onSubmit)(e);
+        }}
+        p={3}
+        bg={bg}
+        borderRadius="lg"
+        border="1px"
+        borderColor={borderColor}
+      >
+        <VStack spacing={3} align="stretch">
+          <Textarea
+            {...register('body')}
+            placeholder="Écrivez votre commentaire..."
+            minHeight="80px"
+            resize="vertical"
             disabled={isSubmitting}
-          >
-            Annuler
-          </Button>
-          <Button
-            type="submit"
-            colorScheme="blue"
-            size="sm"
-            isLoading={isSubmitting}
-            loadingText="Modification..."
-          >
-            Modifier
-          </Button>
-        </HStack>
-      </VStack>
-    </Box>
+            fontSize="sm"
+          />
+          {errors.body && (
+            <Text color="red.500" fontSize="sm">
+              {errors.body.message}
+            </Text>
+          )}
+
+          <HStack spacing={2} justify="flex-end">
+            <Button
+              color="secondary"
+              handleClick={onCancel}
+              isDisabled={isSubmitting}
+            >
+              Annuler
+            </Button>
+            <Button
+              type="button"
+              color="primary"
+              handleClick={() => handleSubmit(onSubmit)()}
+              isLoading={isSubmitting}
+            >
+              Modifier
+            </Button>
+          </HStack>
+        </VStack>
+      </Box>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setPendingData(null);
+          closeModal();
+        }}
+        title="Confirmer la modification"
+        footer={
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmEdit}
+              isLoading={isSubmitting}
+            >
+              Confirmer
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={() => {
+                setPendingData(null);
+                closeModal();
+              }}
+              isDisabled={isSubmitting}
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir modifier ce commentaire ?
+      </Modal>
+    </>
   );
 };
 

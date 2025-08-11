@@ -15,6 +15,7 @@ L'architecture du projet repose sur un monorepo avec une configuration mutuelle.
 
 - **Front-end** :
   - Application Next.js avec typescript dans `apps/front-end/`.
+  - Redux toolkit pour la persistance des données dans un store global à l'application.
   - Les composants graphiques sont gérés par la librairie de composants ChakraUI et un custom thème.
 
 - **Back-end** :
