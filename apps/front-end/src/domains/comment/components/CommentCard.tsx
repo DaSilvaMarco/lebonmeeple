@@ -193,6 +193,7 @@ const CommentCard = ({
               color="primary"
               handleClick={handleConfirmDelete}
               isLoading={isDeleting}
+              dataTestId="confirm-delete-button"
             >
               Confirmer
             </Button>
@@ -200,6 +201,7 @@ const CommentCard = ({
               color="secondary"
               handleClick={closeModal}
               isDisabled={isDeleting}
+              dataTestId="cancel-delete-button"
             >
               Annuler
             </Button>

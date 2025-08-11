@@ -26,6 +26,10 @@ When('je créé un article', async ({ page }) => {
   await fileChooser.setFiles(imagePath);
 
   await page.click('button[type="submit"]');
+
+  const modal = page.getByTestId('modal');
+  await expect(modal).toBeVisible();
+  await modal.getByTestId('confirm-create-button').click();
 });
 
 Then("je dois voir l'article créé", async ({ page }) => {
@@ -39,6 +43,10 @@ Then("je dois voir l'article créé", async ({ page }) => {
 
 When("je modifie l'article", async ({ page }) => {
   await page.getByLabel('Modifier le post').click();
+
+  const modal = page.getByTestId('modal');
+  await expect(modal).toBeVisible();
+  await modal.getByTestId('confirm-edit-button').click();
 
   await page.fill('input[name="title"]', 'Mon nouvel article modifié');
   await page.fill('textarea[name="body"]', 'Mon nouveau texte modifié');
@@ -54,6 +62,9 @@ When("je modifie l'article", async ({ page }) => {
   await fileChooser.setFiles(imagePath);
 
   await page.click('button[type="submit"]');
+
+  await expect(modal).toBeVisible();
+  await modal.getByTestId('confirm-edit-button').click();
 });
 
 Then("je dois voir l'article modifié", async ({ page }) => {
@@ -70,6 +81,10 @@ Then("je dois voir l'article modifié", async ({ page }) => {
 
 When("je supprime l'article", async ({ page }) => {
   await page.getByLabel('Supprimer le post').click();
+
+  const modal = page.getByTestId('modal');
+  await expect(modal).toBeVisible();
+  await modal.getByTestId('confirm-delete-button').click();
 });
 
 Then("je ne dois plus voir l'article", async ({ page }) => {

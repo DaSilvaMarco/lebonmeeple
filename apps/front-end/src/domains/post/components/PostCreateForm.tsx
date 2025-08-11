@@ -250,7 +250,7 @@ const PostCreateForm = () => {
           </Button>
         </VStack>
       </form>
-    
+
       <Modal
         isOpen={isModalOpen}
         onClose={() => {
@@ -263,6 +263,7 @@ const PostCreateForm = () => {
             <Button
               color="primary"
               handleClick={handleConfirmCreate}
+              dataTestId="confirm-create-button"
             >
               Confirmer
             </Button>
@@ -272,6 +273,7 @@ const PostCreateForm = () => {
                 setPendingData(null);
                 closeModal();
               }}
+              dataTestId="cancel-create-button"
             >
               Annuler
             </Button>

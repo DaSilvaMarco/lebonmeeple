@@ -247,7 +247,11 @@ const PostEditForm = ({ post, token }: Props) => {
         title="Confirmer la modification"
         footer={
           <>
-            <Button color="primary" handleClick={handleConfirmEdit}>
+            <Button
+              color="primary"
+              handleClick={handleConfirmEdit}
+              dataTestId="confirm-edit-button"
+            >
               Confirmer
             </Button>
             <Button
@@ -256,6 +260,7 @@ const PostEditForm = ({ post, token }: Props) => {
                 setPendingData(null);
                 closeModal();
               }}
+              dataTestId="cancel-edit-button"
             >
               Annuler
             </Button>

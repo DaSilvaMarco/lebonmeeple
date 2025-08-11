@@ -249,22 +249,24 @@ const PostCard = (props: Props) => {
         onClose={closeDeleteModal}
         title="Confirmer la suppression"
         footer={
-            <>
-              <Button
-                color="primary"
-                handleClick={handleConfirmDelete}
-                icon={<DeleteIcon />}
-                isLoading={isDeleting}
-              >
-                Supprimer
-              </Button>
-              <Button
-                color="secondary"
-                handleClick={closeDeleteModal}
-              >
-                Annuler
-              </Button>
-            </>
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmDelete}
+              icon={<DeleteIcon />}
+              isLoading={isDeleting}
+              dataTestId="confirm-delete-button"
+            >
+              Supprimer
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={closeDeleteModal}
+              dataTestId="cancel-delete-button"
+            >
+              Annuler
+            </Button>
+          </>
         }
       >
         Êtes-vous sûr de vouloir supprimer ce post ?
@@ -280,12 +282,14 @@ const PostCard = (props: Props) => {
               color="primary"
               handleClick={handleConfirmEdit}
               icon={<EditIcon />}
+              dataTestId="confirm-edit-button"
             >
               Modifier !
             </Button>
             <Button
               color="secondary"
               handleClick={closeEditModal}
+              dataTestId="cancel-edit-button"
             >
               Annuler
             </Button>

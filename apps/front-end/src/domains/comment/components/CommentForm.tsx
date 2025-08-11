@@ -156,6 +156,7 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
               color="primary"
               handleClick={handleConfirmComment}
               isLoading={isSubmitting}
+              dataTestId="confirm-create-button"
             >
               Confirmer
             </Button>
@@ -166,6 +167,7 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
                 closeModal();
               }}
               isDisabled={isSubmitting}
+              dataTestId="cancel-create-button"
             >
               Annuler
             </Button>

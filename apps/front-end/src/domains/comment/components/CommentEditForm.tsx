@@ -143,6 +143,7 @@ const CommentEditForm = ({
               color="primary"
               handleClick={handleConfirmEdit}
               isLoading={isSubmitting}
+              dataTestId="confirm-edit-button"
             >
               Confirmer
             </Button>
@@ -153,6 +154,7 @@ const CommentEditForm = ({
                 closeModal();
               }}
               isDisabled={isSubmitting}
+              dataTestId="cancel-edit-button"
             >
               Annuler
             </Button>

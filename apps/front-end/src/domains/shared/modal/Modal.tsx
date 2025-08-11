@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Modal,
+  Modal as ChakraModal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -9,7 +9,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 
-interface ChakraModalProps {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
@@ -17,29 +17,19 @@ interface ChakraModalProps {
   footer?: React.ReactNode;
 }
 
-const ChakraModal: React.FC<ChakraModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-  footer,
-}) => {
+const Modal = (props: Props) => {
+  const { isOpen, onClose, title, children, footer } = props;
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      isCentered
-      data-testid="modal"
-    >
+    <ChakraModal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent data-testid="modal">
         {title && <ModalHeader>{title}</ModalHeader>}
         <ModalCloseButton />
         <ModalBody>{children}</ModalBody>
         {footer && <ModalFooter>{footer}</ModalFooter>}
       </ModalContent>
-    </Modal>
+    </ChakraModal>
   );
 };
 
-export default ChakraModal;
+export default Modal;
