@@ -15,8 +15,8 @@ const AdminPostsClientPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const fetchedPosts = await getPosts();
-        dispatch(postsList(fetchedPosts));
+        const fetchedPosts = await getPosts({ limit: 60, page: 1 });
+        dispatch(postsList(fetchedPosts.posts));
       } catch (err) {
         console.error('Error fetching posts:', err);
       }

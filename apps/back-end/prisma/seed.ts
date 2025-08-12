@@ -12,9 +12,6 @@ async function main() {
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
 
-  // ...existing code...
-
-  // Création des utilisateurs
   const specificUser = await prisma.user.create({
     data: {
       username: 'Coquinho',
@@ -39,26 +36,29 @@ async function main() {
     users.push(user);
   }
 
-  // Création des posts à partir de seedData
+  const usersWithoutMe = users.filter((user) => user.id !== specificUser.id);
+
   const posts: Awaited<ReturnType<typeof prisma.post.create>>[] = [];
+
   for (const article of seedData) {
-    const user = faker.helpers.arrayElement(users);
+    const user = faker.helpers.arrayElement(usersWithoutMe);
     const post = await prisma.post.create({
       data: {
         title: article.title,
         body: article.body,
         image: article.image,
         userId: user.id,
+        updatedAt: new Date(),
+        createdAt: new Date(),
       },
     });
     posts.push(post);
   }
 
-  // Ajout de commentaires aléatoires pour chaque post
   for (const post of posts) {
     const nbComments = faker.number.int({ min: 1, max: 5 });
     for (let i = 0; i < nbComments; i++) {
-      const user = faker.helpers.arrayElement(users);
+      const user = faker.helpers.arrayElement(usersWithoutMe);
       await prisma.comment.create({
         data: {
           body: faker.lorem.sentences(2),

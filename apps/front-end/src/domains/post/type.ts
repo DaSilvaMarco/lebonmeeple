@@ -13,4 +13,6 @@ export type Post = {
   user: User;
   userId: number;
   comments?: Comment[];
+  updatedAt: Date;
+  createdAt: Date;
 };

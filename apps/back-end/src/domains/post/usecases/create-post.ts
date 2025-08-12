@@ -31,6 +31,8 @@ export const createPost = async (
       title,
       userId: id,
       image,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   });
 };

@@ -56,6 +56,9 @@ const Header = () => {
                 <MenuItem onClick={handleLogout} color="red.500">
                   Se déconnecter
                 </MenuItem>
+                <MenuItem as={Link} href="/profile">
+                  Page de profil
+                </MenuItem>
               </MenuList>
               <MenuButton as={ChakraButton} variant="ghost">
                 <HStack spacing={2}>

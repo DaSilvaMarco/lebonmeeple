@@ -4,7 +4,6 @@ import React from 'react';
 
 import { Box, Flex } from '@chakra-ui/react';
 import PostsGrid from '../components/PostsGrid';
-import PostsHeader from '../components/PostsHeader';
 import { useAppSelector } from '@frontend/store/hook';
 
 const PostsPage = () => {
@@ -32,7 +31,6 @@ const PostsPage = () => {
           opacity: 0.1,
         }}
       >
-        <PostsHeader />
         <PostsGrid posts={posts} />
       </Box>
     </Flex>

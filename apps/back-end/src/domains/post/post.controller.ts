@@ -7,11 +7,12 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { PostService } from './post.service';
 import type { Request } from 'express';
@@ -32,8 +33,20 @@ export class PostController {
   }
 
   @Get('posts')
-  getAll() {
-    return this.postService.getAll();
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Numéro de page',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    type: Number,
+    description: "Nombre d'éléments par page",
+  })
+  getAll(@Query('page') page = 1, @Query('limit') limit = 9) {
+    return this.postService.getAll(Number(page), Number(limit));
   }
 
   @Get('post/:id')

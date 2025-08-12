@@ -217,8 +217,8 @@ const PostCard = (props: Props) => {
             >
               <Avatar
                 size="sm"
-                src={userFromPost.avatar || '/defaultAvatar.jpg'}
-                name={userFromPost.username}
+                src={userFromPost?.avatar || '/defaultAvatar.jpg'}
+                name={userFromPost?.username}
                 bg="brand.100"
                 color="brand.600"
               />
@@ -229,7 +229,7 @@ const PostCard = (props: Props) => {
                   color={textColorPrimary}
                   lineHeight="short"
                 >
-                  {userFromPost.username}
+                  {userFromPost?.username}
                 </Text>
                 <Text
                   fontSize="xs"

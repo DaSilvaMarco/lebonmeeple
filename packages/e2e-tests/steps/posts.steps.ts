@@ -68,6 +68,7 @@ When("je modifie l'article", async ({ page }) => {
 });
 
 Then("je dois voir l'article modifié", async ({ page }) => {
+  await page.getByText('Mon nouvel article modifié').waitFor();
   const articleTitle = page.getByText('Mon nouvel article modifié');
   await expect(articleTitle).toBeVisible();
 
