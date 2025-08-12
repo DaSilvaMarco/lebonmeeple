@@ -9,15 +9,15 @@ import {
   TableContainer,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Post } from '@frontend/domains/post/type';
-import AdminPostsTableRow from './AdminPostsTableRow';
+import AdminCommentsTableRow from './AdminCommentsTableRow';
+import { type Comment } from '@frontend/domains/comment/type';
 
 type Props = {
-  posts: Post[];
+  comments: Comment[];
 };
 
-const AdminPostsTable = (props: Props) => {
-  const { posts } = props;
+const AdminCommentsTable = (props: Props) => {
+  const { comments } = props;
   const bg = useColorModeValue('white', 'gray.800');
   const border = useColorModeValue('gray.200', 'gray.700');
 
@@ -37,16 +37,14 @@ const AdminPostsTable = (props: Props) => {
           <Thead>
             <Tr>
               <Th>ID</Th>
-              <Th>Image</Th>
-              <Th>Titre</Th>
               <Th>Contenu</Th>
               <Th>Utilisateur</Th>
               <Th>Actions</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {posts.map((post) => (
-              <AdminPostsTableRow key={post.id} post={post} />
+            {comments.map((comment, index) => (
+              <AdminCommentsTableRow key={index} comment={comment} />
             ))}
           </Tbody>
         </Table>
@@ -55,4 +53,4 @@ const AdminPostsTable = (props: Props) => {
   );
 };
 
-export default AdminPostsTable;
+export default AdminCommentsTable;

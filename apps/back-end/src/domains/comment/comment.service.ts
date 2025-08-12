@@ -7,6 +7,7 @@ import { deleteComment } from './usecases/delete';
 import { updateComment } from './usecases/update';
 import { PrismaService } from '@prisma-service/prisma.service';
 import { throwError } from '@utils/errors';
+import { getAllComments } from './usecases/get';
 
 @Injectable()
 export class CommentService {
@@ -40,6 +41,14 @@ export class CommentService {
   update = async (id: number, updateCommentDto: UpdateCommentDto) => {
     try {
       return await updateComment(id, updateCommentDto, this.prismaService);
+    } catch (error) {
+      throwError(error);
+    }
+  };
+
+  getAll = async () => {
+    try {
+      return await getAllComments(this.prismaService);
     } catch (error) {
       throwError(error);
     }
