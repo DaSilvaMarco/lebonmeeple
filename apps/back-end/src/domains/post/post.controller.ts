@@ -13,10 +13,11 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { type CreatePostDto, type UpdatePostDto } from './dtos';
 import { PostService } from './post.service';
 import type { Request } from 'express';
 import { IsOwner } from '@backend/decorator/is-owner-or-admin.decorator';
+import { CreatePostDto } from './dtos/create-post-dto';
+import { UpdatePostDto } from './dtos/update-post-dto';
 
 @ApiTags('Post')
 @Controller()

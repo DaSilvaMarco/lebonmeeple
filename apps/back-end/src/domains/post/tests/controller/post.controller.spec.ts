@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { type Request } from 'express';
 import { PostController } from '../../post.controller';
-import { type CreatePostDto, type UpdatePostDto } from '../../dtos';
+import { type CreatePostDto } from '../../dtos/create-post-dto';
+import { type UpdatePostDto } from '../../dtos/update-post-dto';
 
 describe('PostController', () => {
   let controller: PostController;

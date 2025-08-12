@@ -1,4 +1,4 @@
-import { type CreatePostDto } from '../../../dtos';
+import { CreatePostDto } from '@backend/domains/post/dtos/create-post-dto';
 import { type PrismaService } from '../../../../../prisma/prisma.service';
 import { type Request } from 'express';
 import { vi } from 'vitest';
