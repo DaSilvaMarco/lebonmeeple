@@ -1,8 +1,8 @@
 import { type ConfigService } from '@nestjs/config';
 import { type JwtService } from '@nestjs/jwt';
-import { type SigninDto } from '../../../dtos';
 import { type PrismaService } from '../../../../../prisma/prisma.service';
 import { vi } from 'vitest';
+import { type SigninUserDto } from '@backend/domains/user/dtos/signin-user-dto';
 
 export const configServiceMock = {
   get: vi.fn((key: string) => {
@@ -15,7 +15,7 @@ export const jwtServiceMock = {
   sign: vi.fn(() => 'mocked.jwt.token'),
 } as Partial<JwtService> as JwtService;
 
-export const prismaMock = (signinDto: SigninDto) => {
+export const prismaMock = (signinDto: SigninUserDto) => {
   return {
     user: {
       findUnique: vi.fn().mockResolvedValue({
@@ -35,7 +35,7 @@ export const prismaMockUserNotFound = () => {
   } as unknown as PrismaService;
 };
 
-export const prismaCredentialsNotGood = (signinDto: SigninDto) => {
+export const prismaCredentialsNotGood = (signinDto: SigninUserDto) => {
   return {
     user: {
       findUnique: vi.fn().mockResolvedValue({

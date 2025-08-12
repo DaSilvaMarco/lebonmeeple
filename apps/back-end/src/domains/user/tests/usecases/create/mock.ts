@@ -1,9 +1,9 @@
-import { type SignupDto } from '../../../dtos';
 import { SIGNUP_DTO } from './const';
 import { type PrismaService } from '../../../../../prisma/prisma.service';
 import { vi } from 'vitest';
+import { SignupUserDto } from '@backend/domains/user/dtos/signup-user-dto';
 
-export const prismaMock = (signupDto: SignupDto) => {
+export const prismaMock = (signupDto: SignupUserDto) => {
   return {
     user: {
       create: vi.fn().mockResolvedValue({

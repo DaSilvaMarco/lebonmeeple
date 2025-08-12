@@ -1,9 +1,9 @@
 import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
-import { type UpdateDto } from '../dtos/update';
+import { UpdateUserDto } from '../dtos/update-user-dto';
 
 export const updateUser = async (
   id: number,
-  updateDto: UpdateDto,
+  updateDto: UpdateUserDto,
   prismaService: PrismaService,
 ) => {
   const { username, email, avatar } = updateDto;

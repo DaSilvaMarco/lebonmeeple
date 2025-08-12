@@ -1,4 +1,6 @@
-import { type SigninDto, type SignupDto, type UpdateDto } from '../../dtos';
+import { type SignupUserDto } from '../../dtos/signup-user-dto';
+import { type SigninUserDto } from '../../dtos/signin-user-dto';
+import { type UpdateUserDto } from '../../dtos/update-user-dto';
 import { UserController } from '../../user.controller';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -20,7 +22,7 @@ describe('UserController', () => {
   });
 
   it('should call signup with correct dto and return result', async () => {
-    const dto: SignupDto = {
+    const dto: SignupUserDto = {
       email: 'test@test.com',
       password: 'pass',
       username: 'user',
@@ -38,7 +40,7 @@ describe('UserController', () => {
   });
 
   it('should call signin with correct dto and return result', async () => {
-    const dto: SigninDto = { email: 'test@test.com', password: 'pass' };
+    const dto: SigninUserDto = { email: 'test@test.com', password: 'pass' };
     const expectedResult = { token: 'jwt.token' };
 
     userServiceMock.signin.mockResolvedValue(expectedResult);
@@ -75,7 +77,7 @@ describe('UserController', () => {
 
   it('should call update with id and dto and return updated user', async () => {
     const userId = 5;
-    const dto: UpdateDto = {
+    const dto: UpdateUserDto = {
       username: 'newName',
       email: 'test@gmail.com',
       avatar: 'newAvatar.png',

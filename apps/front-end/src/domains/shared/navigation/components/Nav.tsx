@@ -154,7 +154,6 @@ const Nav = () => {
               py={3}
               fontSize="md"
               fontWeight="500"
-              data-testid="view-all-posts-button"
             >
               Voir les articles
             </MenuItem>
@@ -169,7 +168,6 @@ const Nav = () => {
                 py={3}
                 fontSize="md"
                 fontWeight="500"
-                data-testid="create-post-button"
               >
                 Voir les commentaires
                 

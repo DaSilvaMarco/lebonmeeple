@@ -1,4 +1,4 @@
-import { type User } from '@backend/domains/user/types/users';
+import { type User } from '@backend/domains/user/types';
 import { type PrismaService } from '@prisma-service/prisma.service';
 
 export type PermissionChecker = (

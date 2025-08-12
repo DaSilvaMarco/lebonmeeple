@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import { type Request } from 'express';
 import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
-import { BasicUser } from '@backend/domains/user/types/users';
+import { BasicUser } from '@backend/domains/user/types';
 import { type CreatePostDto } from '../dtos/create-post-dto';
 
 export const createPost = async (

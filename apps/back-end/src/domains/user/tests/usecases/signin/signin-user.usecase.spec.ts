@@ -7,7 +7,7 @@ import {
   prismaMockUserNotFound,
 } from './mock';
 import { NotFoundException } from '@nestjs/common';
-import { signinUser } from '../../../usecases';
+import { signinUser } from '@backend/domains/user/usecases/signin-user';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),
