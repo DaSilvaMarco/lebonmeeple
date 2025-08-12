@@ -1,12 +1,12 @@
-import { type SigninDto } from '../dtos/signin';
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { type JwtService } from '@nestjs/jwt';
 import { type ConfigService } from '@nestjs/config';
 import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
+import { SigninUserDto } from '../dtos/signin-user-dto';
 
 export const signinUser = async (
-  signinDto: SigninDto,
+  signinDto: SigninUserDto,
   prismaService: PrismaService,
   jwtService: JwtService,
   configService: ConfigService,

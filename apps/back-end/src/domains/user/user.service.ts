@@ -2,10 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-import { type SigninDto, type SignupDto, type UpdateDto } from './dtos';
 import { throwError } from '@utils/errors';
-import { createUser, getById, me, signinUser, updateUser } from './usecases';
 import { PrismaService } from '@prisma-service/prisma.service';
+import { SignupUserDto } from './dtos/signup-user-dto';
+import { SigninUserDto } from './dtos/signin-user-dto';
+import { UpdateUserDto } from './dtos/update-user-dto';
+import { createUser } from './usecases/create-user';
+import { signinUser } from './usecases/signin-user';
+import { getUser } from './usecases/get-user';
+import { updateUser } from './usecases/update-user';
+import { meUser } from './usecases/me-user';
 
 @Injectable()
 export class UserService {
@@ -15,7 +21,7 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  signup = async (signupDto: SignupDto) => {
+  signup = async (signupDto: SignupUserDto) => {
     try {
       return await createUser(signupDto, this.prismaService);
     } catch (error) {
@@ -23,7 +29,7 @@ export class UserService {
     }
   };
 
-  signin = async (signinDto: SigninDto) => {
+  signin = async (signinDto: SigninUserDto) => {
     try {
       return await signinUser(
         signinDto,
@@ -38,13 +44,13 @@ export class UserService {
 
   getById = async (id: number) => {
     try {
-      return await getById(id, this.prismaService);
+      return await getUser(id, this.prismaService);
     } catch (error) {
       throwError(error);
     }
   };
 
-  update = async (id: number, updateDto: UpdateDto) => {
+  update = async (id: number, updateDto: UpdateUserDto) => {
     try {
       return await updateUser(id, updateDto, this.prismaService);
     } catch (error) {
@@ -54,7 +60,7 @@ export class UserService {
 
   me = async (request: Request) => {
     try {
-      return await me(request, this.jwtService);
+      return await meUser(request, this.jwtService);
     } catch (error) {
       throwError(error);
     }

@@ -13,8 +13,10 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
 import { UserService } from './user.service';
-import { type SigninDto, type SignupDto, type UpdateDto } from './dtos';
-import { IsOwner } from '@decorator/is-owner.decorator';
+import { IsOwner } from '@backend/decorator/is-owner-or-admin.decorator';
+import { SignupUserDto } from './dtos/signup-user-dto';
+import { SigninUserDto } from './dtos/signin-user-dto';
+import { UpdateUserDto } from './dtos/update-user-dto';
 
 @ApiTags('User')
 @Controller()
@@ -22,12 +24,12 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('user/signup')
-  signup(@Body() signupDto: SignupDto) {
+  signup(@Body() signupDto: SignupUserDto) {
     return this.userService.signup(signupDto);
   }
 
   @Post('user/signin')
-  signin(@Body() signinDto: SigninDto) {
+  signin(@Body() signinDto: SigninUserDto) {
     return this.userService.signin(signinDto);
   }
 
@@ -47,7 +49,10 @@ export class UserController {
 
   @IsOwner()
   @Patch('user/:id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateDto: UpdateDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateDto: UpdateUserDto,
+  ) {
     return this.userService.update(id, updateDto);
   }
 }

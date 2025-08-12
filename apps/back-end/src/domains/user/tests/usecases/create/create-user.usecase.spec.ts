@@ -12,7 +12,7 @@ import {
   prismaMockUserAlreadyExists,
 } from './mock';
 import { ConflictException } from '@nestjs/common';
-import { createUser } from '../../../usecases';
+import { createUser } from '@backend/domains/user/usecases/create-user';
 
 vi.mock('bcrypt', () => ({
   hash: vi.fn().mockResolvedValue('hashedPassword'),

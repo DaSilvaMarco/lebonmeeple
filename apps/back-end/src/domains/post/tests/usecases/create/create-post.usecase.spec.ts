@@ -1,4 +1,4 @@
-import { createPost } from '../../../usecases';
+import { createPost } from '@backend/domains/post/usecases/create-post';
 import { CREATE_DTO } from './const';
 import { prismaMock as prismaMockCreate } from './mock';
 import { requestMock } from './mock';

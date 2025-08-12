@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest';
 import { prismaMock as prismaMockGetById } from './mock';
-import { getById } from '../../../usecases';
+import { getPost } from '@backend/domains/post/usecases/get-post';
 
 test('The user can get one post by id', async () => {
   const prismaMock = prismaMockGetById(1);
 
-  const result = await getById(1, prismaMock);
+  const result = await getPost(1, prismaMock);
 
   expect(prismaMock.post.findUnique).toHaveBeenCalledWith({
     where: { id: 1 },

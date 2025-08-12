@@ -1,6 +1,6 @@
 import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
 
-export const getById = async (id: number, prismaService: PrismaService) => {
+export const getUser = async (id: number, prismaService: PrismaService) => {
   return await prismaService.user.findUnique({
     where: {
       id,

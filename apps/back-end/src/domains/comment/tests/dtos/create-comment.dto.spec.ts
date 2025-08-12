@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { validate } from 'class-validator';
-import { CreateCommentDto } from '../../dtos';
+import { CreateCommentDto } from '../../dtos/create-comment-dto';
 
 describe('CreateCommentDto', () => {
   it('should validate successfully with valid data', async () => {
