@@ -1,9 +1,11 @@
 import { Tr, Td } from '@chakra-ui/react';
 import Button from '@frontend/domains/shared/button/components/Button';
-import Link from 'next/link';
 import React, { Fragment, useState } from 'react';
 import Modal from '../../shared/modal/Modal';
 import { type Comment } from '@frontend/domains/comment/type';
+import { useAppDispatch, useAppSelector } from '@frontend/store/hook';
+import { deleteComment } from '@/domains/comment/slice';
+import { deleteCommentApi } from '@frontend/domains/comment';
 
 type Props = {
   comment: Comment;
@@ -12,6 +14,8 @@ type Props = {
 const AdminCommentsTableRow = (props: Props) => {
   const { comment } = props;
   const [isModalOpen, setModalOpen] = useState(false);
+  const { token } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const ellipsisStyle = {
     maxWidth: '180px',
@@ -21,18 +25,15 @@ const AdminCommentsTableRow = (props: Props) => {
     display: 'block',
   };
 
-  // const handleClick = async () => {
-  //   setLoading(true);
-  //   try {
-  //     await deletePostApi(post.id, token ?? '');
-  //     dispatch(deletePostAction(post.id));
-  //     setModalOpen(false);
-  //   } catch (e) {
-  //     console.log('error', e);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const handleClick = async () => {
+    try {
+      await deleteCommentApi(comment.id, token ?? '');
+      dispatch(deleteComment(comment.id));
+      setModalOpen(false);
+    } catch (e) {
+      console.log('error', e);
+    } 
+  };
 
   return (
     <Fragment key={comment.id}>
@@ -54,9 +55,9 @@ const AdminCommentsTableRow = (props: Props) => {
           >
             Supprimer
           </Button>
-          <Button color="primary" type="button">
+          {/* <Button color="primary" type="button">
             <Link href={`/posts/${comment.id}`}>Voir</Link>
-          </Button>
+          </Button> */}
           <Modal
             isOpen={isModalOpen}
             onClose={() => setModalOpen(false)}
@@ -66,7 +67,7 @@ const AdminCommentsTableRow = (props: Props) => {
                 <Button
                   color="secondary"
                   type="button"
-                  // handleClick={handleClick}
+                  handleClick={handleClick}
                 >
                   Confirmer
                 </Button>
