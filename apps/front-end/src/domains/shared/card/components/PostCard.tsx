@@ -97,6 +97,10 @@ const PostCard = (props: Props) => {
     router.push(`/post/${id}/edit`);
   };
 
+  console.log('user.id : ', user?.id);
+  console.log('post.userId : ', post.userId);
+  console.log('boolean : ', user?.id === post.userId);
+
   return (
     <Link href={`/post/${id}`}>
       <Card
@@ -255,14 +259,14 @@ const PostCard = (props: Props) => {
               handleClick={handleConfirmDelete}
               icon={<DeleteIcon />}
               isLoading={isDeleting}
-              dataTestId="confirm-delete-button"
+              dataTestId="modal-confirm-button"
             >
               Supprimer
             </Button>
             <Button
               color="secondary"
               handleClick={closeDeleteModal}
-              dataTestId="cancel-delete-button"
+              dataTestId="modal-cancel-button"
             >
               Annuler
             </Button>
@@ -282,14 +286,14 @@ const PostCard = (props: Props) => {
               color="primary"
               handleClick={handleConfirmEdit}
               icon={<EditIcon />}
-              dataTestId="confirm-edit-button"
+              dataTestId="modal-confirm-button"
             >
               Modifier !
             </Button>
             <Button
               color="secondary"
               handleClick={closeEditModal}
-              dataTestId="cancel-edit-button"
+              dataTestId="modal-cancel-button"
             >
               Annuler
             </Button>

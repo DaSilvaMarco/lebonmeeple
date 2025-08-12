@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '@/domains/shared/modal/Modal';
-import Button from '@/domains/shared/button/components/Button';
+import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
 import { useDisclosure } from '@chakra-ui/react';
 import {
   Box,
@@ -183,34 +182,13 @@ const CommentCard = ({
           </VStack>
         </HStack>
       </Box>
-      <Modal
-        isOpen={isModalOpen}
+      <ConfirmationModal
+        isModalOpen={isModalOpen}
+        setModalOpen={(open) => (open ? openModal() : closeModal())}
+        onConfirm={handleConfirmDelete}
+        title="Êtes-vous sûr de vouloir supprimer ce commentaire ?"
         onClose={closeModal}
-        title="Confirmer la suppression"
-        footer={
-          <>
-            <Button
-              color="primary"
-              handleClick={handleConfirmDelete}
-              isLoading={isDeleting}
-              dataTestId="confirm-delete-button"
-            >
-              Confirmer
-            </Button>
-            <Button
-              color="secondary"
-              handleClick={closeModal}
-              isDisabled={isDeleting}
-              dataTestId="cancel-delete-button"
-            >
-              Annuler
-            </Button>
-          </>
-        }
-      >
-        Êtes-vous sûr de vouloir supprimer ce commentaire ? Cette action est
-        irréversible.
-      </Modal>
+      />
     </>
   );
 };

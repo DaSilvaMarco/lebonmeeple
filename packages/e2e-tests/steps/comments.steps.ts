@@ -47,7 +47,7 @@ When('je supprime le commentaire', async ({ page }) => {
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-delete-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 });
 
 Then('je ne dois plus voir le commentaire', async ({ page }) => {

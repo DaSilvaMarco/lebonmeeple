@@ -263,7 +263,7 @@ const PostCreateForm = () => {
             <Button
               color="primary"
               handleClick={handleConfirmCreate}
-              dataTestId="confirm-create-button"
+              dataTestId="modal-confirm-button"
             >
               Confirmer
             </Button>
@@ -273,7 +273,7 @@ const PostCreateForm = () => {
                 setPendingData(null);
                 closeModal();
               }}
-              dataTestId="cancel-create-button"
+              dataTestId="modal-cancel-button"
             >
               Annuler
             </Button>
