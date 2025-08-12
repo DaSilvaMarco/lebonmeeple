@@ -15,8 +15,6 @@ import { ChevronDownIcon, EditIcon } from '@chakra-ui/icons';
 const Nav = () => {
   const { isAuthenticated, user } = useAppSelector((state) => state.user);
 
-  console.log('user : ', user);
-
   return (
     <Flex align="center" gap={8} fontSize="lg">
       <Button

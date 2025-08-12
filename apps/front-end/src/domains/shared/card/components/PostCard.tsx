@@ -96,10 +96,6 @@ const PostCard = (props: Props) => {
     router.push(`/post/${id}/edit`);
   };
 
-  console.log('user.id : ', user?.id);
-  console.log('post.userId : ', post.userId);
-  console.log('boolean : ', user?.id === post.userId);
-
   return (
     <Link href={`/post/${id}`}>
       <Card
@@ -123,7 +119,7 @@ const PostCard = (props: Props) => {
             fill
             objectFit="cover"
             alt={`Photo de l'article ${title}`}
-            src={image}
+            src={ image }
             fallbackSrc="/boardgame.jpg"
             style={{
               transition: 'transform 0.3s ease',
