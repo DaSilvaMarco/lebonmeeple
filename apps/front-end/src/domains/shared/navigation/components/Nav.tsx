@@ -15,8 +15,6 @@ import { ChevronDownIcon, EditIcon } from '@chakra-ui/icons';
 const Nav = () => {
   const { isAuthenticated, user } = useAppSelector((state) => state.user);
 
-  console.log('user : ', user);
-
   return (
     <Flex align="center" gap={8} fontSize="lg">
       <Button
@@ -174,29 +172,6 @@ const Nav = () => {
               </MenuItem>
           </MenuList>
         </Menu>
-      )}
-
-      {/* Lien Profil */}
-      {isAuthenticated && (
-        <Button
-          as={Link}
-          href="/profile"
-          variant="ghost"
-          px={4}
-          py={2}
-          borderRadius="lg"
-          color="primary.500"
-          fontWeight="600"
-          fontFamily="heading"
-          _hover={{
-            bg: 'primary.100',
-            color: 'primary.700',
-            transform: 'translateY(-1px)',
-          }}
-          transition="all 0.2s"
-        >
-          Profil
-        </Button>
       )}
     </Flex>
   );

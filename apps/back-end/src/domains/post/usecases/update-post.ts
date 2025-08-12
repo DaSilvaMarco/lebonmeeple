@@ -8,6 +8,6 @@ export const updatePost = async (
 ) => {
   return prismaService.post.update({
     where: { id },
-    data: { ...updatePostDto },
+    data: { ...updatePostDto, updatedAt: new Date() },
   });
 };

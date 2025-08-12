@@ -20,5 +20,6 @@ export const prismaMock = () =>
           image: 'image2.jpg',
         },
       ]),
+      count: vi.fn().mockResolvedValue(2),
     },
   }) as unknown as PrismaService;

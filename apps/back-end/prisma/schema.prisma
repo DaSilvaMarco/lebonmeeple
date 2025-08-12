@@ -30,6 +30,8 @@ model Post {
   body String
   userId Int
   image String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   user User @relation("user_posts", fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   comments Comment[] @relation("post_comment")
 }

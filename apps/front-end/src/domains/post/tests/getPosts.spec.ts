@@ -117,7 +117,7 @@ describe('getPosts API', () => {
 
       // Verify correct API call
       expect(mockFetch).toHaveBeenCalledWith(
-        'http://localhost:3001/api/posts',
+        'http://localhost:3001/api/posts?limit=9&page=1',
         {
           method: 'GET',
           headers: {

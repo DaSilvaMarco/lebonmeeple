@@ -17,7 +17,7 @@ When('je créé un commentaire', async ({ page }) => {
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-create-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 });
 
 Then('je dois voir le commentaire créé', async ({ page }) => {
@@ -34,7 +34,7 @@ When('je modifie le commentaire', async ({ page }) => {
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-edit-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 });
 
 Then('je dois voir le commentaire modifié', async ({ page }) => {
@@ -47,7 +47,7 @@ When('je supprime le commentaire', async ({ page }) => {
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-delete-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 });
 
 Then('je ne dois plus voir le commentaire', async ({ page }) => {

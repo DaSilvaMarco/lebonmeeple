@@ -22,7 +22,7 @@ import { updatePost } from '@/domains/post/api/update-post';
 import { updatePost as updatePostAction } from '@/domains/post/slice';
 import { useAppDispatch } from '@frontend/store/hook';
 import Button from '@frontend/domains/shared/button/components/Button';
-import Modal from '@/domains/shared/modal/Modal';
+import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
 import { useDisclosure } from '@chakra-ui/react';
 import { Post } from '@frontend/domains/post/type';
 
@@ -238,37 +238,15 @@ const PostEditForm = ({ post, token }: Props) => {
           </Button>
         </VStack>
       </form>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setPendingData(null);
+      <ConfirmationModal
+        isModalOpen={isModalOpen}
+        setModalOpen={(open) => {
+          if (!open) setPendingData(null);
           closeModal();
         }}
-        title="Confirmer la modification"
-        footer={
-          <>
-            <Button
-              color="primary"
-              handleClick={handleConfirmEdit}
-              dataTestId="confirm-edit-button"
-            >
-              Confirmer
-            </Button>
-            <Button
-              color="secondary"
-              handleClick={() => {
-                setPendingData(null);
-                closeModal();
-              }}
-              dataTestId="cancel-edit-button"
-            >
-              Annuler
-            </Button>
-          </>
-        }
-      >
-        Êtes-vous sûr de vouloir sauvegarder les modifications ?
-      </Modal>
+        onConfirm={handleConfirmEdit}
+        title={'Êtes-vous sûr de vouloir sauvegarder les modifications ?'}
+      />
     </>
   );
 };

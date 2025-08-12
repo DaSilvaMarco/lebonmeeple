@@ -29,7 +29,7 @@ When('je créé un article', async ({ page }) => {
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-create-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 });
 
 Then("je dois voir l'article créé", async ({ page }) => {
@@ -46,7 +46,7 @@ When("je modifie l'article", async ({ page }) => {
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-edit-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 
   await page.fill('input[name="title"]', 'Mon nouvel article modifié');
   await page.fill('textarea[name="body"]', 'Mon nouveau texte modifié');
@@ -64,10 +64,11 @@ When("je modifie l'article", async ({ page }) => {
   await page.click('button[type="submit"]');
 
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-edit-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 });
 
 Then("je dois voir l'article modifié", async ({ page }) => {
+  await page.getByText('Mon nouvel article modifié').waitFor();
   const articleTitle = page.getByText('Mon nouvel article modifié');
   await expect(articleTitle).toBeVisible();
 
@@ -84,7 +85,7 @@ When("je supprime l'article", async ({ page }) => {
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
-  await modal.getByTestId('confirm-delete-button').click();
+  await modal.getByTestId('modal-confirm-button').click();
 });
 
 Then("je ne dois plus voir l'article", async ({ page }) => {

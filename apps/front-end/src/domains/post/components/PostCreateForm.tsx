@@ -20,7 +20,7 @@ import { PostCreateFormData, createPostSchema } from '@/domains/post/schema';
 import { useAppSelector } from '@/store/hook';
 import { convertToBase64 } from '@/utils/convertToBase64';
 import Button from '@frontend/domains/shared/button/components/Button';
-import Modal from '@frontend/domains/shared/modal/Modal';
+import ConfirmationModal from '@frontend/domains/shared/modal/ConfirmationModal';
 import { useDisclosure } from '@chakra-ui/react';
 import { getApiBaseUrl } from '@/utils/api-config';
 
@@ -250,38 +250,15 @@ const PostCreateForm = () => {
           </Button>
         </VStack>
       </form>
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setPendingData(null);
+      <ConfirmationModal
+        isModalOpen={isModalOpen}
+        setModalOpen={(open) => {
+          if (!open) setPendingData(null);
           closeModal();
         }}
-        title="Confirmer la création"
-        footer={
-          <>
-            <Button
-              color="primary"
-              handleClick={handleConfirmCreate}
-              dataTestId="confirm-create-button"
-            >
-              Confirmer
-            </Button>
-            <Button
-              color="secondary"
-              handleClick={() => {
-                setPendingData(null);
-                closeModal();
-              }}
-              dataTestId="cancel-create-button"
-            >
-              Annuler
-            </Button>
-          </>
-        }
-      >
-        Êtes-vous sûr de vouloir créer cet article ?
-      </Modal>
+        onConfirm={handleConfirmCreate}
+        title={'Êtes-vous sûr de vouloir créer cet article ?'}
+      />
     </>
   );
 };

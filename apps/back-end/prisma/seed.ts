@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
+import { seedData } from './seed-data';
 
 const prisma = new PrismaClient();
 
@@ -10,19 +11,6 @@ async function main() {
   await prisma.comment.deleteMany();
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
-
-  const landscapeImages = [
-    'https://picsum.photos/600/300?random=1',
-    'https://picsum.photos/600/300?random=2',
-    'https://picsum.photos/600/300?random=3',
-    'https://picsum.photos/600/300?random=4',
-    'https://picsum.photos/600/300?random=5',
-    'https://picsum.photos/600/300?random=6',
-    'https://picsum.photos/600/300?random=7',
-    'https://picsum.photos/600/300?random=8',
-    'https://picsum.photos/600/300?random=9',
-    'https://picsum.photos/600/300?random=10',
-  ];
 
   const specificUser = await prisma.user.create({
     data: {
@@ -48,32 +36,37 @@ async function main() {
     users.push(user);
   }
 
-  const posts: Awaited<ReturnType<typeof prisma.post.create>>[] = [];
-  for (let i = 0; i < 10; i++) {
-    const user = faker.helpers.arrayElement(users);
+  const usersWithoutMe = users.filter((user) => user.id !== specificUser.id);
 
+  const posts: Awaited<ReturnType<typeof prisma.post.create>>[] = [];
+
+  for (const article of seedData) {
+    const user = faker.helpers.arrayElement(usersWithoutMe);
     const post = await prisma.post.create({
       data: {
-        title: faker.lorem.sentence(6),
-        body: faker.lorem.paragraphs(2),
-        image: faker.helpers.arrayElement(landscapeImages),
+        title: article.title,
+        body: article.body,
+        image: article.image,
         userId: user.id,
+        updatedAt: new Date(),
+        createdAt: new Date(),
       },
     });
     posts.push(post);
   }
 
-  for (let i = 0; i < 20; i++) {
-    const user = faker.helpers.arrayElement(users);
-    const post = faker.helpers.arrayElement(posts);
-
-    await prisma.comment.create({
-      data: {
-        body: faker.lorem.sentences(2),
-        postId: post.id,
-        userId: user.id,
-      },
-    });
+  for (const post of posts) {
+    const nbComments = faker.number.int({ min: 1, max: 5 });
+    for (let i = 0; i < nbComments; i++) {
+      const user = faker.helpers.arrayElement(usersWithoutMe);
+      await prisma.comment.create({
+        data: {
+          body: faker.lorem.sentences(2),
+          postId: post.id,
+          userId: user.id,
+        },
+      });
+    }
   }
 }
 

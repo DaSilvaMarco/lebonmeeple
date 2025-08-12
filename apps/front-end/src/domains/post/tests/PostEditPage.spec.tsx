@@ -69,6 +69,8 @@ const mockPost: Post = {
   image: 'test-image.jpg',
   userId: 1,
   user: mockUser,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const authenticatedUserState: UserState = {

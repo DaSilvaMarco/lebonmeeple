@@ -92,6 +92,8 @@ const mockPostWithImage: Post = {
   user: mockUser,
   userId: 1,
   comments: [mockComment],
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const mockPostWithoutImage: Post = {
@@ -102,6 +104,8 @@ const mockPostWithoutImage: Post = {
   user: { ...mockUser, avatar: '' },
   userId: 1,
   comments: [],
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const renderWithChakra = (component: React.ReactElement) => {

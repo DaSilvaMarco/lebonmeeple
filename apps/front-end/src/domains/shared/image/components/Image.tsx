@@ -73,6 +73,8 @@ const Image = (props: Props) => {
     );
   }
 
+  console.log('NEXT IMAGE : ', src);
+
   return (
     <NextImage
       src={imageSrc}

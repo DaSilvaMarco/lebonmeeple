@@ -11,7 +11,7 @@ type Props = {
   posts: Post[];
 };
 
-const PostsGrid = (props: Props ) => {
+const PostsGrid = (props: Props) => {
   const { posts } = props;
   const MotionGridItem = motion(GridItem);
   const MotionGrid = motion(Grid);

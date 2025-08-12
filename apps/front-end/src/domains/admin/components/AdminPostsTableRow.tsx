@@ -7,7 +7,7 @@ import React, { Fragment, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { deletePost as deletePostAction } from '@/domains/post/slice';
 import { deletePost as deletePostApi } from '@/domains/post/api/delete-post';
-import Modal from '../../shared/modal/Modal';
+import ConfirmationModal from '@frontend/domains/shared/modal/ConfirmationModal';
 
 type Props = {
   post: Post;
@@ -18,7 +18,6 @@ const AdminPostsTableRow = (props: Props) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.user);
-  const [loading, setLoading] = useState(false);
 
   const ellipsisStyle = {
     maxWidth: '180px',
@@ -29,15 +28,12 @@ const AdminPostsTableRow = (props: Props) => {
   };
 
   const handleClick = async () => {
-    setLoading(true);
     try {
       await deletePostApi(post.id, token ?? '');
       dispatch(deletePostAction(post.id));
       setModalOpen(false);
     } catch (e) {
       console.log('error', e);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -70,32 +66,12 @@ const AdminPostsTableRow = (props: Props) => {
           <Button color="primary" type="button">
             <Link href={`/post/${post.id}`}>Voir</Link>
           </Button>
-          <Modal
-            isOpen={isModalOpen}
-            onClose={() => setModalOpen(false)}
-            title="Confirmation"
-            footer={
-              <>
-                <Button
-                  color="secondary"
-                  type="button"
-                  isLoading={loading}
-                  handleClick={handleClick}
-                >
-                  Confirmer
-                </Button>
-                <Button
-                  color="primary"
-                  type="button"
-                  handleClick={() => setModalOpen(false)}
-                >
-                  Annuler
-                </Button>
-              </>
-            }
-          >
-            Êtes-vous sûr de vouloir supprimer ce post ?
-          </Modal>
+          <ConfirmationModal
+            isModalOpen={isModalOpen}
+            setModalOpen={setModalOpen}
+            onConfirm={handleClick}
+            title="Êtes-vous sûr de vouloir supprimer ce post ?"
+          />
         </Td>
       </Tr>
     </Fragment>

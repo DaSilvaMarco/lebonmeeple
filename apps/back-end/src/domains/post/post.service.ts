@@ -31,9 +31,9 @@ export class PostService {
     }
   };
 
-  getAll = async () => {
+  getAll = async (page = 1, limit = 9) => {
     try {
-      return await getPosts(this.prismaService);
+      return await getPosts(this.prismaService, page, limit);
     } catch (error) {
       throwError(error);
     }

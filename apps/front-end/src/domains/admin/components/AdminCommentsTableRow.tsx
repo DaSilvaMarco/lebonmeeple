@@ -1,11 +1,11 @@
 import { Tr, Td } from '@chakra-ui/react';
 import Button from '@frontend/domains/shared/button/components/Button';
 import React, { Fragment, useState } from 'react';
-import Modal from '../../shared/modal/Modal';
 import { type Comment } from '@frontend/domains/comment/type';
 import { useAppDispatch, useAppSelector } from '@frontend/store/hook';
 import { deleteComment } from '@/domains/comment/slice';
 import { deleteCommentApi } from '@frontend/domains/comment';
+import ConfirmationModal from '../../shared/modal/ConfirmationModal';
 
 type Props = {
   comment: Comment;
@@ -55,31 +55,12 @@ const AdminCommentsTableRow = (props: Props) => {
           >
             Supprimer
           </Button>
-          <Modal
-            isOpen={isModalOpen}
-            onClose={() => setModalOpen(false)}
-            title="Confirmation"
-            footer={
-              <>
-                <Button
-                  color="secondary"
-                  type="button"
-                  handleClick={handleClick}
-                >
-                  Confirmer
-                </Button>
-                <Button
-                  color="primary"
-                  type="button"
-                  handleClick={() => setModalOpen(false)}
-                >
-                  Annuler
-                </Button>
-              </>
-            }
-          >
-            Êtes-vous sûr de vouloir supprimer ce commentaire ?
-          </Modal>
+          <ConfirmationModal
+            isModalOpen={isModalOpen}
+            setModalOpen={setModalOpen}
+            onConfirm={handleClick}
+            title="Êtes-vous sûr de vouloir supprimer ce commentaire ?"
+          />
         </Td>
       </Tr>
     </Fragment>

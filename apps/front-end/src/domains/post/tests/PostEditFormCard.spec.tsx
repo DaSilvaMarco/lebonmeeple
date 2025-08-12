@@ -68,6 +68,8 @@ const mockPost: Post = {
     avatar: 'avatar.jpg',
     roles: ['USER'],
   },
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 describe('PostEditFormCard', () => {

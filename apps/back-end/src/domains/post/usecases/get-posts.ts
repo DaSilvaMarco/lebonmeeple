@@ -1,14 +1,34 @@
 import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
 import { PRISMA_BASIC_USER } from '@backend/domains/user/constants';
 
-export const getPosts = async (prismaService: PrismaService) => {
-  return await prismaService.post.findMany({
-    include: {
-      user: {
-        select: {
-          ...PRISMA_BASIC_USER,
+export const getPosts = async (
+  prismaService: PrismaService,
+  page = 1,
+  limit = 10,
+) => {
+  const [posts, total] = await Promise.all([
+    prismaService.post.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        user: {
+          select: {
+            ...PRISMA_BASIC_USER,
+          },
         },
       },
-    },
-  });
+    }),
+    prismaService.post.count(),
+  ]);
+
+  return {
+    posts,
+    total,
+    page,
+    limit,
+    totalPages: Math.ceil(total / limit),
+  };
 };

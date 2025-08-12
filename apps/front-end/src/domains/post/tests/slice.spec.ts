@@ -20,6 +20,8 @@ const mockPost: Post = {
   image: '/test-image.jpg',
   user: mockUser,
   userId: 1,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const mockPost2: Post = {
@@ -29,6 +31,8 @@ const mockPost2: Post = {
   image: '/test-image2.jpg',
   user: mockUser,
   userId: 1,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const mockPost3: Post = {
@@ -38,6 +42,8 @@ const mockPost3: Post = {
   image: '/test-image3.jpg',
   user: mockUser,
   userId: 1,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 describe('Post Slice', () => {
@@ -295,6 +301,8 @@ describe('Post Slice', () => {
       image: '/newimage.jpg',
       user: newUser,
       userId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     partialStore.dispatch(updatePost(completelyUpdatedPost));
