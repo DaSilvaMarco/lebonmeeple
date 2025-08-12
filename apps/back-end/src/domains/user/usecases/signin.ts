@@ -31,6 +31,7 @@ export const signinUser = async (
     id: user.id,
     username: user.username,
     email: user.email,
+    roles: user.roles,
   };
 
   const userStorage = { ...userToken, avatar: user.avatar };

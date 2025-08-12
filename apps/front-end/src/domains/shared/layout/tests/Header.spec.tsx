@@ -71,6 +71,7 @@ describe('Header Component', () => {
       id: 1,
       username: 'testuser',
       email: 'test@example.com',
+      roles: ['USER'],
     };
 
     // Test avec utilisateur authentifié

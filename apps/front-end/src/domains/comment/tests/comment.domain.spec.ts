@@ -43,6 +43,7 @@ describe('Comment Domain', () => {
       email: 'test@example.com',
       username: 'testuser',
       avatar: 'avatar.jpg',
+      roles: ['USER'],
     },
   };
 

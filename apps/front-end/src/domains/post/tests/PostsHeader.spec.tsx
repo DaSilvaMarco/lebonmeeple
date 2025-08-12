@@ -96,6 +96,7 @@ describe('PostsHeader', () => {
       email: 'test@example.com',
       username: 'testuser',
       avatar: '/avatar.jpg',
+      roles: ['USER'],
     };
 
     renderWithProviders({
@@ -163,6 +164,7 @@ describe('PostsHeader', () => {
             email: 'test@example.com',
             username: 'testuser',
             avatar: '/avatar.jpg',
+            roles: ['USER'],
           },
         })}
       >
@@ -184,6 +186,7 @@ describe('PostsHeader', () => {
         email: 'test@example.com',
         username: 'testuser',
         avatar: '/avatar.jpg',
+        roles: ['USER'],
       },
     });
     expect(screen.queryByTestId('create-button')).not.toBeInTheDocument();

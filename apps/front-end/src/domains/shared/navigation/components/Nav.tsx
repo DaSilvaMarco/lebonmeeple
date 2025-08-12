@@ -13,7 +13,9 @@ import { useAppSelector } from '@frontend/store/hook';
 import { ChevronDownIcon, EditIcon } from '@chakra-ui/icons';
 
 const Nav = () => {
-  const { isAuthenticated } = useAppSelector((state) => state.user);
+  const { isAuthenticated, user } = useAppSelector((state) => state.user);
+
+  console.log('user : ', user);
 
   return (
     <Flex align="center" gap={8} fontSize="lg">
@@ -106,6 +108,75 @@ const Nav = () => {
           )}
         </MenuList>
       </Menu>
+
+      {user?.roles.includes('ADMIN') && (
+        <Menu>
+          <MenuButton
+            as={Button}
+            variant="ghost"
+            px={4}
+            py={2}
+            borderRadius="lg"
+            color="primary.500"
+            fontWeight="600"
+            fontFamily="heading"
+            rightIcon={<ChevronDownIcon />}
+            _hover={{
+              bg: 'primary.100',
+              color: 'primary.700',
+              transform: 'translateY(-1px)',
+            }}
+            _expanded={{
+              bg: 'primary.100',
+              color: 'primary.700',
+            }}
+            transition="all 0.2s"
+          >
+            Admin
+          </MenuButton>
+          <MenuList
+            bg="white"
+            border="1px solid"
+            borderColor="neutral.200"
+            borderRadius="xl"
+            shadow="lg"
+            minW="200px"
+            overflow="hidden"
+          >
+            <MenuItem
+              as={Link}
+              href="/admin/posts"
+              _hover={{
+                bg: 'primary.100',
+                color: 'primary.700',
+              }}
+              px={4}
+              py={3}
+              fontSize="md"
+              fontWeight="500"
+              data-testid="view-all-posts-button"
+            >
+              Voir les articles
+            </MenuItem>
+              <MenuItem
+                as={Link}
+                href="/admin/comments"
+                _hover={{
+                  bg: 'primary.100',
+                  color: 'primary.700',
+                }}
+                px={4}
+                py={3}
+                fontSize="md"
+                fontWeight="500"
+                data-testid="create-post-button"
+              >
+                Voir les commentaires
+                
+              </MenuItem>
+          </MenuList>
+        </Menu>
+      )}
 
       {/* Lien Profil */}
       {isAuthenticated && (

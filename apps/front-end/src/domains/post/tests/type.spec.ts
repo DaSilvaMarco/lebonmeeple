@@ -10,6 +10,7 @@ describe('Post Types', () => {
       email: 'test@example.com',
       username: 'testuser',
       avatar: '/defaultAvatar.jpg',
+      roles: ['USER'],
     };
 
     const mockComment: Comment = {
@@ -76,6 +77,7 @@ describe('Post Types', () => {
       email: 'test@example.com',
       username: 'testuser',
       avatar: '/defaultAvatar.jpg',
+      roles: ['USER'],
     };
 
     // Test initial state with empty posts array
@@ -138,6 +140,7 @@ describe('Post Types', () => {
       email: 'test@example.com',
       username: 'testuser',
       avatar: '/defaultAvatar.jpg',
+      roles: ['USER'],
     };
 
     const mockPost: Post = {
@@ -172,6 +175,7 @@ describe('Post Types', () => {
       email: 'user1@example.com',
       username: 'user1',
       avatar: '/avatar1.jpg',
+      roles: ['USER'],
     };
 
     const user2: User = {
@@ -179,6 +183,7 @@ describe('Post Types', () => {
       email: 'user2@example.com',
       username: 'user2',
       avatar: '/avatar2.jpg',
+      roles: ['USER'],
     };
 
     const post1: Post = {

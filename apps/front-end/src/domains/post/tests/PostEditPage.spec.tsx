@@ -59,6 +59,7 @@ const mockUser = {
   email: 'test@test.com',
   username: 'testuser',
   avatar: undefined,
+  roles: ['USER'],
 };
 
 const mockPost: Post = {

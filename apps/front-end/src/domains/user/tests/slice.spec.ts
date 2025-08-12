@@ -50,6 +50,7 @@ describe('userSlice', () => {
     username: 'testuser',
     email: 'test@example.com',
     avatar: 'avatar.jpg',
+    roles: ['USER'],
   };
 
   const mockToken = 'mock-jwt-token';
@@ -97,6 +98,7 @@ describe('userSlice', () => {
         username: 'updateduser',
         email: 'updated@example.com',
         avatar: 'new-avatar.jpg',
+        roles: ['USER'],
       };
 
       store.dispatch(updateUser(updatedData));
@@ -113,6 +115,7 @@ describe('userSlice', () => {
       const updatedData = {
         username: 'updateduser',
         email: 'updated@example.com',
+        roles: ['USER'],
       };
 
       store.dispatch(updateUser(updatedData));

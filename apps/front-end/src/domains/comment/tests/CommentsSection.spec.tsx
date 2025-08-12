@@ -38,6 +38,7 @@ const mockUser: User = {
   email: 'test@example.com',
   username: 'testuser',
   avatar: 'avatar.jpg',
+  roles: ['USER'],
 };
 
 const mockUser2: User = {
@@ -45,6 +46,7 @@ const mockUser2: User = {
   email: 'test2@example.com',
   username: 'testuser2',
   avatar: 'avatar2.jpg',
+  roles: ['USER'],
 };
 
 const mockComments: Comment[] = [
