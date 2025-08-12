@@ -4,16 +4,12 @@ import {
   ForbiddenException,
   Injectable,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
 import { isAuthorized } from './index';
 import { PrismaService } from '@prisma-service/prisma.service';
 
 @Injectable()
 export class IsOwnerGuard implements CanActivate {
-  constructor(
-    private readonly reflector: Reflector,
-    private readonly prismaService: PrismaService,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   canActivate = async (context: ExecutionContext): Promise<boolean> => {
     const request = context.switchToHttp().getRequest();

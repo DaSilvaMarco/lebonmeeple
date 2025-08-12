@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   ParseIntPipe,
   Patch,
@@ -45,5 +46,10 @@ export class CommentController {
     @Body() updateCommentDto: UpdateCommentDto,
   ) {
     return this.commentService.update(id, updateCommentDto);
+  }
+
+  @Get('comments')
+  getAll() {
+    return this.commentService.getAll();
   }
 }

@@ -28,6 +28,7 @@ test('The user can create an account', async () => {
       username: SIGNUP_DTO.username,
       password: 'hashedPassword',
       avatar: SIGNUP_DTO.avatar,
+      roles: ['USER'],
     },
   });
 

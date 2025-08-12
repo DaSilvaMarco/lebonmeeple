@@ -19,6 +19,7 @@ model User {
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
   avatar String
+  roles String[]
   posts Post[] @relation("user_posts")
   comments Comment[] @relation("user_comment")
 }

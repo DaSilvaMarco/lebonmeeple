@@ -39,6 +39,7 @@ const createTestStore = () =>
           email: 'test@test.com',
           username: 'testuser',
           avatar: undefined,
+          roles: ['USER'],
         },
       },
     },

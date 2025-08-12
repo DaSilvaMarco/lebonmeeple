@@ -12,6 +12,9 @@ export const commentSlice = createSlice({
     setComments: (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload;
     },
+    commentsList: (state, action: PayloadAction<Comment[]>) => {
+      state.comments = action.payload;
+    },
     addComment: (state, action: PayloadAction<Comment>) => {
       state.comments.push(action.payload);
     },
@@ -31,7 +34,12 @@ export const commentSlice = createSlice({
   },
 });
 
-export const { setComments, addComment, deleteComment, updateComment } =
-  commentSlice.actions;
+export const {
+  setComments,
+  commentsList,
+  addComment,
+  deleteComment,
+  updateComment,
+} = commentSlice.actions;
 
 export default commentSlice.reducer;

@@ -40,6 +40,7 @@ const createTestStore = () =>
           email: 'test@test.com',
           username: 'testuser',
           avatar: undefined,
+          roles: ['USER'],
         },
       },
     },
@@ -65,6 +66,7 @@ const mockPost: Post = {
     username: 'testuser',
     email: 'test@test.com',
     avatar: 'avatar.jpg',
+    roles: ['USER'],
   },
 };
 

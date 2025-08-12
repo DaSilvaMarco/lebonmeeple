@@ -17,3 +17,14 @@ export type BasicUser = {
   createdAt: number;
   updateAt: number;
 };
+
+export type User = {
+  username: string;
+  email: string;
+  avatar: string;
+  password: string;
+  id: number;
+  createdAt: number;
+  updateAt: number;
+  roles: string[];
+};

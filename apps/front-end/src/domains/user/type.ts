@@ -22,6 +22,7 @@ export type User = {
   username: string;
   email: string;
   avatar?: string;
+  roles: string[];
 };
 
 export type UserState = {

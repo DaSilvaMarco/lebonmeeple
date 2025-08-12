@@ -1,10 +1,11 @@
+import { type User } from '@backend/domains/user/types/users';
 import { ForbiddenException } from '@nestjs/common';
 
 export const checkUserPermission = async (
-  userId: number,
+  user: User,
   paramId: number,
 ): Promise<boolean> => {
-  if (userId === paramId) {
+  if (user.id === paramId || user.roles.includes('ADMIN')) {
     return true;
   }
 

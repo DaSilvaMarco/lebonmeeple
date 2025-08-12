@@ -295,6 +295,7 @@ describe('User Types and Schemas', () => {
         username: 'testuser',
         email: 'test@example.com',
         avatar: 'avatar.jpg',
+        roles: ['USER'],
       };
 
       expect(user.id).toBe(1);
@@ -341,6 +342,7 @@ describe('User Types and Schemas', () => {
           username: 'testuser',
           email: 'test@example.com',
           avatar: 'avatar.jpg',
+          roles: ['USER'],
         },
       };
 
@@ -354,6 +356,7 @@ describe('User Types and Schemas', () => {
         username: 'newusername',
         email: 'newemail@example.com',
         avatar: 'newavatar.jpg',
+        roles: ['USER'],
       };
 
       expect(updatedUser.username).toBe('newusername');

@@ -30,6 +30,7 @@ async function main() {
       email: 'tdasilva.marco@gmail.com',
       password: await bcrypt.hash('pouetpouet', 10),
       avatar: faker.image.avatar(),
+      roles: ['USER', 'ADMIN'],
     },
   });
 
@@ -41,6 +42,7 @@ async function main() {
         email: faker.internet.email(),
         password: faker.internet.password({ length: 12 }),
         avatar: faker.image.avatar(),
+        roles: ['USER'],
       },
     });
     users.push(user);

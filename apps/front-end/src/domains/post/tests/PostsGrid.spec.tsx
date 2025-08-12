@@ -54,6 +54,7 @@ const mockPosts: Post[] = [
       username: 'testuser1',
       email: 'test1@test.com',
       avatar: 'avatar1.jpg',
+      roles: ['USER'],
     },
   },
   {
@@ -67,6 +68,7 @@ const mockPosts: Post[] = [
       username: 'testuser2',
       email: 'test2@test.com',
       avatar: 'avatar2.jpg',
+      roles: ['USER'],
     },
   },
 ];

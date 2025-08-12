@@ -10,6 +10,7 @@ const mockUser: User = {
   email: 'test@example.com',
   username: 'testuser',
   avatar: '/defaultAvatar.jpg',
+  roles: ['USER'],
 };
 
 const mockPost: Post = {
@@ -284,6 +285,7 @@ describe('Post Slice', () => {
       email: 'newuser@example.com',
       username: 'newuser',
       avatar: '/newavatar.jpg',
+      roles: ['USER'],
     };
 
     const completelyUpdatedPost: Post = {

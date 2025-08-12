@@ -1,8 +1,9 @@
+import { type User } from '@backend/domains/user/types/users';
 import { ForbiddenException } from '@nestjs/common';
 import { type PrismaService } from '@prisma-service/prisma.service';
 
 export const checkCommentPermission = async (
-  userId: number,
+  user: User,
   paramId: number,
   prisma: PrismaService,
 ): Promise<boolean> => {
@@ -10,7 +11,11 @@ export const checkCommentPermission = async (
     where: { id: paramId },
   });
 
-  if (comment && comment.userId === userId) {
+  if (!comment) {
+    throw new ForbiddenException('Guard: Comment not found');
+  }
+
+  if (comment.userId === user.id || user.roles.includes('ADMIN')) {
     return true;
   }
 

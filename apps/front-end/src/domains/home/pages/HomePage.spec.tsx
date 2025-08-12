@@ -179,6 +179,7 @@ describe('HomePage', () => {
           email: 'test@example.com',
           username: 'testuser',
           avatar: '/defaultAvatar.jpg',
+          roles: ['USER'],
         },
       });
 
@@ -317,6 +318,7 @@ describe('HomePage', () => {
             email: 'user@example.com',
             username: 'testuser',
             avatar: '/defaultAvatar.jpg',
+            roles: ['USER'],
           },
         },
         { isAuthenticated: false, isLoading: true, user: null },

@@ -77,7 +77,12 @@ describe('Nav Component', () => {
       <TestWrapper
         store={createTestStore({
           isAuthenticated: true,
-          user: { id: 1, username: 'testuser', email: 'test@example.com' },
+          user: {
+            id: 1,
+            username: 'testuser',
+            email: 'test@example.com',
+            roles: ['USER'],
+          },
         })}
       >
         <Nav />
@@ -123,7 +128,7 @@ describe('Nav Component', () => {
       <TestWrapper
         store={createTestStore({
           isAuthenticated: true,
-          user: { id: 1, username: 'testuser', email: 'test@example.com' },
+          user: { id: 1, username: 'testuser', email: 'test@example.com', roles: ['USER'] },
         })}
       >
         <Nav />

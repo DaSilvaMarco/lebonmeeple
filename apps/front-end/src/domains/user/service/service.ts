@@ -9,7 +9,13 @@ export const signinAndGetMe = async (data: LoginFormData) => {
   const { id, email, username } = me;
 
   return {
-    user: { id, email, username, avatar: userStorage.avatar },
+    user: {
+      id,
+      email,
+      username,
+      avatar: userStorage.avatar,
+      roles: userStorage.roles,
+    },
     token,
   };
 };

@@ -35,6 +35,7 @@ const mockUser: User = {
   email: 'test@example.com',
   username: 'testuser',
   avatar: '/defaultAvatar.jpg',
+  roles: ['USER'],
 };
 
 const mockPost1: Post = {
