@@ -9,7 +9,7 @@ describe('NotConnected', () => {
     expect(screen.getByText("Vous n'êtes pas connecté.")).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /se connecter/i })).toHaveAttribute(
       'href',
-      '/login',
+      '/signin',
     );
     expect(
       screen.getByRole('button', { name: /se connecter/i }),

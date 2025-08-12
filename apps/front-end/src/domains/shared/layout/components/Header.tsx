@@ -76,7 +76,7 @@ const Header = () => {
         ) : (
           <Show above="md">
             <HStack spacing={2}>
-              <Link href="/login">
+              <Link href="/signin">
                 <Button type="button" color="primary">
                   Connexion
                 </Button>

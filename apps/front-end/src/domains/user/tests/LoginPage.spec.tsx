@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 import { configureStore } from '@reduxjs/toolkit';
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../pages/SigninPage';
 import { lebonmeepleApi } from '@frontend/store/lebonmeepleApi';
 import theme from '@frontend/ui/theme';
 

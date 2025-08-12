@@ -114,7 +114,6 @@ const LoginForm = () => {
           <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
         </FormControl>
 
-        {/* Lien mot de passe oublié */}
         <Box w="full" textAlign="right">
           <Link href="/forgot-password">
             <Text fontSize="sm" color="primary.500" cursor="pointer">

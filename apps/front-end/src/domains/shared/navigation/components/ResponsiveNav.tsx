@@ -6,7 +6,6 @@ import {
   AiOutlineLogin,
   AiOutlineHome,
   AiOutlineAudit,
-  AiOutlinePoweroff,
   AiOutlineSetting,
 } from 'react-icons/ai';
 
@@ -33,7 +32,7 @@ function ResponsiveNav() {
         justifyContent="space-between"
       >
         <ListItem>
-          <Link href={''}>
+          <Link href="/">
             <Flex direction="column" alignItems="center">
               <AiOutlineHome fontSize="20px" />
               <Text fontWeight="bold" color="white">
@@ -45,7 +44,7 @@ function ResponsiveNav() {
         {!user ? (
           <>
             <ListItem>
-              <Link href={''}>
+              <Link href="/signin">
                 <Flex direction="column" alignItems="center">
                   <AiOutlineLogin fontSize="20px" />
                   <Text fontWeight="bold" color="white">
@@ -55,7 +54,7 @@ function ResponsiveNav() {
               </Link>
             </ListItem>
             <ListItem>
-              <Link href={''}>
+              <Link href="/signup">
                 <Flex direction="column" alignItems="center">
                   <AiOutlineLaptop fontSize="20px" />
                   <Text fontWeight="bold" color="white">
@@ -68,17 +67,17 @@ function ResponsiveNav() {
         ) : (
           <>
             <ListItem>
-              <Link href={''}>
+              <Link href="/posts">
                 <Flex direction="column" alignItems="center">
                   <AiOutlineAudit fontSize="20px" />
                   <Text fontWeight="bold" color="white">
-                    Blog
+                    Articles
                   </Text>
                 </Flex>
               </Link>
             </ListItem>
             <ListItem>
-              <Link href={''}>
+              <Link href="/profile">
                 <Flex direction="column" alignItems="center">
                   <AiOutlineSetting fontSize="20px" />
                   <Text fontWeight="bold" color="white">
@@ -86,20 +85,6 @@ function ResponsiveNav() {
                   </Text>
                 </Flex>
               </Link>
-            </ListItem>
-            <ListItem
-              cursor="pointer"
-              // onClick={() => {
-              //   dispatch(logout());
-              //   notifySuccess('Déconnexion réussie');
-              // }}
-            >
-              <Flex direction="column" alignItems="center">
-                <AiOutlinePoweroff fontSize="20px" />
-                <Text fontWeight="bold" color="white">
-                  Logout
-                </Text>
-              </Flex>
             </ListItem>
           </>
         )}

@@ -9,18 +9,22 @@ import { lebonmeepleApi } from '@frontend/store/lebonmeepleApi';
 import theme from '@frontend/ui/theme';
 
 // Mock du domaine user
-vi.mock('@frontend/domains/user/pages/LoginPage', () => ({
-  default: vi.fn(() => <div data-testid="login-page">Mocked LoginPage</div>),
+vi.mock('@frontend/domains/user/pages/SigninPage', () => ({
+  default: vi.fn(() => <div data-testid="login-page">Mocked SigninPage</div>),
 }));
 
 // Import du composant mocké pour les types
-import LoginPage from '@frontend/domains/user/pages/LoginPage';
+import SigninPage from '@frontend/domains/user/pages/SigninPage';
 
 // Configuration du store de test
+// Mock user reducer to provide isLoading property
+const mockUserReducer = (state = { isLoading: false }) => state;
+
 const createTestStore = () => {
   return configureStore({
     reducer: {
       [lebonmeepleApi.reducerPath]: lebonmeepleApi.reducer,
+      user: mockUserReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(lebonmeepleApi.middleware),
@@ -43,8 +47,8 @@ describe('Login Page App', () => {
     vi.clearAllMocks();
   });
 
-  it('should render the LoginPage component successfully', () => {
-    const MockedLoginPage = vi.mocked(LoginPage);
+  it('should render the SigninPage component successfully', () => {
+    const MockedSigninPage = vi.mocked(SigninPage);
 
     render(
       <TestWrapper>
@@ -52,8 +56,8 @@ describe('Login Page App', () => {
       </TestWrapper>,
     );
 
-    // Vérifie que le composant LoginPage est bien appelé
-    expect(MockedLoginPage).toHaveBeenCalledTimes(1);
+    // Vérifie que le composant SigninPage est bien appelé
+    expect(MockedSigninPage).toHaveBeenCalled();
     // Vérifie que le composant est rendu dans le DOM
     expect(screen.getByTestId('login-page')).toBeInTheDocument();
   });

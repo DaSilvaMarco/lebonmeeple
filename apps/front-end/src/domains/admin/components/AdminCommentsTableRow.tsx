@@ -55,9 +55,6 @@ const AdminCommentsTableRow = (props: Props) => {
           >
             Supprimer
           </Button>
-          {/* <Button color="primary" type="button">
-            <Link href={`/posts/${comment.id}`}>Voir</Link>
-          </Button> */}
           <Modal
             isOpen={isModalOpen}
             onClose={() => setModalOpen(false)}

@@ -39,7 +39,7 @@ const SignupDivider = () => {
           Vous avez déjà un compte ?
         </Text>
         <Flex justify="center" align="center" width="100%">
-          <Link href="/login">
+          <Link href="/signin">
             <Button type="button" color="secondary">
               Se connecter
             </Button>

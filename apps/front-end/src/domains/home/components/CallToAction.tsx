@@ -12,7 +12,7 @@ const CallToAction = () => {
           S'inscrire
         </Button>
       </Link>
-      <Link href="/login">
+      <Link href="/signin">
         <Button color="primary" type="button" icon={<Icon as={FaRocket} />}>
           Se connecter
         </Button>

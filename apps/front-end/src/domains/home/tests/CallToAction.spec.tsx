@@ -98,12 +98,12 @@ describe('CallToAction Component', () => {
 
     // Vérification des liens avec leurs attributs href
     const signupLink = screen.getByTestId('link-/signup');
-    const loginLink = screen.getByTestId('link-/login');
+    const loginLink = screen.getByTestId('link-/signin');
 
     expect(signupLink).toBeInTheDocument();
     expect(signupLink).toHaveAttribute('href', '/signup');
     expect(loginLink).toBeInTheDocument();
-    expect(loginLink).toHaveAttribute('href', '/login');
+    expect(loginLink).toHaveAttribute('href', '/signin');
 
     // Vérification de la structure complète (tous les éléments sont cliquables)
     expect(signupButton).toBeInTheDocument();
