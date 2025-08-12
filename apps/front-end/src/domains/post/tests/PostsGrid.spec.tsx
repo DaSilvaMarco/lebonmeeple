@@ -56,6 +56,8 @@ const mockPosts: Post[] = [
       avatar: 'avatar1.jpg',
       roles: ['USER'],
     },
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 2,
@@ -70,6 +72,8 @@ const mockPosts: Post[] = [
       avatar: 'avatar2.jpg',
       roles: ['USER'],
     },
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ];
 

@@ -14,7 +14,7 @@ test('The user can update a post', async () => {
 
   expect(prismaMock.post.update).toHaveBeenCalledWith({
     where: { id: 1 },
-    data: UPDATE_DTO,
+    data: { ...UPDATE_DTO, updatedAt: expect.any(Date) },
   });
 
   expect(result).not.toMatchObject({

@@ -18,6 +18,8 @@ test('The user can create an account', async () => {
       title: CREATE_DTO.title,
       userId: 1,
       image: CREATE_DTO.image,
+      createdAt: expect.any(Date),
+      updatedAt: expect.any(Date),
     },
   });
 
@@ -26,5 +28,7 @@ test('The user can create an account', async () => {
     title: CREATE_DTO.title,
     userId: 1,
     image: CREATE_DTO.image,
+    createdAt: expect.any(String),
+    updatedAt: expect.any(String),
   });
 });

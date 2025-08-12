@@ -25,10 +25,6 @@ vi.mock('../components/PostsGrid', () => ({
   ),
 }));
 
-vi.mock('../components/PostsHeader', () => ({
-  default: () => <div data-testid="posts-header">Posts Header Component</div>,
-}));
-
 // Mock data
 const mockUser: User = {
   id: 1,
@@ -45,6 +41,8 @@ const mockPost1: Post = {
   image: '/test-image1.jpg',
   user: mockUser,
   userId: 1,
+  updatedAt: new Date(),
+  createdAt: new Date(),
 };
 
 const mockPost2: Post = {
@@ -54,6 +52,8 @@ const mockPost2: Post = {
   image: '/test-image2.jpg',
   user: mockUser,
   userId: 1,
+  updatedAt: new Date(),
+  createdAt: new Date(),
 };
 
 const mockPost3: Post = {
@@ -63,6 +63,8 @@ const mockPost3: Post = {
   image: '/test-image3.jpg',
   user: mockUser,
   userId: 1,
+  updatedAt: new Date(),
+  createdAt: new Date(),
 };
 
 // Helper function to create a mock store
@@ -103,15 +105,10 @@ describe('PostsPage', () => {
 
     // Verify basic rendering and layout structure
     expect(container.firstChild).toBeInTheDocument();
-    expect(screen.getByTestId('posts-header')).toBeInTheDocument();
     expect(screen.getByTestId('posts-grid')).toBeInTheDocument();
 
     // Verify component order and structure
-    const header = screen.getByTestId('posts-header');
     const grid = screen.getByTestId('posts-grid');
-    expect(header.compareDocumentPosition(grid)).toBe(
-      Node.DOCUMENT_POSITION_FOLLOWING,
-    );
 
     // Verify empty posts handling
     expect(grid).toHaveAttribute('data-posts-count', '0');
@@ -119,13 +116,7 @@ describe('PostsPage', () => {
 
     // Verify accessibility and semantic structure
     expect(container.firstChild).toBeInTheDocument();
-    expect(header).toBeInTheDocument();
     expect(grid).toBeInTheDocument();
-
-    // Test component boundaries
-    expect(header).not.toBe(grid);
-    expect(header.contains(grid)).toBe(false);
-    expect(grid.contains(header)).toBe(false);
   });
 
   it('should handle posts data and Redux integration correctly', () => {
@@ -248,7 +239,6 @@ describe('PostsPage', () => {
         <PostsPage />
       </Provider>,
     );
-    expect(screen.getByTestId('posts-header')).toBeInTheDocument();
     expect(screen.getByTestId('posts-grid')).toBeInTheDocument();
 
     // Clean up
@@ -256,10 +246,8 @@ describe('PostsPage', () => {
 
     // Test 4: Unmounting and memory management
     const { unmount: unmount3 } = renderWithProviders([mockPost1, mockPost2]);
-    expect(screen.getByTestId('posts-header')).toBeInTheDocument();
     expect(screen.getByTestId('posts-grid')).toBeInTheDocument();
     unmount3();
-    expect(screen.queryByTestId('posts-header')).not.toBeInTheDocument();
     expect(screen.queryByTestId('posts-grid')).not.toBeInTheDocument();
 
     // Test 5: Rapid re-renders and state changes
@@ -292,9 +280,6 @@ describe('PostsPage', () => {
     // Test 6: Component integration and data passing
     const integrationPosts = [mockPost1, mockPost2];
     const { unmount: unmount5 } = renderWithProviders(integrationPosts);
-    expect(screen.getByTestId('posts-header')).toHaveTextContent(
-      'Posts Header Component',
-    );
     const finalGrid = screen.getByTestId('posts-grid');
     expect(finalGrid).toHaveAttribute('data-posts-count', '2');
     integrationPosts.forEach((post) => {

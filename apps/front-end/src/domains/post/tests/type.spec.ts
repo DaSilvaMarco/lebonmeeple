@@ -31,6 +31,8 @@ describe('Post Types', () => {
       user: mockUser,
       userId: 1,
       comments: [mockComment],
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     expect(postWithComments.id).toBe(1);
@@ -50,6 +52,8 @@ describe('Post Types', () => {
       image: '/image2.jpg',
       user: mockUser,
       userId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     expect(postWithoutComments.comments).toBeUndefined();
@@ -65,6 +69,8 @@ describe('Post Types', () => {
       user: mockUser,
       userId: 1,
       comments: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     expect(postWithEmptyComments.comments).toEqual([]);
@@ -96,6 +102,8 @@ describe('Post Types', () => {
       image: '/test-image.jpg',
       user: mockUser,
       userId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     const stateWithSinglePost: InitialStatePost = {
@@ -114,6 +122,8 @@ describe('Post Types', () => {
         image: '/image1.jpg',
         user: mockUser,
         userId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         id: 2,
@@ -122,6 +132,8 @@ describe('Post Types', () => {
         image: '/image2.jpg',
         user: mockUser,
         userId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ];
 
@@ -150,6 +162,8 @@ describe('Post Types', () => {
       image: '/test-image.jpg',
       user: mockUser,
       userId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     const mockComment: Comment = {
@@ -193,6 +207,8 @@ describe('Post Types', () => {
       image: '/image1.jpg',
       user: user1,
       userId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     const post2: Post = {
@@ -202,6 +218,8 @@ describe('Post Types', () => {
       image: '/image2.jpg',
       user: user2,
       userId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     // Verify different users maintain separate identity
