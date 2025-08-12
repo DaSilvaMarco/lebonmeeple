@@ -1,6 +1,6 @@
 import { ForbiddenException } from '@nestjs/common';
 import { type Request } from 'express';
-import { permissionCheckers } from './permissions/index';
+import { permissionCheckers } from './permissions/permission-checker';
 import { type PrismaService } from '@prisma-service/prisma.service';
 import { type User } from '@backend/domains/user/types/users';
 

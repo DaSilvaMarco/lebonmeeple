@@ -1,13 +1,14 @@
 /* istanbul ignore file */
 import { Injectable } from '@nestjs/common';
-import { type CreateCommentDto, type UpdateCommentDto } from './dtos';
-import { createComment } from './usecases/create';
+import { createComment } from './usecases/create-comment';
 import { type Request } from 'express';
-import { deleteComment } from './usecases/delete';
-import { updateComment } from './usecases/update';
+import { deleteComment } from './usecases/delete-comment';
+import { updateComment } from './usecases/update-comment';
 import { PrismaService } from '@prisma-service/prisma.service';
 import { throwError } from '@utils/errors';
-import { getAllComments } from './usecases/get';
+import { CreateCommentDto } from './dtos/create-comment-dto';
+import { UpdateCommentDto } from './dtos/update-comment-dto';
+import { getComments } from './usecases/get-comments';
 
 @Injectable()
 export class CommentService {
@@ -48,7 +49,7 @@ export class CommentService {
 
   getAll = async () => {
     try {
-      return await getAllComments(this.prismaService);
+      return await getComments(this.prismaService);
     } catch (error) {
       throwError(error);
     }

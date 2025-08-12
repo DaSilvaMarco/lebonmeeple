@@ -14,7 +14,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { UserService } from './user.service';
 import { type SigninDto, type SignupDto, type UpdateDto } from './dtos';
-import { IsOwner } from '@decorator/is-owner.decorator';
+import { IsOwner } from '@backend/decorator/is-owner-or-admin.decorator';
 
 @ApiTags('User')
 @Controller()

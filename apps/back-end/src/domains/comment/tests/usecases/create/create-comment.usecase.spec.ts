@@ -1,7 +1,7 @@
 import { prismaMock as prismaMockCreate, requestMock } from './mock';
 import { CREATE_DTO } from './const';
-import { createComment } from '../../../usecases';
 import { expect, test } from 'vitest';
+import { createComment } from '@backend/domains/comment/usecases/create-comment';
 
 test('The user can create a comment in a post', async () => {
   const prismaMock = prismaMockCreate(CREATE_DTO);

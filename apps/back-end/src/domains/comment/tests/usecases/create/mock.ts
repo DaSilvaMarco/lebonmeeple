@@ -1,4 +1,4 @@
-import { type CreateCommentDto } from '../../../dtos';
+import { CreateCommentDto } from '@backend/domains/comment/dtos/create-comment-dto';
 import { type PrismaService } from '../../../../../prisma/prisma.service';
 import { type Request } from 'express';
 import { vi } from 'vitest';

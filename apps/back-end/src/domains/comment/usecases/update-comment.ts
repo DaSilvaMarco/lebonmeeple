@@ -1,5 +1,5 @@
 import { type PrismaService } from 'apps/back-end/src/prisma/prisma.service';
-import { type UpdateCommentDto } from '../dtos';
+import { UpdateCommentDto } from '../dtos/update-comment-dto';
 
 export const updateComment = async (
   id: number,
