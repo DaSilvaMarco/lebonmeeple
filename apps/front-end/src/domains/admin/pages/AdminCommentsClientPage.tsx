@@ -4,7 +4,7 @@ import NotConnected from '@frontend/domains/shared/warning/NotConnected';
 import { useAppSelector } from '@frontend/store/hook';
 import React from 'react';
 
-const AdminCommentsPage = () => {
+const AdminCommentsClientPage = () => {
   const { user } = useAppSelector((state) => state.user);
 
   if (!user?.roles.includes('ADMIN')) {
@@ -13,4 +13,4 @@ const AdminCommentsPage = () => {
   return <div>Admin comments</div>;
 };
 
-export default AdminCommentsPage;
+export default AdminCommentsClientPage;

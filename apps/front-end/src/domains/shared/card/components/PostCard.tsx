@@ -148,7 +148,7 @@ const PostCard = (props: Props) => {
               Jeu de société
             </Badge>
           </Box>
-          {user?.id === post.userId && (
+          {user?.id === post.userId || user?.roles.includes('ADMIN') && (
             <Box position="absolute" top={3} left={3}>
               <HStack spacing={2}>
                 <IconButton

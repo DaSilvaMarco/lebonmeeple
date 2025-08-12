@@ -1,8 +1,7 @@
 import React from 'react';
 
-import AdminPostsPage from '@frontend/domains/admin/pages/AdminPostsPage';
+import AdminPostsClientPage from '@frontend/domains/admin/pages/AdminPostsClientPage';
 
 export default function App() {
-
-  return <AdminPostsPage />;
+  return <AdminPostsClientPage />;
 }

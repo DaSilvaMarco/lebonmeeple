@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AdminCommentsPage from '@frontend/domains/admin/pages/AdminCommentsPage';
+import AdminCommentsClientPage from '@frontend/domains/admin/pages/AdminCommentsClientPage';
 
 export default function App() {
-  return <AdminCommentsPage />;
+  return <AdminCommentsClientPage />;
 }
