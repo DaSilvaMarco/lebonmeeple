@@ -1,8 +1,9 @@
+import { type User } from '@backend/domains/user/types/users';
 import { ForbiddenException } from '@nestjs/common';
 import { type PrismaService } from '@prisma-service/prisma.service';
 
 export const checkPostPermission = async (
-  userId: number,
+  user: User,
   paramId: number,
   prisma: PrismaService,
 ): Promise<boolean> => {
@@ -10,7 +11,11 @@ export const checkPostPermission = async (
     where: { id: paramId },
   });
 
-  if (post && post.userId === userId) {
+  if (!post) {
+    throw new ForbiddenException('Guard: Post not found');
+  }
+
+  if (post.userId === user.id || user.roles.includes('ADMIN')) {
     return true;
   }
 
