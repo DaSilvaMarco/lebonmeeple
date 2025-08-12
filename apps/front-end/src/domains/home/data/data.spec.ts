@@ -1,60 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { FaGamepad, FaPenNib, FaRocket, FaUsers } from 'react-icons/fa';
-import { features, homeData, testimonials } from './data';
+import { features, testimonials } from './data';
 
 describe('Home Data', () => {
-  describe('homeData', () => {
-    it('should be an array with 3 items', () => {
-      expect(homeData).toBeInstanceOf(Array);
-      expect(homeData).toHaveLength(3);
-    });
-
-    it('should have correct structure for each item', () => {
-      homeData.forEach((item) => {
-        expect(item).toHaveProperty('text');
-        expect(item).toHaveProperty('image');
-        expect(typeof item.text).toBe('string');
-        expect(typeof item.image).toBe('string');
-      });
-    });
-
-    it('should contain expected content for first item', () => {
-      const [firstItem] = homeData;
-      expect(firstItem.text).toBe(
-        'Rejoignez la plus grosse communauté professionnelle de jeux de société',
-      );
-      expect(firstItem.image).toBe('/boardgame.jpg');
-    });
-
-    it('should contain expected content for second item', () => {
-      const [, secondItem] = homeData;
-      expect(secondItem.text).toBe(
-        "Retrouvez plusieurs de vos éditeurs, influenceurs préférés du processus de création d'un jeu.",
-      );
-      expect(secondItem.image).toBe('/boardgame2.jpg');
-    });
-
-    it('should contain expected content for third item', () => {
-      const [, , thirdItem] = homeData;
-      expect(thirdItem.text).toBe(
-        'Abonnez-vous aux utilisateurs afin de filtrer les informations que vous souhaitez !',
-      );
-      expect(thirdItem.image).toBe('/boardgame3.jpg');
-    });
-
-    it('should have non-empty text for all items', () => {
-      homeData.forEach((item) => {
-        expect(item.text.length).toBeGreaterThan(0);
-      });
-    });
-
-    it('should have valid image paths for all items', () => {
-      homeData.forEach((item) => {
-        expect(item.image).toMatch(/^\/boardgame\d*\.jpg$/);
-      });
-    });
-  });
-
   describe('features', () => {
     it('should be an array with 4 items', () => {
       expect(features).toBeInstanceOf(Array);
@@ -212,16 +160,8 @@ describe('Home Data', () => {
 
   describe('Data integrity tests', () => {
     it('should export all required data structures', () => {
-      expect(homeData).toBeDefined();
       expect(features).toBeDefined();
       expect(testimonials).toBeDefined();
-    });
-
-    it('should have consistent image path format across homeData', () => {
-      const imagePattern = /^\/[a-zA-Z0-9]+\.(jpg|png|jpeg)$/;
-      homeData.forEach((item) => {
-        expect(item.image).toMatch(imagePattern);
-      });
     });
 
     it('should have all testimonials using the same avatar', () => {
@@ -248,16 +188,13 @@ describe('Home Data', () => {
     });
 
     it('should maintain data immutability', () => {
-      const originalHomeDataLength = homeData.length;
       const originalFeaturesLength = features.length;
       const originalTestimonialsLength = testimonials.length;
 
       // Attempt to modify (should not affect original if properly exported)
-      const homeDataCopy = [...homeData];
       const featuresCopy = [...features];
       const testimonialsCopy = [...testimonials];
 
-      homeDataCopy.push({ text: 'test', image: 'test' });
       featuresCopy.push({
         icon: FaUsers,
         title: 'test',
@@ -270,7 +207,6 @@ describe('Home Data', () => {
         avatar: 'test',
       });
 
-      expect(homeData.length).toBe(originalHomeDataLength);
       expect(features.length).toBe(originalFeaturesLength);
       expect(testimonials.length).toBe(originalTestimonialsLength);
     });
