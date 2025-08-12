@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '@/domains/shared/modal/Modal';
-import Button from '@/domains/shared/button/components/Button';
+import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
 import { useDisclosure } from '@chakra-ui/react';
 import {
   Box,
@@ -143,39 +142,15 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
           </ChakraButton>
         </VStack>
       </Box>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setPendingData(null);
+      <ConfirmationModal
+        isModalOpen={isModalOpen}
+        setModalOpen={(open) => {
+          if (!open) setPendingData(null);
           closeModal();
         }}
-        title="Confirmer la publication"
-        footer={
-          <>
-            <Button
-              color="primary"
-              handleClick={handleConfirmComment}
-              isLoading={isSubmitting}
-              dataTestId="confirm-create-button"
-            >
-              Confirmer
-            </Button>
-            <Button
-              color="secondary"
-              handleClick={() => {
-                setPendingData(null);
-                closeModal();
-              }}
-              isDisabled={isSubmitting}
-              dataTestId="cancel-create-button"
-            >
-              Annuler
-            </Button>
-          </>
-        }
-      >
-        Êtes-vous sûr de vouloir publier ce commentaire ?
-      </Modal>
+        onConfirm={handleConfirmComment}
+        title="Êtes-vous sûr de vouloir publier ce commentaire ?"
+      />
     </>
   );
 };

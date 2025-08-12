@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import Modal from '@/domains/shared/modal/Modal';
+import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
 import Button from '@/domains/shared/button/components/Button';
 import { useDisclosure } from '@chakra-ui/react';
-import { Box, Textarea, VStack, HStack, Text, useToast, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  Textarea,
+  VStack,
+  HStack,
+  Text,
+  useToast,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createCommentSchema } from '../schema';
@@ -130,39 +138,15 @@ const CommentEditForm = ({
           </HStack>
         </VStack>
       </Box>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setPendingData(null);
+      <ConfirmationModal
+        isModalOpen={isModalOpen}
+        setModalOpen={(open) => {
+          if (!open) setPendingData(null);
           closeModal();
         }}
-        title="Confirmer la modification"
-        footer={
-          <>
-            <Button
-              color="primary"
-              handleClick={handleConfirmEdit}
-              isLoading={isSubmitting}
-              dataTestId="confirm-edit-button"
-            >
-              Confirmer
-            </Button>
-            <Button
-              color="secondary"
-              handleClick={() => {
-                setPendingData(null);
-                closeModal();
-              }}
-              isDisabled={isSubmitting}
-              dataTestId="cancel-edit-button"
-            >
-              Annuler
-            </Button>
-          </>
-        }
-      >
-        Êtes-vous sûr de vouloir modifier ce commentaire ?
-      </Modal>
+        onConfirm={handleConfirmEdit}
+        title='Êtes-vous sûr de vouloir modifier ce commentaire ?'
+      />
     </>
   );
 };

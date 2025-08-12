@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '@/domains/shared/modal/Modal';
+import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
 import { useDisclosure } from '@chakra-ui/react';
 import {
   Card,
@@ -24,7 +24,6 @@ import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
 import { deletePost as deletePostApi } from '@frontend/domains/post/api/delete-post';
 import { deletePost as deletePostAction } from '@frontend/domains/post/slice';
 import { toastSuccess, toastError } from '@frontend/domains/shared/toat/toast';
-import Button from '../../button/components/Button';
 
 type Props = {
   post: Post;
@@ -248,60 +247,21 @@ const PostCard = (props: Props) => {
           </VStack>
         </CardBody>
       </Card>
-      <Modal
-        isOpen={isDeleteModalOpen}
-        onClose={closeDeleteModal}
-        title="Confirmer la suppression"
-        footer={
-          <>
-            <Button
-              color="primary"
-              handleClick={handleConfirmDelete}
-              icon={<DeleteIcon />}
-              isLoading={isDeleting}
-              dataTestId="modal-confirm-button"
-            >
-              Supprimer
-            </Button>
-            <Button
-              color="secondary"
-              handleClick={closeDeleteModal}
-              dataTestId="modal-cancel-button"
-            >
-              Annuler
-            </Button>
-          </>
-        }
-      >
-        Êtes-vous sûr de vouloir supprimer ce post ?
-      </Modal>
-
-      <Modal
-        isOpen={isEditModalOpen}
-        onClose={closeEditModal}
-        title="Confirmer la modification"
-        footer={
-          <>
-            <Button
-              color="primary"
-              handleClick={handleConfirmEdit}
-              icon={<EditIcon />}
-              dataTestId="modal-confirm-button"
-            >
-              Modifier !
-            </Button>
-            <Button
-              color="secondary"
-              handleClick={closeEditModal}
-              dataTestId="modal-cancel-button"
-            >
-              Annuler
-            </Button>
-          </>
-        }
-      >
-        Êtes-vous sûr de vouloir modifier ce post ?
-      </Modal>
+      <ConfirmationModal
+        isModalOpen={isDeleteModalOpen}
+        setModalOpen={(open) => {
+          if (!open) setIsDeleting(false);
+          closeDeleteModal();
+        }}
+        onConfirm={handleConfirmDelete}
+        title={'Êtes-vous sûr de vouloir supprimer ce post ?'}
+      />
+      <ConfirmationModal
+        isModalOpen={isEditModalOpen}
+        setModalOpen={closeEditModal}
+        onConfirm={handleConfirmEdit}
+        title={'Êtes-vous sûr de vouloir modifier ce post ?'}
+      />
     </Link>
   );
 };
