@@ -61,7 +61,7 @@ const HomeHeader = (props: Props) => {
       <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} w="full">
         {isAuthenticated ? (
           <>
-            <Link href="/blog">
+            <Link href="/posts">
               <Button
                 type="button"
                 color="secondary"
@@ -70,7 +70,7 @@ const HomeHeader = (props: Props) => {
                 Explorer les Articles
               </Button>
             </Link>
-            <Link href="/blog/create">
+            <Link href="/post/create">
               <Button
                 type="button"
                 color="primary"
@@ -91,7 +91,7 @@ const HomeHeader = (props: Props) => {
                 Rejoindre la communauté
               </Button>
             </Link>
-            <Link href="/login">
+            <Link href="/signin">
               <Button
                 color="primary"
                 type="button"

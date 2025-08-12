@@ -6,7 +6,7 @@ const { Given } = createBdd();
 Given(
   'je me connecte en tant que {string} avec {string}',
   async ({ page }, user, password) => {
-    await page.goto('http://localhost:3001/login');
+    await page.goto('http://localhost:3001/signin');
 
     const loginTitle = page.getByText(
       'Connectez-vous à votre compte LeBonMeeple',
@@ -19,7 +19,5 @@ Given(
     await page.click('button[type="submit"]');
 
     await page.waitForURL('http://localhost:3001/');
-
-    await expect(page).toHaveURL('http://localhost:3001/');
   },
 );

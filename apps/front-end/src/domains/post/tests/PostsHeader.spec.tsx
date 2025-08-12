@@ -118,7 +118,7 @@ describe('PostsHeader', () => {
     // Verify link properties
     const link = screen.getByTestId('next-link');
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', '/posts/create');
+    expect(link).toHaveAttribute('href', '/post/create');
 
     // Verify accessibility
     expect(

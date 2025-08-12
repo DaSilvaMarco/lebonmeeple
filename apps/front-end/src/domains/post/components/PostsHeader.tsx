@@ -23,7 +23,7 @@ const PostsHeader = () => {
         Articles
       </Heading>
       {isAuthenticated && (
-        <Link href="/posts/create">
+        <Link href="/post/create">
           <Button color="primary" type="button">
             Créer un article
           </Button>

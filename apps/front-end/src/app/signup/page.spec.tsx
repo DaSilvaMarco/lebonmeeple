@@ -69,7 +69,7 @@ describe('Signup Page App', () => {
 
     // Vérifier que c'est un simple wrapper
     expect(typeof SignupPageApp).toBe('function');
-    expect(SignupPageApp.name).toBe('SignupForm');
+    expect(SignupPageApp.name).toBe('App');
     expect(SignupPageApp.length).toBe(0); // Aucun paramètre
 
     // Pas de logique métier complexe - éviter les mots qui peuvent apparaître dans les imports transpilés

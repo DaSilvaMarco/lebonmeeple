@@ -91,7 +91,7 @@ const Nav = () => {
           {isAuthenticated && (
             <MenuItem
               as={Link}
-              href="/posts/create"
+              href="/post/create"
               _hover={{
                 bg: 'primary.100',
                 color: 'primary.700',

@@ -134,7 +134,7 @@ describe('HomeHeader Component', () => {
     expect(screen.getByText('Rejoindre la communauté')).toBeInTheDocument();
     expect(screen.getByText('Se connecter')).toBeInTheDocument();
     expect(screen.getByTestId('link-/signup')).toBeInTheDocument();
-    expect(screen.getByTestId('link-/login')).toBeInTheDocument();
+    expect(screen.getByTestId('link-/signin')).toBeInTheDocument();
     expect(screen.getByTestId('button-secondary')).toBeInTheDocument();
     expect(screen.getByTestId('button-primary')).toBeInTheDocument();
 
@@ -147,8 +147,8 @@ describe('HomeHeader Component', () => {
 
     expect(screen.getByText('Explorer les Articles')).toBeInTheDocument();
     expect(screen.getByText('Créer un article')).toBeInTheDocument();
-    expect(screen.getByTestId('link-/blog')).toBeInTheDocument();
-    expect(screen.getByTestId('link-/blog/create')).toBeInTheDocument();
+    expect(screen.getByTestId('link-/posts')).toBeInTheDocument();
+    expect(screen.getByTestId('link-/post/create')).toBeInTheDocument();
     expect(
       screen.queryByText('Rejoindre la communauté'),
     ).not.toBeInTheDocument();

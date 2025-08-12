@@ -30,7 +30,7 @@ const ProfilePage = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    router.push('/login');
+    router.push('/signin');
   };
 
   if (!isAuthenticated || !user) {

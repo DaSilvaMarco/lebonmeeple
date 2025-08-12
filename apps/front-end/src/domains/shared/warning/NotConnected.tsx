@@ -13,7 +13,7 @@ export const NotConnected = () => {
       textAlign="center"
     >
       <Text>Vous n'êtes pas connecté.</Text>
-      <Link href="/login">
+      <Link href="/signin">
         <Button type="button" color="primary">
           Se connecter
         </Button>

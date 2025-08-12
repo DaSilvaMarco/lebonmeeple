@@ -68,7 +68,7 @@ const AdminPostsTableRow = (props: Props) => {
             Supprimer
           </Button>
           <Button color="primary" type="button">
-            <Link href={`/posts/${post.id}`}>Voir</Link>
+            <Link href={`/post/${post.id}`}>Voir</Link>
           </Button>
           <Modal
             isOpen={isModalOpen}

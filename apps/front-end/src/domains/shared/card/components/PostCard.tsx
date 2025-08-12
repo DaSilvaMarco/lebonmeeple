@@ -94,11 +94,11 @@ const PostCard = (props: Props) => {
 
   const handleConfirmEdit = () => {
     closeEditModal();
-    router.push(`/posts/${id}/edit`);
+    router.push(`/post/${id}/edit`);
   };
 
   return (
-    <Link href={`/posts/${id}`}>
+    <Link href={`/post/${id}`}>
       <Card
         bg={cardBg}
         border="1px"

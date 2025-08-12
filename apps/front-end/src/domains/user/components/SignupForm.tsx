@@ -60,7 +60,7 @@ const SignupForm = () => {
       );
 
       setTimeout(() => {
-        router.push('/login');
+        router.push('/signin');
       }, 2000);
     } catch (error) {
       const errorMessage =
