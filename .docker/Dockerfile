@@ -15,17 +15,19 @@ FROM base AS frontend
 # CMD ["npm", "run", "front:dev"]
 
 FROM base AS base-prod
-COPY ./package*.json ./
+COPY --chown=node:node ./package*.json ./ 
 RUN npm ci --omit=dev --ignore-scripts
 
 FROM base-prod AS backend-prod
-COPY apps/back-end ./apps/back-end
-COPY ./tsconfig.json ./
-RUN ["npm", "run", "build"]
+COPY --chown=node:node apps/back-end ./apps/back-end
+COPY --chown=node:node ./tsconfig.json ./
+RUN ["npm", "run", "prisma:generate"]
+RUN ["npm", "run", "api:build"]
 CMD ["sh", "-c", "npm run prisma:migrate && npm run api:start:prod"]
 
 FROM base-prod AS frontend-prod
-COPY apps/front-end ./apps/front-end
+COPY --chown=node:node apps/front-end ./apps/front-end
+RUN ls -la apps/front-end/ && mkdir -p apps/front-end/.next
 # COPY ./tsconfig.json ./
 RUN ["npm", "run", "front:build"]
 CMD ["npm", "run", "front:start"]

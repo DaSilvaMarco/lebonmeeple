@@ -3,6 +3,7 @@ coverage/
 dist/
 playwright-report/
 test-results/
+**/.next/
 
 **/tests/
 **/*.spec.tsx

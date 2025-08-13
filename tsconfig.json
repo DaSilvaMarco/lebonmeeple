@@ -33,7 +33,7 @@
     "outDir": "./dist",
     // Types
     "types": [
-      "vitest/globals",
+      // "vitest/globals",
       "node"
     ],
     // Paths alias pour tout le projet

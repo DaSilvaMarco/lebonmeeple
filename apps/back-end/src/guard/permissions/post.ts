@@ -1,6 +1,6 @@
 import { type User } from '@backend/domains/user/types';
 import { ForbiddenException } from '@nestjs/common';
-import { type PrismaService } from '@prisma-service/prisma.service';
+import { PrismaService } from '@prisma-service/prisma.service';
 
 export const checkPostPermission = async (
   user: User,
