@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import './globals.css';
 import React from 'react';
 import { Provider } from '@/ui/Provider';
 import PageLayout from '@/domains/shared/layout/components/PageLayout';

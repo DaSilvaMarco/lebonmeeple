@@ -25,6 +25,8 @@ services:
     environment:
       - NODE_ENV=development
       - DOCKER_ENV=true
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - SECRET_KEY=SECRET_KEY
 
   frontend:
     build:

@@ -28,6 +28,6 @@ CMD ["sh", "-c", "npm run prisma:migrate && npm run api:start:prod"]
 FROM base-prod AS frontend-prod
 COPY --chown=node:node apps/front-end ./apps/front-end
 RUN ls -la apps/front-end/ && mkdir -p apps/front-end/.next
-# COPY ./tsconfig.json ./
+COPY --chown=node:node ./tsconfig.json ./
 RUN ["npm", "run", "front:build"]
 CMD ["npm", "run", "front:start"]

@@ -6,6 +6,7 @@ test-results/
 **/.next/
 
 **/tests/
+apps/front-end/src/test/
 **/*.spec.tsx
 
 apps/back-end/prisma/seed.ts
