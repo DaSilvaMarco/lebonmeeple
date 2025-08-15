@@ -63,7 +63,9 @@ const PostEditForm = ({ post, token }: Props) => {
     watchedValues.title &&
     watchedValues.title.trim().length > 0 &&
     watchedValues.body &&
-    watchedValues.body.trim().length > 0
+    watchedValues.body.trim().length > 0 &&
+    watchedValues.category &&
+    watchedValues.category.trim().length > 0
   );
 
   const {
@@ -156,6 +158,40 @@ const PostEditForm = ({ post, token }: Props) => {
             </FormErrorMessage>
           </FormControl>
 
+          <FormControl isInvalid={!!errors.category}>
+            <FormLabel
+              htmlFor="category"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Catégorie
+            </FormLabel>
+            <Input
+              id="category"
+              type="text"
+              placeholder="Catégorie de l'article (ex: Stratégie, Famille...)"
+              bg={inputBg}
+              border="2px"
+              borderColor={errors.category ? 'red.300' : inputBorderColor}
+              _hover={{
+                borderColor: errors.category ? 'red.400' : 'brand.300',
+              }}
+              _focus={{
+                borderColor: errors.category ? 'red.500' : 'brand.500',
+                bg: cardBg,
+                shadow: 'lg',
+              }}
+              size="lg"
+              borderRadius="lg"
+              fontSize="md"
+              {...register('category')}
+              data-testid="post-category-input"
+            />
+            <FormErrorMessage fontSize="sm" mt={2}>
+              {errors.category?.message}
+            </FormErrorMessage>
+          </FormControl>
           <FormControl isInvalid={!!errors.image}>
             <FormLabel
               htmlFor="image"

@@ -12,6 +12,11 @@ export const createPostSchema = z.object({
     .min(1, 'Le contenu est requis')
     .max(5000, 'Le contenu ne peut pas dépasser 5000 caractères'),
   image: z.string().optional(),
+  category: z
+    .string()
+    .trim()
+    .min(1, 'La catégorie est requise')
+    .max(50, 'La catégorie ne peut pas dépasser 50 caractères'),
 });
 
 export const updatePostSchema = z.object({
@@ -26,6 +31,11 @@ export const updatePostSchema = z.object({
     .min(1, 'Le contenu est requis')
     .max(5000, 'Le contenu ne peut pas dépasser 5000 caractères'),
   image: z.string().optional(),
+  category: z
+    .string()
+    .trim()
+    .min(1, 'La catégorie est requise')
+    .max(50, 'La catégorie ne peut pas dépasser 50 caractères'),
 });
 
 export type PostCreateFormData = z.infer<typeof createPostSchema>;

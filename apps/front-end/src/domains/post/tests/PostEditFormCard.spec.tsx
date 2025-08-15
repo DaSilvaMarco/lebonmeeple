@@ -68,6 +68,7 @@ const mockPost: Post = {
     avatar: 'avatar.jpg',
     roles: ['USER'],
   },
+  category: 'Test Category',
   createdAt: new Date(),
   updatedAt: new Date(),
 };

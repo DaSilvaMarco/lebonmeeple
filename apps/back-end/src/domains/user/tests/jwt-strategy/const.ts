@@ -4,5 +4,5 @@ export const USER_PAYLOAD = {
   email: 'testuser@example.com',
   password: 'hashedpass',
   createdAt: new Date(),
-  updateAt: new Date(),
+  updatedAt: new Date(),
 };

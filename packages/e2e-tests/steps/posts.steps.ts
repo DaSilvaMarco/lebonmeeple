@@ -14,6 +14,7 @@ When('je créé un article', async ({ page }) => {
 
   await page.fill('input[name="title"]', 'Mon nouvel article');
   await page.fill('textarea[name="body"]', 'Mon nouveau texte');
+  await page.fill('input[name="category"]', 'Jeux de société');
 
   const imagePath = path.join(
     __dirname,
@@ -50,6 +51,7 @@ When("je modifie l'article", async ({ page }) => {
 
   await page.fill('input[name="title"]', 'Mon nouvel article modifié');
   await page.fill('textarea[name="body"]', 'Mon nouveau texte modifié');
+  await page.fill('input[name="category"]', 'Jeux de société modifié');
 
   const imagePath = path.join(
     __dirname,

@@ -10,6 +10,7 @@ export type Post = {
   title: string;
   body: string;
   image: string;
+  category: string;
   user: User;
   userId: number;
   comments?: Comment[];

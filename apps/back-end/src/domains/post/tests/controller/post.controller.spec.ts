@@ -26,6 +26,7 @@ describe('PostController', () => {
       title: 'Test Post',
       body: 'Content',
       image: 'test-image.jpg',
+      category: 'Test Category',
     };
     const fakeRequest = {} as Request;
     const expectedResult = { id: 1, ...dto };

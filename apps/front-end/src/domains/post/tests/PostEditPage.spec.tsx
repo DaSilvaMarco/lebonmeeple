@@ -71,6 +71,7 @@ const mockPost: Post = {
   user: mockUser,
   createdAt: new Date(),
   updatedAt: new Date(),
+  category: 'Test Category',
 };
 
 const authenticatedUserState: UserState = {

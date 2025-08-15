@@ -5,7 +5,7 @@ export type PrismaBasicUser = {
   password: boolean;
   id: boolean;
   createdAt: boolean;
-  updateAt: boolean;
+  updatedAt: boolean;
 };
 
 export type BasicUser = {
@@ -15,7 +15,7 @@ export type BasicUser = {
   password: string;
   id: number;
   createdAt: number;
-  updateAt: number;
+  updatedAt: number;
 };
 
 export type User = {
@@ -25,6 +25,6 @@ export type User = {
   password: string;
   id: number;
   createdAt: number;
-  updateAt: number;
+  updatedAt: number;
   roles: string[];
 };

@@ -10,7 +10,7 @@ export const createPost = async (
   prismaService: PrismaService,
 ) => {
   const { id } = request.user as BasicUser;
-  const { body, title, image } = createPostDto;
+  const { body, title, image, category } = createPostDto;
 
   const user = await prismaService.user.findUnique({
     where: { id },
@@ -31,6 +31,7 @@ export const createPost = async (
       title,
       userId: id,
       image,
+      category,
       createdAt: new Date(),
       updatedAt: new Date(),
     },

@@ -7,5 +7,5 @@ export const PRISMA_BASIC_USER: PrismaBasicUser = {
   password: false,
   id: false,
   createdAt: false,
-  updateAt: false,
+  updatedAt: false,
 };

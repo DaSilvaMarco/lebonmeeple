@@ -11,4 +11,7 @@ export class CreatePostDto {
   @ApiProperty()
   @IsNotEmpty()
   readonly image: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  readonly category: string;
 }
