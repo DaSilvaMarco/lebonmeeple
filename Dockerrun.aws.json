@@ -1,0 +1,39 @@
+{
+  "AWSEBDockerrunVersion": 3,
+  "containerDefinitions": [
+    {
+      "name": "backend",
+      "image": "590184137944.dkr.ecr.eu-west-3.amazonaws.com/lebonmeeple-backend:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000
+        }
+      ],
+      "environment": [
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "DOCKER_ENV", "value": "true" },
+        { "name": "DATABASE_URL", "value": "postgresql://postgres:postgres@db:5432/postgres" },
+        { "name": "SECRET_KEY", "value": "SECRET_KEY" }
+      ]
+    },
+    {
+      "name": "frontend",
+      "image": "590184137944.dkr.ecr.eu-west-3.amazonaws.com/lebonmeeple-frontend:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3001
+        }
+      ],
+      "environment": [
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "DOCKER_ENV", "value": "true" }
+      ]
+    }
+  ]
+}
