@@ -39,9 +39,7 @@
     // Paths alias pour tout le projet
     "paths": {
       // Backend aliases
-      "@backend/*": [
-        "./apps/back-end/src/*"
-      ],
+      "@backend/*": ["./apps/back-end/src/*"],
       "@backend/domains/*": [
         "./apps/back-end/src/domains/*"
       ],

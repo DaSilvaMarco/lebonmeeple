@@ -3,7 +3,7 @@ name: le-bon-meeple
 services:
   db:
     image: postgres:17.5
-    restart: always
+    restart: unless-stopped
     environment:
       - POSTGRES_PASSWORD=postgres
     container_name: db
@@ -13,12 +13,12 @@ services:
       - '127.0.0.1:5432:5432'
 
   backend:
-    image: 590184137944.dkr.ecr.eu-west-3.amazonaws.com/lebonmeeple-backend:latest
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: backend-prod
+      target: backend
     container_name: backend
+    command: ["sh", "-c", "npm install && npm run prisma:generate && sh ./apps/back-end/start.sh"]
     ports:
       - '127.0.0.1:3000:3000'
     depends_on:
@@ -26,27 +26,33 @@ services:
     environment:
       - NODE_ENV=development
       - DOCKER_ENV=true
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
-      - SECRET_KEY=SECRET_KEY
+    volumes:
+      - .:/app
+    user: root
 
   frontend:
-    image: 590184137944.dkr.ecr.eu-west-3.amazonaws.com/lebonmeeple-frontend:latest
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: frontend-prod
+      target: frontend
     container_name: frontend
+    command: ["sh", "-c", "npm install && npm run front:dev"]
     ports:
       - '127.0.0.1:3001:3000'
+    volumes:
+      - .:/app
+      # - /app/node_modules
     environment:
       - NODE_ENV=development
       - DOCKER_ENV=true
     depends_on:
       - backend
+    user: root
+
 
   adminer:
     image: adminer
-    restart: always
+    restart: unless-stopped
     container_name: adminer
     ports:
       - '127.0.0.1:8080:8080'

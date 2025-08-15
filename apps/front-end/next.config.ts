@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
       '@/ui': path.resolve(__dirname, './src/ui'),
       '@/utils': path.resolve(__dirname, './src/utils'),
       '@public': path.resolve(__dirname, './public'),
+      '@frontend': path.resolve(__dirname, './src/frontend'),
     };
     return config;
   },
