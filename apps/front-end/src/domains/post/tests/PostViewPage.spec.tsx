@@ -94,6 +94,7 @@ const mockPostWithImage: Post = {
   comments: [mockComment],
   createdAt: new Date(),
   updatedAt: new Date(),
+  category: 'Test Category',
 };
 
 const mockPostWithoutImage: Post = {
@@ -106,6 +107,7 @@ const mockPostWithoutImage: Post = {
   comments: [],
   createdAt: new Date(),
   updatedAt: new Date(),
+  category: 'Test Category',
 };
 
 const renderWithChakra = (component: React.ReactElement) => {

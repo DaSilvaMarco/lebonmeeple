@@ -58,6 +58,7 @@ const mockPosts: Post[] = [
     },
     createdAt: new Date(),
     updatedAt: new Date(),
+    category: 'Test Category',
   },
   {
     id: 2,
@@ -74,6 +75,7 @@ const mockPosts: Post[] = [
     },
     createdAt: new Date(),
     updatedAt: new Date(),
+    category: 'Test Category',
   },
 ];
 

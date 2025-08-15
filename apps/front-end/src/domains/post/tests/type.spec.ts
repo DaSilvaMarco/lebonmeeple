@@ -33,6 +33,7 @@ describe('Post Types', () => {
       comments: [mockComment],
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     expect(postWithComments.id).toBe(1);
@@ -54,6 +55,7 @@ describe('Post Types', () => {
       userId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     expect(postWithoutComments.comments).toBeUndefined();
@@ -71,6 +73,7 @@ describe('Post Types', () => {
       comments: [],
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     expect(postWithEmptyComments.comments).toEqual([]);
@@ -104,6 +107,7 @@ describe('Post Types', () => {
       userId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     const stateWithSinglePost: InitialStatePost = {
@@ -124,6 +128,7 @@ describe('Post Types', () => {
         userId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
+        category: 'Test Category',
       },
       {
         id: 2,
@@ -134,6 +139,7 @@ describe('Post Types', () => {
         userId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
+        category: 'Test Category',
       },
     ];
 
@@ -164,6 +170,7 @@ describe('Post Types', () => {
       userId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     const mockComment: Comment = {
@@ -209,6 +216,7 @@ describe('Post Types', () => {
       userId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     const post2: Post = {
@@ -220,6 +228,7 @@ describe('Post Types', () => {
       userId: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     // Verify different users maintain separate identity

@@ -36,24 +36,38 @@ async function main() {
     users.push(user);
   }
 
+  console.log(`Users créés : ${users.length}`);
+
   const usersWithoutMe = users.filter((user) => user.id !== specificUser.id);
 
   const posts: Awaited<ReturnType<typeof prisma.post.create>>[] = [];
 
+  const categories = [
+    'Jeux de société',
+    'Jeux de cartes',
+    'Jeux de rôle',
+    'Jeux de figurines',
+    'Autres',
+  ];
+
   for (const article of seedData) {
     const user = faker.helpers.arrayElement(usersWithoutMe);
+    const category = faker.helpers.arrayElement(categories);
     const post = await prisma.post.create({
       data: {
         title: article.title,
         body: article.body,
         image: article.image,
         userId: user.id,
+        category,
         updatedAt: new Date(),
         createdAt: new Date(),
       },
     });
     posts.push(post);
   }
+
+  console.log(`Posts créés : ${posts.length}`);
 
   for (const post of posts) {
     const nbComments = faker.number.int({ min: 1, max: 5 });
@@ -68,6 +82,9 @@ async function main() {
       });
     }
   }
+
+  const nbComments = await prisma.comment.count();
+  console.log(`Commentaires créés : ${nbComments}`);
 }
 
 main()

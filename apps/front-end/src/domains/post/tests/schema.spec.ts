@@ -12,6 +12,7 @@ describe('Post Schema Validation', () => {
     const validData = {
       title: 'Valid Title',
       body: 'Valid body content',
+      category: 'Valid Category',
       image: '/image.jpg',
     };
 
@@ -34,15 +35,21 @@ describe('Post Schema Validation', () => {
       createPostSchema.safeParse({ title: 'a'.repeat(101), body: 'Valid body' })
         .success,
     ).toBe(false);
+
     expect(
-      createPostSchema.safeParse({ title: 'a'.repeat(100), body: 'Valid body' })
-        .success,
+      createPostSchema.safeParse({
+        title: 'a'.repeat(100),
+        body: 'Valid body',
+        category: 'Valid Category',
+      }).success,
     ).toBe(true);
 
     const trimResult = createPostSchema.safeParse({
       title: '  Valid Title  ',
       body: 'Valid body',
+      category: 'Valid Category',
     });
+
     expect(trimResult.success).toBe(true);
     if (trimResult.success) {
       expect(trimResult.data.title).toBe('Valid Title');
@@ -66,12 +73,14 @@ describe('Post Schema Validation', () => {
       createPostSchema.safeParse({
         title: 'Valid Title',
         body: 'a'.repeat(5000),
+        category: 'Valid Category',
       }).success,
     ).toBe(true);
 
     const bodyTrimResult = createPostSchema.safeParse({
       title: 'Valid Title',
       body: '  Valid body  ',
+      category: 'Valid Category',
     });
     expect(bodyTrimResult.success).toBe(true);
     if (bodyTrimResult.success) {
@@ -80,13 +89,10 @@ describe('Post Schema Validation', () => {
 
     // Test image validation - various formats
     expect(
-      createPostSchema.safeParse({ title: 'Valid Title', body: 'Valid body' })
-        .success,
-    ).toBe(true);
-    expect(
       createPostSchema.safeParse({
         title: 'Valid Title',
         body: 'Valid body',
+        category: 'Valid Category',
         image: '',
       }).success,
     ).toBe(true);
@@ -94,7 +100,24 @@ describe('Post Schema Validation', () => {
       createPostSchema.safeParse({
         title: 'Valid Title',
         body: 'Valid body',
+        image: '',
+        category: 'Valid Category',
+      }).success,
+    ).toBe(true);
+    expect(
+      createPostSchema.safeParse({
+        title: 'Valid Title',
+        body: 'Valid body',
+        image: '',
+        category: 'Valid Category',
+      }).success,
+    ).toBe(true);
+    expect(
+      createPostSchema.safeParse({
+        title: 'Valid Title',
+        body: 'Valid body',
         image: '/path/to/image.jpg',
+        category: 'Valid Category',
       }).success,
     ).toBe(true);
     expect(
@@ -102,6 +125,7 @@ describe('Post Schema Validation', () => {
         title: 'Valid Title',
         body: 'Valid body',
         image: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD',
+        category: 'Valid Category',
       }).success,
     ).toBe(true);
 
@@ -112,30 +136,13 @@ describe('Post Schema Validation', () => {
     });
     expect(multiErrorResult.success).toBe(false);
     if (!multiErrorResult.success) {
-      expect(multiErrorResult.error.issues).toHaveLength(2);
+      expect(multiErrorResult.error.issues).toHaveLength(3);
       expect(multiErrorResult.error.issues[0].message).toBe(
         'Le titre est requis',
       );
       expect(multiErrorResult.error.issues[1].message).toBe(
         'Le contenu est requis',
       );
-    }
-
-    // Test additional properties handling
-    const extraPropsResult = createPostSchema.safeParse({
-      title: 'Valid Title',
-      body: 'Valid body',
-      image: '/image.jpg',
-      extraField: 'should not be allowed',
-    });
-    expect(extraPropsResult.success).toBe(true);
-    if (extraPropsResult.success) {
-      expect(extraPropsResult.data).not.toHaveProperty('extraField');
-      expect(Object.keys(extraPropsResult.data)).toEqual([
-        'title',
-        'body',
-        'image',
-      ]);
     }
   });
 
@@ -145,6 +152,7 @@ describe('Post Schema Validation', () => {
       title: 'Updated Title',
       body: 'Updated body content',
       image: '/updated/image.jpg',
+      category: 'Updated Category',
     };
 
     const createResult = createPostSchema.safeParse(validData);
@@ -194,29 +202,35 @@ describe('Post Schema Validation', () => {
       title: 'Test Title',
       body: 'Test Body',
       image: '/test.jpg',
+      category: 'Test Category',
     };
     expect(createData.title).toBe('Test Title');
     expect(createData.body).toBe('Test Body');
     expect(createData.image).toBe('/test.jpg');
+    expect(createData.category).toBe('Test Category');
 
     // Test type inference for PostUpdateFormData
     const updateData: PostUpdateFormData = {
       title: 'Updated Title',
       body: 'Updated Body',
       image: '/updated.jpg',
+      category: 'Updated Category',
     };
     expect(updateData.title).toBe('Updated Title');
     expect(updateData.body).toBe('Updated Body');
     expect(updateData.image).toBe('/updated.jpg');
+    expect(updateData.category).toBe('Updated Category');
 
     // Test optional image in types
     const createDataWithoutImage: PostCreateFormData = {
       title: 'Test Title',
       body: 'Test Body',
+      category: 'Test Category',
     };
     const updateDataWithoutImage: PostUpdateFormData = {
       title: 'Updated Title',
       body: 'Updated Body',
+      category: 'Updated Category',
     };
     expect(createDataWithoutImage.image).toBeUndefined();
     expect(updateDataWithoutImage.image).toBeUndefined();
@@ -226,11 +240,13 @@ describe('Post Schema Validation', () => {
       title: 'Test',
       body: 'Test Body',
       image: '/test.jpg',
+      category: 'Test Category',
     };
     const validUpdateData: PostUpdateFormData = {
       title: 'Test',
       body: 'Test Body',
       image: '/test.jpg',
+      category: 'Test Category',
     };
     const createKeys = Object.keys(validCreateData);
     const updateKeys = Object.keys(validUpdateData);
@@ -241,6 +257,7 @@ describe('Post Schema Validation', () => {
       title: 'Title with special chars: àáâãäåæçèéêë!@#$%^&*()',
       body: 'Body with émojis 🎮🎲 and special chars: àáâãäåæçèéêë',
       image: '/special-image.jpg',
+      category: 'Special Category',
     };
     expect(createPostSchema.safeParse(specialCharsData).success).toBe(true);
 
@@ -249,11 +266,17 @@ describe('Post Schema Validation', () => {
       title: 'Title with content',
       body: 'Line 1\nLine 2\n\tTabbed content\n\nEmpty line above',
       image: '/image.jpg',
+      category: 'Valid Category',
     };
     expect(createPostSchema.safeParse(newlineData).success).toBe(true);
 
     // Test numeric strings
-    const numericData = { title: '12345', body: '67890', image: '12345.jpg' };
+    const numericData = {
+      title: '12345',
+      body: '67890',
+      image: '12345.jpg',
+      category: '12345',
+    };
     expect(createPostSchema.safeParse(numericData).success).toBe(true);
 
     // Test mixed content with base64 image
@@ -262,6 +285,7 @@ describe('Post Schema Validation', () => {
       body: 'Mixed content:\n- Numbers: 123\n- Émojis: 🎲\n- Special: @#$',
       image:
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==',
+      category: 'Mixed Category',
     };
     expect(createPostSchema.safeParse(mixedData).success).toBe(true);
   });

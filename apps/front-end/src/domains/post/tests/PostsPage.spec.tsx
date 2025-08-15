@@ -43,6 +43,7 @@ const mockPost1: Post = {
   userId: 1,
   updatedAt: new Date(),
   createdAt: new Date(),
+  category: 'Test Category',
 };
 
 const mockPost2: Post = {
@@ -54,6 +55,8 @@ const mockPost2: Post = {
   userId: 1,
   updatedAt: new Date(),
   createdAt: new Date(),
+    category: 'Test Category',
+
 };
 
 const mockPost3: Post = {
@@ -65,6 +68,7 @@ const mockPost3: Post = {
   userId: 1,
   updatedAt: new Date(),
   createdAt: new Date(),
+  category: 'Test Category',
 };
 
 // Helper function to create a mock store

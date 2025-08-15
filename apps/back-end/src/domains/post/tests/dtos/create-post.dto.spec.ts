@@ -12,6 +12,7 @@ describe('CreatePostDto', () => {
     Object.assign(dto, {
       body: 'This is a post',
       title: 'Post Title',
+      category: 'Category',
       image: 'http://example.com/image.jpg',
     });
 

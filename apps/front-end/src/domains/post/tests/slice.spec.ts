@@ -22,6 +22,7 @@ const mockPost: Post = {
   userId: 1,
   createdAt: new Date(),
   updatedAt: new Date(),
+  category: 'Test Category',
 };
 
 const mockPost2: Post = {
@@ -33,6 +34,7 @@ const mockPost2: Post = {
   userId: 1,
   createdAt: new Date(),
   updatedAt: new Date(),
+  category: 'Test Category',
 };
 
 const mockPost3: Post = {
@@ -44,6 +46,7 @@ const mockPost3: Post = {
   userId: 1,
   createdAt: new Date(),
   updatedAt: new Date(),
+  category: 'Test Category',
 };
 
 describe('Post Slice', () => {
@@ -303,6 +306,7 @@ describe('Post Slice', () => {
       userId: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
+      category: 'Test Category',
     };
 
     partialStore.dispatch(updatePost(completelyUpdatedPost));

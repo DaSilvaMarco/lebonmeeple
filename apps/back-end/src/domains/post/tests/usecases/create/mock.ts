@@ -24,6 +24,7 @@ export const prismaMock = (createDto: CreatePostDto) => {
         title: createDto.title,
         userId: 1,
         image: createDto.image,
+        category: createDto.category,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }),
