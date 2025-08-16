@@ -132,9 +132,16 @@ const PostCreateForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        aria-labelledby="form-title"
+        role="form"
+      >
         <VStack spacing={6}>
-          <FormControl isInvalid={!!errors.title}>
+          <h2 id="form-title" style={{ fontSize: '1.3em', fontWeight: 'bold' }}>
+            Créer un nouvel article
+          </h2>
+          <FormControl isInvalid={!!errors.title} isRequired>
             <FormLabel
               htmlFor="title"
               color={textColorPrimary}
@@ -161,15 +168,18 @@ const PostCreateForm = () => {
               size="lg"
               borderRadius="lg"
               fontSize="md"
+              aria-required="true"
+              aria-invalid={!!errors.title}
+              aria-describedby={errors.title ? 'title-error' : undefined}
               {...register('title')}
               data-testid="post-title-input"
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <FormErrorMessage fontSize="sm" mt={2} id="title-error">
               {errors.title?.message}
             </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.category}>
+          <FormControl isInvalid={!!errors.category} isRequired>
             <FormLabel
               htmlFor="category"
               color={textColorPrimary}
@@ -196,10 +206,13 @@ const PostCreateForm = () => {
               size="lg"
               borderRadius="lg"
               fontSize="md"
+              aria-required="true"
+              aria-invalid={!!errors.category}
+              aria-describedby={errors.category ? 'category-error' : undefined}
               {...register('category')}
               data-testid="post-category-input"
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <FormErrorMessage fontSize="sm" mt={2} id="category-error">
               {errors.category?.message}
             </FormErrorMessage>
           </FormControl>
@@ -232,14 +245,18 @@ const PostCreateForm = () => {
               borderRadius="lg"
               fontSize="md"
               p={1}
+              aria-describedby="image-help image-error"
               data-testid="post-image-input"
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <span id="image-help" style={{ fontSize: '0.9em' }}>
+              Formats acceptés : jpg, png, gif. Taille max : 5 Mo.
+            </span>
+            <FormErrorMessage fontSize="sm" mt={2} id="image-error">
               {errors.image?.message}
             </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.body}>
+          <FormControl isInvalid={!!errors.body} isRequired>
             <FormLabel
               htmlFor="body"
               color={textColorPrimary}
@@ -267,10 +284,13 @@ const PostCreateForm = () => {
               borderRadius="lg"
               fontSize="md"
               resize="vertical"
+              aria-required="true"
+              aria-invalid={!!errors.body}
+              aria-describedby={errors.body ? 'body-error' : undefined}
               {...register('body')}
               data-testid="post-body-input"
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <FormErrorMessage fontSize="sm" mt={2} id="body-error">
               {errors.body?.message}
             </FormErrorMessage>
           </FormControl>
@@ -281,6 +301,7 @@ const PostCreateForm = () => {
             icon={<FaPlus />}
             isDisabled={!formIsValid}
             isLoading={isSubmitting}
+            aria-label="Créer l'article"
             data-testid="post-submit-button"
           >
             Créer l'article

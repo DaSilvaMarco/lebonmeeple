@@ -12,11 +12,16 @@ const StatsCard = (props: Props) => {
   const textColor = useColorModeValue('neutral.600', 'white');
 
   return (
-    <VStack spacing={1} data-testid="stats-card">
-      <Text fontSize="2xl" fontWeight="bold" color={color}>
+    <VStack
+      spacing={1}
+      data-testid="stats-card"
+      aria-label={`${value} ${title}`}
+      role="region"
+    >
+      <Text as="span" fontSize="2xl" fontWeight="bold" color={color}>
         {value}
       </Text>
-      <Text fontSize="sm" color={textColor}>
+      <Text as="span" fontSize="sm" color={textColor}>
         {title}
       </Text>
     </VStack>

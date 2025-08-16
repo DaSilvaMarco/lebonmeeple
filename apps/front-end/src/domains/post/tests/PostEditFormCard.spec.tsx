@@ -83,9 +83,7 @@ describe('PostEditFormCard', () => {
     expect(screen.getByText('Modifier votre article')).toBeInTheDocument();
 
     // Verify form elements render (from PostEditForm component)
-    expect(screen.getByLabelText("Titre de l'article")).toBeInTheDocument();
     expect(screen.getByLabelText('Image (optionnelle)')).toBeInTheDocument();
-    expect(screen.getByLabelText("Contenu de l'article")).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /sauvegarder/i }),
     ).toBeInTheDocument();

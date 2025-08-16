@@ -110,25 +110,43 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
         borderRadius="lg"
         border="1px"
         borderColor={borderColor}
+        aria-labelledby="comment-form-title"
       >
         <VStack spacing={4} align="stretch">
-          <Text fontWeight="semibold">Ajouter un commentaire</Text>
-
-          <VStack spacing={2} align="stretch">
+          <Text id="comment-form-title" fontWeight="semibold">
+            Ajouter un commentaire
+          </Text>
+          <div className="form-group">
+            <label htmlFor="comment-input" className="comment-label">
+              Commentaire{' '}
+              <span aria-hidden="true" style={{ color: '#b00020' }}>
+                *
+              </span>
+            </label>
             <Textarea
+              id="comment-input"
               {...register('body')}
               placeholder="Écrivez votre commentaire..."
               minHeight="100px"
               resize="vertical"
               disabled={isSubmitting}
+              aria-required="true"
+              aria-invalid={!!errors.body}
+              aria-describedby={errors.body ? 'comment-error' : undefined}
+              style={{ borderColor: errors.body ? '#b00020' : '#ccc' }}
             />
             {errors.body && (
-              <Text color="red.500" fontSize="sm">
+              <Text
+                color="red.500"
+                fontSize="sm"
+                id="comment-error"
+                role="alert"
+                aria-live="assertive"
+              >
                 {errors.body.message}
               </Text>
             )}
-          </VStack>
-
+          </div>
           <ChakraButton
             type="submit"
             colorScheme="brand"
@@ -137,6 +155,7 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
             data-testid="submit-comment-button"
             size="sm"
             alignSelf="flex-end"
+            aria-disabled={isSubmitting}
           >
             Publier le commentaire
           </ChakraButton>

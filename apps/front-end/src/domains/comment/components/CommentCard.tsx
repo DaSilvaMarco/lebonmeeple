@@ -109,31 +109,52 @@ const CommentCard = ({
   };
 
   return (
-    <>
+    <article
+      aria-label={`Commentaire de ${comment.user.username}`}
+      tabIndex={0}
+      style={{ outline: 'none' }}
+    >
       <Box
         bg={cardBg}
         p={4}
         borderRadius="lg"
         border="1px"
         borderColor={useColorModeValue('gray.200', 'gray.600')}
+        as="section"
+        role="region"
+        aria-labelledby={`comment-header-${comment.id}`}
       >
         <HStack align="start" spacing={3}>
           <Avatar
             size="sm"
             name={comment.user.username}
             src={comment.user.avatar || '/defaultAvatar.jpg'}
+            aria-label={`Avatar de ${comment.user.username}`}
+            role="img"
           />
           <VStack align="start" spacing={1} flex={1}>
-            <HStack spacing={2} justify="space-between" w="full">
+            <HStack
+              spacing={2}
+              justify="space-between"
+              w="full"
+              as="header"
+              id={`comment-header-${comment.id}`}
+            >
               <HStack spacing={2}>
                 <Text
                   fontSize="sm"
                   fontWeight="semibold"
                   color={textColorPrimary}
+                  as="span"
                 >
                   {comment.user.username}
                 </Text>
-                <Text fontSize="xs" color={textColorSecondary}>
+                <Text
+                  fontSize="xs"
+                  color={textColorSecondary}
+                  as="time"
+                  dateTime={comment.updatedAt}
+                >
                   {formatDate(comment.updatedAt)}
                 </Text>
               </HStack>
@@ -142,23 +163,29 @@ const CommentCard = ({
                 <HStack spacing={1}>
                   <IconButton
                     aria-label="Modifier le commentaire"
-                    icon={<EditIcon />}
+                    icon={<EditIcon aria-hidden="true" focusable={false} />}
                     size="xs"
                     variant="ghost"
                     colorScheme="blue"
                     onClick={handleEdit}
                     disabled={isEditing}
-                  />
+                    tabIndex={0}
+                  >
+                    <span style={{ display: 'none' }}>Modifier</span>
+                  </IconButton>
                   <IconButton
                     aria-label="Supprimer le commentaire"
-                    icon={<DeleteIcon />}
+                    icon={<DeleteIcon aria-hidden="true" focusable={false} />}
                     size="xs"
                     variant="ghost"
                     colorScheme="red"
                     onClick={handleDeleteClick}
                     isLoading={isDeleting}
                     disabled={isEditing}
-                  />
+                    tabIndex={0}
+                  >
+                    <span style={{ display: 'none' }}>Supprimer</span>
+                  </IconButton>
                 </HStack>
               )}
             </HStack>
@@ -168,6 +195,7 @@ const CommentCard = ({
                 initialBody={comment.body}
                 onCommentUpdated={handleCommentUpdated}
                 onCancel={handleCancelEdit}
+                aria-label="Formulaire d'édition du commentaire"
               />
             ) : (
               <Text
@@ -175,6 +203,8 @@ const CommentCard = ({
                 color={textColorPrimary}
                 lineHeight="tall"
                 whiteSpace="pre-wrap"
+                as="p"
+                aria-live="polite"
               >
                 {comment.body}
               </Text>
@@ -189,7 +219,7 @@ const CommentCard = ({
         title="Êtes-vous sûr de vouloir supprimer ce commentaire ?"
         onClose={closeModal}
       />
-    </>
+    </article>
   );
 };
 

@@ -94,6 +94,8 @@ const CommentEditForm = ({
     <>
       <Box
         as="form"
+        role="form"
+        aria-labelledby="edit-comment-title"
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(onSubmit)(e);
@@ -105,7 +107,21 @@ const CommentEditForm = ({
         borderColor={borderColor}
       >
         <VStack spacing={3} align="stretch">
+          <Text
+            as="label"
+            htmlFor="edit-comment-body"
+            fontWeight="bold"
+            id="edit-comment-title"
+          >
+            Modifier le commentaire
+          </Text>
           <Textarea
+            id="edit-comment-body"
+            aria-required="true"
+            aria-invalid={!!errors.body}
+            aria-describedby={
+              errors.body ? 'edit-comment-body-error' : undefined
+            }
             {...register('body')}
             placeholder="Écrivez votre commentaire..."
             minHeight="80px"
@@ -114,7 +130,12 @@ const CommentEditForm = ({
             fontSize="sm"
           />
           {errors.body && (
-            <Text color="red.500" fontSize="sm">
+            <Text
+              color="red.500"
+              fontSize="sm"
+              id="edit-comment-body-error"
+              role="alert"
+            >
               {errors.body.message}
             </Text>
           )}
@@ -132,6 +153,7 @@ const CommentEditForm = ({
               color="primary"
               handleClick={() => handleSubmit(onSubmit)()}
               isLoading={isSubmitting}
+              aria-label="Valider la modification du commentaire"
             >
               Modifier
             </Button>
@@ -145,7 +167,7 @@ const CommentEditForm = ({
           closeModal();
         }}
         onConfirm={handleConfirmEdit}
-        title='Êtes-vous sûr de vouloir modifier ce commentaire ?'
+        title="Êtes-vous sûr de vouloir modifier ce commentaire ?"
       />
     </>
   );

@@ -65,7 +65,6 @@ const PostEditPage = ({ postId }: Props) => {
     );
   }
 
-  // Vérifier que l'utilisateur est propriétaire du post
   if (post.userId !== user.id) {
     return (
       <Flex justify="center" align="center" minH="50vh">

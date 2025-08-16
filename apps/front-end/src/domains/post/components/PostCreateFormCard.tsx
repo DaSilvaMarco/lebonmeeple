@@ -11,6 +11,9 @@ const PostCreateFormCard = () => {
 
   return (
     <Box
+      as="section"
+      role="region"
+      aria-labelledby="post-create-form-card-title"
       bg={cardBg}
       p={{ base: 6, md: 10 }}
       borderRadius="2xl"
@@ -31,6 +34,18 @@ const PostCreateFormCard = () => {
         opacity: 0.1,
       }}
     >
+      <h1
+        id="post-create-form-card-title"
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          height: '1px',
+          width: '1px',
+          overflow: 'hidden',
+        }}
+      >
+        Création d’un nouvel article
+      </h1>
       <WelcomePostCreateFormCard />
       <PostCreateForm />
     </Box>

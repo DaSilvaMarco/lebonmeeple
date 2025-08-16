@@ -15,7 +15,13 @@ const WhyLeBonMeeple = () => {
   const featuresBg = useColorModeValue('white', 'neutral.800');
 
   return (
-    <Box py={20} bg={featuresBg}>
+    <Box
+      py={20}
+      bg={featuresBg}
+      as="section"
+      role="region"
+      aria-labelledby="why-lebonmeeple-heading"
+    >
       <Container maxW="7xl">
         <VStack spacing={12}>
           <VStack spacing={4} textAlign="center">
@@ -28,7 +34,11 @@ const WhyLeBonMeeple = () => {
             >
               Pourquoi Choisir LeBonMeeple
             </Text>
-            <Heading fontSize={{ base: '3xl', md: '4xl' }} maxW="600px">
+            <Heading
+              id="why-lebonmeeple-heading"
+              fontSize={{ base: '3xl', md: '4xl' }}
+              maxW="600px"
+            >
               Une Plateforme pensée pour les passionnés
             </Heading>
           </VStack>

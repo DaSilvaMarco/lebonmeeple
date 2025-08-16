@@ -31,9 +31,26 @@ const AdminCommentsClientPage = () => {
   }, []);
 
   return (
-    <div>
-      <AdminCommentsTable comments={comments} />;
-    </div>
+    <main
+      id="contenu-principal"
+      tabIndex={-1}
+      aria-label="Contenu principal"
+      style={{ outline: 'none' }}
+    >
+      <h1
+        style={{
+          position: 'absolute',
+          left: '-10000px',
+          top: 'auto',
+          width: '1px',
+          height: '1px',
+          overflow: 'hidden',
+        }}
+      >
+        Administration des commentaires
+      </h1>
+      <AdminCommentsTable comments={comments} />
+    </main>
   );
 };
 

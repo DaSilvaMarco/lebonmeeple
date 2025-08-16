@@ -122,9 +122,19 @@ const PostEditForm = ({ post, token }: Props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        aria-labelledby="form-title-edit"
+        role="form"
+      >
         <VStack spacing={6}>
-          <FormControl isInvalid={!!errors.title}>
+          <h2
+            id="form-title-edit"
+            style={{ fontSize: '1.3em', fontWeight: 'bold' }}
+          >
+            Modifier l’article
+          </h2>
+          <FormControl isInvalid={!!errors.title} isRequired>
             <FormLabel
               htmlFor="title"
               color={textColorPrimary}
@@ -151,14 +161,17 @@ const PostEditForm = ({ post, token }: Props) => {
               size="lg"
               borderRadius="lg"
               fontSize="md"
+              aria-required="true"
+              aria-invalid={!!errors.title}
+              aria-describedby={errors.title ? 'title-edit-error' : undefined}
               {...register('title')}
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <FormErrorMessage fontSize="sm" mt={2} id="title-edit-error">
               {errors.title?.message}
             </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.category}>
+          <FormControl isInvalid={!!errors.category} isRequired>
             <FormLabel
               htmlFor="category"
               color={textColorPrimary}
@@ -185,10 +198,15 @@ const PostEditForm = ({ post, token }: Props) => {
               size="lg"
               borderRadius="lg"
               fontSize="md"
+              aria-required="true"
+              aria-invalid={!!errors.category}
+              aria-describedby={
+                errors.category ? 'category-edit-error' : undefined
+              }
               {...register('category')}
               data-testid="post-category-input"
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <FormErrorMessage fontSize="sm" mt={2} id="category-edit-error">
               {errors.category?.message}
             </FormErrorMessage>
           </FormControl>
@@ -221,14 +239,18 @@ const PostEditForm = ({ post, token }: Props) => {
               borderRadius="lg"
               fontSize="md"
               p={1}
+              aria-describedby="image-edit-help image-edit-error"
               data-testid="post-image-input"
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <span id="image-edit-help" style={{ fontSize: '0.9em' }}>
+              Formats acceptés : jpg, png, gif. Taille max : 5 Mo.
+            </span>
+            <FormErrorMessage fontSize="sm" mt={2} id="image-edit-error">
               {errors.image?.message}
             </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.body}>
+          <FormControl isInvalid={!!errors.body} isRequired>
             <FormLabel
               htmlFor="body"
               color={textColorPrimary}
@@ -256,9 +278,12 @@ const PostEditForm = ({ post, token }: Props) => {
               borderRadius="lg"
               fontSize="md"
               resize="vertical"
+              aria-required="true"
+              aria-invalid={!!errors.body}
+              aria-describedby={errors.body ? 'body-edit-error' : undefined}
               {...register('body')}
             />
-            <FormErrorMessage fontSize="sm" mt={2}>
+            <FormErrorMessage fontSize="sm" mt={2} id="body-edit-error">
               {errors.body?.message}
             </FormErrorMessage>
           </FormControl>
@@ -269,6 +294,7 @@ const PostEditForm = ({ post, token }: Props) => {
             icon={<FaSave />}
             isDisabled={!formIsValid}
             isLoading={isSubmitting}
+            aria-label="Sauvegarder les modifications"
           >
             Sauvegarder les modifications
           </Button>

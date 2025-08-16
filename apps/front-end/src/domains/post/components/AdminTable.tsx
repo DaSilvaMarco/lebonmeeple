@@ -15,7 +15,6 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-// Exemple de données
 const users = [
   {
     id: 1,
@@ -60,16 +59,21 @@ const AdminTable: React.FC = () => {
       borderColor={border}
     >
       <TableContainer>
-        <Table variant="simple">
-          <TableCaption>Liste des utilisateurs</TableCaption>
+        <Table
+          variant="simple"
+          aria-label="Tableau de gestion des utilisateurs"
+        >
+          <TableCaption placement="top">
+            Tableau de gestion des utilisateurs de la plateforme
+          </TableCaption>
           <Thead>
             <Tr>
-              <Th>ID</Th>
-              <Th>Avatar</Th>
-              <Th>Nom</Th>
-              <Th>Email</Th>
-              <Th>Rôle</Th>
-              <Th>Actions</Th>
+              <Th scope="col">ID</Th>
+              <Th scope="col">Avatar</Th>
+              <Th scope="col">Nom</Th>
+              <Th scope="col">Email</Th>
+              <Th scope="col">Rôle</Th>
+              <Th scope="col">Actions</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -77,20 +81,38 @@ const AdminTable: React.FC = () => {
               <Tr key={user.id}>
                 <Td>{user.id}</Td>
                 <Td>
-                  <Avatar name={user.name} src={user.avatar} size="sm" />
+                  <Avatar
+                    name={user.name}
+                    src={user.avatar}
+                    size="sm"
+                    aria-label={`Avatar de ${user.name}`}
+                    title={`Avatar de ${user.name}`}
+                  />
                 </Td>
                 <Td>{user.name}</Td>
                 <Td>{user.email}</Td>
                 <Td>
-                  <Badge colorScheme={roleColor[user.role] || 'gray'}>
+                  <Badge
+                    colorScheme={roleColor[user.role] || 'gray'}
+                    aria-label={`Rôle : ${user.role}`}
+                  >
                     {user.role}
                   </Badge>
                 </Td>
                 <Td>
-                  <Button size="sm" colorScheme="teal" mr={2}>
+                  <Button
+                    size="sm"
+                    colorScheme="teal"
+                    mr={2}
+                    aria-label={`Éditer l'utilisateur ${user.name}`}
+                  >
                     Éditer
                   </Button>
-                  <Button size="sm" colorScheme="red">
+                  <Button
+                    size="sm"
+                    colorScheme="red"
+                    aria-label={`Supprimer l'utilisateur ${user.name}`}
+                  >
                     Supprimer
                   </Button>
                 </Td>
