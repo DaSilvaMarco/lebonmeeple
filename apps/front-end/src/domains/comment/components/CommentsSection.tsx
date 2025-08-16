@@ -16,7 +16,12 @@ type Props = {
   onCommentsUpdate: () => void;
 };
 
-const CommentsSection = ({ postId, comments, onCommentsUpdate }: Props) => {
+const CommentsSection = ({
+  postId,
+  comments,
+  onCommentsUpdate,
+  fullWidth,
+}: Props & { fullWidth?: boolean }) => {
   const textColor = useColorModeValue('gray.800', 'white');
 
   const sortedComments = [...comments].sort(
@@ -24,7 +29,13 @@ const CommentsSection = ({ postId, comments, onCommentsUpdate }: Props) => {
   );
 
   return (
-    <Box as="section" aria-labelledby={`comments-title-${postId}`}>
+    <Box
+      as="section"
+      aria-labelledby={`comments-title-${postId}`}
+      w={fullWidth ? '100%' : undefined}
+      maxW={fullWidth ? '100vw' : undefined}
+      px={fullWidth ? { base: 0, md: 0 } : undefined}
+    >
       <Divider mb={6} />
 
       <VStack spacing={6} align="stretch">

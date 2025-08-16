@@ -14,7 +14,7 @@ const PostsPage = () => {
       <Box
         w="100%"
         borderRadius="2xl"
-        shadow="lg"
+        shadow="none"
         position="relative"
         overflow="hidden"
         _before={{

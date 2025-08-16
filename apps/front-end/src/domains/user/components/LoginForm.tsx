@@ -26,12 +26,14 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { login } from '@/domains/user/slice';
 import { signinAndGetMe } from '@frontend/domains/user/service/service';
 import Button from '@frontend/domains/shared/button/components/Button';
+import Loader from '@frontend/domains/shared/loader/components/Loader';
 
 const LoginForm = () => {
   const router = useRouter();
   const toast = useToast();
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const { isLoading } = useAppSelector((state) => state.user);
 
   const {
@@ -44,6 +46,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormData) => {
+    setShowLoading(true);
     try {
       const user = await signinAndGetMe(data);
       dispatch(login(user));
@@ -52,11 +55,11 @@ const LoginForm = () => {
         'Connexion réussie !',
         'Vous êtes maintenant connecté.',
       );
-
       setTimeout(() => {
         router.push('/');
       }, 1000);
     } catch (error) {
+      setShowLoading(false);
       const errorMessage =
         error instanceof Error ? error.message : 'Une erreur est survenue';
       toastError(toast, 'Erreur de connexion', errorMessage);
@@ -64,76 +67,85 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <VStack spacing={6}>
-        <FormControl isInvalid={!!errors.email}>
-          <FormLabel htmlFor="email" color="neutral.800" fontWeight="semibold">
-            Adresse e-mail
-          </FormLabel>
-          <Input
-            id="email"
-            type="email"
-            placeholder="votre.email@exemple.com"
-            autoComplete="email"
-            {...register('email')}
-            data-testid="login-email-input"
-          />
-          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-        </FormControl>
-
-        <FormControl isInvalid={!!errors.password}>
-          <FormLabel
-            htmlFor="password"
-            color="neutral.800"
-            fontWeight="semibold"
-          >
-            Mot de passe
-          </FormLabel>
-          <InputGroup>
+    <Box position="relative">
+      {showLoading && (
+        <Loader />
+      )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <VStack spacing={6}>
+          <FormControl isInvalid={!!errors.email}>
+            <FormLabel
+              htmlFor="email"
+              color="neutral.800"
+              fontWeight="semibold"
+            >
+              Adresse e-mail
+            </FormLabel>
             <Input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Votre mot de passe"
-              autoComplete="current-password"
-              {...register('password')}
-              data-testid="login-password-input"
+              id="email"
+              type="email"
+              placeholder="votre.email@exemple.com"
+              autoComplete="email"
+              {...register('email')}
+              data-testid="login-email-input"
             />
-            <InputRightElement>
-              <IconButton
-                aria-label={
-                  showPassword
-                    ? 'Masquer le mot de passe'
-                    : 'Afficher le mot de passe'
-                }
-                icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
-                variant="ghost"
-                onClick={() => setShowPassword(!showPassword)}
+            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+          </FormControl>
+
+          <FormControl isInvalid={!!errors.password}>
+            <FormLabel
+              htmlFor="password"
+              color="neutral.800"
+              fontWeight="semibold"
+            >
+              Mot de passe
+            </FormLabel>
+            <InputGroup>
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Votre mot de passe"
+                autoComplete="current-password"
+                {...register('password')}
+                data-testid="login-password-input"
               />
-            </InputRightElement>
-          </InputGroup>
-          <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-        </FormControl>
+              <InputRightElement>
+                <IconButton
+                  aria-label={
+                    showPassword
+                      ? 'Masquer le mot de passe'
+                      : 'Afficher le mot de passe'
+                  }
+                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  variant="ghost"
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </InputRightElement>
+            </InputGroup>
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+          </FormControl>
 
-        <Box w="full" textAlign="right">
-          <Link href="/forgot-password">
-            <Text fontSize="sm" color="primary.500" cursor="pointer">
-              Mot de passe oublié ?
-            </Text>
-          </Link>
-        </Box>
+          <Box w="full" textAlign="right">
+            <Link href="/forgot-password">
+              <Text fontSize="sm" color="primary.500" cursor="pointer">
+                Mot de passe oublié ?
+              </Text>
+            </Link>
+          </Box>
 
-        <Button
-          dataTestId="login-submit-button"
-          type="submit"
-          color="primary"
-          icon={<FaLock />}
-          isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
-          isLoading={isSubmitting || isLoading}
-        >
-          Se connecter
-        </Button>
-      </VStack>
-    </form>
+          <Button
+            dataTestId="login-submit-button"
+            type="submit"
+            color="primary"
+            icon={<FaLock />}
+            isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
+            isLoading={isSubmitting || isLoading}
+          >
+            Se connecter
+          </Button>
+        </VStack>
+      </form>
+    </Box>
   );
 };
 

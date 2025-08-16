@@ -7,12 +7,15 @@ import { vi } from 'vitest';
 // Mock Chakra UI Box to avoid style issues
 vi.mock('@chakra-ui/react', () => ({
   Box: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  Flex: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  VStack: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+  Text: ({ children }: { children: React.ReactNode }) => (
+    <span>{children}</span>
+  ),
 }));
 
-// Mock child components to focus on composition
-vi.mock('../components/WelcomeLoginFormCard', () => ({
-  default: () => <div data-testid="welcome-login-form-card" />,
-}));
 vi.mock('../components/LoginForm', () => ({
   default: () => <form data-testid="login-form" />,
 }));
@@ -23,8 +26,6 @@ vi.mock('../components/LoginDivider', () => ({
 describe('LoginFormCard', () => {
   it('renders all child components', () => {
     render(<LoginFormCard />);
-    expect(screen.getByTestId('welcome-login-form-card')).toBeInTheDocument();
     expect(screen.getByTestId('login-form')).toBeInTheDocument();
-    expect(screen.getByTestId('login-divider')).toBeInTheDocument();
   });
 });

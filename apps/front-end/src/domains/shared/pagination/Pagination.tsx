@@ -2,9 +2,9 @@ import {
   Button as ChakraButton,
   ButtonGroup,
   Flex,
-  Heading,
-  useColorModeValue,
+  IconButton,
 } from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { useAppSelector } from '@frontend/store/hook';
 import Link from 'next/link';
 import React from 'react';
@@ -20,66 +20,61 @@ type Props = {
 
 const Pagination = (props: Props) => {
   const { page, totalPages, setPage, handlePrevPage, handleNextPage } = props;
-  const textColorBrand = useColorModeValue('primary.500', 'primary.500');
   const { isAuthenticated } = useAppSelector((state) => state.user);
 
   return (
-    <Flex w="100%" alignItems="center" mb={6} px={4} pt={4} gap={2}>
-      {/* Titre à gauche */}
-      <Heading
-        size="lg"
-        color={textColorBrand}
-        fontWeight="bold"
-        data-testid="posts-title-page"
-        flexShrink={0}
-      >
-        Articles
-      </Heading>
-      {/* Pagination centrée */}
+    <Flex w="100%" alignItems="center" mb={6} px={2} pt={2} gap={2}>
+      {/* Pagination centrée, moderne et légère */}
       <Flex flex="1" justify="center" align="center">
-        <ButtonGroup isAttached>
-          <ChakraButton
+        <ButtonGroup size="sm" variant="ghost" spacing={1}>
+          <IconButton
+            aria-label="Page précédente"
+            icon={<ChevronLeftIcon boxSize={5} />}
             onClick={handlePrevPage}
             isDisabled={page <= 1}
-            colorScheme={page <= 1 ? 'gray' : 'blue'}
-            variant="outline"
-            w="140px"
-            h="48px"
-            cursor={page <= 1 ? 'not-allowed' : 'pointer'}
-          >
-            Précédent
-          </ChakraButton>
+            rounded="full"
+            colorScheme="gray"
+            minW={8}
+            minH={8}
+          />
           {Array.from({ length: totalPages }, (_, i) => (
             <ChakraButton
               key={i + 1}
-              colorScheme={page === i + 1 ? 'blue' : 'gray'}
-              variant={page === i + 1 ? 'solid' : 'outline'}
-              w="48px"
-              h="48px"
+              colorScheme={page === i + 1 ? 'primary' : 'gray'}
+              variant={page === i + 1 ? 'solid' : 'ghost'}
               onClick={() => setPage(i + 1)}
               isDisabled={page === i + 1}
+              rounded="full"
+              minW={8}
+              minH={8}
+              px={0}
+              fontWeight="semibold"
+              fontSize="md"
+              _disabled={{ opacity: 1, bg: 'primary.500', color: 'white' }}
             >
               {i + 1}
             </ChakraButton>
           ))}
-          <ChakraButton
+          <IconButton
+            aria-label="Page suivante"
+            icon={<ChevronRightIcon boxSize={5} />}
             onClick={handleNextPage}
             isDisabled={page >= totalPages}
-            colorScheme={page >= totalPages ? 'gray' : 'blue'}
-            variant="outline"
-            w="140px"
-            h="48px"
-            cursor={page >= totalPages ? 'not-allowed' : 'pointer'}
-          >
-            Suivant
-          </ChakraButton>
+            rounded="full"
+            colorScheme="gray"
+            minW={8}
+            minH={8}
+          />
         </ButtonGroup>
       </Flex>
       {/* Bouton à droite, espace réservé si non affiché */}
-      <Flex flexShrink={0} minW="170px" justify="flex-end">
+      <Flex flexShrink={0} minW="120px" justify="flex-end">
         {isAuthenticated ? (
           <Link href="/post/create">
-            <Button color="primary" type="button">
+            <Button
+              color="primary"
+              type="button"
+            >
               Créer un article
             </Button>
           </Link>

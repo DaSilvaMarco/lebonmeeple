@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Box, useColorModeValue } from '@chakra-ui/react';
-import WelcomeSignupFormCard from './WelcomeSignupFormCard';
 import SignupForm from './SignupForm';
 import SignupDivider from './SignupDivider';
 
@@ -32,8 +31,6 @@ const SignupFormCard = () => {
         opacity: 0.1,
       }}
     >
-      <WelcomeSignupFormCard />
-
       <SignupForm />
 
       <SignupDivider />

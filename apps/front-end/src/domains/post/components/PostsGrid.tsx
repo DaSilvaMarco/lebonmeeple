@@ -33,7 +33,7 @@ const PostsGrid = (props: Props) => {
       px={{ base: 4, md: 6, lg: 8 }}
       pb={8}
       w="100%"
-      maxW="7xl"
+      maxW="full"
       mx="auto"
     >
       <h2

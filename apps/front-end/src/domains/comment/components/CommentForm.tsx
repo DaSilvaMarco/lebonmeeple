@@ -111,8 +111,10 @@ const CommentForm = ({ postId, onCommentAdded }: Props) => {
         border="1px"
         borderColor={borderColor}
         aria-labelledby="comment-form-title"
+        w="100%"
+        maxW="100vw"
       >
-        <VStack spacing={4} align="stretch">
+        <VStack spacing={4} align="stretch" w="100%">
           <Text id="comment-form-title" fontWeight="semibold">
             Ajouter un commentaire
           </Text>
