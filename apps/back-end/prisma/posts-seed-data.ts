@@ -1,4 +1,4 @@
-export const seedData = [
+export const postsSeedData = [
   {
     title: 'Terraforming Mars',
     body: 'Dans Terraforming Mars, vous incarnez une corporation chargée de rendre la planète Mars habitable pour l’humanité.\n\nChaque joueur doit gérer ses ressources, investir dans des projets innovants et collaborer tout en restant compétitif. Les stratégies sont multiples : développement technologique, gestion de l’énergie, ou exploitation des océans.\n\nCe jeu offre une expérience immersive et complexe, idéale pour les amateurs de gestion et de science-fiction.',
