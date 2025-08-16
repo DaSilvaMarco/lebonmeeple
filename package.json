@@ -83,7 +83,7 @@
     "@nestjs/schematics": "^11.0.5",
     "@nestjs/testing": "^11.1.2",
     "@playwright/test": "^1.54.2",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/bcrypt": "^5.0.2",
