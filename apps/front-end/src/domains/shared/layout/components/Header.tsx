@@ -13,6 +13,7 @@ import {
   MenuList,
   MenuItem,
   Button as ChakraButton,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ChevronDownIcon } from '@chakra-ui/icons';
@@ -33,12 +34,36 @@ const Header = () => {
     router.push('/');
   };
 
+  const bg = useColorModeValue('white', 'neutral.800');
+  const color = useColorModeValue('primary.500', 'primary.100');
+  const textColor = useColorModeValue('neutral.800', 'white');
+
   return (
-    <Flex w="full" shadow="md" p={5} align="center" justify="space-between">
+    <Flex
+      as="header"
+      width="100%"
+      px={{ base: 4, md: 12 }}
+      py={6}
+      align="center"
+      justify="space-between"
+      bg={bg}
+      color={textColor}
+      boxShadow="sm"
+      fontSize={{ base: 'sm', md: 'md' }}
+      borderBottom="1px solid"
+      borderColor="primary.100"
+      minH="64px"
+      borderTopRadius="xl"
+    >
       <Link href="/">
-        <Heading color="primary.500">
-          Lebonmeeple
-          <Text as="span" fontSize="sm">
+        <Heading
+          color={color}
+          fontWeight="bold"
+          fontSize={{ base: 'lg', md: '2xl' }}
+          letterSpacing="tight"
+        >
+          LebonMeeple
+          <Text as="span" fontSize="sm" color={textColor} fontWeight="normal">
             .com
           </Text>
         </Heading>
@@ -63,14 +88,14 @@ const Header = () => {
               <MenuButton as={ChakraButton} variant="ghost">
                 <HStack spacing={2}>
                   <Text
-                    color="primary.500"
+                    color={color}
                     fontWeight="600"
                     fontFamily="heading"
                     _hover={{ color: 'primary.700' }}
                   >
                     {user.username}
                   </Text>
-                  <ChevronDownIcon />
+                  <ChevronDownIcon color={color} />
                   <Avatar size="md" name={user.username} src={user.avatar} />
                 </HStack>
               </MenuButton>

@@ -1,13 +1,53 @@
+'use client';
+
 import React from 'react';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Text, Link } from '@chakra-ui/react';
 
 const Footer = () => {
   return (
-    <Flex width="100%" p="20px" justifyContent="space-between">
-      <Text fontSize="2xl">Footer</Text>
-      <Text fontSize="2xl">Mentions légales</Text>
-      <Text fontSize="2xl">Plan du site</Text>
-      <Text fontSize="2xl">Contact</Text>
+    <Flex
+      as="footer"
+      width="100%"
+      px={{ base: 4, md: 12 }}
+      py={6}
+      align="center"
+      justify="space-between"
+      bg="peach.200"
+      color="neutral.600"
+      boxShadow="sm"
+      fontSize={{ base: 'sm', md: 'md' }}
+      minH="64px"
+    >
+      <Text
+        fontWeight="bold"
+        color="neutral.600"
+        fontSize={{ base: 'md', md: 'lg' }}
+      >
+        LebonMeeple © {new Date().getFullYear()}
+      </Text>
+      <Flex gap={{ base: 2, md: 6 }}>
+        <Link
+          href="#"
+          color="neutral.600"
+          _hover={{ textDecoration: 'underline', color: 'primary.500' }}
+        >
+          Mentions légales
+        </Link>
+        <Link
+          href="#"
+          color="neutral.600"
+          _hover={{ textDecoration: 'underline', color: 'primary.500' }}
+        >
+          Plan du site
+        </Link>
+        <Link
+          href="#"
+          color="neutral.600"
+          _hover={{ textDecoration: 'underline', color: 'primary.500' }}
+        >
+          Contact
+        </Link>
+      </Flex>
     </Flex>
   );
 };

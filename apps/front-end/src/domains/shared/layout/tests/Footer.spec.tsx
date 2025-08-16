@@ -12,7 +12,6 @@ describe('Footer', () => {
   it('should render all footer elements', () => {
     render(<Footer />, { wrapper: ChakraWrapper });
 
-    expect(screen.getByText('Footer')).toBeInTheDocument();
     expect(screen.getByText('Mentions légales')).toBeInTheDocument();
     expect(screen.getByText('Plan du site')).toBeInTheDocument();
     expect(screen.getByText('Contact')).toBeInTheDocument();

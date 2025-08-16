@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   FormControl,
   FormErrorMessage,
@@ -14,6 +14,7 @@ import {
   Grid,
   GridItem,
   Box,
+  Text,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -24,14 +25,19 @@ import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
 import { SignupFormData, schemaUserSignup } from '@/domains/user/type';
 import { postSignup } from '@frontend/domains/user/api/post-signup';
 import { convertToBase64 } from '@frontend/utils/convertToBase64';
+import { useAppSelector } from '@/store/hook';
+import Link from 'next/link';
 import Button from '@frontend/domains/shared/button/components/Button';
 
 const SignupForm = () => {
   const router = useRouter();
   const toast = useToast();
+  const { isLoading } = useAppSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const textColorPrimary = useColorModeValue('neutral.800', 'white');
   const textColor = useColorModeValue('neutral.600', 'white');
@@ -58,10 +64,9 @@ const SignupForm = () => {
         'Inscription réussie !',
         'Votre compte a été créé avec succès. Vous allez être redirigé vers la page de connexion.',
       );
-
       setTimeout(() => {
         router.push('/signin');
-      }, 2000);
+      }, 1000);
     } catch (error) {
       const errorMessage =
         error instanceof Error
@@ -75,6 +80,7 @@ const SignupForm = () => {
     if (e.target.files && e.target.files[0]) {
       try {
         const file = e.target.files[0];
+        setSelectedFileName(file.name);
         const base64 = await convertToBase64(file);
         setValue('avatar', base64, { shouldValidate: true, shouldDirty: true });
       } catch (error) {
@@ -290,26 +296,31 @@ const SignupForm = () => {
             >
               Avatar (optionnel)
             </FormLabel>
-            <Input
-              id="avatar"
-              type="file"
-              accept="image/*"
-              onChange={handleFileUpload}
-              bg={inputBg}
-              border="2px"
-              borderColor={errors.avatar ? 'red.300' : inputBorderColor}
-              _hover={{
-                borderColor: errors.avatar ? 'red.400' : 'brand.300',
-              }}
-              _focus={{
-                borderColor: errors.avatar ? 'red.500' : 'brand.500',
-                bg: cardBg,
-                shadow: 'lg',
-              }}
-              size="lg"
-              borderRadius="lg"
-              p={1}
-            />
+            <Box display="flex" alignItems="center" gap={4}>
+              <input
+                id="avatar"
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+                data-testid="avatar-file-input"
+              />
+              <Button
+                type="button"
+                color="primary"
+                handleClick={() => fileInputRef.current?.click()}
+                dataTestId="avatar-upload-btn"
+              >
+                Choisir un fichier
+              </Button>
+              <Text
+                fontSize="sm"
+                color={selectedFileName ? textColorPrimary : 'neutral.400'}
+              >
+                {selectedFileName || 'Aucun fichier sélectionné'}
+              </Text>
+            </Box>
             <FormErrorMessage fontSize="sm" mt={2}>
               {errors.avatar?.message}
             </FormErrorMessage>
@@ -319,14 +330,22 @@ const SignupForm = () => {
 
       <Box textAlign="center">
         <Button
+          dataTestId="signup-submit-button"
           type="submit"
           color="primary"
           icon={<FaUserPlus />}
           isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
-          isLoading={isSubmitting}
+          isLoading={isSubmitting || isLoading}
         >
           M'inscrire
         </Button>
+        <Box mt={4}>
+          <Link href="/signin">
+            <Text fontSize="sm" color="primary.500" cursor="pointer">
+              Déjà un compte ? Se connecter
+            </Text>
+          </Link>
+        </Box>
       </Box>
     </form>
   );

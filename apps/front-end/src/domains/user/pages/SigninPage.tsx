@@ -7,7 +7,7 @@ import LoginFormCard from '../components/LoginFormCard';
 const SigninPage = () => {
   return (
     <Flex justify="center">
-      <Box w="full" maxW="md" zIndex={1}>
+      <Box w="full" zIndex={1}>
         <Box>
           <LoginFormCard />
         </Box>

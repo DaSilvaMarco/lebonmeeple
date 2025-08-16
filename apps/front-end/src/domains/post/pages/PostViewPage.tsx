@@ -38,8 +38,30 @@ const PostViewPage = (props: Props) => {
   };
 
   return (
-    <Flex py={8}>
-      <Box maxW="4xl" mx="auto" w="full" px={4}>
+    <Flex justify="center" align="flex-start" p={2} w="100%" minH="100vh">
+      <Box
+        w="100%"
+        borderRadius="2xl"
+        shadow="none"
+        position="relative"
+        overflow="hidden"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          top: '-1px',
+          left: '-1px',
+          right: '-1px',
+          bottom: '-1px',
+          borderRadius: '2xl',
+          background:
+            'linear-gradient(135deg, brand.400, meeple.400, game.400)',
+          zIndex: -1,
+          opacity: 0.1,
+        }}
+        maxW="7xl"
+        mx="auto"
+        px={{ base: 2, md: 6, lg: 8 }}
+      >
         <GoBackButton />
 
         <Box bg="white" borderRadius="xl" shadow="sm" overflow="hidden">
@@ -109,11 +131,12 @@ const PostViewPage = (props: Props) => {
             </HStack>
           </Box>
 
-          <Box p={8} pt={0}>
+          <Box p={0} pt={0} w="100%" maxW="none">
             <CommentsSection
               postId={post.id}
               comments={post.comments || []}
               onCommentsUpdate={handleCommentsUpdate}
+              fullWidth
             />
           </Box>
         </Box>

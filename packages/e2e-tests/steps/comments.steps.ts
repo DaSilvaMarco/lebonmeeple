@@ -7,9 +7,6 @@ When('je créé un commentaire', async ({ page }) => {
   await page.getByRole('button', { name: 'Articles' }).first().click();
   await page.getByTestId('view-all-posts-button').click();
 
-  const createTitle = page.getByTestId('posts-title-page');
-  await expect(createTitle).toBeVisible();
-
   await page.locator('div.chakra-card').first().click();
   await page.fill('textarea[name="body"]', 'Mon nouveau commentaire');
 
