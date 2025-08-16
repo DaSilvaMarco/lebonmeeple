@@ -1,0 +1,85 @@
+# MADR 005 – Choix de l’ORM
+
+## Contexte et problème
+Dans le cadre du développement back-end, nous devons interagir avec une base de données relationnelle (PostgreSQL).  
+L’utilisation d’un **ORM (Object Relational Mapper)** permet d’abstraire la complexité du SQL, d’assurer la compatibilité avec plusieurs SGBD et de faciliter l’évolution du schéma de données.  
+Le choix de l’ORM impactera la productivité, la maintenabilité et la performance du projet.  
+
+## Options considérées
+1. **Prisma**  
+2. **TypeORM**  
+3. **Sequelize**  
+4. **Mongoose (orienté NoSQL)**  
+
+## Avantages et inconvénients
+
+### 1. Prisma
+✅ **Avantages :**
+- Syntaxe moderne et intuitive.  
+- Génération automatique de types TypeScript (typage fort et sécurité accrue).  
+- Excellent support de PostgreSQL, MySQL, SQL Server, MongoDB.  
+- Migration et gestion du schéma très bien intégrées (Prisma Migrate).  
+- Très actif et supporté par une large communauté.  
+
+❌ **Inconvénients :**
+- Encore jeune comparé à TypeORM ou Sequelize.  
+- Moins flexible pour les requêtes SQL très complexes (parfois besoin de SQL brut).  
+- Performances légèrement moindres sur des cas extrêmes (requêtes massives).  
+
+---
+
+### 2. TypeORM
+✅ **Avantages :**
+- Mature et largement adopté.  
+- Compatible avec plusieurs SGBD (PostgreSQL, MySQL, SQLite, etc.).  
+- Syntaxe inspirée de Java (annotations/décorateurs).  
+- Bonne intégration avec NestJS.  
+
+❌ **Inconvénients :**
+- Typage TypeScript moins robuste que Prisma.  
+- Migrations moins intuitives que Prisma Migrate.  
+- Plus verbeux et plus complexe à maintenir sur des projets de grande taille.  
+
+---
+
+### 3. Sequelize
+✅ **Avantages :**
+- Populaire et bien établi depuis longtemps.  
+- Large communauté et beaucoup de documentation.  
+- Compatible avec plusieurs SGBD.  
+
+❌ **Inconvénients :**
+- API vieillissante, manque de modernité.  
+- Typage TypeScript limité.  
+- Code plus verbeux et difficile à maintenir que Prisma.  
+- Moins adapté aux projets TypeScript modernes.  
+
+---
+
+### 4. Mongoose (orienté MongoDB)
+✅ **Avantages :**
+- Excellent pour travailler avec MongoDB.  
+- Très simple d’utilisation.  
+- Grande communauté pour les projets NoSQL.  
+
+❌ **Inconvénients :**
+- Pas adapté aux bases relationnelles.  
+- Hors scope si PostgreSQL est utilisé.  
+- Fonctionnalités limitées pour des relations complexes.  
+
+---
+
+## Décision
+Nous choisissons **Prisma** comme ORM principal.  
+
+## Raisons
+- Modernité et simplicité d’utilisation.  
+- Excellente intégration avec TypeScript, garantissant un code plus sûr et maintenable.  
+- Prisma Migrate facilite la gestion du schéma et les migrations.  
+- Large adoption dans la communauté et bonne documentation.  
+- Parfaitement adapté pour une architecture moderne avec NestJS et PostgreSQL.  
+
+## Conséquences
+- Adaptation à la syntaxe et aux pratiques Prisma.  
+- Certaines requêtes complexes pourraient nécessiter du SQL brut.  
+- La productivité sera nettement améliorée grâce au typage automatique et aux outils intégrés.  
