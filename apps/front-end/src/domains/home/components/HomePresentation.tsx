@@ -39,7 +39,7 @@ const HomePresentation = () => {
               <Image
                 fill
                 objectFit="cover"
-                alt={`Photo de l'accueil`}
+                alt="Personnes jouant à un jeu de société autour d'une table."
                 src="/boardgame3.jpg"
                 style={{
                   transition: 'transform 0.3s ease',
@@ -55,9 +55,10 @@ const HomePresentation = () => {
                 p={3}
                 borderRadius="xl"
                 shadow="lg"
+                aria-label="Note moyenne des utilisateurs : 4,9 sur 5"
               >
                 <HStack>
-                  <Icon as={FaStar} color="yellow.400" />
+                  <Icon as={FaStar} color="yellow.400" aria-hidden="true" />
                   <Text fontWeight="bold">4.9/5</Text>
                 </HStack>
               </Box>

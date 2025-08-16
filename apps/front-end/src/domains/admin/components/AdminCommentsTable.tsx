@@ -34,12 +34,15 @@ const AdminCommentsTable = (props: Props) => {
     >
       <TableContainer w="100%">
         <Table variant="simple" w="100%">
+          <caption style={{ textAlign: 'left', padding: '0.5em 0' }}>
+            Liste des commentaires à modérer
+          </caption>
           <Thead>
             <Tr>
-              <Th>ID</Th>
-              <Th>Contenu</Th>
-              <Th>Utilisateur</Th>
-              <Th>Actions</Th>
+              <Th scope="col">ID</Th>
+              <Th scope="col">Contenu</Th>
+              <Th scope="col">Utilisateur</Th>
+              <Th scope="col">Actions</Th>
             </Tr>
           </Thead>
           <Tbody>

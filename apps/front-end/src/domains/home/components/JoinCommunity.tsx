@@ -18,10 +18,19 @@ const JoinCommunity = () => {
   return (
     <>
       {!isAuthenticated && (
-        <Box py={20} bg={featuresBg}>
+        <Box
+          py={20}
+          bg={featuresBg}
+          as="section"
+          role="region"
+          aria-labelledby="join-community-heading"
+        >
           <Container maxW="4xl" textAlign="center">
             <VStack spacing={8}>
-              <Heading fontSize={{ base: '3xl', md: '4xl' }}>
+              <Heading
+                id="join-community-heading"
+                fontSize={{ base: '3xl', md: '4xl' }}
+              >
                 Prêt à rejoindre la communauté ?
               </Heading>
               <Text fontSize="xl" maxW="600px">

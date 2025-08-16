@@ -39,12 +39,17 @@ const AdminPostsTableRow = (props: Props) => {
 
   return (
     <Fragment key={post.id}>
-      <Tr>
-        <Td>
+      <Tr tabIndex={0} aria-label={`Ligne du post ${post.title}`}>
+        <Td scope="row">
           <span style={ellipsisStyle}>{post.id}</span>
         </Td>
         <Td>
-          <Image src={post.image} width={50} height={50} alt={post.title} />
+          <Image
+            src={post.image}
+            width={50}
+            height={50}
+            alt={`Image du post : ${post.title}`}
+          />
         </Td>
         <Td>
           <span style={ellipsisStyle}>{post.title}</span>
@@ -60,10 +65,17 @@ const AdminPostsTableRow = (props: Props) => {
             color="primary"
             type="button"
             handleClick={() => setModalOpen(true)}
+            aria-label={`Supprimer le post ${post.title}`}
+            dataTestId={`delete-post-${post.id}`}
           >
             Supprimer
           </Button>
-          <Button color="primary" type="button">
+          <Button
+            color="primary"
+            type="button"
+            aria-label={`Voir le post ${post.title}`}
+            dataTestId={`view-post-${post.id}`}
+          >
             <Link href={`/post/${post.id}`}>Voir</Link>
           </Button>
           <ConfirmationModal

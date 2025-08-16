@@ -30,7 +30,7 @@ When('je modifie le commentaire', async ({ page }) => {
 
   const textarea = page.locator('textarea[name="body"]').nth(1);
   await textarea.fill('Mon nouveau commentaire modifié');
-  await page.getByText('Modifier').click();
+  await page.getByRole('button', { name: 'Modifier', exact: true }).click();
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();

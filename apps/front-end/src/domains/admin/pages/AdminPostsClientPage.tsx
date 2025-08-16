@@ -28,9 +28,19 @@ const AdminPostsClientPage = () => {
     return <NotConnected />;
   }
   return (
-    <div>
-      <AdminPostsTable posts={posts} />;
-    </div>
+    <main role="main" aria-label="Gestion des posts" tabIndex={-1}>
+      <header>
+        <h1
+          id="admin-posts-title"
+          style={{ fontSize: '2rem', marginBottom: '1rem' }}
+        >
+          Gestion des posts
+        </h1>
+      </header>
+      <section aria-labelledby="admin-posts-title">
+        <AdminPostsTable posts={posts} />
+      </section>
+    </main>
   );
 };
 

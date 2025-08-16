@@ -17,6 +17,9 @@ const PostEditFormCard = ({ post, token }: Props) => {
 
   return (
     <Box
+      as="section"
+      role="region"
+      aria-labelledby="post-edit-form-card-title"
       bg={cardBg}
       p={{ base: 6, md: 10 }}
       borderRadius="2xl"
@@ -37,6 +40,18 @@ const PostEditFormCard = ({ post, token }: Props) => {
         opacity: 0.1,
       }}
     >
+      <h1
+        id="post-edit-form-card-title"
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          height: '1px',
+          width: '1px',
+          overflow: 'hidden',
+        }}
+      >
+        Modification d’un article
+      </h1>
       <WelcomePostEditFormCard />
       <PostEditForm post={post} token={token} />
     </Box>

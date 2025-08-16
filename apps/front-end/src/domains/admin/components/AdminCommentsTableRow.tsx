@@ -32,29 +32,50 @@ const AdminCommentsTableRow = (props: Props) => {
       setModalOpen(false);
     } catch (e) {
       console.log('error', e);
-    } 
+    }
   };
 
   return (
     <Fragment key={comment.id}>
-      <Tr>
-        <Td>
+      <Tr
+        tabIndex={0}
+        aria-label={`Commentaire de ${comment.user?.username ?? 'utilisateur inconnu'}`}
+      >
+        <Td
+          tabIndex={0}
+          aria-label={`Identifiant du commentaire : ${comment.id}`}
+        >
           <span style={ellipsisStyle}>{comment.id}</span>
         </Td>
-        <Td>
+        <Td
+          tabIndex={0}
+          aria-label={`Contenu du commentaire : ${comment.body}`}
+        >
           <span style={ellipsisStyle}>{comment.body}</span>
         </Td>
-        <Td>
+        <Td
+          tabIndex={0}
+          aria-label={`Utilisateur : ${comment.user?.username ?? 'inconnu'}`}
+        >
           <span style={ellipsisStyle}>{comment.user?.username}</span>
         </Td>
         <Td>
-          <Button
-            color="primary"
-            type="button"
-            handleClick={() => setModalOpen(true)}
+          <span
+            tabIndex={0}
+            aria-label="Supprimer ce commentaire"
+            style={{ outline: 'none', display: 'inline-block' }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') setModalOpen(true);
+            }}
           >
-            Supprimer
-          </Button>
+            <Button
+              color="primary"
+              type="button"
+              handleClick={() => setModalOpen(true)}
+            >
+              Supprimer
+            </Button>
+          </span>
           <ConfirmationModal
             isModalOpen={isModalOpen}
             setModalOpen={setModalOpen}

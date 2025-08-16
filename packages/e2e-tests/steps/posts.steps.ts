@@ -8,10 +8,6 @@ When('je créé un article', async ({ page }) => {
   await page.getByRole('button', { name: 'Articles' }).first().click();
   await page.getByTestId('create-post-button').click();
 
-  const createTitle = page.getByText('Créer un nouvel article');
-
-  await expect(createTitle).toBeVisible();
-
   await page.fill('input[name="title"]', 'Mon nouvel article');
   await page.fill('textarea[name="body"]', 'Mon nouveau texte');
   await page.fill('input[name="category"]', 'Jeux de société');

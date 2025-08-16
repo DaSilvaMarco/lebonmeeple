@@ -65,7 +65,14 @@ const HomeHeader = (props: Props) => {
               <Button
                 type="button"
                 color="secondary"
-                icon={<Icon as={FaRocket} />}
+                aria-label="Explorer les articles"
+                icon={
+                  <Icon
+                    as={FaRocket}
+                    title="Explorer les articles"
+                    aria-hidden="true"
+                  />
+                }
               >
                 Explorer les Articles
               </Button>
@@ -74,7 +81,14 @@ const HomeHeader = (props: Props) => {
               <Button
                 type="button"
                 color="primary"
-                icon={<Icon as={FaPenNib} />}
+                aria-label="Créer un article"
+                icon={
+                  <Icon
+                    as={FaPenNib}
+                    title="Créer un article"
+                    aria-hidden="true"
+                  />
+                }
               >
                 Créer un article
               </Button>
@@ -86,7 +100,14 @@ const HomeHeader = (props: Props) => {
               <Button
                 color="secondary"
                 type="button"
-                icon={<Icon as={FaStar} />}
+                aria-label="Rejoindre la communauté"
+                icon={
+                  <Icon
+                    as={FaStar}
+                    title="Rejoindre la communauté"
+                    aria-hidden="true"
+                  />
+                }
               >
                 Rejoindre la communauté
               </Button>
@@ -95,7 +116,10 @@ const HomeHeader = (props: Props) => {
               <Button
                 color="primary"
                 type="button"
-                icon={<Icon as={FaRocket} />}
+                aria-label="Se connecter"
+                icon={
+                  <Icon as={FaRocket} title="Se connecter" aria-hidden="true" />
+                }
               >
                 Se connecter
               </Button>

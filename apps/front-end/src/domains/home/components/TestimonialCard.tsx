@@ -45,16 +45,19 @@ const TestimonialCard = (props: Props) => {
         position="absolute"
         top={6}
         left={6}
+        aria-hidden="true"
       />
       <VStack spacing={6} pt={4}>
-        <Text
+        <Box
+          as="blockquote"
           fontSize="lg"
           fontStyle="italic"
           textAlign="center"
           data-testid="testimonial-content"
+          m={0}
         >
           "{testimonial.content}"
-        </Text>
+        </Box>
         <Divider />
         <HStack>
           <Avatar size="md" src={testimonial.avatar} name={testimonial.name} />

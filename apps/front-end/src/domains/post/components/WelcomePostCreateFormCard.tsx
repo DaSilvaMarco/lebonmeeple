@@ -9,12 +9,24 @@ const WelcomePostCreateFormCard = () => {
 
   return (
     <VStack spacing={4} textAlign="center" mb={8}>
+      <h2
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          height: '1px',
+          width: '1px',
+          overflow: 'hidden',
+        }}
+      >
+        Bienvenue sur la page de création d’article
+      </h2>
       <Heading
         as="h2"
         size="xl"
         color={textColorPrimary}
         fontWeight="bold"
         letterSpacing="tight"
+        aria-hidden="true"
       >
         Créer un nouvel article
       </Heading>

@@ -11,9 +11,14 @@ import TestimonialCard from './TestimonialCard';
 import { testimonials } from '@frontend/domains/home/data/data';
 
 const Testimonial = () => {
-
   return (
-    <Box py={20} bg="peach.200">
+    <Box
+      py={20}
+      bg="peach.200"
+      as="section"
+      role="region"
+      aria-labelledby="testimonials-heading"
+    >
       <Container maxW="7xl">
         <VStack spacing={12}>
           <VStack spacing={4} textAlign="center">
@@ -26,7 +31,10 @@ const Testimonial = () => {
             >
               Témoignages
             </Text>
-            <Heading fontSize={{ base: '3xl', md: '4xl' }}>
+            <Heading
+              id="testimonials-heading"
+              fontSize={{ base: '3xl', md: '4xl' }}
+            >
               Ce que disent nos membres
             </Heading>
           </VStack>

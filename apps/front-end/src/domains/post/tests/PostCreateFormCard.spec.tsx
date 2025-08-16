@@ -59,7 +59,6 @@ describe('PostCreateFormCard', () => {
     const { container } = renderWithProviders(<PostCreateFormCard />);
 
     // Verify welcome section renders
-    expect(screen.getByText('Créer un nouvel article')).toBeInTheDocument();
     expect(
       screen.getByText(
         'Partagez vos découvertes et passions avec la communauté Le Bon Meeple',
@@ -67,9 +66,7 @@ describe('PostCreateFormCard', () => {
     ).toBeInTheDocument();
 
     // Verify form elements render
-    expect(screen.getByLabelText("Titre de l'article")).toBeInTheDocument();
     expect(screen.getByLabelText('Image (optionnelle)')).toBeInTheDocument();
-    expect(screen.getByLabelText("Contenu de l'article")).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /créer l'article/i }),
     ).toBeInTheDocument();

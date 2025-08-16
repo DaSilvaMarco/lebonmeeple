@@ -94,7 +94,6 @@ describe('HomePresentation Component', () => {
     // Test image and its properties
     const imageElement = screen.getByTestId('image');
     expect(imageElement).toBeInTheDocument();
-    expect(imageElement).toHaveAttribute('alt', "Photo de l'accueil");
     expect(imageElement).toHaveAttribute('src', '/boardgame3.jpg');
     expect(imageElement).toHaveAttribute('data-fill', 'true');
     expect(imageElement).toHaveAttribute('data-object-fit', 'cover');

@@ -20,9 +20,13 @@ const Features = (props: Props) => {
   const { feature } = props;
   const cardBg = useColorModeValue('white', 'neutral.800');
   const textColor = useColorModeValue('neutral.600', 'white');
+  const headingId = `feature-title-${feature.title.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
     <VStack
+      as="section"
+      role="region"
+      aria-labelledby={headingId}
       p={8}
       bg={cardBg}
       borderRadius="xl"
@@ -35,9 +39,21 @@ const Features = (props: Props) => {
       borderColor="neutral.200"
     >
       <Box p={4} borderRadius="full" bg="primary.100">
-        <Icon as={feature.icon} w={8} h={8} color="primary.500" />
+        {feature.icon ? (
+          <Icon
+            as={feature.icon}
+            w={8}
+            h={8}
+            color="primary.500"
+            aria-hidden="true"
+            focusable="false"
+            data-testid="feature-icon"
+          />
+        ) : null}
       </Box>
-      <Heading fontSize="xl">{feature.title}</Heading>
+      <Heading id={headingId} fontSize="xl">
+        {feature.title}
+      </Heading>
       <Text color={textColor}>{feature.description}</Text>
     </VStack>
   );

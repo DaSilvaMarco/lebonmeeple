@@ -24,27 +24,40 @@ const CommentsSection = ({ postId, comments, onCommentsUpdate }: Props) => {
   );
 
   return (
-    <Box>
+    <Box as="section" aria-labelledby={`comments-title-${postId}`}>
       <Divider mb={6} />
 
       <VStack spacing={6} align="stretch">
-        <Text fontSize="lg" fontWeight="semibold" color={textColor}>
+        <Text
+          as="h2"
+          id={`comments-title-${postId}`}
+          fontSize="lg"
+          fontWeight="semibold"
+          color={textColor}
+          tabIndex={-1}
+        >
           Commentaires ({comments.length})
         </Text>
 
         <CommentForm postId={postId} onCommentAdded={onCommentsUpdate} />
 
         {sortedComments.length > 0 ? (
-          <VStack spacing={4} align="stretch">
+          <Box
+            as="ul"
+            aria-label="Liste des commentaires"
+            pl={0}
+            style={{ listStyle: 'none' }}
+          >
             {sortedComments.map((comment) => (
-              <CommentCard
-                key={comment.id}
-                comment={comment}
-                onCommentDeleted={onCommentsUpdate}
-                onCommentUpdated={onCommentsUpdate}
-              />
+              <Box as="li" key={comment.id}>
+                <CommentCard
+                  comment={comment}
+                  onCommentDeleted={onCommentsUpdate}
+                  onCommentUpdated={onCommentsUpdate}
+                />
+              </Box>
             ))}
-          </VStack>
+          </Box>
         ) : (
           <Box textAlign="center" py={8}>
             <Text color="gray.500">

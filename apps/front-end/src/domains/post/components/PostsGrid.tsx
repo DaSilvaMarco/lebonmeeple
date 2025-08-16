@@ -18,6 +18,9 @@ const PostsGrid = (props: Props) => {
 
   return (
     <MotionGrid
+      as="section"
+      role="list"
+      aria-labelledby="posts-grid-title"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -33,8 +36,23 @@ const PostsGrid = (props: Props) => {
       maxW="7xl"
       mx="auto"
     >
+      <h2
+        id="posts-grid-title"
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          height: '1px',
+          width: '1px',
+          overflow: 'hidden',
+        }}
+      >
+        Liste des articles
+      </h2>
       {posts.map((post: Post) => (
         <MotionGridItem
+          as="div"
+          role="listitem"
+          aria-label={`Article : ${post.title}`}
           key={post.id}
           w="100%"
           variants={itemVariants}
