@@ -16,7 +16,7 @@ const Nav = () => {
   const { isAuthenticated, user } = useAppSelector((state) => state.user);
 
   return (
-    <Flex align="center" gap={8} fontSize="lg">
+    <Flex align="center" gap={8} fontSize="lg" as="nav">
       <Button
         as={Link}
         href="/"
@@ -105,6 +105,26 @@ const Nav = () => {
             </MenuItem>
           )}
         </MenuList>
+        <Button
+          as={Link}
+          href="/games"
+          variant="ghost"
+          px={4}
+          py={2}
+          borderRadius="lg"
+          color="primary.500"
+          fontWeight="600"
+          fontFamily="heading"
+          _hover={{
+            bg: 'primary.100',
+            color: 'primary.700',
+            transform: 'translateY(-1px)',
+          }}
+          transition="all 0.2s"
+          data-testid="games-list-button"
+        >
+          Jeux
+        </Button>
       </Menu>
 
       {user?.roles.includes('ADMIN') && (
@@ -155,21 +175,20 @@ const Nav = () => {
             >
               Voir les articles
             </MenuItem>
-              <MenuItem
-                as={Link}
-                href="/admin/comments"
-                _hover={{
-                  bg: 'primary.100',
-                  color: 'primary.700',
-                }}
-                px={4}
-                py={3}
-                fontSize="md"
-                fontWeight="500"
-              >
-                Voir les commentaires
-                
-              </MenuItem>
+            <MenuItem
+              as={Link}
+              href="/admin/comments"
+              _hover={{
+                bg: 'primary.100',
+                color: 'primary.700',
+              }}
+              px={4}
+              py={3}
+              fontSize="md"
+              fontWeight="500"
+            >
+              Voir les commentaires
+            </MenuItem>
           </MenuList>
         </Menu>
       )}

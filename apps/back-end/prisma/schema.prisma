@@ -35,6 +35,8 @@ model Post {
   updatedAt DateTime @updatedAt
   user User @relation("user_posts", fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   comments Comment[] @relation("post_comment")
+  gameId Int?
+  game Games? @relation("game_posts", fields: [gameId], references: [id], onUpdate: Cascade, onDelete: SetNull)
 }
 
 model Comment {
@@ -46,4 +48,19 @@ model Comment {
   updatedAt DateTime @default(now()) @updatedAt
   post Post @relation("post_comment", fields: [postId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   user User @relation("user_comment", fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model Games {
+  id Int @id @default(autoincrement())
+  name String
+  year String
+  rating Int
+  mechanics String[]
+  image String
+  description String
+  minPlayers Int
+  maxPlayers Int
+  duration Int
+  difficulty String
+  posts Post[] @relation("game_posts")
 }

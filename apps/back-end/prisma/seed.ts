@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
-import { seedData } from './seed-data';
+import { postsSeedData } from './posts-seed-data';
+import { gamesSeedData } from './games-seed-data';
+import { g } from 'vitest/dist/chunks/suite.d.FvehnV49';
 
 const prisma = new PrismaClient();
 
@@ -50,7 +52,7 @@ async function main() {
     'Autres',
   ];
 
-  for (const article of seedData) {
+  for (const article of postsSeedData) {
     const user = faker.helpers.arrayElement(usersWithoutMe);
     const category = faker.helpers.arrayElement(categories);
     const post = await prisma.post.create({
@@ -83,6 +85,27 @@ async function main() {
     }
   }
 
+  const gamesList: Awaited<ReturnType<typeof prisma.games.create>>[] = [];
+
+  for (const game of gamesSeedData) {
+    const games = await prisma.games.create({
+      data: {
+        name: game.name,
+        year: game.year,
+        rating: game.rating,
+        mechanics: game.mechanics,
+        image: game.image,
+        minPlayers: game.minPlayers,
+        maxPlayers: game.maxPlayers,
+        duration: game.duration,
+        difficulty: game.difficulty,
+        description: faker.lorem.paragraphs(2),
+      },
+    });
+    gamesList.push(games);
+  }
+
+  console.log(`Jeux créés : ${gamesList.length}`);
   const nbComments = await prisma.comment.count();
   console.log(`Commentaires créés : ${nbComments}`);
 }
