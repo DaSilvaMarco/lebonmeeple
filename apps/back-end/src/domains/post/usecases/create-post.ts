@@ -5,35 +5,34 @@ import { BasicUser } from '@backend/domains/user/types';
 import { CreatePostDto } from '../dtos/create-post-dto';
 
 export const createPost = async (
-  createPostDto: CreatePostDto,
-  request: Request,
-  prismaService: PrismaService,
+  dto: CreatePostDto,
+  req: Request,
+  prisma: PrismaService,
 ) => {
-  const { id } = request.user as BasicUser;
-  const { body, title, image, category } = createPostDto;
+  const userId = (req.user as BasicUser).id;
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new BadRequestException('User not found');
 
-  const user = await prismaService.user.findUnique({
-    where: { id },
-    select: {
-      id: true,
-      email: true,
-      username: true,
-    },
-  });
-
-  if (!user) {
-    throw new BadRequestException('User not found');
-  }
-
-  return await prismaService.post.create({
+  const post = await prisma.post.create({
     data: {
-      body,
-      title,
-      userId: id,
-      image,
-      category,
+      title: dto.title,
+      body: dto.body,
+      image: dto.image,
+      category: dto.category,
+      userId,
       createdAt: new Date(),
       updatedAt: new Date(),
+      games:
+        dto.gameIds && dto.gameIds.length > 0
+          ? { connect: dto.gameIds.map((id) => ({ id })) }
+          : undefined,
     },
+    include: { games: { select: { id: true } } },
   });
+
+  return {
+    ...post,
+    gameIds: post.games.map((g) => g.id),
+    games: undefined,
+  };
 };

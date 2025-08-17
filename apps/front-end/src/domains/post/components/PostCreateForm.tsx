@@ -21,6 +21,9 @@ import { useAppSelector } from '@/store/hook';
 import { convertToBase64 } from '@/utils/convertToBase64';
 import Button from '@frontend/domains/shared/button/components/Button';
 import ConfirmationModal from '@frontend/domains/shared/modal/ConfirmationModal';
+import SearchMultiSelect from '../../shared/select/components/SearchMultiSelect';
+import { Game } from '../../games/type';
+import { getGames } from '../../games/api/get-games';
 import { useDisclosure } from '@chakra-ui/react';
 import { getApiBaseUrl } from '@/utils/api-config';
 
@@ -32,6 +35,20 @@ const PostCreateForm = () => {
   } = useDisclosure();
   const [pendingData, setPendingData] =
     React.useState<PostCreateFormData | null>(null);
+  const [games, setGames] = React.useState<Game[]>([]);
+  const [selectedGameIds, setSelectedGameIds] = React.useState<number[]>([]);
+  const [loadingGames, setLoadingGames] = React.useState(false);
+  // Charger la liste des jeux au montage
+  React.useEffect(() => {
+    setLoadingGames(true);
+    getGames({ limit: 100, page: 1 })
+      .then((data) => {
+        // Si l'API renvoie un objet { games: [...] }
+        if (Array.isArray(data)) setGames(data);
+        else if (Array.isArray(data?.games)) setGames(data.games);
+      })
+      .finally(() => setLoadingGames(false));
+  }, []);
   const router = useRouter();
   const toast = useToast();
   const { token } = useAppSelector((state) => state.user);
@@ -69,7 +86,7 @@ const PostCreateForm = () => {
   );
 
   const onSubmit = (data: PostCreateFormData) => {
-    setPendingData(data);
+    setPendingData({ ...data, gameIds: selectedGameIds });
     openModal();
   };
 
@@ -87,6 +104,7 @@ const PostCreateForm = () => {
           body: pendingData.body,
           image: pendingData.image || null,
           category: pendingData.category,
+          gameIds: pendingData.gameIds || [], // Ajout des jeux sélectionnés
         }),
       });
 
@@ -215,6 +233,22 @@ const PostCreateForm = () => {
             <FormErrorMessage fontSize="sm" mt={2} id="category-error">
               {errors.category?.message}
             </FormErrorMessage>
+          </FormControl>
+          <FormControl>
+            <FormLabel
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Jeux à rattacher (optionnel)
+            </FormLabel>
+            <SearchMultiSelect
+              options={games.map((g) => ({ label: g.name, value: g.id }))}
+              value={selectedGameIds}
+              onChange={(ids) => setSelectedGameIds(ids.map(Number))}
+              placeholder={loadingGames ? 'Chargement...' : 'Rechercher un jeu'}
+              disabled={loadingGames}
+            />
           </FormControl>
           <FormControl isInvalid={!!errors.image}>
             <FormLabel

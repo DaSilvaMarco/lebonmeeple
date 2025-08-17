@@ -6,8 +6,19 @@ export const updatePost = async (
   updatePostDto: UpdatePostDto,
   prismaService: PrismaService,
 ) => {
+  const { games, ...rest } = updatePostDto;
+
   return prismaService.post.update({
     where: { id },
-    data: { ...updatePostDto, updatedAt: new Date() },
+    data: {
+      ...rest,
+      updatedAt: new Date(),
+      ...(games && {
+        games: {
+          set: games.map((gameId) => ({ id: gameId })),
+        },
+      }),
+    },
+    include: { games: true },
   });
 };

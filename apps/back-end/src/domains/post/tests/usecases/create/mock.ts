@@ -27,6 +27,7 @@ export const prismaMock = (createDto: CreatePostDto) => {
         category: createDto.category,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        games: [],
       }),
     },
   } as unknown as PrismaService;

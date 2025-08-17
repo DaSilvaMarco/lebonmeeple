@@ -17,6 +17,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FaSave } from 'react-icons/fa';
 import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
 import { PostUpdateFormData, updatePostSchema } from '@/domains/post/schema';
+import SearchMultiSelect, {
+  SearchMultiSelectOption,
+} from '@/domains/shared/select/components/SearchMultiSelect';
+import { getGames } from '@/domains/games/api/get-games';
+import { Game } from '@/domains/games/type';
+import { useEffect, useState } from 'react';
 import { convertToBase64 } from '@/utils/convertToBase64';
 import { updatePost } from '@/domains/post/api/update-post';
 import { updatePost as updatePostAction } from '@/domains/post/slice';
@@ -42,6 +48,9 @@ const PostEditForm = ({ post, token }: Props) => {
   const inputBg = useColorModeValue('gray.50', 'gray.700');
   const inputBorderColor = useColorModeValue('gray.300', 'gray.600');
 
+  const [gameOptions, setGameOptions] = useState<SearchMultiSelectOption[]>([]);
+  const [loadingGames, setLoadingGames] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -55,8 +64,21 @@ const PostEditForm = ({ post, token }: Props) => {
       title: post.title,
       body: post.body,
       image: post.image || '',
+      category: post.category,
+      gameIds: post.games ? post.games.map((g) => g.id) : [],
     },
   });
+
+  // Charger les jeux pour le select
+  useEffect(() => {
+    setLoadingGames(true);
+    getGames({ limit: 100, page: 1 }).then((data) => {
+      // data peut être paginé ou non selon l'API, on tente data.games sinon data
+      const games: Game[] = Array.isArray(data) ? data : data.games || [];
+      setGameOptions(games.map((g: Game) => ({ label: g.name, value: g.id })));
+      setLoadingGames(false);
+    });
+  }, []);
 
   const watchedValues = watch();
   const formIsValid = !!(
@@ -210,6 +232,41 @@ const PostEditForm = ({ post, token }: Props) => {
               {errors.category?.message}
             </FormErrorMessage>
           </FormControl>
+          <FormControl isInvalid={!!errors.gameIds} isRequired={false}>
+            <FormLabel
+              htmlFor="gameIds"
+              color={textColorPrimary}
+              fontWeight="semibold"
+              fontSize="sm"
+            >
+              Jeux associés
+            </FormLabel>
+            <SearchMultiSelect
+              options={gameOptions}
+              value={watchedValues.gameIds || []}
+              onChange={(selected) =>
+                setValue(
+                  'gameIds',
+                  selected.map((value) =>
+                    typeof value === 'number' ? value : Number(value),
+                  ),
+                  {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  },
+                )
+              }
+              placeholder={
+                loadingGames ? 'Chargement...' : 'Sélectionnez les jeux'
+              }
+              disabled={loadingGames}
+              className="post-edit-games-select"
+            />
+            <FormErrorMessage fontSize="sm" mt={2} id="gameIds-edit-error">
+              {errors.gameIds?.message}
+            </FormErrorMessage>
+          </FormControl>
+
           <FormControl isInvalid={!!errors.image}>
             <FormLabel
               htmlFor="image"

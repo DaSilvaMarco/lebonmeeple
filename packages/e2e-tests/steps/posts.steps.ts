@@ -39,7 +39,7 @@ Then("je dois voir l'article créé", async ({ page }) => {
 });
 
 When("je modifie l'article", async ({ page }) => {
-  await page.getByLabel('Modifier le post').click();
+  await page.getByLabel('Modifier le post').first().click();
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();

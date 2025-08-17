@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { GamesService } from './games.service';
 
@@ -22,5 +22,10 @@ export class GamesController {
   })
   getAll(@Query('page') page = 1, @Query('limit') limit = 9) {
     return this.gamesService.getAll(Number(page), Number(limit));
+  }
+
+  @Get('game/:id')
+  getById(@Param('id', ParseIntPipe) id: number) {
+    return this.gamesService.getById(id);
   }
 }

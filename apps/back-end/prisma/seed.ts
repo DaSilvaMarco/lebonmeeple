@@ -13,6 +13,7 @@ async function main() {
   await prisma.comment.deleteMany();
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.game.deleteMany();
 
   const specificUser = await prisma.user.create({
     data: {
@@ -71,6 +72,7 @@ async function main() {
 
   console.log(`Posts créés : ${posts.length}`);
 
+  // Générer des commentaires pour les posts (uniquement postId)
   for (const post of posts) {
     const nbComments = faker.number.int({ min: 1, max: 5 });
     for (let i = 0; i < nbComments; i++) {
@@ -79,16 +81,19 @@ async function main() {
         data: {
           body: faker.lorem.sentences(2),
           postId: post.id,
+          gameId: null,
           userId: user.id,
-        },
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        } as any,
       });
     }
   }
 
-  const gamesList: Awaited<ReturnType<typeof prisma.games.create>>[] = [];
+  const gamesList: Awaited<ReturnType<typeof prisma.game.create>>[] = [];
 
   for (const game of gamesSeedData) {
-    const games = await prisma.games.create({
+    const games = await prisma.game.create({
       data: {
         name: game.name,
         year: game.year,
@@ -106,6 +111,42 @@ async function main() {
   }
 
   console.log(`Jeux créés : ${gamesList.length}`);
+
+  // Générer de nouveaux commentaires pour les jeux (uniquement gameId)
+  for (const game of gamesList) {
+    const nbNewComments = faker.number.int({ min: 2, max: 4 });
+    for (let i = 0; i < nbNewComments; i++) {
+      const user = faker.helpers.arrayElement(usersWithoutMe);
+      await prisma.comment.create({
+        data: {
+          body: `Nouveau commentaire : ${faker.lorem.sentences(2)}`,
+          postId: null,
+          gameId: game.id,
+          userId: user.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        } as any,
+      });
+    }
+  }
+
+  // Générer des commentaires pour les jeux (uniquement gameId)
+  for (const game of gamesList) {
+    const nbComments = faker.number.int({ min: 1, max: 3 });
+    for (let i = 0; i < nbComments; i++) {
+      const user = faker.helpers.arrayElement(usersWithoutMe);
+      await prisma.comment.create({
+        data: {
+          body: faker.lorem.sentences(2),
+          postId: null,
+          gameId: game.id,
+          userId: user.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        } as any,
+      });
+    }
+  }
   const nbComments = await prisma.comment.count();
   console.log(`Commentaires créés : ${nbComments}`);
 }

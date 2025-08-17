@@ -5,7 +5,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { containerVariants, itemVariants } from '../constants';
 import { Game } from '../type';
-import GameCard from '@frontend/domains/shared/card/components/GameCard';
+import GameCardPreview from '@frontend/domains/shared/card/components/GameCardPreview';
 
 type Props = {
   games: Game[];
@@ -62,7 +62,7 @@ const GamesGrid = (props: Props) => {
           }}
           style={{ originY: 0.5 }}
         >
-          <GameCard game={game} />
+          <GameCardPreview game={game} />
         </MotionGridItem>
       ))}
     </MotionGrid>

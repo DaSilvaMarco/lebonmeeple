@@ -6,6 +6,7 @@ const UPDATE_DTO = {
   title: 'Updated post title',
   body: 'Updated post content',
   image: 'updated-image.jpg',
+  category: 'updated category',
 };
 
 test('The user can update a post', async () => {
@@ -15,6 +16,7 @@ test('The user can update a post', async () => {
   expect(prismaMock.post.update).toHaveBeenCalledWith({
     where: { id: 1 },
     data: { ...UPDATE_DTO, updatedAt: expect.any(Date) },
+    include: { games: true },
   });
 
   expect(result).not.toMatchObject({
