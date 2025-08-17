@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
+import Modal from '@/domains/shared/modal/Modal';
 import { useDisclosure } from '@chakra-ui/react';
 import {
   Card,
@@ -24,6 +24,7 @@ import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
 import { deletePost as deletePostApi } from '@frontend/domains/post/api/delete-post';
 import { deletePost as deletePostAction } from '@frontend/domains/post/slice';
 import { toastSuccess, toastError } from '@frontend/domains/shared/toat/toast';
+import Button from '../../button/components/Button';
 
 type Props = {
   post: Post;
@@ -119,7 +120,7 @@ const PostCard = (props: Props) => {
             fill
             objectFit="cover"
             alt={`Photo de l'article ${title}`}
-            src={ image }
+            src={image}
             fallbackSrc="/boardgame.jpg"
             style={{
               transition: 'transform 0.3s ease',
@@ -217,8 +218,8 @@ const PostCard = (props: Props) => {
             >
               <Avatar
                 size="sm"
-                src={userFromPost?.avatar || '/defaultAvatar.jpg'}
-                name={userFromPost?.username}
+                src={userFromPost.avatar || '/defaultAvatar.jpg'}
+                name={userFromPost.username}
                 bg="brand.100"
                 color="brand.600"
               />
@@ -229,7 +230,7 @@ const PostCard = (props: Props) => {
                   color={textColorPrimary}
                   lineHeight="short"
                 >
-                  {userFromPost?.username}
+                  {userFromPost.username}
                 </Text>
                 <Text
                   fontSize="xs"
@@ -243,21 +244,60 @@ const PostCard = (props: Props) => {
           </VStack>
         </CardBody>
       </Card>
-      <ConfirmationModal
-        isModalOpen={isDeleteModalOpen}
-        setModalOpen={(open) => {
-          if (!open) setIsDeleting(false);
-          closeDeleteModal();
-        }}
-        onConfirm={handleConfirmDelete}
-        title={'Êtes-vous sûr de vouloir supprimer ce post ?'}
-      />
-      <ConfirmationModal
-        isModalOpen={isEditModalOpen}
-        setModalOpen={closeEditModal}
-        onConfirm={handleConfirmEdit}
-        title={'Êtes-vous sûr de vouloir modifier ce post ?'}
-      />
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        title="Confirmer la suppression"
+        footer={
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmDelete}
+              icon={<DeleteIcon />}
+              isLoading={isDeleting}
+              dataTestId="confirm-delete-button"
+            >
+              Supprimer
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={closeDeleteModal}
+              dataTestId="cancel-delete-button"
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir supprimer ce post ?
+      </Modal>
+
+      <Modal
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        title="Confirmer la modification"
+        footer={
+          <>
+            <Button
+              color="primary"
+              handleClick={handleConfirmEdit}
+              icon={<EditIcon />}
+              dataTestId="confirm-edit-button"
+            >
+              Modifier !
+            </Button>
+            <Button
+              color="secondary"
+              handleClick={closeEditModal}
+              dataTestId="cancel-edit-button"
+            >
+              Annuler
+            </Button>
+          </>
+        }
+      >
+        Êtes-vous sûr de vouloir modifier ce post ?
+      </Modal>
     </Link>
   );
 };

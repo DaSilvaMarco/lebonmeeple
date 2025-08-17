@@ -13,6 +13,7 @@ async function main() {
   await prisma.comment.deleteMany();
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.game.deleteMany();
 
   const specificUser = await prisma.user.create({
     data: {
