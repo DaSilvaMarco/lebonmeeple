@@ -22,6 +22,7 @@ test('The user can create an account', async () => {
       createdAt: expect.any(Date),
       updatedAt: expect.any(Date),
     },
+    include: { games: { select: { id: true } } },
   });
 
   expect(result).toMatchObject({

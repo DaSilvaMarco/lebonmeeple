@@ -19,6 +19,15 @@ export const getPosts = async (
             ...PRISMA_BASIC_USER,
           },
         },
+        games: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+            year: true,
+            rating: true,
+          },
+        },
       },
     }),
     prismaService.post.count(),

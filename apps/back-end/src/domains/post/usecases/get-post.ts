@@ -23,6 +23,16 @@ export const getPost = async (id: number, prismaService: PrismaService) => {
           },
         },
       },
+      games: {
+        select: {
+          id: true,
+          name: true,
+          year: true,
+          image: true,
+          rating: true,
+          description: false,
+        },
+      },
     },
   });
 };

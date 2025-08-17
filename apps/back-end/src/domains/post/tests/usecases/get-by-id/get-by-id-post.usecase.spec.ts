@@ -29,6 +29,16 @@ test('The user can get one post by id', async () => {
           },
         },
       },
+      games: {
+        select: {
+          id: true,
+          name: true,
+          year: true,
+          image: true,
+          rating: true,
+          description: false,
+        },
+      },
       user: {
         select: {
           avatar: true,

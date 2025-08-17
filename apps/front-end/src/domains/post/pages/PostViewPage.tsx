@@ -16,6 +16,7 @@ import {
 import GoBackButton from '@frontend/domains/shared/button/components/GoBackButton';
 import React, { useState } from 'react';
 import { Post } from '../type';
+import GameCard from '@frontend/domains/shared/card/components/GameCard';
 import Image from '@frontend/domains/shared/image/components/Image';
 import CommentsSection from '@frontend/domains/comment/components/CommentsSection';
 import { getPostById } from '../api/getPostById';
@@ -115,6 +116,20 @@ const PostViewPage = (props: Props) => {
               {post?.body}
             </Text>
           </Box>
+          {post?.games && post.games.length > 0 && (
+            <Box p={8} pt={0}>
+              <Heading as="h2" size="md" mb={4} color="meeple.600">
+                Jeux associés à ce post
+              </Heading>
+              <Flex wrap="wrap" gap={4}>
+                {post.games.map((game) => (
+                  <Box key={game.id} minW="250px" maxW="300px" flex="1 1 250px">
+                    <GameCard game={game} />
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+          )}
           <Box p={8} pt={0}>
             <Divider mb={4} />
             <HStack justify="space-between">

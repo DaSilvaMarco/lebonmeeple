@@ -5,6 +5,8 @@ export type InitialStatePost = {
   posts: Post[];
 };
 
+import { type Game } from '../games/type';
+
 export type Post = {
   id: number;
   title: string;
@@ -14,6 +16,7 @@ export type Post = {
   user: User;
   userId: number;
   comments?: Comment[];
+  games?: Game[];
   updatedAt: Date;
   createdAt: Date;
 };
