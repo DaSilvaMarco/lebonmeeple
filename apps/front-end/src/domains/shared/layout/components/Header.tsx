@@ -17,7 +17,6 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import ResponsiveNav from '@/domains/shared/navigation/components/ResponsiveNav';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { logout } from '@/domains/user/slice';
 import { useRouter } from 'next/navigation';
@@ -117,9 +116,6 @@ const Header = () => {
             </HStack>
           </Show>
         )}
-        <Show below="md">
-          <ResponsiveNav />
-        </Show>
       </HStack>
     </Flex>
   );

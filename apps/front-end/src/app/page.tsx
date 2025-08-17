@@ -1,25 +1,20 @@
 import React from 'react';
-import Head from 'next/head';
 import HomePage from '@frontend/domains/home/pages/HomePage';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Accueil',
+  description:
+    'Page d\'accueil pour Le Bon Meeple. Découvrez nos services de manière accessible et conforme au RGAA.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const App = () => {
   return (
     <>
-      <Head>
-        <title>Accueil | LebonMeeple</title>
-        <meta
-          name="description"
-          content="Page d'accueil de LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Accueil | LebonMeeple" />
-        <meta
-          property="og:description"
-          content="Page d'accueil de LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta property="og:type" content="website" />
-      </Head>
       <HomePage />
     </>
   );

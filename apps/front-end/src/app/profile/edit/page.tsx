@@ -1,25 +1,20 @@
 import React from 'react';
-import Head from 'next/head';
 import ProfileEditPage from '@frontend/domains/user/pages/ProfileEditPage';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Modifier le profil',
+  description:
+    'Page de modification du profil utilisateur pour Le Bon Meeple. Mettez à jour vos informations personnelles de manière accessible et conforme au RGAA.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const App = () => {
   return (
     <>
-      <Head>
-        <title>Édition du profil | LebonMeeple</title>
-        <meta
-          name="description"
-          content="Page d'édition du profil utilisateur sur LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="noindex, nofollow" />
-        <meta property="og:title" content="Édition du profil | LebonMeeple" />
-        <meta
-          property="og:description"
-          content="Page d'édition du profil utilisateur sur LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta property="og:type" content="website" />
-      </Head>
       <ProfileEditPage />
     </>
   );

@@ -1,6 +1,16 @@
 import PostEditPage from '@frontend/domains/post/pages/PostEditPage';
 import React from 'react';
-import Head from 'next/head';
+import { type Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Edition de l\'article',
+  description:
+    'Page d’édition de l’article pour Le Bon Meeple. Modifiez le contenu de l’article de façon accessible et conforme au RGAA.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 type Props = {
   params: {
@@ -11,14 +21,6 @@ type Props = {
 const App = ({ params }: Props) => {
   return (
     <>
-      <Head>
-        <title>Édition du post | LebonMeeple</title>
-        <meta
-          name="description"
-          content="Page d'édition d'un post sur LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <PostEditPage postId={parseInt(params.id)} />
     </>
   );
