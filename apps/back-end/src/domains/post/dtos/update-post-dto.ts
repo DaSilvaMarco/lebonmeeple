@@ -7,6 +7,8 @@ export class UpdatePostDto {
   readonly body: string;
   @ApiPropertyOptional()
   readonly image: string;
+  @ApiPropertyOptional()
+  readonly category: string;
   @ApiPropertyOptional({
     type: [Number],
     description: 'Liste des IDs de jeux à associer au post',

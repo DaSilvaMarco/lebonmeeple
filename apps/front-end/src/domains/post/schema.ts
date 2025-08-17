@@ -37,6 +37,7 @@ export const updatePostSchema = z.object({
     .trim()
     .min(1, 'La catégorie est requise')
     .max(50, 'La catégorie ne peut pas dépasser 50 caractères'),
+  gameIds: z.array(z.number()).optional(),
 });
 
 export type PostCreateFormData = z.infer<typeof createPostSchema>;

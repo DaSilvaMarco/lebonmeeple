@@ -2,14 +2,11 @@
 
 import {
   Avatar,
-  Badge,
   Box,
-  Button,
   Divider,
   Flex,
   Heading,
   HStack,
-  Link,
   VStack,
   Text,
 } from '@chakra-ui/react';
@@ -20,6 +17,14 @@ import GameCard from '@frontend/domains/shared/card/components/GameCard';
 import Image from '@frontend/domains/shared/image/components/Image';
 import CommentsSection from '@frontend/domains/comment/components/CommentsSection';
 import { getPostById } from '../api/getPostById';
+import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
+import Button from '@frontend/domains/shared/button/components/Button';
+import { useRouter } from 'next/navigation';
+import { deletePost as deletePostApi } from '../api/delete-post';
+import { deletePost as deletePostAction } from '../slice';
+import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
+import { useDisclosure } from '@chakra-ui/react';
+import Link from 'next/link';
 
 type Props = {
   post: Post;
@@ -28,6 +33,26 @@ type Props = {
 const PostViewPage = (props: Props) => {
   const { post: initialPost } = props;
   const [post, setPost] = useState<Post>(initialPost);
+  const { user, token } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const {
+    isOpen: isDeleteModalOpen,
+    onOpen: openDeleteModal,
+    onClose: closeDeleteModal,
+  } = useDisclosure();
+
+  const handleDelete = async () => {
+    if (!token) return;
+    try {
+      await deletePostApi(post.id, token);
+      dispatch(deletePostAction(post.id));
+      router.push('/posts');
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   const handleCommentsUpdate = async () => {
     try {
@@ -86,6 +111,30 @@ const PostViewPage = (props: Props) => {
                   </Text>
                 </VStack>
               </HStack>
+              {user?.id === post.userId && (
+                <HStack spacing={4} mb={4} justifyContent="flex-end">
+                  <Link href={`/post/${post.id}/edit`}>
+                    <Button color="primary" type="button">
+                      Éditer
+                    </Button>
+                  </Link>
+                  <Button
+                    color="secondary"
+                    type="button"
+                    handleClick={openDeleteModal}
+                  >
+                    Supprimer
+                  </Button>
+                  <ConfirmationModal
+                    isModalOpen={isDeleteModalOpen}
+                    setModalOpen={(open) => {
+                      if (!open) closeDeleteModal();
+                    }}
+                    onConfirm={handleDelete}
+                    title={'Êtes-vous sûr de vouloir supprimer cet article ?'}
+                  />
+                </HStack>
+              )}
 
               <Divider />
             </VStack>
@@ -130,22 +179,6 @@ const PostViewPage = (props: Props) => {
               </Flex>
             </Box>
           )}
-          <Box p={8} pt={0}>
-            <Divider mb={4} />
-            <HStack justify="space-between">
-              <Badge colorScheme="brand" variant="subtle">
-                Article de blog
-              </Badge>
-              <HStack spacing={2}>
-                <Link href="/posts">
-                  <Button variant="outline" size="sm">
-                    Voir tous les articles
-                  </Button>
-                </Link>
-              </HStack>
-            </HStack>
-          </Box>
-
           <Box p={0} pt={0} w="100%" maxW="none">
             <CommentsSection
               postId={post.id}

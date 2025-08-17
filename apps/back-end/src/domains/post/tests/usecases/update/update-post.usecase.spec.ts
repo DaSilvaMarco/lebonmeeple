@@ -6,6 +6,7 @@ const UPDATE_DTO = {
   title: 'Updated post title',
   body: 'Updated post content',
   image: 'updated-image.jpg',
+  category: 'updated category',
 };
 
 test('The user can update a post', async () => {
