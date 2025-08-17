@@ -14,6 +14,7 @@ const GameCardPreview = (props: Props) => {
     id,
     name,
     rating,
+    image,
   } = game;
 
   const overlayBg = useColorModeValue(
@@ -39,7 +40,7 @@ const GameCardPreview = (props: Props) => {
           fill
           objectFit="cover"
           alt={`Photo du jeu ${name}`}
-          src={'/boardgame.jpg'}
+          src={image || '/boardgame.jpg'}
           fallbackSrc="/boardgame.jpg"
           style={{ transition: 'transform 0.3s ease' }}
           className="hover:scale-105"

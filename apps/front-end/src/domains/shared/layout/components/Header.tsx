@@ -14,7 +14,6 @@ import {
   MenuItem,
   Button as ChakraButton,
   useColorModeValue,
-  Box,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ChevronDownIcon } from '@chakra-ui/icons';
@@ -63,19 +62,14 @@ const Header = () => {
           fontSize={{ base: 'lg', md: '2xl' }}
           letterSpacing="tight"
         >
-          LebonMeeple
-          <Text as="span" fontSize="sm" color={textColor} fontWeight="normal">
-            .com
-          </Text>
+          LBM
         </Heading>
       </Link>
 
       <Show above="md">
         <HStack spacing={8} align="center">
           <Nav />
-          <Box minW="320px" maxW="400px" w="100%">
-            <Search />
-          </Box>
+          <Search />
         </HStack>
       </Show>
 

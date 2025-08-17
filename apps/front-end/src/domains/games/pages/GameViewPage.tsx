@@ -69,7 +69,7 @@ const GameViewPage = (props: Props) => {
                     fill
                     objectFit="cover"
                     alt={`Photo du jeu: ${game?.name}`}
-                    src={'/boardgame.jpg'}
+                    src={game?.image || '/boardgame.jpg'}
                     fallbackSrc="/boardgame.jpg"
                     style={{
                       width: '100%',

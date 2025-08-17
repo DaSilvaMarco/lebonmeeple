@@ -5,8 +5,10 @@ import {
   List,
   ListItem,
   Spinner,
+  IconButton,
   useOutsideClick,
 } from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/navigation';
 import { getGames } from '@/domains/games/api/get-games';
 import { type Game } from '@/domains/games/type';
@@ -16,12 +18,16 @@ const Search = () => {
   const [results, setResults] = useState<Game[]>([]);
   const [loading, setLoading] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showInput, setShowInput] = useState(false);
   const router = useRouter();
   const ref = useRef(null);
 
   useOutsideClick({
     ref,
-    handler: () => setShowDropdown(false),
+    handler: () => {
+      setShowDropdown(false);
+      setShowInput(false);
+    },
   });
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,44 +58,65 @@ const Search = () => {
   const handleSelect = (game: Game) => {
     setQuery('');
     setShowDropdown(false);
+    setShowInput(false);
     router.push(`/game/${game.id}`);
   };
 
   return (
-    <Box position="relative" w="100%" maxW="400px" mx="auto" ref={ref}>
-      <Input
-        placeholder="Rechercher un jeu..."
-        value={query}
-        onChange={handleChange}
-        autoComplete="off"
-        aria-label="Recherche de jeux"
-      />
-      {loading && <Spinner size="sm" position="absolute" right={2} top={2} />}
-      {showDropdown && results.length > 0 && (
-        <List
-          position="absolute"
-          zIndex={10}
-          w="100%"
-          bg="white"
-          borderRadius="md"
-          boxShadow="md"
-          mt={1}
-          maxH="250px"
-          overflowY="auto"
-        >
-          {results.map((game) => (
-            <ListItem
-              key={game.id}
-              px={4}
-              py={2}
-              cursor="pointer"
-              _hover={{ bg: 'gray.100' }}
-              onClick={() => handleSelect(game)}
+    <Box position="relative" ref={ref}>
+      {!showInput && (
+        <IconButton
+          aria-label="Ouvrir la recherche"
+          icon={<SearchIcon />}
+          variant="ghost"
+          onClick={() => setShowInput(true)}
+          size="md"
+        />
+      )}
+      {showInput && (
+        <Box position="absolute" right={0} top={0} zIndex={20}>
+          <Input
+            placeholder="Rechercher un jeu..."
+            value={query}
+            onChange={handleChange}
+            autoFocus
+            autoComplete="off"
+            aria-label="Recherche de jeux"
+            mb={1}
+            bg="white"
+            borderRadius="md"
+            boxShadow="md"
+          />
+          {loading && (
+            <Spinner size="sm" position="absolute" right={2} top={2} />
+          )}
+          {showDropdown && results.length > 0 && (
+            <List
+              position="absolute"
+              zIndex={10}
+              w="100%"
+              bg="white"
+              borderRadius="md"
+              boxShadow="md"
+              mt={1}
+              maxH="250px"
+              overflowY="auto"
             >
-              {game.name}
-            </ListItem>
-          ))}
-        </List>
+              {results.map((game) => (
+                <ListItem
+                  key={game.id}
+                  px={4}
+                  py={2}
+                  cursor="pointer"
+                  _hover={{ bg: 'gray.100' }}
+                  onClick={() => handleSelect(game)}
+                >
+                  {game.name}
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </Box>
       )}
     </Box>
   );
