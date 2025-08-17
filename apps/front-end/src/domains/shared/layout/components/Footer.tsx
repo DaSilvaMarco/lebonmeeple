@@ -18,8 +18,6 @@ const Footer = () => {
       fontSize={{ base: 'sm', md: 'md' }}
       minH="64px"
       mt="auto"
-      position="relative"
-      zIndex={1}
     >
       <Text
         fontWeight="bold"

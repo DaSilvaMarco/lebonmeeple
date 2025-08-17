@@ -30,11 +30,7 @@ const ResponsiveNav = () => {
   return (
     <Flex
       as="nav"
-      position="fixed"
-      left="0"
-      bottom="0"
       w="100%"
-      zIndex={3000}
       bg={bg}
       borderTop="1px solid"
       borderColor={useColorModeValue('gray.200', 'gray.700')}
