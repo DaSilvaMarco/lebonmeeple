@@ -55,7 +55,8 @@ Créez le fichier `.env` à la racine du projet à côté du fichier `.env.local
 3. **Lancer l'application avec Docker**
 
 ```bash
-docker compose up --build
+docker compose -f docker-composer.dev.yml build
+docker compose -f docker-composer.dev.yml up
 ```
 
 - Cette commande va :

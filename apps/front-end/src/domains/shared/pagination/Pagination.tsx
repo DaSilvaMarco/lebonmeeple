@@ -24,7 +24,6 @@ const Pagination = (props: Props) => {
 
   return (
     <Flex w="100%" alignItems="center" mb={6} px={2} pt={2} gap={2}>
-      {/* Pagination centrée, moderne et légère */}
       <Flex flex="1" justify="center" align="center">
         <ButtonGroup size="sm" variant="ghost" spacing={1}>
           <IconButton
