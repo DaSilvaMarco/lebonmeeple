@@ -255,7 +255,7 @@ const PostCard = (props: Props) => {
               handleClick={handleConfirmDelete}
               icon={<DeleteIcon />}
               isLoading={isDeleting}
-              dataTestId="confirm-delete-button"
+              dataTestId="modal-confirm-button"
             >
               Supprimer
             </Button>
@@ -282,7 +282,7 @@ const PostCard = (props: Props) => {
               color="primary"
               handleClick={handleConfirmEdit}
               icon={<EditIcon />}
-              dataTestId="confirm-edit-button"
+              dataTestId="modal-confirm-button"
             >
               Modifier !
             </Button>

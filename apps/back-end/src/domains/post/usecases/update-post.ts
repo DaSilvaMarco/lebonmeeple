@@ -8,7 +8,6 @@ export const updatePost = async (
 ) => {
   const { games, ...rest } = updatePostDto;
 
-  console.log(updatePostDto);
   return prismaService.post.update({
     where: { id },
     data: {

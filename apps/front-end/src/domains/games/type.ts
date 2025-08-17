@@ -1,3 +1,4 @@
+import { type Comment } from '../comment';
 import { type Post } from '../post/type';
 
 export type InitialStateGame = {
@@ -17,4 +18,5 @@ export type Game = {
   duration: number;
   difficulty: string;
   posts?: Post[];
+  comments?: Comment[];
 };

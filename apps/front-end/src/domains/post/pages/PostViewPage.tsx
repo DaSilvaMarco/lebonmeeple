@@ -13,7 +13,6 @@ import {
 import GoBackButton from '@frontend/domains/shared/button/components/GoBackButton';
 import React, { useState } from 'react';
 import { Post } from '../type';
-import GameCard from '@frontend/domains/shared/card/components/GameCard';
 import Image from '@frontend/domains/shared/image/components/Image';
 import CommentsSection from '@frontend/domains/comment/components/CommentsSection';
 import { getPostById } from '../api/getPostById';
@@ -25,6 +24,7 @@ import { deletePost as deletePostAction } from '../slice';
 import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
 import { useDisclosure } from '@chakra-ui/react';
 import Link from 'next/link';
+import GameCardPreview from '@frontend/domains/shared/card/components/GameCardPreview';
 
 type Props = {
   post: Post;
@@ -173,7 +173,7 @@ const PostViewPage = (props: Props) => {
               <Flex wrap="wrap" gap={4}>
                 {post.games.map((game) => (
                   <Box key={game.id} minW="250px" maxW="300px" flex="1 1 250px">
-                    <GameCard game={game} />
+                    <GameCardPreview game={game} />
                   </Box>
                 ))}
               </Flex>

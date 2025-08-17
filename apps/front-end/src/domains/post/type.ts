@@ -1,11 +1,10 @@
 import { type User } from '../user/type';
 import { type Comment } from '../comment/type';
+import { type Game } from '../games/type';
 
 export type InitialStatePost = {
   posts: Post[];
 };
-
-import { type Game } from '../games/type';
 
 export type Post = {
   id: number;
