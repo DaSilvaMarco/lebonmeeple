@@ -8,7 +8,7 @@ import ResponsiveNav from '@/domains/shared/navigation/components/ResponsiveNav'
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Flex direction="column" minHeight="100vh">
-      <Flex as="header"width="100%">
+      <Flex as="header" width="100%">
         <Header />
       </Flex>
       <Flex
@@ -17,19 +17,18 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
         justifyContent="center"
         width="100%"
         overflowY="auto"
+        pb={{ base: '64px', md: 0 }}
       >
         {children}
       </Flex>
-      <Flex>
-        <Show above="md">
-          <Flex as="footer" width="100%">
-            <Footer />
-          </Flex>
-        </Show>
-        <Show below="md">
-          <ResponsiveNav />
-        </Show>
-      </Flex>
+      <Show above="md">
+        <Flex as="footer" width="100%">
+          <Footer />
+        </Flex>
+      </Show>
+      <Show below="md">
+        <ResponsiveNav />
+      </Show>
     </Flex>
   );
 };
