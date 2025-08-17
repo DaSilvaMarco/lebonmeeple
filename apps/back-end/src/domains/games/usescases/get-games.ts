@@ -6,11 +6,11 @@ export const getGames = async (
   limit = 10,
 ) => {
   const [games, total] = await Promise.all([
-    prismaService.games.findMany({
+    prismaService.game.findMany({
       skip: (page - 1) * limit,
       take: limit,
     }),
-    prismaService.games.count(),
+    prismaService.game.count(),
   ]);
 
   return {

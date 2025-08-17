@@ -12,7 +12,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { PostService } from './post.service';
 import type { Request } from 'express';
@@ -28,6 +28,7 @@ export class PostController {
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('access-token')
   @Post('post')
+  @ApiBody({ type: CreatePostDto })
   create(@Body() createPostDto: CreatePostDto, @Req() request: Request) {
     return this.postService.create(createPostDto, request);
   }
