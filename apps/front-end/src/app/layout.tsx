@@ -1,13 +1,7 @@
-import type { Metadata } from 'next';
 import React from 'react';
 import { Provider } from '@/ui/Provider';
 import PageLayout from '@/domains/shared/layout/components/PageLayout';
 import { ReduxProvider } from '@frontend/store/ReduxProvider';
-
-export const metadata: Metadata = {
-  title: 'Le Bon Meeple',
-  description: 'Le blog des pros des jeux de société',
-};
 
 export default function RootLayout({
   children,

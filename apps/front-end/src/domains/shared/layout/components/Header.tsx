@@ -14,15 +14,16 @@ import {
   MenuItem,
   Button as ChakraButton,
   useColorModeValue,
+  Box,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import ResponsiveNav from '@/domains/shared/navigation/components/ResponsiveNav';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { logout } from '@/domains/user/slice';
 import { useRouter } from 'next/navigation';
 import Button from '@/domains/shared/button/components/Button';
 import Nav from '../../navigation/components/Nav';
+import Search from '../../search/components/Search';
 
 const Header = () => {
   const { user, isAuthenticated } = useAppSelector((state) => state.user);
@@ -70,7 +71,12 @@ const Header = () => {
       </Link>
 
       <Show above="md">
-        <Nav />
+        <HStack spacing={8} align="center">
+          <Nav />
+          <Box minW="320px" maxW="400px" w="100%">
+            <Search />
+          </Box>
+        </HStack>
       </Show>
 
       <HStack spacing={4}>
@@ -117,9 +123,6 @@ const Header = () => {
             </HStack>
           </Show>
         )}
-        <Show below="md">
-          <ResponsiveNav />
-        </Show>
       </HStack>
     </Flex>
   );

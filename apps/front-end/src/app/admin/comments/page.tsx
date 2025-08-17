@@ -1,19 +1,20 @@
 import React from 'react';
-import Head from 'next/head';
-
 import AdminCommentsClientPage from '@frontend/domains/admin/pages/AdminCommentsClientPage';
+import { type Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Admin commentaires',
+  description:
+    'Page d’administration des commentaires pour Le Bon Meeple. Gérez les commentaires des utilisateurs de façon accessible et conforme au RGAA.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function App() {
   return (
     <>
-      <Head>
-        <title>Gestion des commentaires - Administration | LebonMeeple</title>
-        <meta
-          name="description"
-          content="Page d'administration pour la gestion des commentaires sur LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <AdminCommentsClientPage />
     </>
   );

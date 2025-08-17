@@ -14,7 +14,7 @@ const GameViewPage = (props: Props) => {
   const { game } = props;
 
   return (
-    <Flex direction="column" minH="100vh" w="100%">
+    <Flex direction="column" w="100%">
       <Flex
         flex="1"
         direction="column"

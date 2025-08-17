@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Box, useColorModeValue } from '@chakra-ui/react';
-import WelcomePostCreateFormCard from './WelcomePostCreateFormCard';
 import PostCreateForm from './PostCreateForm';
 
 const PostCreateFormCard = () => {
@@ -15,6 +14,7 @@ const PostCreateFormCard = () => {
       role="region"
       aria-labelledby="post-create-form-card-title"
       bg={cardBg}
+      my={8}
       p={{ base: 6, md: 10 }}
       borderRadius="2xl"
       shadow="2xl"
@@ -46,7 +46,6 @@ const PostCreateFormCard = () => {
       >
         Création d’un nouvel article
       </h1>
-      <WelcomePostCreateFormCard />
       <PostCreateForm />
     </Box>
   );

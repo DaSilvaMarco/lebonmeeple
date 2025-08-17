@@ -79,7 +79,7 @@ Then("je dois voir l'article modifié", async ({ page }) => {
 });
 
 When("je supprime l'article", async ({ page }) => {
-  await page.getByLabel('Supprimer le post').click();
+  await page.getByLabel('Supprimer le post').first().click();
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();

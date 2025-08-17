@@ -13,7 +13,17 @@ import {
   Link as ChakraLink,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { AiOutlineAppstore, AiOutlineEdit, AiOutlineHome, AiOutlineMenu, AiOutlineRobot, AiOutlineUnorderedList } from 'react-icons/ai';
+import {
+  AiOutlineAppstore,
+  AiOutlineEdit,
+  AiOutlineHome,
+  AiOutlineMenu,
+  AiOutlineRobot,
+  AiOutlineUnorderedList,
+  AiOutlineSearch,
+} from 'react-icons/ai';
+import { useState } from 'react';
+import Search from '../../search/components/Search';
 
 const footerLinks = [
   { label: 'Mentions légales', href: '#' },
@@ -23,6 +33,7 @@ const footerLinks = [
 import { useAppSelector } from '@/store/hook';
 
 const ResponsiveNav = () => {
+  const [showSearch, setShowSearch] = useState(false);
   const { isAuthenticated } = useAppSelector((state) => state.user);
   const bg = useColorModeValue('white', 'gray.900');
   const color = useColorModeValue('gray.600', 'gray.200');
@@ -30,11 +41,11 @@ const ResponsiveNav = () => {
   return (
     <Flex
       as="nav"
+      w="100vw"
       position="fixed"
-      left="0"
-      bottom="0"
-      w="100%"
-      zIndex={3000}
+      left={0}
+      bottom={0}
+      zIndex={20}
       bg={bg}
       borderTop="1px solid"
       borderColor={useColorModeValue('gray.200', 'gray.700')}
@@ -127,7 +138,38 @@ const ResponsiveNav = () => {
           </Text>
         </Flex>
       )}
-      {/* Footer Icon/Menu */}
+      <Flex direction="column" align="center">
+        <Popover
+          isOpen={showSearch}
+          onClose={() => setShowSearch(false)}
+          placement="top"
+          closeOnBlur
+        >
+          <PopoverTrigger>
+            <IconButton
+              aria-label="Rechercher un jeu"
+              icon={<AiOutlineSearch size={24} color={color} />}
+              variant="ghost"
+              fontSize="xl"
+              onClick={() => setShowSearch((v) => !v)}
+            />
+          </PopoverTrigger>
+          <PopoverContent
+            w="fit-content"
+            minW="280px"
+            p={2}
+            borderRadius="md"
+            boxShadow="md"
+          >
+            <PopoverBody>
+              <Search />
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+        <Text fontSize="xs" color={color} mt={0.5}>
+          Rechercher
+        </Text>
+      </Flex>
       <Flex direction="column" align="center">
         <Popover placement="top" trigger="click">
           <PopoverTrigger>

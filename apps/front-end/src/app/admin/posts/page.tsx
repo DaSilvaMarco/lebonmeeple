@@ -1,29 +1,20 @@
 import React from 'react';
-import Head from 'next/head';
-
 import AdminPostsClientPage from '@frontend/domains/admin/pages/AdminPostsClientPage';
+import { type Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Admin articles',
+  description:
+    'Page d’administration des articles pour Le Bon Meeple. Gérez les articles des utilisateurs de façon accessible et conforme au RGAA.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function App() {
   return (
     <>
-      <Head>
-        <title>Gestion des posts - Administration | LebonMeeple</title>
-        <meta
-          name="description"
-          content="Page d'administration pour la gestion des posts sur LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="noindex, nofollow" />
-        <meta
-          property="og:title"
-          content="Gestion des posts - Administration | LebonMeeple"
-        />
-        <meta
-          property="og:description"
-          content="Page d'administration pour la gestion des posts sur LebonMeeple. Accessible et conforme RGAA."
-        />
-        <meta property="og:type" content="website" />
-      </Head>
       <AdminPostsClientPage />
     </>
   );

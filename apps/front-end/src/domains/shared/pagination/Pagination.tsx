@@ -5,10 +5,7 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { useAppSelector } from '@frontend/store/hook';
-import Link from 'next/link';
 import React from 'react';
-import Button from '../button/components/Button';
 
 type Props = {
   page: number;
@@ -20,7 +17,6 @@ type Props = {
 
 const Pagination = (props: Props) => {
   const { page, totalPages, setPage, handlePrevPage, handleNextPage } = props;
-  const { isAuthenticated } = useAppSelector((state) => state.user);
 
   return (
     <Flex w="100%" alignItems="center" mb={6} px={2} pt={2} gap={2}>
@@ -65,19 +61,6 @@ const Pagination = (props: Props) => {
             minH={8}
           />
         </ButtonGroup>
-      </Flex>
-      {/* Bouton à droite, espace réservé si non affiché */}
-      <Flex flexShrink={0} minW="120px" justify="flex-end">
-        {isAuthenticated ? (
-          <Link href="/post/create">
-            <Button
-              color="primary"
-              type="button"
-            >
-              Créer un article
-            </Button>
-          </Link>
-        ) : null}
       </Flex>
     </Flex>
   );
