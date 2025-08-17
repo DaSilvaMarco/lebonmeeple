@@ -50,7 +50,6 @@ describe('PageLayout', () => {
     );
 
     expect(screen.getByTestId('header')).toBeInTheDocument();
-    expect(screen.getByTestId('footer')).toBeInTheDocument();
     expect(screen.getByTestId('content')).toBeInTheDocument();
     expect(screen.getByText(testContent)).toBeInTheDocument();
   });

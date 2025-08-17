@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { Box, Stack, Center, Text, Flex } from '@chakra-ui/react';
 import { getPosts } from '@frontend/domains/post/api/getPosts';
 import PostsPage from '@frontend/domains/post/pages/PostsPage';
 import { useDispatch } from 'react-redux';
@@ -45,30 +46,49 @@ const PostsClientPage = () => {
 
   if (error) {
     return (
-      <div style={{ textAlign: 'center', padding: '2rem' }}>
-        <p>{error}</p>
-      </div>
+      <Center minH="40vh" px={4}>
+        <Text
+          color="red.500"
+          fontWeight="bold"
+          fontSize={{ base: 'md', md: 'lg' }}
+        >
+          {error}
+        </Text>
+      </Center>
     );
   }
 
   return (
-    <>
-      <Pagination
-        page={page}
-        totalPages={totalPages}
-        setPage={setPage}
-        handlePrevPage={handlePrevPage}
-        handleNextPage={handleNextPage}
-      />
-      {isLoading ? <PostsPageSkeleton /> : <PostsPage />}
-      <Pagination
-        page={page}
-        totalPages={totalPages}
-        setPage={setPage}
-        handlePrevPage={handlePrevPage}
-        handleNextPage={handleNextPage}
-      />
-    </>
+    <Box w="100%" py={{ base: 4, md: 8 }} px={{ base: 0, md: 4 }}>
+      <Stack
+        spacing={{ base: 4, md: 8 }}
+        align="center"
+        maxW="1200px"
+        mx="auto"
+      >
+        <Flex justifyContent="center" alignItems="center">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
+        </Flex>
+        <Box w="100%" maxW="1200px" minH="400px" px={{ base: 2, md: 0 }}>
+          {isLoading ? <PostsPageSkeleton /> : <PostsPage />}
+        </Box>
+        <Box w="fit-content" maxW="100%" mx="auto">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 
