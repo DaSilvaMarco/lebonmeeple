@@ -10,7 +10,7 @@ const GamesPage = () => {
   const { games } = useAppSelector((state) => state.games);
 
   return (
-    <Flex justify="center" align="flex-start" p={2} w="100%" minH="100vh">
+    <Flex justify="center" align="flex-start" p={2} w="100%">
       <Box
         w="100%"
         borderRadius="2xl"

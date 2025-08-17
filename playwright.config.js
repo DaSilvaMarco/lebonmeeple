@@ -11,4 +11,7 @@ export default defineConfig({
   testDir,
   reporter: 'html',
   workers: 1,
+  use: {
+    trace: 'retain-on-failure',
+  },
 });

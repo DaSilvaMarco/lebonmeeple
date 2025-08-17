@@ -165,6 +165,7 @@ const PostCard = (props: Props) => {
                     bg: 'blue.600',
                   }}
                   backdropFilter="blur(8px)"
+                  data-testid="edit-post-button"
                 />
                 <IconButton
                   aria-label="Supprimer le post"
@@ -181,6 +182,7 @@ const PostCard = (props: Props) => {
                     bg: 'red.600',
                   }}
                   backdropFilter="blur(8px)"
+                  data-testid="delete-post-button"
                 />
               </HStack>
             </Box>

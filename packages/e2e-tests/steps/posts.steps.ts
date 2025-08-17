@@ -34,12 +34,15 @@ Then("je dois voir l'article créé", async ({ page }) => {
   await expect(articleTitle).toBeVisible();
 
   await articleTitle.click();
-
-  await page.getByText('Retour').click();
 });
 
 When("je modifie l'article", async ({ page }) => {
-  await page.getByLabel('Modifier le post').first().click();
+  await page.getByRole('button', { name: 'Articles' }).first().click();
+  await page.getByTestId('view-all-posts-button').click();
+  await page.getByText('Mon nouvel article').first().waitFor();
+
+  const editButton = page.getByTestId('edit-post-button');
+  await editButton.click();
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();
@@ -79,7 +82,12 @@ Then("je dois voir l'article modifié", async ({ page }) => {
 });
 
 When("je supprime l'article", async ({ page }) => {
-  await page.getByLabel('Supprimer le post').first().click();
+  await page.getByRole('button', { name: 'Articles' }).first().click();
+  await page.getByTestId('view-all-posts-button').click();
+  await page.getByText('Mon nouvel article modifié').waitFor();
+
+  const deleteButton = page.getByTestId('delete-post-button');
+  await deleteButton.click();
 
   const modal = page.getByTestId('modal');
   await expect(modal).toBeVisible();

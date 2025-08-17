@@ -10,8 +10,7 @@ export const gamesSeedData = [
       'Deck Construction',
       'Variable Player Powers',
     ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/gloomhaven.webp',
     minPlayers: 1,
     maxPlayers: 4,
     duration: 120,
@@ -22,8 +21,7 @@ export const gamesSeedData = [
     year: '2008',
     rating: 8.2,
     mechanics: ['Cooperative Play', 'Set Collection', 'Variable Player Powers'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/pandemic_legacy.webp',
     minPlayers: 2,
     maxPlayers: 4,
     duration: 45,
@@ -34,8 +32,7 @@ export const gamesSeedData = [
     year: '2017',
     rating: 7.9,
     mechanics: ['Pattern Building', 'Tile Placement'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/azul.webp',
     minPlayers: 2,
     maxPlayers: 4,
     duration: 30,
@@ -46,8 +43,7 @@ export const gamesSeedData = [
     year: '2015',
     rating: 7.8,
     mechanics: ['Word Game', 'Team-Based Game'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/codenames.webp',
     minPlayers: 4,
     maxPlayers: 8,
     duration: 30,
@@ -63,8 +59,7 @@ export const gamesSeedData = [
       'Hand Management',
       'Set Collection',
     ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/terraforming_mars.webp',
     minPlayers: 1,
     maxPlayers: 5,
     duration: 120,
@@ -75,8 +70,7 @@ export const gamesSeedData = [
     year: '2019',
     rating: 8.1,
     mechanics: ['Engine Building', 'Set Collection', 'Card Drafting'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/wingspan.webp',
     minPlayers: 1,
     maxPlayers: 5,
     duration: 40,
@@ -87,24 +81,11 @@ export const gamesSeedData = [
     year: '2000',
     rating: 7.4,
     mechanics: ['Tile Placement', 'Area Control / Area Influence'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/carcassonne.webp',
     minPlayers: 2,
     maxPlayers: 5,
     duration: 35,
     difficulty: 'Low',
-  },
-  {
-    name: 'Dominion',
-    year: '2008',
-    rating: 7.6,
-    mechanics: ['Deck Building', 'Set Collection'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
-    minPlayers: 2,
-    maxPlayers: 4,
-    duration: 30,
-    difficulty: 'Medium',
   },
   {
     name: '7 Wonders',
@@ -115,8 +96,7 @@ export const gamesSeedData = [
       'Set Collection',
       'Simultaneous Action Selection',
     ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/7_wonders.webp',
     minPlayers: 3,
     maxPlayers: 7,
     duration: 30,
@@ -127,8 +107,7 @@ export const gamesSeedData = [
     year: '2004',
     rating: 7.5,
     mechanics: ['Set Collection', 'Route Building'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/ticket_to_ride.webp',
     minPlayers: 2,
     maxPlayers: 5,
     duration: 60,
@@ -139,57 +118,11 @@ export const gamesSeedData = [
     year: '2014',
     rating: 7.5,
     mechanics: ['Set Collection', 'Push Your Luck', 'Card Drafting'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/splendor.webp',
     minPlayers: 2,
     maxPlayers: 4,
     duration: 30,
     difficulty: 'Low',
-  },
-  {
-    name: 'King of Tokyo',
-    year: '2011',
-    rating: 7.3,
-    mechanics: [
-      'Dice Rolling',
-      'Area Control / Area Influence',
-      'Set Collection',
-    ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
-    minPlayers: 2,
-    maxPlayers: 6,
-    duration: 30,
-    difficulty: 'Low',
-  },
-  {
-    name: 'Agricola',
-    year: '2007',
-    rating: 7.9,
-    mechanics: ['Action Points', 'Worker Placement', 'Set Collection'],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
-    minPlayers: 1,
-    maxPlayers: 5,
-    duration: 120,
-    difficulty: 'High',
-  },
-  {
-    name: 'Caverna: The Cave Farmers',
-    year: '2013',
-    rating: 7.8,
-    mechanics: [
-      'Action Points',
-      'Worker Placement',
-      'Tile Placement',
-      'Set Collection',
-    ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
-    minPlayers: 1,
-    maxPlayers: 7,
-    duration: 120,
-    difficulty: 'High',
   },
   {
     name: 'Root',
@@ -200,8 +133,7 @@ export const gamesSeedData = [
       'Variable Player Powers',
       'Hand Management',
     ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/root.webp',
     minPlayers: 2,
     maxPlayers: 4,
     duration: 60,
@@ -217,27 +149,10 @@ export const gamesSeedData = [
       'Combat',
       'Resource Management',
     ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
+    image: '/games/scythe.webp',
     minPlayers: 2,
     maxPlayers: 7,
     duration: 90,
     difficulty: 'Medium',
-  },
-  {
-    name: 'Twilight Struggle',
-    year: '2005',
-    rating: 8.4,
-    mechanics: [
-      'Card Driven',
-      'Area Control / Area Influence',
-      'Simultaneous Action Selection',
-    ],
-    image:
-      'https://cf.geekdo-images.com/original/img/0i9yZfV7gkQ9Q3cW5r0Vjzq2K9s=/0x0/pic3582969.jpg',
-    minPlayers: 2,
-    maxPlayers: 2,
-    duration: 180,
-    difficulty: 'High',
   },
 ];
