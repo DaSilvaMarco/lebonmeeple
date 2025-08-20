@@ -1,24 +1,4 @@
 services:
-  traefik:
-    image: traefik:v3.5.0
-    container_name: traefik
-    restart: unless-stopped
-    command:
-      - '--api.dashboard=true'
-      - '--providers.docker=true'
-      - '--entrypoints.web.address=:80'
-      - '--entrypoints.websecure.address=:443'
-      - '--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web'
-      - '--certificatesresolvers.letsencrypt.acme.email=tdasilva.marco@gmail.com'
-      - '--certificatesresolvers.letsencrypt.acme.storage=/acme/acme.json'
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - './traefik/config/traefik.yml:/etc/traefik/traefik.yml:ro'
-      - './traefik/acme/acme.json:/etc/traefik/acme/acme.json'
-      - '/var/run/docker.sock:/var/run/docker.sock:ro'
-
   db:
     image: postgres:17.5
     container_name: db
@@ -28,7 +8,7 @@ services:
     volumes:
       - ./db-data:/var/lib/postgresql/data
     ports:
-      - '127.0.0.1:5432:5432'
+      - '5432:5432'
 
   backend:
     build:
@@ -43,12 +23,8 @@ services:
       - SECRET_KEY=SECRET_KEY
     depends_on:
       - db
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.backend.rule=Host(`api.lebonmeeple.online`)'
-      - 'traefik.http.routers.backend.entrypoints=web,websecure'
-      - 'traefik.http.routers.backend.tls.certresolver=letsencrypt'
-      - 'traefik.http.services.backend.loadbalancer.server.port=3000'
+    ports:
+      - '3000:3000'
 
   frontend:
     build:
@@ -61,30 +37,15 @@ services:
       - DOCKER_ENV=true
     depends_on:
       - backend
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.frontend.rule=Host(`lebonmeeple.online`)'
-      - 'traefik.http.routers.frontend.entrypoints=web,websecure'
-      - 'traefik.http.routers.frontend.tls.certresolver=letsencrypt'
-      - 'traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https'
-      - 'traefik.http.routers.frontend.middlewares=redirect-to-https'
-      - 'traefik.http.services.frontend.loadbalancer.server.port=3001'
-      # Router spécial pour le challenge ACME (pas de redirection, pas de TLS)
-      - 'traefik.http.routers.frontend-acme.rule=Host(`lebonmeeple.online`) && PathPrefix(`/.well-known/acme-challenge/`)'
-      - 'traefik.http.routers.frontend-acme.entrypoints=web'
-      - 'traefik.http.routers.frontend-acme.priority=100'
-      - 'traefik.http.services.frontend.loadbalancer.server.port=3001'
+    ports:
+      - '3001:3000'
 
   adminer:
     image: adminer
     container_name: adminer
     restart: always
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.adminer.rule=Host(`adminer.lebonmeeple.online`)'
-      - 'traefik.http.routers.adminer.entrypoints=websecure'
-      - 'traefik.http.routers.adminer.tls.certresolver=letsencrypt'
-      - 'traefik.http.services.adminer.loadbalancer.server.port=8080'
+    ports:
+      - '8080:8080'
 
 volumes:
   pgdata:
