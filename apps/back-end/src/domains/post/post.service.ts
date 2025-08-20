@@ -33,7 +33,6 @@ export class PostService {
 
   getAll = async (page = 1, limit = 9) => {
     try {
-      console.log('pouet');
       return await getPosts(this.prismaService, page, limit);
     } catch (error) {
       throwError(error);

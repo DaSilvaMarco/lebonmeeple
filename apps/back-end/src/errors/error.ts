@@ -29,8 +29,6 @@ export class CatchEverythingFilter implements ExceptionFilter {
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
     };
 
-    console.log(exception);
-
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
   }
 }
