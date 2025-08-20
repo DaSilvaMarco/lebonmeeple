@@ -35,6 +35,7 @@ services:
     environment:
       - NODE_ENV=production
       - DOCKER_ENV=true
+      - NEXT_PUBLIC_API_URL=/api
     depends_on:
       - backend
     ports:
