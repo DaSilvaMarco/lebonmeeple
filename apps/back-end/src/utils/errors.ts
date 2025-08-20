@@ -4,6 +4,7 @@ import {
 } from '@nestjs/common';
 
 export const throwError = (error: Error) => {
+  console.log(error);
   if (error instanceof BadRequestException) {
     throw error;
   }

@@ -33,6 +33,8 @@ export const getPosts = async (
     prismaService.post.count(),
   ]);
 
+  console.log('posts : ', posts);
+
   return {
     posts,
     total,

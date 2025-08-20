@@ -6,9 +6,11 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    networks:
+      - backend-network
 
   backend:
     build:
@@ -25,6 +27,8 @@ services:
       - db
     ports:
       - '3000:3000'
+    networks:
+      - backend-network
 
   frontend:
     build:
@@ -49,4 +53,8 @@ services:
       - '8080:8080'
 
 volumes:
-  pgdata:
+  db-data:
+
+networks:
+  backend-network:
+    driver: bridge
