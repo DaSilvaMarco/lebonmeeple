@@ -1,7 +1,6 @@
-version: '3.9'
 services:
   traefik:
-    image: traefik:v2.16
+    image: traefik:v3.5.0
     container_name: traefik
     restart: unless-stopped
     command:
@@ -33,7 +32,7 @@ services:
 
   backend:
     build:
-      context: ./app
+      context: ./
       dockerfile: ./Dockerfile
       target: backend-prod
     container_name: backend
@@ -52,7 +51,7 @@ services:
 
   frontend:
     build:
-      context: ./app
+      context: ./
       dockerfile: ./Dockerfile
       target: frontend-prod
     container_name: frontend
@@ -71,8 +70,13 @@ services:
     image: adminer
     container_name: adminer
     restart: always
-    ports:
-      - "127.0.0.1:8080:8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`adminer.lebonmeeple.online`)"
+      - "traefik.http.routers.adminer.entrypoints=websecure"
+      - "traefik.http.routers.adminer.tls.certresolver=letsencrypt"
+      - "traefik.http.services.adminer.loadbalancer.server.port=8080"
+
 
 volumes:
   pgdata:
