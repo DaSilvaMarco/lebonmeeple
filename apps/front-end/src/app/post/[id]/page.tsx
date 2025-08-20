@@ -1,28 +1,21 @@
 import React from 'react';
 import PostViewPage from '@frontend/domains/post/pages/PostViewPage';
-import { getPostById } from '@frontend/domains/post/api/getPostById';
+import { Metadata } from 'next';
 
-export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const post = await getPostById(id);
+export const metadata: Metadata = {
+  title: 'Liste des jeux',
+  description:
+    'Page de jeu pour Le Bon Meeple. Ajoutez, modifiez ou supprimez des jeux de manière accessible et conforme au RGAA.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
-  return {
-    title: post.title,
-    description: post.description,
-  };
-}
-
-interface PageProps {
-  params: { id: string };
-}
-
-const App = async ({ params }: PageProps) => {
-  const { id } = await params;
-  const post = await getPostById(id);
-
-  return (
+const App = async () => {
+return (
     <>
-      <PostViewPage post={post} />
+      <PostViewPage />
     </>
   );
 };
