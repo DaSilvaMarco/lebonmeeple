@@ -102,7 +102,7 @@
     "eslint-plugin-prettier": "^5.5.1",
     "globals": "^16.3.0",
     "husky": "^9.1.7",
-    "jsdom": "^25.0.1",
+    "jsdom": "^26.1.0",
     "playwright-bdd": "^8.3.1",
     "prettier": "^3.6.2",
     "redux-mock-store": "^1.5.5",
