@@ -83,7 +83,7 @@ const AdminTable: React.FC = () => {
                 <Td>
                   <Avatar
                     name={user.name}
-                    src={user.avatar}
+                    src={user.avatar || '/defaultAvatar.jpg'}
                     size="sm"
                     aria-label={`Avatar de ${user.name}`}
                     title={`Avatar de ${user.name}`}

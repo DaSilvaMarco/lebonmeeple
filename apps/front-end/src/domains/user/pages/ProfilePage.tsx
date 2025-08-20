@@ -42,7 +42,7 @@ const ProfilePage = () => {
       <Card maxW="md" mx="auto">
         <CardBody>
           <VStack spacing={6} align="center">
-            <Avatar size="xl" name={user.username} src={user.avatar} />
+            <Avatar size="xl" name={user.username} src={user.avatar || '/defaultAvatar.jpg'} />
 
             <VStack spacing={2} align="center">
               <Heading size="lg" color="neutral.800">

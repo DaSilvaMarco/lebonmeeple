@@ -50,6 +50,6 @@ describe('Avatar Component', () => {
 
     const avatarImage = screen.getByRole('img', { name: 'Avatar' });
     expect(avatarImage).toBeInTheDocument();
-    expect(avatarImage).toHaveAttribute('src', './public/defaultAvatar.jpg');
+    expect(avatarImage).toHaveAttribute('src', '/defaultAvatar.jpg');
   });
 });

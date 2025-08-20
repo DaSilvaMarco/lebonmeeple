@@ -10,7 +10,7 @@ const Avatar = ({ user }: Props) => {
   return (
     <Box h="50px" w="50px" borderRadius="50%" overflow="hidden">
       <Image
-        src={user.avatar ? user.avatar : './public/defaultAvatar.jpg'}
+        src={user.avatar ? user.avatar : '/defaultAvatar.jpg'}
         alt="Avatar"
         height="100%"
       />

@@ -96,7 +96,7 @@ const Header = () => {
                     {user.username}
                   </Text>
                   <ChevronDownIcon color={color} />
-                  <Avatar size="md" name={user.username} src={user.avatar} />
+                  <Avatar size="md" name={user.username} src={user.avatar || '/defaultAvatar.jpg'} />
                 </HStack>
               </MenuButton>
             </Menu>
