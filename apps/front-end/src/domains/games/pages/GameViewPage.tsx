@@ -1,17 +1,29 @@
 'use client';
 
-import React from 'react';
-import { type Game } from '../type';
+import React, { useEffect } from 'react';
 import { Box, Flex, Heading, Text, VStack, Divider } from '@chakra-ui/react';
 import GoBackButton from '@frontend/domains/shared/button/components/GoBackButton';
 import Image from '@frontend/domains/shared/image/components/Image';
+import { useParams } from 'next/navigation';
+import { Game } from '../type';
+import { getGame } from '../api/get-game';
 
-type Props = {
-  game: Game;
-};
+const GameViewPage = () => {
+  const params = useParams();
+  const id = params?.id as string;
+  const [game, setGame] = React.useState<Game | null>(null);
 
-const GameViewPage = (props: Props) => {
-  const { game } = props;
+  useEffect(() => {
+    const fetchGame = async () => {
+      try {
+        const fetchedGame = await getGame(id);
+        setGame(fetchedGame);
+      } catch (err) {
+        console.error('Error fetching game:', err);
+      }
+    };
+    fetchGame();
+  }, []);
 
   return (
     <Flex direction="column" w="100%">

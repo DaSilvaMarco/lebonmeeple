@@ -11,14 +11,14 @@ import {
   Text,
 } from '@chakra-ui/react';
 import GoBackButton from '@frontend/domains/shared/button/components/GoBackButton';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Post } from '../type';
 import Image from '@frontend/domains/shared/image/components/Image';
 import CommentsSection from '@frontend/domains/comment/components/CommentsSection';
 import { getPostById } from '../api/getPostById';
 import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
 import Button from '@frontend/domains/shared/button/components/Button';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { deletePost as deletePostApi } from '../api/delete-post';
 import { deletePost as deletePostAction } from '../slice';
 import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
@@ -26,16 +26,25 @@ import { useDisclosure } from '@chakra-ui/react';
 import Link from 'next/link';
 import GameCardPreview from '@frontend/domains/shared/card/components/GameCardPreview';
 
-type Props = {
-  post: Post;
-};
-
-const PostViewPage = (props: Props) => {
-  const { post: initialPost } = props;
-  const [post, setPost] = useState<Post>(initialPost);
+const PostViewPage = () => {
+  const params = useParams();
+  const id = params?.id as string;
+  const [post, setPost] = useState<Post | null>(null);
   const { user, token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const fetchedPost = await getPostById(id);
+        setPost(fetchedPost);
+      } catch (err) {
+        console.error('Error fetching post:', err);
+      }
+    };
+    fetchPost();
+  }, []);
 
   const {
     isOpen: isDeleteModalOpen,
@@ -44,7 +53,7 @@ const PostViewPage = (props: Props) => {
   } = useDisclosure();
 
   const handleDelete = async () => {
-    if (!token) return;
+    if (!token || !post) return;
     try {
       await deletePostApi(post.id, token);
       dispatch(deletePostAction(post.id));
@@ -55,13 +64,16 @@ const PostViewPage = (props: Props) => {
   };
 
   const handleCommentsUpdate = async () => {
+    if (!post) return;
     try {
-      const updatedPost = await getPostById(initialPost.id.toString());
+      const updatedPost = await getPostById(post.id.toString());
       setPost(updatedPost);
     } catch (error) {
       console.error('Erreur lors de la mise à jour des commentaires:', error);
     }
   };
+
+  if (!post) return null;
 
   return (
     <Flex justify="center" align="flex-start" p={2} w="100%" minH="100vh">
@@ -111,9 +123,9 @@ const PostViewPage = (props: Props) => {
                   </Text>
                 </VStack>
               </HStack>
-              {user?.id === post.userId && (
+              {user?.id === post?.userId && (
                 <HStack spacing={4} mb={4} justifyContent="flex-end">
-                  <Link href={`/post/${post.id}/edit`}>
+                  <Link href={`/post/${post?.id}/edit`}>
                     <Button color="primary" type="button">
                       Éditer
                     </Button>
@@ -181,8 +193,8 @@ const PostViewPage = (props: Props) => {
           )}
           <Box p={0} pt={0} w="100%" maxW="none">
             <CommentsSection
-              postId={post.id}
-              comments={post.comments || []}
+              postId={post?.id}
+              comments={post?.comments || []}
               onCommentsUpdate={handleCommentsUpdate}
               fullWidth
             />

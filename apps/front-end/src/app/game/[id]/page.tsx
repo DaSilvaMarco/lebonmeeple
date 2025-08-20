@@ -1,27 +1,21 @@
 import React from 'react';
-import { getGame } from '@frontend/domains/games/api/get-game';
 import GameViewPage from '@frontend/domains/games/pages/GameViewPage';
+import { Metadata } from 'next';
 
-export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const game = await getGame(id);
-  return {
-    title: game.name,
-    description: game.description,
-  };
-}
+export const metadata: Metadata = {
+  title: 'Jeu',
+  description:
+    'Page d’affichage des jeux pour Le Bon Meeple.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
-interface PageProps {
-  params: { id: string };
-}
-
-const App = async ({ params }: PageProps) => {
-  const { id } = await params;
-  const game = await getGame(id);
-
-  return (
+const App = async () => {
+return (
     <>
-      <GameViewPage game={game} />
+      <GameViewPage />
     </>
   );
 };
