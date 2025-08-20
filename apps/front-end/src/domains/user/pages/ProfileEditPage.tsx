@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
   useToast,
   Flex,
@@ -12,7 +12,9 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
-  Button,
+  useColorModeValue,
+  Text,
+  Button as ChakraButton,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -24,8 +26,15 @@ import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
 import { patchUser } from '../api/patch-user';
 import { updateUser } from '../slice';
 import { UserProfileFormData, userProfileUpdateSchema } from '../type';
+import { convertToBase64 } from '@frontend/utils/convertToBase64';
+import Button from '@frontend/domains/shared/button/components/Button';
 
 const ProfileEditPage = () => {
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const textColorPrimary = useColorModeValue('neutral.800', 'white');
+
   const { user, isAuthenticated, token } = useAppSelector(
     (state) => state.user,
   );
@@ -49,11 +58,26 @@ const ProfileEditPage = () => {
   });
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Ici vous pouvez implémenter votre logique d'upload
-      // Pour l'instant, on retourne juste le nom du fichier
-      setValue('avatar', file.name);
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+      if (!allowedTypes.includes(file.type)) {
+        setSelectedFileName(null);
+        setValue('avatar', '', { shouldValidate: true, shouldDirty: true });
+        toastError(
+          toast,
+          "Mauvais type d'avatar",
+          'Seuls les fichiers JPG, JPEG ou PNG sont autorisés.',
+        );
+        return;
+      }
+      try {
+        setSelectedFileName(file.name);
+        const base64 = await convertToBase64(file);
+        setValue('avatar', base64, { shouldValidate: true, shouldDirty: true });
+      } catch (error) {
+        console.error('Erreur lors du téléchargement du fichier:', error);
+      }
     }
   };
 
@@ -131,24 +155,55 @@ const ProfileEditPage = () => {
               </FormErrorMessage>
             </FormControl>
 
-            <FormControl isInvalid={!!errors.avatar} mb="30px">
-              <FormLabel htmlFor="avatar">Avatar</FormLabel>
-              <Input type="file" accept="image/*" onChange={handleFileUpload} />
-              <FormErrorMessage>
+            <FormControl isInvalid={!!errors.avatar}>
+              <FormLabel
+                htmlFor="avatar"
+                color={textColorPrimary}
+                fontWeight="semibold"
+                fontSize="sm"
+              >
+                Avatar (optionnel)
+              </FormLabel>
+              <Box display="flex" alignItems="center" gap={4}>
+                <input
+                  id="avatar"
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  style={{ display: 'none' }}
+                  data-testid="avatar-file-input"
+                />
+                <Button
+                  type="button"
+                  color="primary"
+                  handleClick={() => fileInputRef.current?.click()}
+                  dataTestId="avatar-upload-btn"
+                >
+                  Choisir un fichier
+                </Button>
+                <Text
+                  fontSize="sm"
+                  color={selectedFileName ? textColorPrimary : 'neutral.400'}
+                >
+                  {selectedFileName || 'Aucun fichier sélectionné'}
+                </Text>
+              </Box>
+              <FormErrorMessage fontSize="sm" mt={2}>
                 {typeof errors.avatar?.message === 'string'
                   ? errors.avatar.message
-                  : ''}
+                  : ''}{' '}
               </FormErrorMessage>
             </FormControl>
 
-            <Button
+            <ChakraButton
               disabled={!(isValid && isDirty)}
               type="submit"
               width="100%"
               colorScheme="brand"
             >
               Modifier le profil
-            </Button>
+            </ChakraButton>
           </VStack>
         </form>
       </Box>

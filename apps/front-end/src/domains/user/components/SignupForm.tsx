@@ -78,8 +78,19 @@ const SignupForm = () => {
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+      if (!allowedTypes.includes(file.type)) {
+        setSelectedFileName(null);
+        setValue('avatar', '', { shouldValidate: true, shouldDirty: true });
+        toastError(
+          toast,
+          "Mauvais type d'avatar",
+          'Seuls les fichiers JPG, JPEG ou PNG sont autorisés.',
+        );
+        return;
+      }
       try {
-        const file = e.target.files[0];
         setSelectedFileName(file.name);
         const base64 = await convertToBase64(file);
         setValue('avatar', base64, { shouldValidate: true, shouldDirty: true });
