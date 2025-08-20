@@ -1,3 +1,3 @@
 export const getApiBaseUrl = () => {
-  return 'http://lebonmeeple.online/api';
+  return 'http://lebonmeeple.online';
 };
