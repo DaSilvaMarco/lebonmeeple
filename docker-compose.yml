@@ -15,7 +15,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - "./traefik/config/traefik.yml:/traefik.yml:ro"
+      - "./traefik/config/traefik.yml:/etc/traefik/traefik.yml:ro"
       - "./traefik/acme/acme.json:/acme/acme.json"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
@@ -32,7 +32,7 @@ services:
 
   backend:
     build:
-      context: ./lebonmeeple
+      context: ./
       dockerfile: ./Dockerfile
       target: backend-prod
     container_name: backend
@@ -51,7 +51,7 @@ services:
 
   frontend:
     build:
-      context: ./lebonmeeple
+      context: ./
       dockerfile: ./Dockerfile
       target: frontend-prod
     container_name: frontend

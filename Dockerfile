@@ -13,7 +13,7 @@ RUN npm ci --omit=dev --ignore-scripts
 FROM base-prod AS backend-prod
 COPY --chown=node:node ./apps/back-end ./apps/back-end
 COPY --chown=node:node ./tsconfig.json ./
-COPY --chown=node:node ./prisma ./prisma
+COPY --chown=node:node ./apps/back-end/prisma ./apps/back-end/prisma
 RUN npm run prisma:generate
 RUN npm run api:build
 CMD ["npm", "run", "api:start:prod"]
