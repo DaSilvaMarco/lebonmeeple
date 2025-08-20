@@ -1,55 +1,78 @@
-name: le-bon-meeple
-
+version: '3.9'
 services:
+  traefik:
+    image: traefik:v2.16
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=tdasilva.marco@gmail.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/acme/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./traefik/config/traefik.yml:/traefik.yml:ro"
+      - "./traefik/acme/acme.json:/acme/acme.json"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
   db:
     image: postgres:17.5
+    container_name: db
     restart: always
     environment:
       - POSTGRES_PASSWORD=postgres
-    container_name: db
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./db-data:/var/lib/postgresql/data
     ports:
-      - '127.0.0.1:5432:5432'
+      - "127.0.0.1:5432:5432"
 
   backend:
-    image: 590184137944.dkr.ecr.eu-west-3.amazonaws.com/lebonmeeple-backend:latest
     build:
-      context: .
+      context: ./app
       dockerfile: ./Dockerfile
       target: backend-prod
     container_name: backend
-    ports:
-      - '127.0.0.1:3000:3000'
-    depends_on:
-      - db
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - DOCKER_ENV=true
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
       - SECRET_KEY=SECRET_KEY
+    depends_on:
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.lebonmeeple.online`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
 
   frontend:
-    image: 590184137944.dkr.ecr.eu-west-3.amazonaws.com/lebonmeeple-frontend:latest
     build:
-      context: .
+      context: ./app
       dockerfile: ./Dockerfile
       target: frontend-prod
     container_name: frontend
-    ports:
-      - '127.0.0.1:3001:3000'
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - DOCKER_ENV=true
     depends_on:
       - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`lebonmeeple.online`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
 
   adminer:
     image: adminer
-    restart: always
     container_name: adminer
+    restart: always
     ports:
-      - '127.0.0.1:8080:8080'
+      - "127.0.0.1:8080:8080"
 
 volumes:
   pgdata:

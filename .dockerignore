@@ -8,6 +8,3 @@ test-results/
 **/tests/
 apps/front-end/src/test/
 **/*.spec.tsx
-
-apps/back-end/prisma/seed.ts
-apps/back-end/prisma/seed-data.ts
