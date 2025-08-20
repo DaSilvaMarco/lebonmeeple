@@ -16,7 +16,8 @@ services:
       - "443:443"
     volumes:
       - "./traefik/config/traefik.yml:/etc/traefik/traefik.yml:ro"
-      - "./traefik/acme/acme.json:/etc/traefik/acme/acme.json:ro"
+      - "./traefik/acme/acme.json:/etc/traefik/acme/acme.json"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   db:
     image: postgres:17.5
@@ -42,12 +43,13 @@ services:
       - SECRET_KEY=SECRET_KEY
     depends_on:
       - db
-    expose:
-      - "3000" 
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`api.lebonmeeple.online`)"
+      - "traefik.http.routers.backend.entrypoints=web,websecure"
+      - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
+
 
   frontend:
     build:
@@ -60,11 +62,11 @@ services:
       - DOCKER_ENV=true
     depends_on:
       - backend
-    expose:
-      - "3001" # Exemple: Next.js
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`lebonmeeple.online`)"
+      - "traefik.http.routers.frontend.entrypoints=web,websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
       - "traefik.http.services.frontend.loadbalancer.server.port=3001"
 
   adminer:
