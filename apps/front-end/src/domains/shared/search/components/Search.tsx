@@ -63,18 +63,28 @@ const Search = () => {
   };
 
   return (
-    <Box position="relative" ref={ref}>
-      {!showInput && (
-        <IconButton
-          aria-label="Ouvrir la recherche"
-          icon={<SearchIcon />}
-          variant="ghost"
-          onClick={() => setShowInput(true)}
-          size="md"
-        />
-      )}
+    <Box position="relative" ref={ref} display="flex" alignItems="center">
+      <IconButton
+        aria-label="Ouvrir la recherche"
+        icon={<SearchIcon />}
+        variant="ghost"
+        onClick={() => setShowInput(true)}
+        size="md"
+        mr={2}
+        zIndex={30}
+      />
       {showInput && (
-        <Box position="absolute" right={0} top={0} zIndex={20}>
+        <Box
+          position="absolute"
+          right={0}
+          top={0}
+          zIndex={9999}
+          minW="350px"
+          w="400px"
+          bg="white"
+          boxShadow="2xl"
+          borderRadius="md"
+        >
           <Input
             placeholder="Rechercher un jeu..."
             value={query}
@@ -85,28 +95,35 @@ const Search = () => {
             mb={1}
             bg="white"
             borderRadius="md"
-            boxShadow="md"
+            boxShadow="none"
+            fontSize="lg"
+            h="48px"
+            px={6}
+            style={{ background: 'white', opacity: 1 }}
           />
           {loading && (
-            <Spinner size="sm" position="absolute" right={2} top={2} />
+            <Spinner size="md" position="absolute" right={4} top={3} />
           )}
           {showDropdown && results.length > 0 && (
             <List
               position="absolute"
-              zIndex={10}
+              zIndex={9999}
               w="100%"
+              minW="350px"
               bg="white"
               borderRadius="md"
-              boxShadow="md"
+              boxShadow="2xl"
               mt={1}
-              maxH="250px"
+              maxH="350px"
               overflowY="auto"
+              style={{ background: 'white', opacity: 1 }}
             >
               {results.map((game) => (
                 <ListItem
                   key={game.id}
-                  px={4}
-                  py={2}
+                  px={6}
+                  py={3}
+                  fontSize="lg"
                   cursor="pointer"
                   _hover={{ bg: 'gray.100' }}
                   onClick={() => handleSelect(game)}
