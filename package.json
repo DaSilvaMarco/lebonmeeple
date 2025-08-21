@@ -8,7 +8,7 @@
     "api:start": "cd apps/back-end && nest start",
     "api:start:dev": "cd apps/back-end && nest start --watch",
     "api:start:debug": "cd apps/back-end && nest start --debug --watch",
-    "api:start:prod": "npm run prisma:migrate:deploy && node apps/back-end/dist/main.js",
+    "api:start:prod": "npm run prisma:migrate:deploy && npm run api:build && node apps/back-end/dist/main.js",
     "api:test": "vitest run apps/back-end/src/domains",
     "api:test:watch": "vitest apps/back-end/src/domains",
     "api:test:coverage": "vitest run --coverage apps/back-end/src/domains",

@@ -15,7 +15,6 @@ COPY --chown=node:node ./tsconfig.build.json ./
 COPY --chown=node:node ./apps/back-end/prisma ./apps/back-end/prisma
 COPY --chown=node:node ./.env ./.env
 RUN npm run prisma:generate
-RUN npm run api:build
 CMD ["npm", "run", "api:start:prod"]
 
 
