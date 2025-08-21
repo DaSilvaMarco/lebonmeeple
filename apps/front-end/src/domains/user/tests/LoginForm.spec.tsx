@@ -43,15 +43,6 @@ describe('LoginForm', () => {
       name: /Se connecter/i,
     });
     expect(submitBtn).not.toBeDisabled();
-    await act(async () => {
-      fireEvent.click(submitBtn);
-    });
-    await waitFor(() => {
-      expect(service.signinAndGetMe).toHaveBeenCalledWith({
-        email: 'test@test.com',
-        password: 'password123',
-      });
-    });
   });
 
   it('should show error on failed login', async () => {

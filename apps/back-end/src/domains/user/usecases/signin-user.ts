@@ -18,13 +18,19 @@ export const signinUser = async (
   });
 
   if (!user) {
-    throw new NotFoundException('User not found');
+    throw new NotFoundException({
+      message: "L'utilisateur n'a pas été trouvé.",
+      code: 'USER_NOT_FOUND',
+    });
   }
 
   const match = await bcrypt.compare(password, user.password);
 
   if (!match) {
-    throw new UnauthorizedException('Credentials are not good');
+    throw new UnauthorizedException({
+      message: 'Le mot de passe ou l’email est incorrect.',
+      code: 'INVALID_CREDENTIALS',
+    });
   }
 
   const userToken = {

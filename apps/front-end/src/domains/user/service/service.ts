@@ -13,7 +13,7 @@ export const signinAndGetMe = async (data: LoginFormData) => {
       id,
       email,
       username,
-      avatar: userStorage.avatar,
+      avatar: userStorage.avatar || '/defaultAvatar.jpg',
       roles: userStorage.roles,
     },
     token,

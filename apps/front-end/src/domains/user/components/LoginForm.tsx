@@ -20,13 +20,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { FaLock } from 'react-icons/fa';
-import { toastSuccess, toastError } from '@/domains/shared/toat/toast';
+import { toastError, toastSuccess } from '@/domains/shared/toat/toast';
 import { LoginFormData, schemaUserLogin } from '@/domains/user/type';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { login } from '@/domains/user/slice';
-import { signinAndGetMe } from '@frontend/domains/user/service/service';
 import Button from '@frontend/domains/shared/button/components/Button';
 import Loader from '@frontend/domains/shared/loader/components/Loader';
+import { postSignin } from '../api/post-signin';
+import { getMe } from '../api/get-me';
+import { login } from '../slice';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -48,29 +49,65 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormData) => {
     setShowLoading(true);
     try {
-      const user = await signinAndGetMe(data);
-      dispatch(login(user));
-      toastSuccess(
-        toast,
-        'Connexion réussie !',
-        'Vous êtes maintenant connecté.',
-      );
-      setTimeout(() => {
-        router.push('/');
-      }, 1000);
+      const signin = await postSignin(data);
+      try {
+        const me = await getMe(signin.token);
+        const userRedux = {
+          user: {
+            id: me.id,
+            email: me.email,
+            username: me.username,
+            avatar: signin.userStorage.avatar || '/defaultAvatar.jpg',
+            roles: signin.userStorage.roles,
+          },
+          token: signin.token,
+        };
+
+        dispatch(login(userRedux));
+
+        toastSuccess(
+          toast,
+          'Connexion réussie !',
+          'Vous êtes maintenant connecté.',
+        );
+
+        setTimeout(() => {
+          setShowLoading(false);
+          router.push('/');
+        }, 1000);
+      } catch (error) {
+        setShowLoading(false);
+        toastError(toast, 'Erreur de connexion', error.message);
+      }
     } catch (error) {
       setShowLoading(false);
-      const errorMessage =
-        error instanceof Error ? error.message : 'Une erreur est survenue';
-      toastError(toast, 'Erreur de connexion', errorMessage);
+      toastError(toast, 'Erreur de connexion', error.message);
     }
+
+    console.log('ok');
+
+    // try {
+    //   const user = await signinAndGetMe(data);
+    //   dispatch(login(user));
+    //   toastSuccess(
+    //     toast,
+    //     'Connexion réussie !',
+    //     'Vous êtes maintenant connecté.',
+    //   );
+    //   setTimeout(() => {
+    //     router.push('/');
+    //   }, 1000);
+    // } catch (error) {
+    //   setShowLoading(false);
+    //   const errorMessage =
+    //     error instanceof Error ? error.message : 'Une erreur est survenue';
+    //   toastError(toast, 'Erreur de connexion', errorMessage);
+    // }
   };
 
   return (
     <Box position="relative">
-      {showLoading && (
-        <Loader />
-      )}
+      {showLoading && <Loader />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={6}>
           <FormControl isInvalid={!!errors.email}>
