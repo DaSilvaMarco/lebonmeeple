@@ -16,12 +16,13 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            su deploy
-            cd /home/deploy/app/
-            touch .env
-            echo "" > .env # Clear .env file
-            echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-            echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
-            echo "NODE_ENV=production" >> .env
-            git pull origin main
-            docker compose up --build -d
+            su - deploy -c '
+              cd /home/deploy/app/
+              touch .env
+              echo "" > .env # Clear .env file
+              echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+              echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+              echo "NODE_ENV=production" >> .env
+              git pull origin main
+              docker compose up --build -d
+            '
