@@ -1,4 +1,3 @@
-# Base pour tous les stages
 FROM node:20-alpine AS base
 WORKDIR /app
 RUN chown -R node:node /app

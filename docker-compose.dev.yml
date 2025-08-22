@@ -1,4 +1,4 @@
-name: le-bon-meeple
+name: lebonmeeple_dev
 
 services:
   db:
@@ -6,7 +6,6 @@ services:
     restart: unless-stopped
     environment:
       - POSTGRES_PASSWORD=postgres
-    container_name: db
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
@@ -15,10 +14,9 @@ services:
   backend:
     build:
       context: .
-      dockerfile: ./Dockerfile
-      target: backend
-    container_name: backend
-    command: ["sh", "-c", "npm install && npm run prisma:generate && sh ./apps/back-end/start.sh"]
+      dockerfile: ./Dockerfile.dev
+      target: backend-dev
+    command: ["sh", "-c", "npm install && npm run prisma:generate && sh ./start.sh"]
     ports:
       - '127.0.0.1:3000:3000'
     depends_on:
@@ -33,9 +31,8 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: ./Dockerfile
-      target: frontend
-    container_name: frontend
+      dockerfile: ./Dockerfile.dev
+      target: frontend-dev
     command: ["sh", "-c", "npm install && npm run front:dev"]
     ports:
       - '127.0.0.1:3001:3000'

@@ -68,6 +68,19 @@ docker compose -f docker-composer.dev.yml up
 - **Front-end** : [http://localhost:3001/](http://localhost:3001/)
 - **Back-end (API doc)** : [http://localhost:3000/api](http://localhost:3000/api).
 
+5. **Jouer les fausses données pour dev**
+
+```bash
+docker exec -it lebonmeeple_dev-backend-1 ash
+npm run prisma:fixtures
+```
+
+6. **Connexion en admin**
+
+Vous pouvez vous connecter en tant qu'admin avec les credentials suivants :
+- adresse mail : tdasiva.marco@gmail.com
+- mot de passe : pouetpouet
+
 ## Tests
 
 Des scripts de test sont disponibles pour le front-end et le back-end.

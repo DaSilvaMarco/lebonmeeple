@@ -79,6 +79,7 @@ const SignupForm = () => {
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      const maxSize = 990 * 1024;
       const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
       if (!allowedTypes.includes(file.type)) {
         setSelectedFileName(null);
@@ -88,6 +89,15 @@ const SignupForm = () => {
           "Mauvais type d'avatar",
           'Seuls les fichiers JPG, JPEG ou PNG sont autorisés.',
         );
+        return;
+      }
+      if (file.size > maxSize) {
+        toastError(
+          toast,
+          'Image trop volumineuse',
+          'La taille maximale autorisée est de 990 ko.',
+        );
+        setValue('avatar', '', { shouldValidate: true, shouldDirty: true });
         return;
       }
       try {

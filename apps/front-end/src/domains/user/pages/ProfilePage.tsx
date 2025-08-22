@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import {
@@ -67,11 +66,11 @@ const ProfilePage = () => {
             >
               Se déconnecter
             </Button>
-            <Link href="profile/edit">
+            {/* <Link href="profile/edit">
               <Button colorScheme="primary" variant="solid" w="full">
                 Modifier profil
               </Button>
-            </Link>
+            </Link> */}
           </VStack>
         </CardBody>
       </Card>

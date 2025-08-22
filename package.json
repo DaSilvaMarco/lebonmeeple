@@ -6,7 +6,7 @@
   "scripts": {
     "api:build": "nest build",
     "api:start": "cd apps/back-end && nest start",
-    "api:start:dev": "cd apps/back-end && nest start --watch",
+    "api:start:dev": "npm run prisma:generate && cd apps/back-end && nest start --watch",
     "api:start:debug": "cd apps/back-end && nest start --debug --watch",
     "api:start:prod": "npm run prisma:migrate:deploy && npm run api:build && node apps/back-end/dist/main.js",
     "api:test": "vitest run apps/back-end/src/domains",

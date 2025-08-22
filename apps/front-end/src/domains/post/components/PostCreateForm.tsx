@@ -43,7 +43,6 @@ const PostCreateForm = () => {
     setLoadingGames(true);
     getGames({ limit: 100, page: 1 })
       .then((data) => {
-        // Si l'API renvoie un objet { games: [...] }
         if (Array.isArray(data)) setGames(data);
         else if (Array.isArray(data?.games)) setGames(data.games);
       })
@@ -104,7 +103,7 @@ const PostCreateForm = () => {
           body: pendingData.body,
           image: pendingData.image || null,
           category: pendingData.category,
-          gameIds: pendingData.gameIds || [], // Ajout des jeux sélectionnés
+          gameIds: pendingData.gameIds || [],
         }),
       });
 
@@ -133,8 +132,28 @@ const PostCreateForm = () => {
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const maxSize = 990 * 1024;
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      if (!allowedTypes.includes(file.type)) {
+        toastError(
+          toast,
+          'Format non autorisé',
+          'Seuls les fichiers JPEG, JPG ou PNG sont acceptés.',
+        );
+        setValue('image', '', { shouldValidate: true, shouldDirty: true });
+        return;
+      }
+      if (file.size > maxSize) {
+        toastError(
+          toast,
+          'Image trop volumineuse',
+          'La taille maximale autorisée est de 990 ko.',
+        );
+        setValue('image', '', { shouldValidate: true, shouldDirty: true });
+        return;
+      }
       try {
-        const file = e.target.files[0];
         const base64 = await convertToBase64(file);
         setValue('image', base64, { shouldValidate: true, shouldDirty: true });
       } catch (error) {
@@ -250,14 +269,14 @@ const PostCreateForm = () => {
               disabled={loadingGames}
             />
           </FormControl>
-          <FormControl isInvalid={!!errors.image}>
+          <FormControl isInvalid={!!errors.image} isRequired>
             <FormLabel
               htmlFor="image"
               color={textColorPrimary}
               fontWeight="semibold"
               fontSize="sm"
             >
-              Image (optionnelle)
+              Image
             </FormLabel>
             <Input
               id="image"
