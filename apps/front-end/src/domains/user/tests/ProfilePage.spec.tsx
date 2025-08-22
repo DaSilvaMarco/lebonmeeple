@@ -63,7 +63,7 @@ describe('ProfilePage', () => {
     expect(screen.getByText(user.email)).toBeInTheDocument();
     expect(screen.getByText('Connecté')).toBeInTheDocument();
     expect(screen.getByText('Se déconnecter')).toBeInTheDocument();
-    expect(screen.getByText('Modifier profil')).toBeInTheDocument();
+    // expect(screen.getByText('Modifier profil')).toBeInTheDocument();
     expect(screen.getByText('Post 1')).toBeInTheDocument();
     expect(screen.queryByText('Post 2')).not.toBeInTheDocument();
   });

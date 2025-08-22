@@ -7,14 +7,12 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  Text,
   VStack,
   useToast,
   InputGroup,
   InputRightElement,
   IconButton,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -83,26 +81,6 @@ const LoginForm = () => {
       setShowLoading(false);
       toastError(toast, 'Erreur de connexion', error.message);
     }
-
-    console.log('ok');
-
-    // try {
-    //   const user = await signinAndGetMe(data);
-    //   dispatch(login(user));
-    //   toastSuccess(
-    //     toast,
-    //     'Connexion réussie !',
-    //     'Vous êtes maintenant connecté.',
-    //   );
-    //   setTimeout(() => {
-    //     router.push('/');
-    //   }, 1000);
-    // } catch (error) {
-    //   setShowLoading(false);
-    //   const errorMessage =
-    //     error instanceof Error ? error.message : 'Une erreur est survenue';
-    //   toastError(toast, 'Erreur de connexion', errorMessage);
-    // }
   };
 
   return (
@@ -161,15 +139,6 @@ const LoginForm = () => {
             </InputGroup>
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
-
-          <Box w="full" textAlign="right">
-            <Link href="/forgot-password">
-              <Text fontSize="sm" color="primary.500" cursor="pointer">
-                Mot de passe oublié ?
-              </Text>
-            </Link>
-          </Box>
-
           <Button
             dataTestId="login-submit-button"
             type="submit"

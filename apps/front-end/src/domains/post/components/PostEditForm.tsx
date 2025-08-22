@@ -127,8 +127,28 @@ const PostEditForm = ({ post, token }: Props) => {
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const maxSize = 990 * 1024;
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      if (!allowedTypes.includes(file.type)) {
+        toastError(
+          toast,
+          'Format non autorisé',
+          'Seuls les fichiers JPEG, JPG ou PNG sont acceptés.',
+        );
+        setValue('image', '', { shouldValidate: true, shouldDirty: true });
+        return;
+      }
+      if (file.size > maxSize) {
+        toastError(
+          toast,
+          'Image trop volumineuse',
+          'La taille maximale autorisée est de 990 ko.',
+        );
+        setValue('image', '', { shouldValidate: true, shouldDirty: true });
+        return;
+      }
       try {
-        const file = e.target.files[0];
         const base64 = await convertToBase64(file);
         setValue('image', base64, { shouldValidate: true, shouldDirty: true });
       } catch (error) {
