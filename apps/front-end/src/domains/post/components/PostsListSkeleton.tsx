@@ -8,7 +8,7 @@ type Props = {
   count?: number;
 };
 
-const PostsGridSkeleton = ({ count = 6 }: Props) => {
+const PostsListSkeleton = ({ count = 6 }: Props) => {
   return (
     <Grid
       templateColumns={{
@@ -32,4 +32,4 @@ const PostsGridSkeleton = ({ count = 6 }: Props) => {
   );
 };
 
-export default PostsGridSkeleton;
+export default PostsListSkeleton;

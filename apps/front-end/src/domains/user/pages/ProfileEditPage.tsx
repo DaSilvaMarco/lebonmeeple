@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import NotConnected from '@frontend/domains/shared/warning/NotConnected';
-import { useProfileEdit } from '../service/useProfileEdit';
+import { useProfileEdit } from '../services/useProfileEdit';
 import ProfileUsernameField from '../components/ProfileUsernameField';
 import ProfileEmailField from '../components/ProfileEmailField';
 import ProfileAvatarField from '../components/ProfileAvatarField';

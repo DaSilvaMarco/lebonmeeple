@@ -11,67 +11,24 @@ import {
   Text,
 } from '@chakra-ui/react';
 import GoBackButton from '@frontend/domains/shared/button/components/GoBackButton';
-import React, { useEffect, useState } from 'react';
-import { Post } from '../type';
+import React from 'react';
 import Image from '@frontend/domains/shared/image/components/Image';
 import CommentsSection from '@frontend/domains/comment/components/CommentsSection';
-import { getPostById } from '../api/getPostById';
-import { useAppSelector, useAppDispatch } from '@frontend/store/hook';
-import Button from '@frontend/domains/shared/button/components/Button';
-import { useParams, useRouter } from 'next/navigation';
-import { deletePost as deletePostApi } from '../api/delete-post';
-import { deletePost as deletePostAction } from '../slice';
-import ConfirmationModal from '@/domains/shared/modal/ConfirmationModal';
-import { useDisclosure } from '@chakra-ui/react';
-import Link from 'next/link';
-import GameCardPreview from '@frontend/domains/shared/card/components/GameCardPreview';
+import { usePostView } from '../services/usePostView';
+import PostViewOptions from '../components/PostViewOptions';
+import PostViewGames from '../components/PostViewGames';
 
 const PostViewPage = () => {
-  const params = useParams();
-  const id = params?.id as string;
-  const [post, setPost] = useState<Post | null>(null);
-  const { user, token } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const fetchedPost = await getPostById(id);
-        setPost(fetchedPost);
-      } catch (err) {
-        console.error('Error fetching post:', err);
-      }
-    };
-    fetchPost();
-  }, []);
 
   const {
-    isOpen: isDeleteModalOpen,
-    onOpen: openDeleteModal,
-    onClose: closeDeleteModal,
-  } = useDisclosure();
-
-  const handleDelete = async () => {
-    if (!token || !post) return;
-    try {
-      await deletePostApi(post.id, token);
-      dispatch(deletePostAction(post.id));
-      router.push('/posts');
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
-
-  const handleCommentsUpdate = async () => {
-    if (!post) return;
-    try {
-      const updatedPost = await getPostById(post.id.toString());
-      setPost(updatedPost);
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour des commentaires:', error);
-    }
-  };
+    post,
+    user,
+    isDeleteModalOpen,
+    openDeleteModal,
+    closeDeleteModal,
+    handleDelete,
+    handleCommentsUpdate,
+  } = usePostView();
 
   if (!post) return null;
 
@@ -124,28 +81,13 @@ const PostViewPage = () => {
                 </VStack>
               </HStack>
               {user?.id === post?.userId && (
-                <HStack spacing={4} mb={4} justifyContent="flex-end">
-                  <Link href={`/post/${post?.id}/edit`}>
-                    <Button color="primary" type="button">
-                      Éditer
-                    </Button>
-                  </Link>
-                  <Button
-                    color="secondary"
-                    type="button"
-                    handleClick={openDeleteModal}
-                  >
-                    Supprimer
-                  </Button>
-                  <ConfirmationModal
-                    isModalOpen={isDeleteModalOpen}
-                    setModalOpen={(open) => {
-                      if (!open) closeDeleteModal();
-                    }}
-                    onConfirm={handleDelete}
-                    title={'Êtes-vous sûr de vouloir supprimer cet article ?'}
-                  />
-                </HStack>
+                <PostViewOptions
+                  post={post}
+                  openDeleteModal={openDeleteModal}
+                  isDeleteModalOpen={isDeleteModalOpen}
+                  closeDeleteModal={closeDeleteModal}
+                  handleDelete={handleDelete}
+                />
               )}
 
               <Divider />
@@ -178,18 +120,7 @@ const PostViewPage = () => {
             </Text>
           </Box>
           {post?.games && post.games.length > 0 && (
-            <Box p={8} pt={0}>
-              <Heading as="h2" size="md" mb={4} color="meeple.600">
-                Jeux associés à ce post
-              </Heading>
-              <Flex wrap="wrap" gap={4}>
-                {post.games.map((game) => (
-                  <Box key={game.id} minW="250px" maxW="300px" flex="1 1 250px">
-                    <GameCardPreview game={game} />
-                  </Box>
-                ))}
-              </Flex>
-            </Box>
+            <PostViewGames games={post.games} />
           )}
           <Box p={0} pt={0} w="100%" maxW="none">
             <CommentsSection

@@ -11,7 +11,7 @@ import SignupPasswordConfirmationField from './SignupPasswordConfirmationField';
 import SignupUsernameField from './SignupUsernameField';
 import SignupAvatarField from './SignupAvatarField';
 
-import { useSignup } from '../service/useSignup';
+import { useSignup } from '../services/useSignup';
 
 const SignupForm = () => {
   const { isLoading } = useAppSelector((state) => state.user);

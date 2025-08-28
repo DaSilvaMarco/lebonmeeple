@@ -5,7 +5,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { containerVariants, itemVariants } from '../constants';
 import { Game } from '../type';
-import GameCardPreview from '@frontend/domains/shared/card/components/GameCardPreview';
+import GameCardPreview from '@frontend/domains/games/components/GameCardPreview';
 
 type Props = {
   games: Game[];

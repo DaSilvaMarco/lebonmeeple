@@ -17,12 +17,11 @@ export const getPosts = async ({ limit = 9, page = 1 } = {}) => {
     });
 
     if (!posts.ok) {
-      throw new Error(`HTTP error! status: ${posts.status}`);
+      throw new Error(`Erreur: ${posts.status}`);
     }
 
     return await posts.json();
   } catch (error) {
-    console.error('Error fetching posts:', error);
-    return [];
+    throw new Error(`${error}`);
   }
 };

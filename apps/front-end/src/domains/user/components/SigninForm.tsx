@@ -8,7 +8,7 @@ import { FaLock } from 'react-icons/fa';
 import { LoginFormData, schemaUserLogin } from '@/domains/user/type';
 import { Button } from '@chakra-ui/react';
 import Loader from '@frontend/domains/shared/loader/components/Loader';
-import { useLogin } from '../service/useLogin';
+import { useLogin } from '../services/useLogin';
 import SigninEmailField from './SigninEmailField';
 import SigninPasswordField from './SigninPasswordField';
 

@@ -16,7 +16,7 @@ import {
 import NotConnected from '@frontend/domains/shared/warning/NotConnected';
 import { useAppDispatch, useAppSelector } from '@frontend/store/hook';
 import { logout } from '../slice';
-import PostsGrid from '@frontend/domains/post/components/PostsGrid';
+import PostsList from '@frontend/domains/post/components/PostsList';
 import Link from 'next/link';
 
 const ProfilePage = () => {
@@ -71,7 +71,7 @@ const ProfilePage = () => {
               </VStack>
             </CardBody>
           </Card>
-          <PostsGrid posts={userPosts} />
+          <PostsList posts={userPosts} />
         </>
       )}
     </>

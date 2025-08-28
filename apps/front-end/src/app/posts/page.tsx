@@ -1,4 +1,4 @@
-import PostsClientPage from '@frontend/domains/post/pages/PostsClientPage';
+import PostsPage from '@frontend/domains/post/pages/PostsPage';
 import React from 'react';
 import { Metadata } from 'next';
 
@@ -13,10 +13,9 @@ export const metadata: Metadata = {
 };
 
 const App = () => {
-
   return (
     <>
-      <PostsClientPage />
+      <PostsPage />
     </>
   );
 };

@@ -9,7 +9,7 @@ import type { UserProfileFormData } from '../type';
 import { userProfileUpdateSchema } from '../type';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { handleFileUpload } from './handleFilUpload';
+import { handleFileUpload } from './handleFileUpload';
 
 export const useProfileEdit = () => {
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);

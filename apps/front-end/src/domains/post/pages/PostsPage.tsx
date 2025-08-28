@@ -1,39 +1,56 @@
 'use client';
 
 import React from 'react';
-
-import { Box, Flex } from '@chakra-ui/react';
-import PostsGrid from '../components/PostsGrid';
-import { useAppSelector } from '@frontend/store/hook';
+import { Box, Stack, Flex } from '@chakra-ui/react';
+import Pagination from '@frontend/domains/shared/pagination/Pagination';
+import PostsPageSkeleton from './PostsPageSkeleton';
+import PostsList from '../components/PostsList';
+import { usePosts } from '../services/usePosts';
 
 const PostsPage = () => {
-  const { posts } = useAppSelector((state) => state.post);
+  const {
+    posts,
+    page,
+    setPage,
+    totalPages,
+    isLoading,
+    handlePrevPage,
+    handleNextPage,
+  } = usePosts();
 
   return (
-    <Flex justify="center" align="flex-start" p={2} w="100%" minH="100vh">
-      <Box
-        w="100%"
-        borderRadius="2xl"
-        shadow="none"
-        position="relative"
-        overflow="hidden"
-        _before={{
-          content: '""',
-          position: 'absolute',
-          top: '-1px',
-          left: '-1px',
-          right: '-1px',
-          bottom: '-1px',
-          borderRadius: '2xl',
-          background:
-            'linear-gradient(135deg, brand.400, meeple.400, game.400)',
-          zIndex: -1,
-          opacity: 0.1,
-        }}
+    <Box w="100%" py={{ base: 4, md: 8 }} px={{ base: 0, md: 4 }}>
+      <Stack
+        spacing={{ base: 4, md: 8 }}
+        align="center"
+        maxW="1200px"
+        mx="auto"
       >
-        <PostsGrid posts={posts} />
-      </Box>
-    </Flex>
+        <Flex justifyContent="center" alignItems="center">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
+        </Flex>
+        <Box w="100%" maxW="1200px" minH="400px" px={{ base: 2, md: 0 }}>
+
+          {isLoading ? <PostsPageSkeleton /> : <PostsList posts={posts} />}
+          
+        </Box>
+        <Box w="fit-content" maxW="100%" mx="auto">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 

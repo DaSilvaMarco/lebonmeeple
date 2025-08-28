@@ -7,7 +7,7 @@ import { schemaUserSignup } from '@/domains/user/type';
 import { postSignup } from '@frontend/domains/user/api/post-signup';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { handleFileUpload } from './handleFilUpload';
+import { handleFileUpload } from './handleFileUpload';
 
 export const useSignup = () => {
   const router = useRouter();

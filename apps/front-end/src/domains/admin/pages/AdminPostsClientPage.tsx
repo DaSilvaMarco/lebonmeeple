@@ -1,7 +1,7 @@
 'use client';
 
 import AdminPostsTable from '@frontend/domains/admin/components/AdminPostsTable';
-import { getPosts } from '@frontend/domains/post/api/getPosts';
+import { getPosts } from '@frontend/domains/post/api/get-posts';
 import { postsList } from '@frontend/domains/post/slice';
 import NotConnected from '@frontend/domains/shared/warning/NotConnected';
 import { useAppDispatch, useAppSelector } from '@frontend/store/hook';

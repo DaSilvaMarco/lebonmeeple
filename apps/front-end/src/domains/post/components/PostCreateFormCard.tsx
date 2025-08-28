@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import { Box, useColorModeValue, Heading } from '@chakra-ui/react';
 import PostCreateForm from './PostCreateForm';
 
 const PostCreateFormCard = () => {
@@ -34,7 +34,8 @@ const PostCreateFormCard = () => {
         opacity: 0.1,
       }}
     >
-      <h1
+      <Heading
+        as="h1"
         id="post-create-form-card-title"
         style={{
           position: 'absolute',
@@ -45,7 +46,7 @@ const PostCreateFormCard = () => {
         }}
       >
         Création d’un nouvel article
-      </h1>
+      </Heading>
       <PostCreateForm />
     </Box>
   );

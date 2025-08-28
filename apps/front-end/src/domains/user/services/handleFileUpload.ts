@@ -29,7 +29,7 @@ export async function handleFileUpload<T extends FieldValues>(
       });
       toastError(
         toast,
-        "Mauvais type d'avatar",
+        'Mauvais type de fichier',
         'Seuls les fichiers JPG, JPEG ou PNG sont autorisés.',
       );
       return;
@@ -38,7 +38,7 @@ export async function handleFileUpload<T extends FieldValues>(
     if (file.size > maxSize) {
       toastError(
         toast,
-        'Image trop volumineuse',
+        'Fichier trop volumineux',
         'La taille maximale autorisée est de 990 ko.',
       );
       setValue(avatarKey, undefined as FieldPathValue<T, typeof avatarKey>, {
