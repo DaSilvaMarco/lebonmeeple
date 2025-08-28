@@ -5,20 +5,21 @@ import {
   Button,
   FormErrorMessage,
   useColorModeValue,
-  Text,
 } from '@chakra-ui/react';
 import React from 'react';
 import { FieldErrors } from 'react-hook-form';
 
 type Props = {
   errors: FieldErrors<{
-    avatar: string;
+    avatar?: string;
+    username: string;
+    email: string;
   }>;
   fileInputRef: React.RefObject<HTMLInputElement>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const SignupAvatarField = (props: Props) => {
+const ProfileAvatarField = (props: Props) => {
   const { errors, fileInputRef, onChange } = props;
 
   const textColorPrimary = useColorModeValue('neutral.800', 'white');
@@ -45,20 +46,20 @@ const SignupAvatarField = (props: Props) => {
         />
         <Button
           type="button"
-          colorScheme="primary"
+          colorScheme="brand"
           onClick={() => fileInputRef.current?.click()}
           data-testid="avatar-upload-btn"
         >
           Choisir un fichier
         </Button>
-        <Text fontSize="sm" color={'neutral.400'}>
-        </Text>
       </Box>
       <FormErrorMessage fontSize="sm" mt={2}>
-        {errors.avatar?.message}
+        {typeof errors.avatar?.message === 'string'
+          ? errors.avatar.message
+          : ''}{' '}
       </FormErrorMessage>
     </FormControl>
   );
 };
 
-export default SignupAvatarField;
+export default ProfileAvatarField;

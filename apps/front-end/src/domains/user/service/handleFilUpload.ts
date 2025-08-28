@@ -1,15 +1,20 @@
 import { toastError } from '@/domains/shared/toat/toast';
 import { convertToBase64 } from '@frontend/utils/convertToBase64';
-import type { UseFormSetValue } from 'react-hook-form';
-import type { SignupFormData } from '@/domains/user/type';
+import type {
+  FieldPathValue,
+  FieldValues,
+  Path,
+  UseFormSetValue,
+} from 'react-hook-form';
 
 import type { ChangeEvent } from 'react';
 
-export async function handleFileUpload(
+export async function handleFileUpload<T extends FieldValues>(
   e: ChangeEvent<HTMLInputElement>,
   toast: ReturnType<typeof import('@chakra-ui/react').useToast>,
-  setValue: UseFormSetValue<SignupFormData>,
+  setValue: UseFormSetValue<T>,
   setSelectedFileName: (name: string | null) => void,
+  avatarKey: Path<T> = 'avatar' as Path<T>,
 ) {
   if (e.target.files && e.target.files[0]) {
     const [file] = e.target.files;
@@ -18,7 +23,7 @@ export async function handleFileUpload(
 
     if (!allowedTypes.includes(file.type)) {
       setSelectedFileName(null);
-      setValue('avatar', undefined, {
+      setValue(avatarKey, undefined as FieldPathValue<T, typeof avatarKey>, {
         shouldValidate: true,
         shouldDirty: true,
       });
@@ -36,7 +41,7 @@ export async function handleFileUpload(
         'Image trop volumineuse',
         'La taille maximale autorisée est de 990 ko.',
       );
-      setValue('avatar', undefined, {
+      setValue(avatarKey, undefined as FieldPathValue<T, typeof avatarKey>, {
         shouldValidate: true,
         shouldDirty: true,
       });
@@ -46,7 +51,7 @@ export async function handleFileUpload(
     try {
       setSelectedFileName(file.name);
       const base64 = await convertToBase64(file);
-      setValue('avatar', base64, {
+      setValue(avatarKey, base64 as FieldPathValue<T, typeof avatarKey>, {
         shouldValidate: true,
         shouldDirty: true,
       });
