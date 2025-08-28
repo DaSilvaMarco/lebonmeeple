@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { getPostById } from '../api/getPostById';
+import { getPostById } from '../api/get-post';
 
 // Mock fetch globally
 const mockFetch = vi.fn();

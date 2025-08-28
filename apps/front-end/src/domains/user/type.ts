@@ -12,7 +12,7 @@ export type LoginFormData = z.infer<typeof schemaUserLogin>;
 export const userProfileUpdateSchema = z.object({
   username: z.string().min(1, 'Le pseudo est requis'),
   email: z.email('Email invalide'),
-  avatar: z.any().optional(),
+  avatar: z.string().optional(),
 });
 
 export type UserProfileFormData = z.infer<typeof userProfileUpdateSchema>;

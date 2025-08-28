@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { Fragment, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { deletePost as deletePostAction } from '@/domains/post/slice';
-import { deletePost as deletePostApi } from '@/domains/post/api/delete-post';
+import { deletePostAction } from '@/domains/post/slice';
+import { deletePost } from '@/domains/post/api/delete-post';
 import ConfirmationModal from '@frontend/domains/shared/modal/ConfirmationModal';
 
 type Props = {
@@ -29,7 +29,7 @@ const AdminPostsTableRow = (props: Props) => {
 
   const handleClick = async () => {
     try {
-      await deletePostApi(post.id, token ?? '');
+      await deletePost(post.id, token ?? '');
       dispatch(deletePostAction(post.id));
       setModalOpen(false);
     } catch (e) {

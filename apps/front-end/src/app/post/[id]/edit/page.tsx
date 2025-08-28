@@ -3,7 +3,7 @@ import React from 'react';
 import { type Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Edition de l\'article',
+  title: "Edition de l'article",
   description:
     'Page d’édition de l’article pour Le Bon Meeple. Modifiez le contenu de l’article de façon accessible et conforme au RGAA.',
   robots: {
@@ -19,11 +19,7 @@ type Props = {
 };
 
 const App = ({ params }: Props) => {
-  return (
-    <>
-      <PostEditPage postId={parseInt(params.id)} />
-    </>
-  );
+  return <PostEditPage postId={parseInt(params.id)} />;
 };
 
 export default App;

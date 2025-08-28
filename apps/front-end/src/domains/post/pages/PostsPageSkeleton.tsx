@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
-import PostsGridSkeleton from '../components/PostsGridSkeleton';
+import PostsListSkeleton from '../components/PostsListSkeleton';
 import PostsHeaderSkeleton from '../components/PostsHeaderSkeleton';
 
 const PostsPageSkeleton = () => {
@@ -29,7 +29,7 @@ const PostsPageSkeleton = () => {
         }}
       >
         <PostsHeaderSkeleton />
-        <PostsGridSkeleton count={6} />
+        <PostsListSkeleton count={6} />
       </Box>
     </Flex>
   );

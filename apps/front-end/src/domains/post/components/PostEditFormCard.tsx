@@ -3,15 +3,17 @@
 import React from 'react';
 import { Box, useColorModeValue } from '@chakra-ui/react';
 import { Post } from '@frontend/domains/post/type';
-import WelcomePostEditFormCard from './WelcomePostEditFormCard';
 import PostEditForm from './PostEditForm';
 
 type Props = {
-  post: Post;
+  post: Post | null;
   token: string;
+  isLoading: boolean;
 };
 
-const PostEditFormCard = ({ post, token }: Props) => {
+const PostEditFormCard = (props: Props) => {
+  const { post, token, isLoading } = props;
+
   const cardBg = useColorModeValue('white', 'neutral.800');
   const borderColor = useColorModeValue('neutral.200', 'neutral.600');
 
@@ -52,8 +54,7 @@ const PostEditFormCard = ({ post, token }: Props) => {
       >
         Modification d’un article
       </h1>
-      <WelcomePostEditFormCard />
-      <PostEditForm post={post} token={token} />
+      {!isLoading && <PostEditForm post={post} token={token} />}
     </Box>
   );
 };
