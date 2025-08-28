@@ -11,10 +11,13 @@ export const metadata: Metadata = {
     follow: false,
   },
 };
-export default function App() {
+
+const App = () => {
   return (
     <>
       <SignupPage />
     </>
   );
-}
+};
+
+export default App;

@@ -41,8 +41,8 @@ export const useLogin = () => {
         );
 
         setTimeout(() => {
-          setIsLoading(false);
           router.push('/');
+          setIsLoading(false);
         }, 1000);
       } catch (error) {
         setIsLoading(false);

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, Text, VStack } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaLock } from 'react-icons/fa';
@@ -12,8 +12,7 @@ import { useLogin } from '../service/useLogin';
 import SigninEmailField from './SigninEmailField';
 import SigninPasswordField from './SigninPasswordField';
 
-const 
-SigninForm = () => {
+const SigninForm = () => {
   const { handleLogin, isLoading } = useLogin();
 
   const {
@@ -31,24 +30,30 @@ SigninForm = () => {
 
   return (
     <Box>
-      {isLoading && <Loader />}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack spacing={6}>
-          <SigninEmailField errors={errors} register={register} />
-          <SigninPasswordField errors={errors} register={register} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <VStack spacing={6}>
+            <Text fontSize="lg" fontWeight="bold" textAlign="center" mb={4}>
+              Se connecter
+            </Text>
+            <SigninEmailField errors={errors} register={register} />
+            <SigninPasswordField errors={errors} register={register} />
 
-          <Button
-            leftIcon={<FaLock />}
-            type="submit"
-            colorScheme="primary"
-            data-testid="login-submit-button"
-            isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
-            isLoading={isSubmitting || isLoading}
-          >
-            Se connecter
-          </Button>
-        </VStack>
-      </form>
+            <Button
+              leftIcon={<FaLock />}
+              type="submit"
+              colorScheme="primary"
+              data-testid="login-submit-button"
+              isDisabled={!isValid || Object.keys(dirtyFields).length === 0}
+              isLoading={isSubmitting || isLoading}
+            >
+              Se connecter
+            </Button>
+          </VStack>
+        </form>
+      )}
     </Box>
   );
 };

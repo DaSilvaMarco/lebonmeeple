@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import SignupForm from './SignupForm';
-import SignupDivider from './SignupDivider';
 
 const SignupFormCard = () => {
   const cardBg = useColorModeValue('white', 'neutral.800');
@@ -31,9 +30,10 @@ const SignupFormCard = () => {
         opacity: 0.1,
       }}
     >
+      <Text fontSize="lg" fontWeight="bold" textAlign="center" mb={4}>
+        Créer un compte
+      </Text>
       <SignupForm />
-
-      <SignupDivider />
     </Box>
   );
 };

@@ -47,7 +47,6 @@ const SigninFormCard = () => {
         mt={{ base: 8, md: 0 }}
         mb={{ base: 8, md: 0 }}
       >
-        {/* Bloc de gauche : Features */}
         <Box
           flex={1}
           bgGradient="linear(to-br, orange.100, pink.100)"
@@ -111,8 +110,6 @@ const SigninFormCard = () => {
           <Box
             w="100%"
             maxW="370px"
-            boxShadow="md"
-            borderRadius="xl"
             p={{ base: 4, md: 6 }}
             bg="white"
           >
