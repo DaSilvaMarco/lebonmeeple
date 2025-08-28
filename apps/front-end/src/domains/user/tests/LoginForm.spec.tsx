@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/SigninForm';
 import { store } from '@/store/store';
 import * as service from '@frontend/domains/user/service/service';
 import { toastError } from '@/domains/shared/toat/toast';

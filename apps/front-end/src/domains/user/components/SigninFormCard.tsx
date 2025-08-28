@@ -4,7 +4,7 @@ import React from 'react';
 import { Box, Flex, VStack, Text } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { FaLock } from 'react-icons/fa';
-import LoginForm from './LoginForm';
+import SigninForm from './SigninForm';
 
 const features = [
   {
@@ -29,9 +29,9 @@ const features = [
   },
 ];
 
-const LoginFormCard = () => {
+const SigninFormCard = () => {
   return (
-    <Flex minH="100vh" align="center" justify="center">
+    <Flex align="center" justify="center">
       <Box
         w={{ base: '95%', sm: '90%', md: '850px' }}
         minH={{ base: 'auto', md: '600px' }}
@@ -126,7 +126,7 @@ const LoginFormCard = () => {
             >
               Connexion à votre compte
             </Text>
-            <LoginForm />
+            <SigninForm />
             <Text mt={6} fontSize="sm" color="gray.600" textAlign="center">
               Vous n'avez pas encore de compte ?{' '}
               <a
@@ -143,4 +143,4 @@ const LoginFormCard = () => {
   );
 };
 
-export default LoginFormCard;
+export default SigninFormCard;
